@@ -12,7 +12,7 @@ const Home: NextPage = () => {
           Next Themes + Tailwind Dark Mode
         </h1>
 
-        <div className='h-10 w-10 bg-th-background'></div>
+        <Button />
 
         <button
           className="mt-16 px-4 py-2 text-white dark:text-black bg-black dark:bg-white font-semibold rounded-md"

@@ -1,10 +1,14 @@
 import styles from './button.module.scss'
 
-const Button = () => {
+export interface ButtonProps {
+
+}
+
+const Button = (props: ButtonProps) => {
   return (
     <button
       type="button"
-      className="px-4 py-3 bg-blue-600 rounded-md text-white outline-none focus:ring-4 hover:bg-blue-800 shadow-lg transform active:scale-75 transition-transform"
+      className="px-[10px] py-[5px] bg-th-primary-medium rounded-md text-white outline-none hover:bg-th-primary-dark shadow-lg transform active:scale-75 hover:scale-110 transition-transform"
     >
       Button
     </button>
