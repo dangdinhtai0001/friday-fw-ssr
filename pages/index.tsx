@@ -1,11 +1,28 @@
 import type { NextPage } from 'next';
 import { Button } from 'components';
+import { useTheme } from 'next-themes';
 
 const Home: NextPage = () => {
+  const { theme, setTheme } = useTheme();
+
   return (
-    <div>
-      <Button></Button>
-      <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Default</button>
+    <div className="bg-white dark:bg-black">
+      <div className="py-20 flex flex-col items-center justify-center">
+        <h1 className="text-5xl text-center text-gray-800 dark:text-gray-100 font-bold">
+          Next Themes + Tailwind Dark Mode
+        </h1>
+
+        <div className='h-10 w-10 bg-th-background'></div>
+
+        <button
+          className="mt-16 px-4 py-2 text-white dark:text-black bg-black dark:bg-white font-semibold rounded-md"
+          onClick={() => {
+            setTheme(theme === 'light' ? 'black' : 'light')
+          }}
+        >
+          Change Theme
+        </button>
+      </div>
     </div>
   );
 };

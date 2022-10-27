@@ -6,7 +6,7 @@
   --background: theme("colors.white");
   --background-secondary: theme("colors.gray.50");
 
-  --primary-dark: theme("colors.gray.900");
+  --primary-dark: theme("colors.gray.500");
   --primary-medium: theme("colors.gray.700");
   --primary-light: theme("colors.gray.500");
 }
