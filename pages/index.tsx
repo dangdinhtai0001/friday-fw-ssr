@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { Button } from 'components';
 import { useTheme } from 'next-themes';
+import { AppleIcon } from '@components/icons';
 
 const Home: NextPage = () => {
   const { theme, setTheme } = useTheme();
@@ -12,7 +13,8 @@ const Home: NextPage = () => {
           Next Themes + Tailwind Dark Mode
         </h1>
 
-        <Button />
+        <Button disabled={false} icon={<AppleIcon />} onClick={() => { console.log("click") }}>Button</Button>
+        <Button disabled={false} icon={<AppleIcon />} onClick={() => { console.log("click") }}></Button>
 
         <button
           className="mt-16 px-4 py-2 text-white dark:text-black bg-black dark:bg-white font-semibold rounded-md"
