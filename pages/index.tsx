@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <div className="bg-white dark:bg-black">
       <div className="py-20 flex flex-col items-center justify-center">
-        <h1 className="text-5xl text-center  font-bold text-th-accent-medium">
+        <h1 className="text-5xl text-center  font-bold text-th-accent">
           Next Themes + Tailwind Dark Mode
         </h1>
 
@@ -34,7 +34,13 @@ const Home: NextPage = () => {
           }}
         ></Button>
 
-        <div className="v-[100px] h-[100px] border-2 border-red-50 bg-th-background">1</div>
+        <button className="btn relative inline-flex items-center justify-start overflow-hidden transition-all bg-red-700 rounded hover:bg-red-700 group">
+          {/* purple box */}
+          <div className="w-0 h-full rounded bg-white absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full opacity-50 -z-1"></div>
+          <span className="w-full text-black transition-colors duration-300 ease-in-out  z-10">
+            hover effect 2
+          </span>
+        </button>
 
         <select
           name="theme"

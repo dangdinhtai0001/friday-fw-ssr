@@ -16,6 +16,7 @@ export interface BaseButtonProps {
   type?: ButtonType;
   icon?: React.ReactNode;
   disabled?: boolean;
+  outline?: boolean;
   color?: string;
   loading?: boolean | { delay?: number };
   className?: string;
@@ -53,6 +54,7 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
   const {
     loading = false,
     type = 'default',
+    outline = false,
     color,
     disabled,
     className,
@@ -105,12 +107,15 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
     (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
   };
 
-  const classes = classNames('border-2 border-red', {
-    ['opacity-50 cursor-not-allowed']: disabled,
-    [`rounded-full px-1 py-1`]: !children && children !== 0 && !!iconType,
-    [`px-[5px] py-[1px]`]: children,
-    [getColorClassName(color, type)]: true,
-  });
+  const classes = classNames(
+    'border-[0.1rem] hover:scale-110 transition-transform active:scale-75 group btn relative inline-flex items-center justify-start overflow-hidden transition-all',
+    {
+      ['opacity-50 cursor-not-allowed']: disabled,
+      [`rounded-full px-[0.5rem] py-[0.5rem]`]: !children && children !== 0 && !!iconType,
+      [`rounded px-[0.5rem] py-[0.2rem]`]: children,
+      [getColorClassName(color, type)]: true,
+    },
+  );
 
   const iconNode =
     icon && !innerLoading ? (
@@ -128,7 +133,8 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
       disabled={disabled}
       ref={buttonRef}
     >
-      <div className="flex gap-[1px] items-center justify-center">
+      <div className="w-0 h-full rounded bg-black absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full opacity-50 -z-1"></div>
+      <div className="flex gap-[0.5rem] items-center justify-center ">
         {iconNode}
         {children}
       </div>
