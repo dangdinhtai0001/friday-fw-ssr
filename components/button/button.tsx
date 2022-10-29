@@ -16,6 +16,7 @@ export interface BaseButtonProps {
   type?: ButtonType;
   icon?: React.ReactNode;
   disabled?: boolean;
+  color?: string;
   loading?: boolean | { delay?: number };
   className?: string;
   onClick?: React.MouseEventHandler<HTMLElement>;
@@ -40,12 +41,29 @@ export type NativeButtonProps = {
 
 export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>;
 
+const getColorClassName = (color, type) => {
+  if (color) {
+    return `bg-${color}`;
+  } else {
+    return `bg-th-${type}`;
+  }
+};
+
 const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
-  const { loading = false, type = 'default', disabled, className, children, icon,
+  const {
+    loading = false,
+    type = 'default',
+    color,
+    disabled,
+    className,
+    children,
+    icon,
     /** If we extract items here, we don't need use omit.js */
     // React does not recognize the `htmlType` prop on a DOM element. Here we pick it out of `rest`.
     htmlType = 'button' as ButtonProps['htmlType'],
-    onClick, ...rest } = props;
+    onClick,
+    ...rest
+  } = props;
 
   const buttonRef = (ref as any) || React.createRef<HTMLElement>();
 
@@ -87,34 +105,35 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
     (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
   };
 
-  const classes = classNames(
-    'border-2 border-red px-[5px] py-[1px]',
-    {
-      ['opacity-50 cursor-not-allowed']: disabled,
-      [`rounded-full`]: !children && children !== 0 && !!iconType,
-    }
-  );
+  const classes = classNames('border-2 border-red', {
+    ['opacity-50 cursor-not-allowed']: disabled,
+    [`rounded-full px-1 py-1`]: !children && children !== 0 && !!iconType,
+    [`px-[5px] py-[1px]`]: children,
+    [getColorClassName(color, type)]: true,
+  });
 
   const iconNode =
     icon && !innerLoading ? (
       icon
     ) : (
-      <LoadingIcon existIcon={!!icon} loading={!!innerLoading} />
+      <LoadingIcon existIcon={!!icon} loading={!!innerLoading} className="ma-7" />
     );
 
-  return <button {...(rest as NativeButtonProps)}
-    type={htmlType}
-    className={classes}
-    onClick={handleClick}
-    disabled={disabled}
-    ref={buttonRef}>
-    <div className='flex gap-[1px] items-center justify-center'>
-      {iconNode}
-      {children}
-    </div>
-  </button>
-
-
+  return (
+    <button
+      {...(rest as NativeButtonProps)}
+      type={htmlType}
+      className={classes}
+      onClick={handleClick}
+      disabled={disabled}
+      ref={buttonRef}
+    >
+      <div className="flex gap-[1px] items-center justify-center">
+        {iconNode}
+        {children}
+      </div>
+    </button>
+  );
 });
 // const Button = (props: ButtonProps) => {
 //   return (
@@ -126,5 +145,7 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
 //     </button>
 //   );
 // };
+
+InternalButton.displayName = 'Button';
 
 export default InternalButton;
