@@ -1,41 +1,45 @@
+// Button.stories.ts|tsx
+
 import React from 'react';
+
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Button } from './Button';
+import { Button } from '../components';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Example/Button',
+  /* 👇 The title prop is optional.
+   * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
+   * to learn how to generate automatic titles
+   */
+  title: 'components/Button',
   component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
+    type: {
+      name: 'type',
+      type: { name: 'string', required: false },
+      defaultValue: 'primary',
+      description: 'Kiểu của button, thường thì sẽ chỉ dùng để xác định màu',
+      control: 'select',
+      options: ['primary', 'secondary', 'success', 'danger', 'warning', 'info'],
+    },
+    icon: {
+
+    }
   },
 } as ComponentMeta<typeof Button>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+//👇 We create a “template” of how args map to rendering
+const Template: ComponentStory<typeof Button> = args => <Button {...args} />;
 
+//👇 Each story then reuses that template
 export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  primary: true,
-  label: 'Button',
+  children: 'Button',
+  type: 'primary',
 };
 
 export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Button',
-};
+Secondary.args = {};
 
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
-};
+export const Tertiary = Template.bind({});
+Tertiary.args = {};

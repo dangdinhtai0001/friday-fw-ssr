@@ -3,44 +3,57 @@
 @tailwind utilities;
 
 :root {
-  --background: theme('colors.white');
-  --background-secondary: theme('colors.gray.50');
+  /* --background: '#191C24';
+  --primary: '#AF1763';
+  --secondary: '#0DCAF0';
+  --success: '#198754';
+  --danger: '#AB2E3C';
+  --warning: '#FFC107';
+  --info: '#0D6EFD'; */
+}
 
-  --primary-dark: theme('colors.gray.900');
-  --primary: theme('colors.gray.700');
-  --primary-light: theme('colors.gray.500');
+[data-theme='light'] {
+  --background: theme('colors.slate.200');
+  --foreground: theme('colors.slate.300');
+  /* --------------------------- */
+  --primary: theme('colors.blue.500');
+  --success: theme('colors.green.600');
+  --danger: theme('colors.red.700');
+  --warning: theme('colors.amber.300');
+  --info: theme('colors.sky.500');
+  /* --------------------------- */
+  --text-primary: theme('colors.slate.900');
 }
 
 [data-theme='dark'] {
-  --background: theme('colors.black');
-  --background-secondary: theme('colors.gray.800');
-
-  --accent-dark: theme('colors.fuchsia.900');
-  --accent: theme('colors.fuchsia.700');
-  --accent-light: theme('colors.fuchsia.500');
-
-  --primary-dark: theme('colors.gray.300');
-  --primary: theme('colors.gray.200');
-  --primary-light: theme('colors.gray.100');
+  --background: theme('colors.slate.900');
+  --foreground: theme('colors.slate.700');
+  /* --------------------------- */
+  --primary: theme('colors.fuchsia.700');
+  --success: theme('colors.emerald.700');
+  --danger: theme('colors.red.800');
+  --warning: theme('colors.amber.500');
+  --info: theme('colors.blue.500');
+  /* --------------------------- */
+  --text-primary: theme('colors.red.200');
 }
 
 [data-theme='emerald'] {
-  --background: theme('colors.white');
-
-  --accent-dark: theme('colors.emerald.900');
-  --accent: theme('colors.emerald.700');
-  --accent-light: theme('colors.emerald.500');
+  --background: '#191C24';
+  --primary: '#AF1763';
+  --secondary: '#0DCAF0';
+  --success: '#198754';
+  --danger: '#AB2E3C';
+  --warning: '#FFC107';
+  --info: '#0D6EFD';
 }
 
 [data-theme='pink'] {
-  --background: theme('colors.gray.900');
-  --background-secondary: theme('colors.gray.800');
-
-  --accent-dark: theme('colors.pink.900');
-  --accent: theme('colors.pink.700');
-  --accent-light: theme('colors.pink.500');
-
-  --primary-dark: theme('colors.gray.300');
-  --primary: theme('colors.gray.200');
-  --primary-light: theme('colors.gray.100');
+  --background: '#191C24';
+  --primary: '#AF1763';
+  --secondary: '#0DCAF0';
+  --success: '#198754';
+  --danger: '#AB2E3C';
+  --warning: '#FFC107';
+  --info: '#0D6EFD';
 }
