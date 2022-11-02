@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useTheme } from 'next-themes';
-import Link from 'next/link'
+import Link from 'next/link';
 
 const themes = [{ name: 'Light' }, { name: 'Dark' }, { name: 'Emerald' }, { name: 'Pink' }];
 
@@ -29,6 +29,8 @@ const Home: NextPage = () => {
         </select>
 
         <Link href="/components">Components</Link>
+
+        
       </div>
     </div>
   );
