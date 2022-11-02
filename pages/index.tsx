@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { useTheme } from 'next-themes';
+import Link from 'next/link'
 
 const themes = [{ name: 'Light' }, { name: 'Dark' }, { name: 'Emerald' }, { name: 'Pink' }];
 
@@ -7,12 +8,11 @@ const Home: NextPage = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="bg-th-background">
-      <div className="py-20 flex flex-col items-center justify-center">
+    <div className="bg-th-background w-full h-screen">
+      <div className="py-20 flex flex-col gap-3 items-center justify-center">
         <h1 className="text-5xl text-center  font-bold text-th-primary">
           Next Themes + Tailwind Dark Mode
         </h1>
-
         <select
           name="theme"
           id="theme-select"
@@ -27,6 +27,8 @@ const Home: NextPage = () => {
             </option>
           ))}
         </select>
+
+        <Link href="/components">Components</Link>
       </div>
     </div>
   );

@@ -17,10 +17,10 @@
     "noImplicitAny": false,
     "baseUrl": ".",
     "paths": {
-      "@components/**": ["components/*"],
+      "@components/*": ["components/*"],
       "@components": ["components"],
-      "@public/**": ["public/*"],
-      "@modules/**": ["modules/*"]
+      "@public/*": ["public/*"],
+      "@modules/*": ["modules/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
