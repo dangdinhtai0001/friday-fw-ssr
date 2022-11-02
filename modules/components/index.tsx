@@ -67,8 +67,9 @@ const Page = (props: ComponentPageProps) => {
             }}
           ></Button>
 
-          <div className="v-10 h-10 bg-th-success">
-            <div className="font-[roboto_sans]"> hello</div>
+          <div className="v-10 h-20 bg-th-success">
+            <div className="font-roboto"> hello</div>
+            <div className=""> hello</div>
           </div>
         </div>
       </div>

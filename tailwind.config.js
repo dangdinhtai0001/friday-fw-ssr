@@ -24,6 +24,9 @@ module.exports = {
         'th-text-primary': 'var(--text-primary)',
       },
     },
+    fontFamily: {
+      roboto: ['Roboto', 'sans-serif'],
+    },
   },
   variants: {
     extend: {},

@@ -62,5 +62,6 @@
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
   font-style: normal;
-  src: local(''), url('/fonts/roboto/Roboto-Regular.ttf') format('ttf');
+  /* src: url('../public/fonts/roboto/Roboto-Regular.ttf'); */
+  src: url('../public/fonts/roboto/Roboto-Italic.ttf');
 }
