@@ -42,12 +42,27 @@ export type NativeButtonProps = {
 
 export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>;
 
-const getColorClassName = (color, type) => {
-  if (color) {
-    return `bg-${color}`;
-  } else {
-    return `bg-th-${type}`;
+const getColorClassName = (type: string): string => {
+  // Do cơ chế Just-in-time (JIT) của tailwind mà phải viết như này thay vì viết 1 phép concat chuỗi
+  // Nếu không sẽ gây nên hiện tượng, có tên class nhưng ko apply được hiệu ứng
+
+  switch (type) {
+    case 'primary':
+      return `bg-th-primary`;
+    case 'secondary':
+      return `bg-th-secondary`;
+    case 'success':
+      return `bg-th-success`;
+    case 'danger':
+      return `bg-th-danger`;
+    case 'warning':
+      return `bg-th-warning`;
+    case 'info':
+      return `bg-th-info`;
   }
+
+  return '';
+
 };
 
 const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
@@ -113,7 +128,7 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
       ['opacity-50 cursor-not-allowed']: disabled,
       [`rounded-full px-[0.5rem] py-[0.5rem]`]: !children && children !== 0 && !!iconType,
       [`rounded px-[0.5rem] py-[0.2rem]`]: children,
-      [getColorClassName(color, type)]: true,
+      [getColorClassName(type)]: true,
     },
   );
 
