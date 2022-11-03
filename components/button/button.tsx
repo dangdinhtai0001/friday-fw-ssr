@@ -4,7 +4,7 @@ import { tuple } from '../_util/type';
 import React from 'react';
 import LoadingIcon from './LoadingIcon';
 
-const ButtonTypes = tuple('primary', 'secondary', 'success', 'danger', 'warning', 'info');
+const ButtonTypes = tuple('primary', 'success', 'danger', 'warning', 'info');
 export type ButtonType = typeof ButtonTypes[number];
 
 const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
@@ -16,6 +16,7 @@ export interface BaseButtonProps {
   type?: ButtonType;
   icon?: React.ReactNode;
   disabled?: boolean;
+  rounded?: boolean;
   outline?: boolean;
   color?: string;
   loading?: boolean | { delay?: number };
@@ -42,9 +43,13 @@ export type NativeButtonProps = {
 
 export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>;
 
-const getColorClassName = (type: string): string => {
+const getColorClassName = (type: string, outline: boolean): string => {
   // Do cơ chế Just-in-time (JIT) của tailwind mà phải viết như này thay vì viết 1 phép concat chuỗi
   // Nếu không sẽ gây nên hiện tượng, có tên class nhưng ko apply được hiệu ứng
+
+  if (outline) {
+    return `bg-transparent`
+  }
 
   switch (type) {
     case 'primary':
@@ -70,6 +75,7 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
     loading = false,
     type = 'primary',
     outline = false,
+    rounded = false,
     color,
     disabled,
     className,
@@ -125,14 +131,15 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
   const classes = classNames(
     `border-[0.1rem] border-th-foreground 
     transition-all  hover:scale-105 transition-transform active:scale-[0.9]
-    group btn relative inline-flex items-center justify-start overflow-hidden 
+    group btn relative overflow-hidden 
+    inline-flex items-center justify-start 
     cursor-pointer
-    text-th-text-primary font-roboto font-[400] font-[0.875rem] leading-[1.5715rem]`,
+    text-th-text-primary font-roboto font-[500] font-[0.6rem] leading-[1.5715rem]`,
     {
       ['opacity-50 cursor-not-allowed']: disabled,
-      [`rounded-full px-[0.5rem] py-[0.5rem]`]: !children && children !== 0 && !!iconType,
+      [`rounded-full px-[0.5rem] py-[0.5rem]`]: (!children && children !== 0 && !!iconType) || rounded,
       [`rounded px-[0.5rem] py-[0.2rem]`]: children,
-      [getColorClassName(type)]: true,
+      [getColorClassName(type, outline)]: true,
     },
   );
 
@@ -152,24 +159,14 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
       disabled={disabled}
       ref={buttonRef}
     >
-      <div className="w-0 h-full rounded bg-th-background absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full opacity-50 -z-1 "></div>
-      <div className="flex items-center justify-center h-full border-2">
+      <div className="w-0 h-full rounded bg-th-background absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full opacity-30 -z-1 "></div>
+      <div className="flex items-center justify-center h-full ">
         {iconNode}
         {children}
       </div>
     </button>
   );
 });
-// const Button = (props: ButtonProps) => {
-//   return (
-//     <button
-//       type="button"
-//       className="px-[10px] py-[5px] bg-th-primary-medium rounded-md text-white outline-none hover:bg-th-primary-dark shadow-lg transform active:scale-75 hover:scale-110 transition-transform"
-//     >
-//       Button
-//     </button>
-//   );
-// };
 
 InternalButton.displayName = 'Button';
 
