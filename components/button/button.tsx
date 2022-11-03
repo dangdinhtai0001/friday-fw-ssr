@@ -132,13 +132,15 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
 
   const classes = classNames(
     `border-[0.1rem] border-th-foreground 
-    transition-all  hover:scale-105 transition-transform active:scale-[0.9]
+    
     group btn relative overflow-hidden 
     inline-flex items-center justify-start 
     cursor-pointer
     text-th-text-primary font-roboto font-[500] text-[0.9rem] leading-[1.5715rem]`,
     {
       ['opacity-50 cursor-not-allowed']: disabled || innerLoading,
+      ['transition-all  hover:scale-105 transition-transform active:scale-[0.9]']:
+        !disabled && !innerLoading,
       [`rounded-full px-[0.5rem] py-[0.5rem]`]:
         (!children && children !== 0 && !!iconType) || rounded,
       [`rounded px-[0.3rem] py-[0.05rem]`]: children,
@@ -167,7 +169,9 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
       disabled={disabled}
       ref={buttonRef}
     >
-      <div className="w-0 h-full rounded bg-th-background absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full opacity-30 -z-1 "></div>
+      {!disabled && !innerLoading && (
+        <div className="w-0 h-full rounded bg-th-background absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full opacity-30 -z-1 "></div>
+      )}
       <div className="flex items-center justify-center h-full ">
         {renderIconNode()}
         {children}
