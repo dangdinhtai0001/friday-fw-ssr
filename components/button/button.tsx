@@ -1,8 +1,11 @@
 /* eslint-disable react/button-has-type */
-import classNames from 'classnames';
-import { tuple } from '../_util/type';
 import React from 'react';
-import LoadingIcon from './LoadingIcon';
+// ----------------
+import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+// ----------------
+import { tuple } from '../_util/type';
 
 const ButtonTypes = tuple('primary', 'success', 'danger', 'warning', 'info');
 export type ButtonType = typeof ButtonTypes[number];
@@ -48,7 +51,7 @@ const getColorClassName = (type: string, outline: boolean): string => {
   // Nếu không sẽ gây nên hiện tượng, có tên class nhưng ko apply được hiệu ứng
 
   if (outline) {
-    return `bg-transparent`
+    return `bg-transparent`;
   }
 
   switch (type) {
@@ -67,7 +70,6 @@ const getColorClassName = (type: string, outline: boolean): string => {
   }
 
   return '';
-
 };
 
 const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
@@ -134,21 +136,27 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
     group btn relative overflow-hidden 
     inline-flex items-center justify-start 
     cursor-pointer
-    text-th-text-primary font-roboto font-[500] font-[0.6rem] leading-[1.5715rem]`,
+    text-th-text-primary font-roboto font-[500] text-[0.9rem] leading-[1.5715rem]`,
     {
-      ['opacity-50 cursor-not-allowed']: disabled,
-      [`rounded-full px-[0.5rem] py-[0.5rem]`]: (!children && children !== 0 && !!iconType) || rounded,
-      [`rounded px-[0.5rem] py-[0.2rem]`]: children,
+      ['opacity-50 cursor-not-allowed']: disabled || innerLoading,
+      [`rounded-full px-[0.5rem] py-[0.5rem]`]:
+        (!children && children !== 0 && !!iconType) || rounded,
+      [`rounded px-[0.3rem] py-[0.05rem]`]: children,
       [getColorClassName(type, outline)]: true,
     },
   );
 
-  const iconNode =
-    icon && !innerLoading ? (
-      icon
-    ) : (
-      <LoadingIcon existIcon={!!icon} loading={!!innerLoading} className="ma-7" />
-    );
+  const renderIconNode = () => {
+    if (innerLoading) {
+      return <FontAwesomeIcon icon={faSpinner} spin className="mr-[0.3rem]" />;
+    } else {
+      if (children || children == 0) {
+        return icon ? <div className="mr-[0.3rem]">{icon}</div> : null;
+      } else {
+        return icon ? icon : null;
+      }
+    }
+  };
 
   return (
     <button
@@ -161,7 +169,7 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
     >
       <div className="w-0 h-full rounded bg-th-background absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full opacity-30 -z-1 "></div>
       <div className="flex items-center justify-center h-full ">
-        {iconNode}
+        {renderIconNode()}
         {children}
       </div>
     </button>
