@@ -64,7 +64,21 @@ const Page = (props: ComponentPageProps) => {
         {/* ---------------------------------------------------------- */}
         {/* ---------------------------------------------------------- */}
         <div className="mb-3 mt-5 text-[0.8rem] font-[600]">OUTLINE ROUNDED</div>
-        <div className="button-container flex flex-row items-center justify-start gap-[1rem]"></div>
+        <div className="button-container flex flex-row items-center justify-start gap-[1rem]">
+          {['primary', 'success', 'danger', 'warning', 'info'].map((item, index) => {
+            return <Button
+              key={index}
+              outline={true}
+              rounded={true}
+              type={item}
+              onClick={() => {
+                console.log('click');
+              }}
+            >
+              {item}
+            </Button>
+          })}
+        </div>
         {/* ---------------------------------------------------------- */}
         {/* ---------------------------------------------------------- */}
         <div className="mb-3 mt-5 text-[0.8rem] font-[600]">LINKS</div>
