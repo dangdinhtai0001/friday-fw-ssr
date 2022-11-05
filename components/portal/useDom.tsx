@@ -13,9 +13,9 @@ const EMPTY_LIST = [];
 export default function useDom(
     render?: boolean,
     debug?: string,
-): [HTMLDivElement | null, QueueCreate] {
+): [Element, QueueCreate] {
 
-    const craeteDefaultEle = () => {
+    const createDefaultEle = (): HTMLDivElement | null => {
         if (!canUseDom()) {
             return null;
         }
@@ -28,7 +28,7 @@ export default function useDom(
 
         return defaultEle;
     }
-    const [ele] = React.useState(craeteDefaultEle());
+    const [ele] = React.useState<Element | null>(createDefaultEle());
 
     // ========================== Order ==========================
     const queueCreate = React.useContext(OrderContext);
@@ -77,5 +77,5 @@ export default function useDom(
         }
     }, [queue]);
 
-    return [ele, mergedQueueCreate];
+    return [ele!, mergedQueueCreate];
 }
