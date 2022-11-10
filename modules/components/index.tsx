@@ -1,5 +1,6 @@
 import ButtonContainer from "./ButtonContainer";
-import Portal from "@components/portal/Portal";
+import { Dialog } from "@components/dialog";
+import Button from "@components/button";
 
 export interface ComponentPageProps { }
 
@@ -13,17 +14,13 @@ const Page = (props: ComponentPageProps) => {
         <ButtonContainer />
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Modal</div>
-        <Portal
-          open={true}
-          autoDestroy={false}
-          autoLock={true}
-          // getContainer={'portal'}
-        >
-          <div className="z-[100]">
-            <p>Thinking with portals</p>
-          </div>
-        </Portal>
-
+        <Dialog>
+          <Dialog.Activator>
+            <Button type='primary' >
+              open modal
+            </Button>
+          </Dialog.Activator>
+        </Dialog>
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Tabs</div>
         {/* ================================================================================= */}
