@@ -4,7 +4,8 @@ import React, { Children } from 'react';
 // local imports
 import Activator from "./core/Activator";
 import { IDialogPropTypes, ActivatorProps } from "./core/PropTypes";
-import { DialogContextProvider } from './core/DialogContext'
+import { DialogContextProvider } from './core/DialogContext';
+import DialogContainer from './core/dialog-container/DialogContainer';
 
 // define type/ interface
 
@@ -13,13 +14,28 @@ const Dialog = (props: IDialogPropTypes) => {
 
     // ------------------------- || render function || -------------------------
     const renderActivatorContainer = () => {
-        return Children.map(children, (child) => {
+        if (Children.count(children) === 0) {
+            return <></>;
+        }
+
+        let _activator = <></>;
+
+        Children.forEach(children, (child) => {
             if (child && child.type === Dialog.Activator) {
-                return child;
+                _activator = child;
             }
         });
+
+        return _activator;
     };
+
+    const renderDialogContainer = () => {
+        return <DialogContainer {...props}>
+            <div className='h-[500px] w-[700px]'>123456</div>
+        </DialogContainer>
+    }
     return <DialogContextProvider initialState={{ visible: false }}>
+        {renderDialogContainer()}
         {renderActivatorContainer()}
     </DialogContextProvider>;
 }

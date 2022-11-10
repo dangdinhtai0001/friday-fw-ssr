@@ -13,7 +13,7 @@ interface ContextValue {
 
 interface ContextProviderProps {
     initialState: ContextState;
-    children?: React.ReactElement | React.ReactElement[];
+    children: React.ReactElement | React.ReactElement[];
 }
 
 // ---------------------- || Khởi tạo context || ---------------------- //

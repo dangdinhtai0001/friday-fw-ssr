@@ -18,8 +18,6 @@ const Activator = forwardRef((props: ActivatorProps, ref) => {
         onClick?.();
 
         updateVisible(true);
-        console.log('handleOnClickActivator');
-
     };
 
     if (children && Children.count(children) === 1) {

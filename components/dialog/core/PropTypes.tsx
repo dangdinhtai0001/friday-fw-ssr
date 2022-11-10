@@ -1,4 +1,5 @@
 import { GetContainer } from "@components/portal/Portal";
+import type { ReactNode } from 'react';
 
 export interface IDialogPropTypes {
     visible?: boolean;
@@ -7,6 +8,7 @@ export interface IDialogPropTypes {
     destroyOnClose?: boolean;
     afterClose?: () => any;
     children?: React.ReactElement;
+    title?: ReactNode;
 }
 
 export interface ActivatorProps {
