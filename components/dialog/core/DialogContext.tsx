@@ -3,7 +3,7 @@ import React, { useState, useContext, createContext, useEffect } from 'react';
 
 // ---------------------- || Define type/ interface || ---------------------- //
 export interface ContextState {
-
+    visible: boolean;
 };
 
 interface ContextValue {
@@ -39,9 +39,18 @@ const DialogContextProvider = (props: ContextProviderProps) => {
 const useDialogContext = () => {
     const { context, setContext } = useContext(DialogContext)!;
 
+    // cập nhật thuộc tính visible
+    const updateVisible = (visible: boolean) => {
+        setContext((prevState: ContextState) => ({
+            ...prevState,
+            visible
+        }));
+    };
+
     return {
         context,
-        setContext
+        setContext,
+        updateVisible
     };
 };
 
