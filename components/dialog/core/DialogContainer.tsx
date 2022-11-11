@@ -30,21 +30,34 @@ const dropIn = {
     },
 };
 
+
+
 const DialogContainer: React.FC<IDialogPropTypes> = (props: IDialogPropTypes) => {
-    const { context } = useDialogContext();
+    const dialogContextHook = useDialogContext();
+    const { context } = dialogContextHook;
     const { visible, actionDefs } = context;
 
-    const { getContainer, forceRender, destroyOnClose = false, afterClose, title, children } = props;
+    const { getContainer, forceRender, destroyOnClose = false, afterClose, title, onDialogEvent, children } = props;
+    const [animatedVisible, setAnimatedVisible] = React.useState<boolean>(visible);
 
+    React.useEffect(() => {
+        if (visible) {
+            setAnimatedVisible(true);
+        }
+    }, [visible]);
 
     // Destroy on close will remove wrapped div
-    if (!forceRender && destroyOnClose) {
+    if (!forceRender && destroyOnClose && !animatedVisible) {
         return null;
+    }
+
+    const handleOnDialogEvent = (key: string) => {
+        onDialogEvent?.({ key: key, hook: dialogContextHook });
     }
 
     const renderDialogFooter = () => {
         return actionDefs?.map((item, index) => {
-            return <Button key={`${item.key}--${index}`} type={item.type}>
+            return <Button key={`${item.key}--${index}`} type={item.type} onClick={() => { handleOnDialogEvent(item.key) }}>
                 {item.label}
             </Button>
         })
@@ -55,7 +68,7 @@ const DialogContainer: React.FC<IDialogPropTypes> = (props: IDialogPropTypes) =>
             open={visible || forceRender}
             autoDestroy={false}
             getContainer={getContainer}
-            autoLock={visible}
+            autoLock={visible || animatedVisible}
         >
             <div className='fd--dialog-root transition-all ease-in-out'>
                 {/* ----------------------------------- | mask | ----------------------------------- */}

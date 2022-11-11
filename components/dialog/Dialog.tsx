@@ -47,10 +47,12 @@ const Dialog = (props: IDialogPropTypes) => {
             {_container}
         </DialogContainer>
     }
-    return <DialogContextProvider initialState={{ visible: false, actionDefs: actionDefs }}>
-        {renderDialogContainer()}
-        {renderActivatorContainer()}
-    </DialogContextProvider>;
+    return (
+        <DialogContextProvider initialState={{ visible: false, actionDefs: actionDefs }}>
+            {renderDialogContainer()}
+            {renderActivatorContainer()}
+        </DialogContextProvider>
+    );
 }
 
 Dialog.Activator = (props: ActivatorProps) => {

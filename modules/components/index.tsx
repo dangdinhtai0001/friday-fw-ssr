@@ -14,10 +14,18 @@ const Page = (props: ComponentPageProps) => {
         <ButtonContainer />
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Modal</div>
-        <Dialog title='Đây là title' actionDefs={[
-          { key: 'cancel', label: 'Hủy', disabled: false, visible: true, type: 'transparent' },
-          { key: 'ok', label: 'Xác nhận', disabled: false, visible: true, type: 'primary' }
-        ]} >
+        <Dialog
+          title='Đây là title'
+          actionDefs={[
+            { key: 'cancel', label: 'Hủy', disabled: false, visible: true, type: 'transparent' },
+            { key: 'ok', label: 'Xác nhận', disabled: false, visible: true, type: 'primary' }
+          ]}
+          onDialogEvent={({ key, hook }) => {
+            if (key === 'cancel') {
+              hook.updateVisible(false);
+            }
+          }}
+        >
           <Dialog.Activator>
             <Button type='primary' block={false} >
               open modal
