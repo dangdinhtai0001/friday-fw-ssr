@@ -3,9 +3,9 @@ import React from 'react';
 // ------- 3rd imports
 // ------- local imports
 import Portal from '@components/portal/Portal';
-import { useDialogContext } from '../DialogContext';
+import { useDialogContext } from './DialogContext';
 // ------- type imports
-import type { IDialogPropTypes } from '../PropTypes';
+import type { IDialogPropTypes } from './PropTypes';
 
 const DialogContainer: React.FC<IDialogPropTypes> = (props: IDialogPropTypes) => {
     const { context } = useDialogContext();

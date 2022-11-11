@@ -16,7 +16,7 @@ const Page = (props: ComponentPageProps) => {
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Modal</div>
         <Dialog title='Đây là title'>
           <Dialog.Activator>
-            <Button type='primary' >
+            <Button type='primary' block={false} >
               open modal
             </Button>
           </Dialog.Activator>

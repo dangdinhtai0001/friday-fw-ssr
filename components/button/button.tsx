@@ -18,6 +18,7 @@ type Loading = number | boolean;
 export interface BaseButtonProps {
   type?: ButtonType;
   icon?: React.ReactNode;
+  block?: boolean;
   disabled?: boolean;
   rounded?: boolean;
   outline?: boolean;
@@ -78,6 +79,7 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
     type = 'primary',
     outline = false,
     rounded = false,
+    block = false,
     color,
     disabled,
     className,
@@ -145,6 +147,8 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
         (!children && children !== 0 && !!iconType) || rounded,
       [`rounded px-[0.3rem] py-[0.05rem]`]: children,
       [getColorClassName(type, outline)]: true,
+      [`w-full`]: block,
+      [`w-fit`]: !block
     },
   );
 
