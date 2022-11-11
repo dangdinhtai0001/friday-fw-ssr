@@ -23,6 +23,9 @@ const Page = (props: ComponentPageProps) => {
               open modal
             </Button>
           </Dialog.Activator>
+          <Dialog.Container>
+            <div className='h-[500px] w-[700px] border-2'>123456</div>
+          </Dialog.Container>
         </Dialog>
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Tabs</div>

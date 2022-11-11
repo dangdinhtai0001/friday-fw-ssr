@@ -8,7 +8,7 @@ export interface IDialogPropTypes {
     forceRender?: boolean;
     destroyOnClose?: boolean;
     afterClose?: () => any;
-    children?: React.ReactElement;
+    children?: React.ReactElement | React.ReactElement[];
     title?: ReactNode;
     actionDefs: ActionDef[]
 }

@@ -30,8 +30,21 @@ const Dialog = (props: IDialogPropTypes) => {
     };
 
     const renderDialogContainer = () => {
+        if (Children.count(children) === 0) {
+            return <></>;
+        }
+
+        let _container = <></>;
+
+        Children.forEach(children, (child) => {
+            if (child && child.type === Dialog.Container) {
+                _container = child;
+            }
+        });
+
+
         return <DialogContainer {...props}>
-            <div className='h-[500px] w-[700px] border-2'>123456</div>
+            {_container}
         </DialogContainer>
     }
     return <DialogContextProvider initialState={{ visible: false, actionDefs: actionDefs }}>
@@ -42,6 +55,10 @@ const Dialog = (props: IDialogPropTypes) => {
 
 Dialog.Activator = (props: ActivatorProps) => {
     return <Activator {...props} />
+}
+
+Dialog.Container = ({ children }) => {
+    return children;
 }
 
 export default Dialog;
