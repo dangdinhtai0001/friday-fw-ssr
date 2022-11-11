@@ -14,7 +14,10 @@ const Page = (props: ComponentPageProps) => {
         <ButtonContainer />
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Modal</div>
-        <Dialog title='Đây là title'>
+        <Dialog title='Đây là title' actionDefs={[
+          { key: 'cancel', label: 'Hủy', disabled: false, visible: true, type: 'transparent' },
+          { key: 'ok', label: 'Xác nhận', disabled: false, visible: true, type: 'primary' }
+        ]} >
           <Dialog.Activator>
             <Button type='primary' block={false} >
               open modal

@@ -1,9 +1,19 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
+import { ButtonType } from '@components/button/button'
 // ================================================== || CONTEXT || ================================================== //
 
 // ---------------------- || Define type/ interface || ---------------------- //
+export interface ActionDef {
+    key: string;
+    label: string;
+    type: ButtonType;
+    disabled: boolean;
+    visible: boolean;
+}
+
 export interface ContextState {
     visible: boolean;
+    actionDefs?: ActionDef[]
 };
 
 interface ContextValue {

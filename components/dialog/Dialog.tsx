@@ -10,7 +10,7 @@ import DialogContainer from './core/DialogContainer';
 // define type/ interface
 
 const Dialog = (props: IDialogPropTypes) => {
-    const { children } = props;
+    const { actionDefs, children } = props;
 
     // ------------------------- || render function || -------------------------
     const renderActivatorContainer = () => {
@@ -31,10 +31,10 @@ const Dialog = (props: IDialogPropTypes) => {
 
     const renderDialogContainer = () => {
         return <DialogContainer {...props}>
-            <div className='h-[500px] w-[700px]'>123456</div>
+            <div className='h-[500px] w-[700px] border-2'>123456</div>
         </DialogContainer>
     }
-    return <DialogContextProvider initialState={{ visible: false }}>
+    return <DialogContextProvider initialState={{ visible: false, actionDefs: actionDefs }}>
         {renderDialogContainer()}
         {renderActivatorContainer()}
     </DialogContextProvider>;
