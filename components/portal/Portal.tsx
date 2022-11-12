@@ -75,6 +75,7 @@ const Portal = React.forwardRef<any, PortalProps>((props, ref) => {
         ContainerType | boolean | null
     >(getPortalContainer(getContainer!));
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     React.useEffect(() => {
         const customizeContainer = getPortalContainer(getContainer!);
 
