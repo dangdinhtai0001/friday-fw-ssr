@@ -7,7 +7,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 // ----------------
 import { tuple } from '../_util/type';
 
-const ButtonTypes = tuple('primary', 'success', 'danger', 'warning', 'info');
+const ButtonTypes = tuple('primary', 'success', 'danger', 'warning', 'info', 'transparent');
 export type ButtonType = typeof ButtonTypes[number];
 
 const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
@@ -18,6 +18,7 @@ type Loading = number | boolean;
 export interface BaseButtonProps {
   type?: ButtonType;
   icon?: React.ReactNode;
+  block?: boolean;
   disabled?: boolean;
   rounded?: boolean;
   outline?: boolean;
@@ -67,6 +68,8 @@ const getColorClassName = (type: string, outline: boolean): string => {
       return `bg-th-warning`;
     case 'info':
       return `bg-th-info`;
+    case 'transparent':
+      return `bg-transparent`;
   }
 
   return '';
@@ -78,6 +81,7 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
     type = 'primary',
     outline = false,
     rounded = false,
+    block = false,
     color,
     disabled,
     className,
@@ -132,11 +136,11 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
 
   const classes = classNames(
     `border-[0.1rem] border-th-foreground 
-    
-    group btn relative overflow-hidden 
-    inline-flex items-center justify-start 
-    cursor-pointer
-    text-th-text-primary font-roboto font-[500] text-[0.9rem] leading-[1.5715rem]`,
+      h-fit
+      group btn relative overflow-hidden 
+      inline-flex items-center justify-start 
+      cursor-pointer
+      text-th-text-primary font-roboto font-[500] text-[0.9rem] leading-[1.5715rem]`,
     {
       ['opacity-50 cursor-not-allowed']: disabled || innerLoading,
       ['transition-all  hover:scale-105 transition-transform active:scale-[0.9]']:
@@ -145,6 +149,8 @@ const InternalButton = React.forwardRef<unknown, ButtonProps>((props, ref) => {
         (!children && children !== 0 && !!iconType) || rounded,
       [`rounded px-[0.3rem] py-[0.05rem]`]: children,
       [getColorClassName(type, outline)]: true,
+      [`w-full`]: block,
+      [`w-fit`]: !block
     },
   );
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import Portal from '@components/portal/Portal';
-import type { IDialogPropTypes } from './IDialogPropTypes';
+import type { IDialogPropTypes } from './core/PropTypes';
 
-const DialogWrap: React.FC<IDialogPropTypes> = (props: IDialogPropTypes) => {
+const Dialog: React.FC<IDialogPropTypes> = (props: IDialogPropTypes) => {
     const { visible = false, getContainer, forceRender, destroyOnClose = false, afterClose } = props;
     const [animatedVisible, setAnimatedVisible] = React.useState<boolean>(visible);
 
@@ -24,4 +24,4 @@ const DialogWrap: React.FC<IDialogPropTypes> = (props: IDialogPropTypes) => {
     );
 };
 
-export default DialogWrap;
+export default Dialog;

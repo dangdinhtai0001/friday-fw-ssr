@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import { supportRef, useComposeRef } from 'rc-util/lib/ref';
@@ -88,6 +88,9 @@ const Portal = React.forwardRef<any, PortalProps>((props, ref) => {
     );
     const mergedContainer = innerContainer ?? defaultContainer;
 
+    React.useEffect(() => {
+        setMounted(true);
+    }, [mergedContainer]);
     // ========================= Locker ==========================
     useScrollLocker(
         autoLock &&
@@ -123,9 +126,7 @@ const Portal = React.forwardRef<any, PortalProps>((props, ref) => {
         });
     }
 
-    React.useEffect(() => {
-        setMounted(true);
-    }, [mergedContainer]);
+
 
     return open && mounted ? <OrderContext.Provider value={queueCreate}>
         {renderInline
