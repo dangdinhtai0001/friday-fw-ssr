@@ -1,6 +1,6 @@
 import ButtonContainer from "./ButtonContainer";
-import { Dialog } from "@components/dialog";
-import Button from "@components/button";
+import DialogContainer from "./DialogContainer";
+import TabsContainer from "./TabsContainer";
 
 export interface ComponentPageProps { }
 
@@ -14,29 +14,10 @@ const Page = (props: ComponentPageProps) => {
         <ButtonContainer />
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Modal</div>
-        <Dialog
-          title='Đây là title'
-          actionDefs={[
-            { key: 'cancel', label: 'Hủy', disabled: false, visible: true, type: 'transparent' },
-            { key: 'ok', label: 'Xác nhận', disabled: false, visible: true, type: 'primary' }
-          ]}
-          onDialogEvent={({ key, hook }) => {
-            if (key === 'cancel') {
-              hook.updateVisible(false);
-            }
-          }}
-        >
-          <Dialog.Activator>
-            <Button type='primary' block={false} >
-              open modal
-            </Button>
-          </Dialog.Activator>
-          <Dialog.Container>
-            <div className='h-[500px] w-[700px] border-2'>123456</div>
-          </Dialog.Container>
-        </Dialog>
+        <DialogContainer />
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Tabs</div>
+        <TabsContainer />
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Input</div>
         {/* ================================================================================= */}
