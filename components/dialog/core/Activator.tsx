@@ -27,4 +27,7 @@ const Activator = forwardRef((props: ActivatorProps, ref) => {
     return <></>;
 });
 
+Activator.displayName = 'Dialog--Activator';
+
+
 export default Activator;
