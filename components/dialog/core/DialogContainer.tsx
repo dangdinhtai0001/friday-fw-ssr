@@ -6,7 +6,7 @@ import { Resizable } from 'react-resizable';
 // ------- local imports
 import { useDialogContext } from './DialogContext';
 import Button from '@components/button';
-import useClientSize from '@components/hooks/useClientSize';
+import { getDimensionByRef } from '@components/_util/dimension'
 // ------- type imports
 import type { IDialogPropTypes } from './PropTypes';
 
@@ -37,24 +37,18 @@ const dropIn = {
 
 const DialogContainer = (props: IDialogPropTypes) => {
     const {
-        getContainer,
-        forceRender,
-        destroyOnClose = false,
-        afterClose,
         title,
         onDialogEvent,
         children,
-        initWidth,
-        initHeight
+        initWidth = '700px',
+        initHeight = '500px'
     } = props;
 
     const dialogContextHook = useDialogContext();
     const { context } = dialogContextHook;
-    const { visible, actionDefs } = context;
+    const { actionDefs } = context;
 
     const dialogContainerRef = React.useRef<HTMLDivElement | null>(null);
-
-    const { getClientSize } = useClientSize({ ref: dialogContainerRef });
 
     const [currentHeight, setCurrentHeight] = React.useState<string>(initHeight);
     const [currentWidth, setCurrentWidth] = React.useState<string>(initWidth);
@@ -63,13 +57,13 @@ const DialogContainer = (props: IDialogPropTypes) => {
         onDialogEvent?.({ key: key, hook: dialogContextHook });
     };
 
-    const handleOnResize = (event, { element, size, handle }) => {
+    const handleOnResize = (event, { size }) => {
         console.log(size);
     }
 
-    React.useEffect(() => {
-        console.log('use effect ', getClientSize(dialogContainerRef));
-        let size = getClientSize(dialogContainerRef);
+    React.useLayoutEffect(() => {
+        console.log('use effect ', getDimensionByRef(dialogContainerRef));
+        let size = getDimensionByRef(dialogContainerRef);
         setCurrentHeight(`${size?.height ? size.height : initHeight}px`);
         setCurrentWidth(`${size?.width ? size?.width : initWidth}px`);
 
@@ -107,7 +101,7 @@ const DialogContainer = (props: IDialogPropTypes) => {
                         {title}
                     </div>
                     {/* ------------------ | content | ------------------ */}
-                    <div className="fd--dialog-content px-[0.5rem] py-[0.3rem]">{children}</div>
+                    <div className="fd--dialog-content overflow-auto w-full h-full px-[0.5rem] py-[0.3rem]">{children}</div>
                     {/* ------------------ | footer | ------------------ */}
                     <div className="fd--dialog-footer h-fit rounded-b-[0.5rem] border-t-[0.1rem] border-th-foreground flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem]">
                         {renderDialogFooter()}
