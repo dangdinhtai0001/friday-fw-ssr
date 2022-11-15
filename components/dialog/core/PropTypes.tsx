@@ -16,7 +16,9 @@ export interface IDialogPropTypes {
     children?: React.ReactElement | React.ReactElement[];
     title?: ReactNode;
     actionDefs: ActionDef[];
-    onDialogEvent?: (props: DialogEventProps) => void
+    onDialogEvent?: (props: DialogEventProps) => void,
+    initWidth: string;
+    initHeight: string;
 }
 
 export interface ActivatorProps {

@@ -5,7 +5,7 @@ import React, { Children } from 'react';
 import Activator from './core/Activator';
 import { IDialogPropTypes, ActivatorProps } from './core/PropTypes';
 import { DialogContextProvider } from './core/DialogContext';
-import DialogContainer from './core/DialogContainer';
+import DialogContainer from './core/DialogPortal';
 
 // define type/ interface
 
