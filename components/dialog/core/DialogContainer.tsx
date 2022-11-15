@@ -2,7 +2,7 @@
 import React from 'react';
 // ------- 3rd imports
 import { motion } from 'framer-motion';
-import { Resizable } from 'react-resizable';
+import { Resizable } from 're-resizable';
 // ------- local imports
 import { useDialogContext } from './DialogContext';
 import Button from '@components/button';
@@ -86,7 +86,10 @@ const DialogContainer = (props: IDialogPropTypes) => {
     };
 
     return (
-        <Resizable height={currentHeight} width={currentWidth} onResize={handleOnResize}>
+        <Resizable defaultSize={{
+            width: 320,
+            height: 200,
+        }} className='border-2'>
             <div className='fd--dialog-container border-3' style={{ width: currentWidth, height: currentHeight }} ref={dialogContainerRef}>
                 <motion.div
                     className="fd--dialog-panel h-fit w-fit bg-th-background rounded-[0.5rem] flex flex-col "
