@@ -6,29 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Activator from "./core/Activator";
 import { IDialogPropTypes, ActivatorProps } from "./core/PropTypes";
 import { DialogContextProvider } from './core/DialogContext';
-import DialogContainer from './core/DialogContainer';
+import DialogContainer from './core/DialogPortal';
 
 // define type/ interface
-const dropIn = {
-    hidden: {
-        y: "-100vh",
-        opacity: 0,
-    },
-    visible: {
-        y: "0",
-        opacity: 1,
-        transition: {
-            duration: 0.1,
-            type: "spring",
-            damping: 25,
-            stiffness: 500,
-        },
-    },
-    exit: {
-        y: "100vh",
-        opacity: 0,
-    },
-};
 
 const Dialog = (props: IDialogPropTypes) => {
     const { actionDefs, children } = props;
