@@ -7,6 +7,8 @@ import { Resizable } from 're-resizable';
 import { useDialogContext } from './DialogContext';
 import Button from '@components/button';
 import { getDimensionByRef } from '@components/_util/dimension';
+import Draggable from 'react-draggable';
+import useWindowDimensions from '@components/hooks/useWindowDimensions'
 // ------- type imports
 import type { IDialogPropTypes } from './PropTypes';
 
@@ -42,6 +44,8 @@ const DialogContainer = (props: IDialogPropTypes) => {
   const { context, updateSizeByDelta } = dialogContextHook;
   const { actionDefs } = context;
 
+  const [disabledDrag, setDisabledDrag] = React.useState<boolean>(false);
+
   const handleOnDialogEvent = (key: string) => {
     onDialogEvent?.({ key: key, hook: dialogContextHook });
   };
@@ -64,40 +68,41 @@ const DialogContainer = (props: IDialogPropTypes) => {
 
   return (
     <motion.div
-      className="fd--dialog-panel h-fit w-fit bg-th-background rounded-[0.5rem] "
+      className="fd--dialog-panel h-fit w-fit border-2 rounded-[0.5rem] "
       variants={dropIn}
       initial="hidden"
       animate="visible"
       exit="exit"
       key="fd--dialog-panel"
     >
-      <Resizable
-        defaultSize={{
-          width: initWidth,
-          height: initHeight,
-        }}
-        size={{ width: context.width, height: context.height }}
-        className=" fd--dialog-container flex flex-col  rounded-t-[0.5rem] rounded-b-[0.5rem] bg-red-400 "
-        onResize={(event, direction, ref, delta) => {
-          console.log('resizing');
-        }}
-        onResizeStop={(event, direction, ref, delta) => {
-          updateSizeByDelta(delta);
-        }}
-      >
-        {/* ------------------ | header | ------------------ */}
-        <div className="fd--dialog-header flex items-center justify-center text-th-text-primary font-[600] text-[1.3rem] h-[2.1rem] w-full py-[1rem] bg-th-primary rounded-t-[0.5rem]">
-          {title}
-        </div>
-        {/* ------------------ | content | ------------------ */}
-        <div className="fd--dialog-content overflow-auto w-full h-full px-[0.5rem] py-[0.3rem]">
-          {children}
-        </div>
-        {/* ------------------ | footer | ------------------ */}
-        <div className="fd--dialog-footer h-fit rounded-b-[0.5rem] border-t-[0.1rem] border-th-foreground flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem]">
-          {renderDialogFooter()}
-        </div>
-      </Resizable>
+      <Draggable disabled={disabledDrag} >
+        <Resizable
+          defaultSize={{
+            width: initWidth,
+            height: initHeight,
+          }}
+          size={{ width: context.width, height: context.height }}
+          className=" fd--dialog-container flex flex-col  rounded-t-[0.5rem] rounded-b-[0.5rem] bg-red-400 "
+          onResize={(event, direction, ref, delta) => { setDisabledDrag(true); }}
+          onResizeStop={(event, direction, ref, delta) => {
+            updateSizeByDelta(delta);
+            setDisabledDrag(false);
+          }}
+        >
+          {/* ------------------ | header | ------------------ */}
+          <div className="fd--dialog-header flex items-center justify-center text-th-text-primary font-[600] text-[1.3rem] h-[2.1rem] w-full py-[1rem] bg-th-primary rounded-t-[0.5rem]">
+            {title}
+          </div>
+          {/* ------------------ | content | ------------------ */}
+          <div className="fd--dialog-content overflow-auto w-full h-full px-[0.5rem] py-[0.3rem]">
+            {children}
+          </div>
+          {/* ------------------ | footer | ------------------ */}
+          <div className="fd--dialog-footer h-fit rounded-b-[0.5rem] border-t-[0.1rem] border-th-foreground flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem]">
+            {renderDialogFooter()}
+          </div>
+        </Resizable>
+      </Draggable>
     </motion.div>
   );
 };
