@@ -2,7 +2,7 @@
 import React from 'react';
 // 3rd imports
 // local imports
-import { TabsProps, TabPanelProps, TabDefine } from './core/interface';
+import { TabsProps, TabDefine } from './core/interface';
 import TabHeaders from './core/TabHeaders';
 import TabPanelList from './core/TabPanelList';
 import TabPanel from './core/TabPanel'
