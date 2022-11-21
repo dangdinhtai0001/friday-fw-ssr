@@ -1,15 +1,10 @@
-import { Resizable } from 're-resizable';
+import Tabs from '@components/tabs/Tabs'
 const TabsContainer = () => {
     return <>
-
-        <Resizable
-            defaultSize={{
-                width: 320,
-                height: 200,
-            }} className='border-2'
-        >
-            Sample with default size
-        </Resizable>
+        <Tabs>
+            <Tabs.TabPanel>1</Tabs.TabPanel>
+            <Tabs.TabPanel>2</Tabs.TabPanel>
+        </Tabs>
     </>;
 }
 

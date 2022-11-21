@@ -2,7 +2,9 @@ import { createContext, useContext, useState, useEffect } from 'react';
 // ================================================== || CONTEXT || ================================================== //
 
 // ------------------------ || define interface || ------------------------
-export interface ContextState { }
+export interface ContextState {
+    tabs: any[]
+}
 
 interface ContextProviderProps {
     initialState: ContextState;
