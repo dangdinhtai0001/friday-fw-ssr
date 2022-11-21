@@ -69,7 +69,7 @@ const DialogContainer = (props: IDialogPropTypes) => {
 
   return (
     <motion.div
-      className="fd--dialog-panel h-fit w-fit border-2 rounded-[0.5rem] "
+      className="fd--dialog-panel h-fit w-fit rounded-[0.5rem] "
       variants={dropIn}
       initial="hidden"
       animate="visible"
@@ -85,7 +85,7 @@ const DialogContainer = (props: IDialogPropTypes) => {
         minHeight={minHeight}
         maxWidth={maxWidth}
         maxHeight={maxHeight}
-        className=" fd--dialog-container flex flex-col  rounded-t-[0.5rem] rounded-b-[0.5rem] bg-red-400 "
+        className=" fd--dialog-container flex flex-col  rounded-t-[0.5rem] rounded-b-[0.5rem] bg-th-background "
         onResize={(event, direction, ref, delta) => { }}
         onResizeStop={(event, direction, ref, delta) => {
         }}
