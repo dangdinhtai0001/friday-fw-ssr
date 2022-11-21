@@ -12,6 +12,7 @@ import DialogContainer from './core/DialogPortal';
 const Dialog = (props: IDialogPropTypes) => {
   const { actionDefs, children } = props;
 
+
   // ------------------------- || render function || -------------------------
   const renderActivatorContainer = () => {
     if (Children.count(children) === 0) {

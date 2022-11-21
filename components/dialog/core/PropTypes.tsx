@@ -19,6 +19,10 @@ export interface IDialogPropTypes {
     onDialogEvent?: (props: DialogEventProps) => void,
     initWidth: string;
     initHeight: string;
+    minWidth?: number | string;
+    minHeight?: number | string;
+    maxWidth?: number | string;
+    maxHeight?: number | string;
 }
 
 export interface ActivatorProps {

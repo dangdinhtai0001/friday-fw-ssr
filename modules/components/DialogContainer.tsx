@@ -14,6 +14,12 @@ const DialogContainer = () => {
                     hook.updateVisible(false);
                 }
             }}
+            initWidth='80vw'
+            initHeight="80vh"
+            maxWidth='90vw'
+            maxHeight='90vh'
+            minHeight='50vh'
+            minWidth='50vw'
         >
             <Dialog.Activator>
                 <Button type='primary' block={false} >
@@ -21,7 +27,7 @@ const DialogContainer = () => {
                 </Button>
             </Dialog.Activator>
             <Dialog.Container>
-                <div className='h-[500px] w-[700px] border-2'>123456</div>
+                <div className='h-full w-full border-2'>123456</div>
             </Dialog.Container>
         </Dialog>
     )

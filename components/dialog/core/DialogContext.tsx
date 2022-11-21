@@ -13,8 +13,6 @@ export interface ActionDef {
 
 export interface ContextState {
   visible: boolean;
-  width: number;
-  height: number;
   actionDefs?: ActionDef[];
 }
 
@@ -61,20 +59,10 @@ const useDialogContext = () => {
     }));
   };
 
-  // cập nhật with, height theo delta
-  const updateSizeByDelta = (delta: { width: number; height: number }) => {
-    setContext((prevState: ContextState) => ({
-      ...prevState,
-      width: prevState.width + delta.width,
-      height: prevState.height + delta.height,
-    }));
-  };
-
   return {
     context,
     setContext,
     updateVisible,
-    updateSizeByDelta,
   };
 };
 
