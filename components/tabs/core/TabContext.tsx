@@ -1,22 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+// ------------------------ || define interface || ------------------------
+import { ContextProviderValue, ContextProviderProps, ContextState, TabContextHook } from './interface';
 // ================================================== || CONTEXT || ================================================== //
 
-// ------------------------ || define interface || ------------------------
-export interface ContextState {
-    tabs: any[]
-}
-
-interface ContextProviderProps {
-    initialState: ContextState;
-    children: React.ReactElement;
-}
-
-interface ContextProviderValue {
-    context: ContextState;
-    setContext: any;
-}
-
-export interface TabContextHook extends ContextProviderValue { }
 
 // ---------------------- || Khởi tạo context || ---------------------- //
 const TabContext = createContext<ContextProviderValue | null>(null);
@@ -47,11 +33,21 @@ const useTabContext = (): TabContextHook => {
     // các hàm thay đổi giá trị trong context
 
     // --------------------------------------------------------------------------------
+
+    // Hàm cập nhật selected tab
+    const updateActiveKey = (key: string): void => {
+        setContext((prevState: ContextState) => ({
+            ...prevState,
+            activeKey: key,
+        }));
+    }
     // --------------------------------------------------------------------------------
 
     return {
         context,
         setContext,
+        // ----------------------
+        updateActiveKey
     };
 };
 
