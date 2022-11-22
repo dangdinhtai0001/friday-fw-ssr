@@ -3,6 +3,7 @@ import React from 'react';
 // ------- 3rd imports
 import { motion } from 'framer-motion';
 import { Resizable } from 're-resizable';
+import classNames from 'classnames';
 // ------- local imports
 import { useDialogContext } from './DialogContext';
 import Button from '@components/button';
@@ -38,13 +39,13 @@ const dropIn = {
 const DialogContainer = (props: IDialogPropTypes) => {
     const {
         title, onDialogEvent, children, initWidth = '700px', initHeight = '500px',
-        minWidth, minHeight, maxWidth, maxHeight
+        minWidth, minHeight, maxWidth, maxHeight,
+        lockScroll
     } = props;
 
     const dialogContextHook = useDialogContext();
     const { context } = dialogContextHook;
     const { actionDefs } = context;
-
 
 
     const handleOnDialogEvent = (key: string) => {
@@ -67,9 +68,17 @@ const DialogContainer = (props: IDialogPropTypes) => {
         });
     };
 
+    const dialogContentClasses = classNames(
+        `fd--dialog-content w-full h-full px-[0.5rem] py-[0.3rem] `,
+        {
+            ['overflow-hidden']: lockScroll,
+            ['overflow-auto']: !lockScroll
+        }
+    );
+
     return (
         <motion.div
-            className="fd--dialog-panel h-fit w-fit rounded-[0.5rem] "
+            className="fd--dialog-content w-full h-full px-[0.5rem] py-[0.3rem]  flex justify-center items-center"
             variants={dropIn}
             initial="hidden"
             animate="visible"
@@ -85,7 +94,7 @@ const DialogContainer = (props: IDialogPropTypes) => {
                 minHeight={minHeight}
                 maxWidth={maxWidth}
                 maxHeight={maxHeight}
-                className=" fd--dialog-container flex flex-col  rounded-t-[0.5rem] rounded-b-[0.5rem] bg-th-background "
+                className=" fd--dialog-container flex flex-col rounded-t-[0.5rem] rounded-b-[0.5rem] bg-th-background "
                 onResize={(event, direction, ref, delta) => { }}
                 onResizeStop={(event, direction, ref, delta) => {
                 }}
@@ -95,7 +104,7 @@ const DialogContainer = (props: IDialogPropTypes) => {
                     {title}
                 </div>
                 {/* ------------------ | content | ------------------ */}
-                <div className="fd--dialog-content overflow-auto w-full h-full px-[0.5rem] py-[0.3rem]">
+                <div className={dialogContentClasses}>
                     {children}
                 </div>
                 {/* ------------------ | footer | ------------------ */}

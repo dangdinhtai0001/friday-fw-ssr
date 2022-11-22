@@ -53,6 +53,7 @@ const DialogTab = (props: DialogTabProps) => {
             initWidth={initWidth} initHeight={initHeight}
             maxWidth={maxWidth} maxHeight={maxHeight}
             minHeight={minHeight} minWidth={minWidth}
+            lockScroll={false}
         >
             {renderActivatorContainer()}
             <Dialog.Container>

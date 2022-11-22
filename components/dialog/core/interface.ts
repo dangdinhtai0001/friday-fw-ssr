@@ -34,6 +34,7 @@ export interface IDialogPropTypes {
   visible?: boolean;
   getContainer?: GetContainer | false;
   forceRender?: boolean;
+  lockScroll?: boolean;
   destroyOnClose?: boolean;
   afterClose?: () => any;
   children?: React.ReactElement | React.ReactElement[];

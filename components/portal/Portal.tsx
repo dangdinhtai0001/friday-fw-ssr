@@ -4,7 +4,7 @@ import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import { supportRef, useComposeRef } from 'rc-util/lib/ref';
 import OrderContext from './Context';
 import useDom from './useDom';
-import useScrollLocker from './useScrollLocker';
+import useScrollLocker from '../hooks/useScrollLocker';
 import { inlineMock } from './mock';
 
 export type ContainerType = Element | DocumentFragment;
