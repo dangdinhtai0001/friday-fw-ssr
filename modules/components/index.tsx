@@ -1,6 +1,7 @@
 import ButtonContainer from "./ButtonContainer";
 import DialogContainer from "./DialogContainer";
 import TabsContainer from "./TabsContainer";
+import DialogTabContainer from "./DialogTabContainer";
 
 export interface ComponentPageProps { }
 
@@ -18,6 +19,9 @@ const Page = (props: ComponentPageProps) => {
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Tabs</div>
         <TabsContainer />
+        {/* ================================================================================= */}
+        <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Dialog tab</div>
+        <DialogTabContainer />
         {/* ================================================================================= */}
         <div className="mb-4 text-[1.5rem] font-[600] text-th-success">Input</div>
         {/* ================================================================================= */}

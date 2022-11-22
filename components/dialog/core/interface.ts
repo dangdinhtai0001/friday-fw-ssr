@@ -27,7 +27,7 @@ export interface ContextProviderProps {
 
 interface DialogEventProps {
   key: string;
-  hook: any;
+  hook: DialogContextHook;
 }
 
 export interface IDialogPropTypes {
@@ -51,4 +51,10 @@ export interface IDialogPropTypes {
 export interface ActivatorProps {
   onClick?: VoidFunction;
   children?: React.ReactElement;
+}
+
+export interface DialogContextHook {
+  context: ContextState;
+  setContext: React.Dispatch<any>;
+  updateVisible: (visible: boolean) => void;
 }

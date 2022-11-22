@@ -1,7 +1,6 @@
 // react imports
 import React from 'react';
 // 3rd imports
-import { motion, AnimatePresence } from "framer-motion";
 // local imports
 import { TabPanelListProps } from './interface';
 import { useTabContext } from './TabContext'

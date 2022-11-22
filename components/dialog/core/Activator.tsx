@@ -14,6 +14,8 @@ const Activator = forwardRef((props: ActivatorProps, ref) => {
     }));
 
     const handleOnClickActivator = () => {
+        console.log('activator');
+
         // gọi đến hàm onClick được truyền vào từ bên ngoài (nếu có )
         onClick?.();
 

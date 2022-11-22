@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext, useEffect } from 'react';
 // ================================================== || CONTEXT || ================================================== //
-import { ContextValue, ContextProviderProps, ContextState } from './interface';
+import { ContextValue, ContextProviderProps, ContextState, DialogContextHook } from './interface';
 
 
 // ---------------------- || Khởi tạo context || ---------------------- //
@@ -25,7 +25,7 @@ const DialogContextProvider = (props: ContextProviderProps) => {
 };
 
 // ---------------------- || Định nghĩa hook || ---------------------- //
-const useDialogContext = () => {
+const useDialogContext = (): DialogContextHook => {
     const { context, setContext } = useContext(DialogContext)!;
 
     // cập nhật thuộc tính visible
