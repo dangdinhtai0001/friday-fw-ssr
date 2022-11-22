@@ -1,6 +1,6 @@
 // react imports
 import { cloneElement, forwardRef, Children, useImperativeHandle } from 'react';
-import { ActivatorProps } from './PropTypes';
+import { ActivatorProps } from './interface';
 import { useDialogContext } from './DialogContext'
 
 const Activator = forwardRef((props: ActivatorProps, ref) => {

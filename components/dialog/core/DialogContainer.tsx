@@ -8,103 +8,103 @@ import { useDialogContext } from './DialogContext';
 import Button from '@components/button';
 
 // ------- type imports
-import type { IDialogPropTypes } from './PropTypes';
+import type { IDialogPropTypes } from './interface';
 
 const dropIn = {
-  hidden: {
-    y: '-100vh',
-    opacity: 0,
-  },
-  visible: {
-    y: '0',
-    opacity: 1,
-    transition: {
-      duration: 0.1,
-      type: 'spring',
-      damping: 25,
-      stiffness: 500,
+    hidden: {
+        y: '-100vh',
+        opacity: 0,
     },
-  },
-  exit: {
-    y: '100vh',
-    opacity: 0,
-    transition: {
-      duration: 0.25,
-      type: 'spring',
+    visible: {
+        y: '0',
+        opacity: 1,
+        transition: {
+            duration: 0.1,
+            type: 'spring',
+            damping: 25,
+            stiffness: 500,
+        },
     },
-  },
+    exit: {
+        y: '100vh',
+        opacity: 0,
+        transition: {
+            duration: 0.25,
+            type: 'spring',
+        },
+    },
 };
 
 const DialogContainer = (props: IDialogPropTypes) => {
-  const {
-    title, onDialogEvent, children, initWidth = '700px', initHeight = '500px',
-    minWidth, minHeight, maxWidth, maxHeight
-  } = props;
+    const {
+        title, onDialogEvent, children, initWidth = '700px', initHeight = '500px',
+        minWidth, minHeight, maxWidth, maxHeight
+    } = props;
 
-  const dialogContextHook = useDialogContext();
-  const { context } = dialogContextHook;
-  const { actionDefs } = context;
+    const dialogContextHook = useDialogContext();
+    const { context } = dialogContextHook;
+    const { actionDefs } = context;
 
 
 
-  const handleOnDialogEvent = (key: string) => {
-    onDialogEvent?.({ key: key, hook: dialogContextHook });
-  };
+    const handleOnDialogEvent = (key: string) => {
+        onDialogEvent?.({ key: key, hook: dialogContextHook });
+    };
 
-  const renderDialogFooter = () => {
-    return actionDefs?.map((item, index) => {
-      return (
-        <Button
-          key={`${item.key}--${index}`}
-          type={item.type}
-          onClick={() => {
-            handleOnDialogEvent(item.key);
-          }}
+    const renderDialogFooter = () => {
+        return actionDefs?.map((item, index) => {
+            return (
+                <Button
+                    key={`${item.key}--${index}`}
+                    type={item.type}
+                    onClick={() => {
+                        handleOnDialogEvent(item.key);
+                    }}
+                >
+                    {item.label}
+                </Button>
+            );
+        });
+    };
+
+    return (
+        <motion.div
+            className="fd--dialog-panel h-fit w-fit rounded-[0.5rem] "
+            variants={dropIn}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            key="fd--dialog-panel"
         >
-          {item.label}
-        </Button>
-      );
-    });
-  };
-
-  return (
-    <motion.div
-      className="fd--dialog-panel h-fit w-fit rounded-[0.5rem] "
-      variants={dropIn}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      key="fd--dialog-panel"
-    >
-      <Resizable
-        defaultSize={{
-          width: initWidth,
-          height: initHeight,
-        }}
-        minWidth={minWidth}
-        minHeight={minHeight}
-        maxWidth={maxWidth}
-        maxHeight={maxHeight}
-        className=" fd--dialog-container flex flex-col  rounded-t-[0.5rem] rounded-b-[0.5rem] bg-th-background "
-        onResize={(event, direction, ref, delta) => { }}
-        onResizeStop={(event, direction, ref, delta) => {
-        }}
-      >
-        {/* ------------------ | header | ------------------ */}
-        <div className="fd--dialog-header flex items-center justify-center text-th-text-primary font-[600] text-[1.3rem] h-[2.1rem] w-full py-[1rem] bg-th-primary rounded-t-[0.5rem]">
-          {title}
-        </div>
-        {/* ------------------ | content | ------------------ */}
-        <div className="fd--dialog-content overflow-auto w-full h-full px-[0.5rem] py-[0.3rem]">
-          {children}
-        </div>
-        {/* ------------------ | footer | ------------------ */}
-        <div className="fd--dialog-footer h-fit rounded-b-[0.5rem] border-t-[0.1rem] border-th-foreground flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem]">
-          {renderDialogFooter()}
-        </div>
-      </Resizable>
-    </motion.div>
-  );
+            <Resizable
+                defaultSize={{
+                    width: initWidth,
+                    height: initHeight,
+                }}
+                minWidth={minWidth}
+                minHeight={minHeight}
+                maxWidth={maxWidth}
+                maxHeight={maxHeight}
+                className=" fd--dialog-container flex flex-col  rounded-t-[0.5rem] rounded-b-[0.5rem] bg-th-background "
+                onResize={(event, direction, ref, delta) => { }}
+                onResizeStop={(event, direction, ref, delta) => {
+                }}
+            >
+                {/* ------------------ | header | ------------------ */}
+                <div className="fd--dialog-header flex items-center justify-center text-th-text-primary font-[600] text-[1.3rem] h-[2.1rem] w-full py-[1rem] bg-th-primary rounded-t-[0.5rem]">
+                    {title}
+                </div>
+                {/* ------------------ | content | ------------------ */}
+                <div className="fd--dialog-content overflow-auto w-full h-full px-[0.5rem] py-[0.3rem]">
+                    {children}
+                </div>
+                {/* ------------------ | footer | ------------------ */}
+                <div className="fd--dialog-footer h-fit rounded-b-[0.5rem] border-t-[0.1rem] border-th-foreground flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem]">
+                    {renderDialogFooter()}
+                </div>
+            </Resizable>
+        </motion.div>
+    );
 };
 
 export default DialogContainer;
