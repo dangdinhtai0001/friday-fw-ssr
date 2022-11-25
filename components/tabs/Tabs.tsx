@@ -29,12 +29,10 @@ const Tabs = (props: TabsProps) => {
     // ------------------------- || render function || -------------------------
     return (
         <TabContextProvider initialState={getTabInitialContextState(props)} >
-            {/* <div className='w-full h-full'> */}
             <>
                 <TabHeaders />
                 <TabPanelList />
             </>
-            {/* </div> */}
         </TabContextProvider >
     );
 }

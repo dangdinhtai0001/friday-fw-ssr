@@ -15,7 +15,7 @@ const TabPanel = (props: TabDefine) => {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -10, opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className='w-full h-full p-[0.2rem] overflow-auto'
+                className='p-[0.2rem]'
             >
                 {props.children}
             </motion.div>

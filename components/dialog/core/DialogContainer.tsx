@@ -71,7 +71,7 @@ const DialogContainer = (props: IDialogPropTypes) => {
     const dialogContentClasses = classNames(
         `fd--dialog-content w-full h-full px-[0.5rem] py-[0.3rem] `,
         {
-            ['overflow-hidden']: lockScroll,
+            ['overflow-clip']: lockScroll,
             ['overflow-auto']: !lockScroll
         }
     );

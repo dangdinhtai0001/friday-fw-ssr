@@ -13,7 +13,7 @@ const TabPanelList = (props: TabPanelListProps) => {
 
     // ------------------------- || render function || -------------------------
     return (
-        <>
+        <div className='fd--tab-panel-list h-fit w-fit overflow-auto'>
             {
                 tabs.map((item, index) => {
                     if (item.key === activeKey) {
@@ -22,17 +22,13 @@ const TabPanelList = (props: TabPanelListProps) => {
                             index: index
                         };
 
-
-
-                        return (
-                            <TabPanel {..._item} />
-                        )
+                        return <TabPanel {..._item} />
                     } else {
                         return null;
                     }
                 })
             }
-        </>
+        </div>
     );
 }
 
