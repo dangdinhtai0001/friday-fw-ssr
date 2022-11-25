@@ -14,7 +14,7 @@ const DialogTabContainer = () => {
                     hook.updateVisible(false);
                 }
             }}
-            initWidth='80vw'
+            initWidth='60vw'
             initHeight="80vh"
             maxWidth='90vw'
             maxHeight='90vh'
@@ -27,7 +27,7 @@ const DialogTabContainer = () => {
                 </Button>
             </DialogTab.Activator>
             <DialogTab.TabPanel label='label 1' key='key1'>
-                <div className="bg-red-300 w-[70vh] h-[70vh]">1</div>
+                <div className="bg-red-300 w-[70vw] h-[70vh]">1</div>
             </DialogTab.TabPanel>
             <DialogTab.TabPanel label='label 2' key='key2'>
                 <div>2</div>

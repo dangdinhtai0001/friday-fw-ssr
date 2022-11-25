@@ -78,7 +78,7 @@ const DialogContainer = (props: IDialogPropTypes) => {
 
     return (
         <motion.div
-            className="fd--dialog-content w-full h-full px-[0.5rem] py-[0.3rem]  flex justify-center items-center"
+            className="fd--dialog-content w-full h-full px-[0.5rem] py-[0.3rem] flex justify-center items-center"
             variants={dropIn}
             initial="hidden"
             animate="visible"

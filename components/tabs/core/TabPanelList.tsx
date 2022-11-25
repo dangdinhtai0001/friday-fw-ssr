@@ -13,7 +13,7 @@ const TabPanelList = (props: TabPanelListProps) => {
 
     // ------------------------- || render function || -------------------------
     return (
-        <div>
+        <>
             {
                 tabs.map((item, index) => {
                     if (item.key === activeKey) {
@@ -22,7 +22,7 @@ const TabPanelList = (props: TabPanelListProps) => {
                             index: index
                         };
 
-                       
+
 
                         return (
                             <TabPanel {..._item} />
@@ -32,7 +32,7 @@ const TabPanelList = (props: TabPanelListProps) => {
                     }
                 })
             }
-        </div>
+        </>
     );
 }
 
