@@ -1,7 +1,17 @@
 {
   "name": "friday-fw-ssr--dev-1",
-  "version": "0.1.0",
+  "author": {
+    "name": "Đặng Đình Tài"
+  },
+  "description": "A framework that supports building interfaces for administrative applications",
+  "version": "2.1.0",
   "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": "16.18.1",
+    "yarn": "1.22.19",
+    "npm": "please-use-yarn"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
