@@ -1,8 +1,9 @@
 on: workflow_dispatch
 
-name: Sonar Workflow
+name: Sonar Cloud - Branch Analysis
 jobs:
   sonarcloud:
+    name: Build (Sonar Cloud)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
