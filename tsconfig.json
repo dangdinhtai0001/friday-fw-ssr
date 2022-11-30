@@ -13,8 +13,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@packages/*": ["packages/*"],
+      "@modules/*": ["modules/*"],
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js", "packages/hufflepuff/Portal/Portal.js"],
   "exclude": ["node_modules"]
 }
