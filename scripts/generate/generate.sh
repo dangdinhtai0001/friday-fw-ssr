@@ -50,6 +50,6 @@ mkdir $COMPONENT_DIR
 
 sed 's/BaseComponent/'$COMPONENT_NAME'/g' components/BaseComponent.tsx > $COMPONENT_DIR/$COMPONENT_NAME.tsx
 sed 's/BaseComponent/'$COMPONENT_NAME'/g' components/index.ts > $COMPONENT_DIR/index.ts
-sed 's/BaseComponent/'$COMPONENT_NAME'/g' components/interfaces.ts > $COMPONENT_DIR/interfaces.tsx
+sed 's/BaseComponent/'$COMPONENT_NAME'/g' components/BaseComponent.d.ts > $COMPONENT_DIR/$COMPONENT_NAME.d.ts
 
 echo "Done!!!"

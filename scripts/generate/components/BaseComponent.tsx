@@ -1,9 +1,9 @@
 // react imports
 // 3rd imports
 // local imports
-import { IBaseComponent } from './interfaces';
+import { BaseComponentProps } from './BaseComponent.d';
 
-const BaseComponent: React.FC<IBaseComponent> = () => {
+const BaseComponent: React.FC<BaseComponentProps> = () => {
     return <div></div>;
 };
 
