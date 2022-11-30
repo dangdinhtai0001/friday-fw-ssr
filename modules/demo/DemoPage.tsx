@@ -1,4 +1,4 @@
-import ButtonUnstyled from '@mui/base/ButtonUnstyled';
+import { Button } from '@packages/slytherin';
 
 const DemoPage = () => {
     return (
@@ -7,7 +7,15 @@ const DemoPage = () => {
                 Hello world!
             </h1>
             <div>
-                <ButtonUnstyled>Hello World</ButtonUnstyled>
+                <Button
+                    disabled={false}
+                    onClick={() => console.log('click!')}
+                    style={{
+                        backgroundColor: 'red'
+                    }}
+                >
+                    Hello World
+                </Button>
             </div>
         </>);
 }
