@@ -21,7 +21,7 @@ const coverVariants = {
     },
 };
 
-const Button: React.FC<ButtonProps> = React.forwardRef((props: ButtonProps, ref: React.ForwardedRef<any>) => {
+function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
     const { children, rounded, icon, disabled, loading = false, block, onClick, color, style } = props;
 
     const [innerLoading, setLoading] = React.useState<Loading>(!!loading);
@@ -118,6 +118,6 @@ const Button: React.FC<ButtonProps> = React.forwardRef((props: ButtonProps, ref:
         />
         {children}
     </ButtonUnstyled>;
-});
+}
 
-export default Button;
+export default React.forwardRef(Button);

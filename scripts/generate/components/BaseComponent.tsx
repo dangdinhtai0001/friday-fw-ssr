@@ -4,8 +4,8 @@ import * as React from 'react';
 // local imports
 import { BaseComponentProps } from './BaseComponent.d';
 
-const BaseComponent: React.FC<BaseComponentProps> = React.forwardRef((props: BaseComponentProps, ref: React.ForwardedRef<unknown>) => {
+function BaseComponent(props: BaseComponentProps, ref: React.ForwardedRef<any>): JSX.Element {
     return <></>;
-});
+}
 
-export default BaseComponent;
+export default React.forwardRef(BaseComponent);
