@@ -1,0 +1,4 @@
+- `gryffindor`: Bao gồm các advanced component như `form` và `grid`
+- `hufflepuff`: Bao gồm các component chưa được style và các hook ở low-level
+- `ravenclaw`: Các hàm utils được sử dụng chung
+- `slytherin`: Bao gồm các component của `hufflepuff` và đã được style
