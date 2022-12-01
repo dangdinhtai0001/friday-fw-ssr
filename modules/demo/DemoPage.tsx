@@ -10,9 +10,10 @@ const DemoPage = () => {
                 <Button
                     disabled={false}
                     onClick={() => console.log('click!')}
-                    style={{
-                        backgroundColor: 'red'
-                    }}
+                    // style={{
+                    //     backgroundColor: 'red'
+                    // }}
+                    color='red'
                 >
                     Hello World
                 </Button>

@@ -9,6 +9,10 @@ export interface ButtonProps extends ButtonUnstyledProps {
    */
   loading?: boolean | { delay?: number };
   /**
+   * background color
+   */
+  color?: string;
+  /**
    * Can be set button shape
    */
   rounded?: boolean;

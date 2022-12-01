@@ -22,7 +22,7 @@ const coverVariants = {
 };
 
 const Button: React.FC<ButtonProps> = React.forwardRef((props: ButtonProps, ref: React.ForwardedRef<any>) => {
-    const { children, rounded, icon, disabled, loading = false, block, onClick } = props;
+    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style } = props;
 
     const [innerLoading, setLoading] = React.useState<Loading>(!!loading);
 
@@ -84,18 +84,24 @@ const Button: React.FC<ButtonProps> = React.forwardRef((props: ButtonProps, ref:
         },
     );
 
-    return <ButtonUnstyled {...props} slotProps={{
-        root: (state: ButtonUnstyledOwnerState) => ({
-            className: classes,
-            onClick: handleClick
-        }),
-    }} ref={ref}
+    return <ButtonUnstyled {...props}
+        slotProps={{
+            root: (state: ButtonUnstyledOwnerState) => ({
+                className: classes,
+                onClick: handleClick,
+                style: {
+                    ...style,
+                    backgroundColor: color ? color : ''
+                }
+            }),
+        }}
         onMouseEnter={() => {
             controls.start("hover");
         }}
         onMouseLeave={() => {
             controls.start("initial");
         }}
+        ref={ref}
     >
         <motion.div
             transition={{
@@ -106,7 +112,7 @@ const Button: React.FC<ButtonProps> = React.forwardRef((props: ButtonProps, ref:
             }}
             variants={coverVariants}
             initial="initial"
-            // exit="exit"
+            exit="exit"
             animate={controls}
             className='bg-black w-full h-full absolute top-0 left-0 opacity-[0.3]'
         />
