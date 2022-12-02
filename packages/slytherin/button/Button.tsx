@@ -10,11 +10,19 @@ import { ButtonProps, Loading } from './Button.d';
 const coverVariants = {
     initial: {
         x: "-100%",
-        scale: 1
+        scale: 1,
+        opacity: 0.3,
+        borderRadius: "0%"
     },
     hover: {
         x: "0",
-        scale: [1.1, 1]
+        scale: [1, 1.1],
+    },
+    tap: {
+        opacity: [0.5, 0],
+        scale: [1.1, 0.5, 0],
+        borderRadius: "100%"
+
     },
     exit: {
         opacity: 0,
@@ -54,7 +62,7 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
         };
     }, [loadingOrDelay]);
 
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
         // https://github.com/ant-design/ant-design/issues/30207
         if (innerLoading || disabled) {
             e.preventDefault();
@@ -62,6 +70,9 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
         }
 
         // kisch hoajt animation tap
+
+        await controls.start('tap');
+
         (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
     };
 
@@ -95,11 +106,12 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
                 }
             }),
         }}
-        onMouseEnter={() => {
-            controls.start("hover");
+        onMouseEnter={async () => {
+            await controls.start("hover");
         }}
-        onMouseLeave={() => {
-            controls.start("initial");
+        onMouseLeave={async () => {
+            controls.stop();
+            await controls.start("initial");
         }}
         ref={ref}
     >
@@ -114,7 +126,7 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             initial="initial"
             exit="exit"
             animate={controls}
-            className='bg-black w-full h-full absolute top-0 left-0 opacity-[0.3]'
+            className='bg-black w-full h-full absolute top-0 left-0 '
         />
         {children}
     </ButtonUnstyled>;
