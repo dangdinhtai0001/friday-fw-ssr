@@ -1,36 +1,46 @@
 // react imports
 import * as React from 'react';
-// 3rd imports
+// 3rd importsgetTabHeader
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 // local imports
 import Tab from './Tab';
 import TabItem from './TabItem';
 import TabPanel from './TabPanel';
-import { TabsProps } from './Tabs.d';
+import { ContextState, TabsProps } from './Tabs.d';
+import { useTabsContext } from './TabsContext';
 import TabsList from './TabsList';
 
-const getTabHeaderFromChildren = (children: JSX.Element | JSX.Element[] | undefined): JSX.Element | JSX.Element[] | null => {
+const getTabHeader = (children: JSX.Element | JSX.Element[] | undefined): JSX.Element | JSX.Element[] | null => {
     if (!children) return null;
     return React.Children.map(children, (child) => {
         if (child.type === TabItem) {
             let { props } = child;
-            return <Tab value={props.id} disabled={props.disabled}>
-                {props.label}
-            </Tab>;
+            return (
+                <Tab value={props.id} disabled={props.disabled}>
+                    {props.label}
+                </Tab>
+            );
         }
 
         return null;
     })
 }
 
-const getTabPanelFromChildren = (children: JSX.Element | JSX.Element[] | undefined): JSX.Element | JSX.Element[] | null => {
+const getTabPanel = (children: JSX.Element | JSX.Element[] | undefined, context: ContextState, _props: TabsProps): JSX.Element | JSX.Element[] | null => {
     if (!children) return null;
     return React.Children.map(children, (child) => {
         if (child.type === TabItem) {
             let { props } = child;
-            return <TabPanel value={props.id}>
-                {props.children}
-            </TabPanel>;
+
+            if (_props.destroyInactiveTabPane) {
+                return context.activedId === props.id ? (<TabPanel value={props.id}>
+                    {props.children}
+                </TabPanel>) : null;
+            } else {
+                return <TabPanel value={props.id}>
+                    {props.children}
+                </TabPanel>
+            }
         }
 
         return null;
@@ -38,14 +48,30 @@ const getTabPanelFromChildren = (children: JSX.Element | JSX.Element[] | undefin
 }
 
 function Tabs(props: TabsProps, ref: React.ForwardedRef<any>): JSX.Element {
-    const { children } = props;
+    const { onChange } = props;
 
-    return <TabsUnstyled {...props} >
-        <TabsList>
-            {getTabHeaderFromChildren(children)}
-        </TabsList>
-        {getTabPanelFromChildren(children)}
-    </TabsUnstyled>;
+    const { context, helper } = useTabsContext();
+
+    const handleOnChange = (event: React.SyntheticEvent<Element, Event>, tabId: string | number | boolean) => {
+        // update lại tab id mỗi khi thay đổi
+        helper.commitActivedId(tabId);
+
+        // Gọi hàm onchange từ props
+        onChange?.(event, tabId, context, helper);
+    }
+
+    return (
+        <TabsUnstyled {...props} onChange={(event: React.SyntheticEvent<Element, Event>, value: string | number | boolean) => { handleOnChange(event, value) }}>
+            <TabsList slotProps={{
+                root: () => ({
+                    className: 'flex',
+                }),
+            }}>
+                {getTabHeader(props.children)}
+            </TabsList>
+            {getTabPanel(props.children, context, props)}
+        </TabsUnstyled>
+    );
 }
 
 export default React.forwardRef(Tabs);

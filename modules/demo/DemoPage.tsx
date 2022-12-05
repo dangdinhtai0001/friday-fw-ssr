@@ -16,7 +16,7 @@ const DemoPage = () => {
                 </Button>
             </div>
             <div>
-                <Tabs defaultValue="id-000" orientation="vertical">
+                <Tabs defaultValue="id-000" destroyInactiveTabPane={true}>
                     <TabItem id="id-000" label="label 000">
                         <div>Tab panel 000</div>
                     </TabItem>
