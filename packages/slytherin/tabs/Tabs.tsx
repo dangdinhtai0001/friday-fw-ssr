@@ -48,7 +48,7 @@ const getTabPanel = (children: JSX.Element | JSX.Element[] | undefined, context:
 }
 
 function Tabs(props: TabsProps, ref: React.ForwardedRef<any>): JSX.Element {
-    const { onChange } = props;
+    const { onChange, destroyInactiveTabPane, ..._props } = props;
 
     const { context, helper } = useTabsContext();
 
@@ -61,7 +61,7 @@ function Tabs(props: TabsProps, ref: React.ForwardedRef<any>): JSX.Element {
     }
 
     return (
-        <TabsUnstyled {...props} onChange={(event: React.SyntheticEvent<Element, Event>, value: string | number | boolean) => { handleOnChange(event, value) }}>
+        <TabsUnstyled {..._props} onChange={(event: React.SyntheticEvent<Element, Event>, value: string | number | boolean) => { handleOnChange(event, value) }}>
             <TabsList slotProps={{
                 root: () => ({
                     className: 'flex',

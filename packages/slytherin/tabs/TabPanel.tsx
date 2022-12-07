@@ -39,7 +39,12 @@ function TabPanel(props: TabPanelProps, ref: React.ForwardedRef<any>): JSX.Eleme
                     stiffness: 500,
                 }}
             >
-                <TabPanelUnstyled {...props} />
+                <TabPanelUnstyled {...props}
+                    slotProps={{
+                        root: () => ({
+                            className: 'bg-blue-100',
+                        }),
+                    }} />
             </motion.div>
         </AnimatePresence>
     );
