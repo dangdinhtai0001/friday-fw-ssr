@@ -4,6 +4,7 @@ import * as React from 'react';
 // local imports
 import Dialog from './Dialog';
 import { DialogProps } from './Dialog.d';
+import DialogActivator from './DialogActivator';
 import { DialogContextProvider } from './DialogContext';
 
 function getDialogContextInitial(props: DialogProps) {
@@ -11,11 +12,13 @@ function getDialogContextInitial(props: DialogProps) {
 }
 
 function DialogWrapper(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
-    return (<>
+    return (
         <DialogContextProvider initialState={getDialogContextInitial(props)}>
-            <Dialog {...props}></Dialog>
+            <Dialog {...props} ref={ref} />
         </DialogContextProvider>
-    </>);
+    );
 }
+
+DialogWrapper.Activator = DialogActivator;
 
 export default React.forwardRef(DialogWrapper);

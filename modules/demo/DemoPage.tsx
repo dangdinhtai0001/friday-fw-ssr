@@ -1,4 +1,4 @@
-import { Button, TabItem, Tabs } from '@packages/slytherin';
+import { Button, Dialog, TabItem, Tabs } from '@packages/slytherin';
 
 const DemoPage = () => {
     return (
@@ -24,6 +24,14 @@ const DemoPage = () => {
                         <div>Tab panel 001</div>
                     </TabItem>
                 </Tabs>
+            </div>
+            <div>
+                <Dialog>
+                    <div>
+                        <h2 id="unstyled-modal-title">Text in a modal</h2>
+                        <p id="unstyled-modal-description">Aliquid amet deserunt earum!</p>
+                    </div>
+                </Dialog>
             </div>
         </>
     );

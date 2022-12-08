@@ -1,4 +1,11 @@
-export interface DialogProps {}
+import { ModalUnstyledProps } from '@mui/base/ModalUnstyled';
+
+export interface DialogProps extends ModalUnstyledProps {
+  /**
+   * Không có ý nghĩa lắm, nhưng do @MUI base đòi nên phải override
+   */
+  open?: boolean;
+}
 
 // ==========================================================================
 export interface ContextState {
