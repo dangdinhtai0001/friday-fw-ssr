@@ -3,26 +3,19 @@ import * as React from 'react';
 // 3rd imports
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 // local imports
+import { getChildrenByType } from '@packages/ravenclaw';
 import Backdrop from './Backdrop';
 import { DialogProps } from './Dialog.d';
 import DialogActivator from './DialogActivator';
+import DialogContent from './DialogContent';
 import { useDialogContext } from './DialogContext';
 
-function getActivator(children?: JSX.Element): JSX.Element | null {
-    if (!children) return null;
+function getActivator(children: JSX.Element | JSX.Element[]): JSX.Element | null {
+    return getChildrenByType(children, DialogActivator);
+}
 
-    let _result = null;
-
-    React.Children.forEach(children, (child) => {
-        if (child.type === DialogActivator) {
-            let { props } = child;
-            _result = props.children;
-
-            return _result;
-        }
-    })
-
-    return _result;
+function getContent(children: JSX.Element | JSX.Element[]): JSX.Element | null {
+    return getChildrenByType(children, DialogContent);
 }
 
 function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
@@ -42,7 +35,9 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
                 slots={{ backdrop: Backdrop }}
                 ref={ref}
             >
-                {children}
+                <div>
+                    {getContent(children)}
+                </div>
             </ModalUnstyled>
         </>
     );
