@@ -10,7 +10,7 @@ function Backdrop(props: { open?: boolean; className: string }, ref: React.Forwa
     const classname = classnames(
         `
             ${className}
-            absolute top-0 left-0 bg-black opacity-50 h-screen w-screen 
+            absolute top-0 left-0 bg-black opacity-50 h-screen w-screen
         `,
         { [`MuiBackdrop-open`]: open }
     )

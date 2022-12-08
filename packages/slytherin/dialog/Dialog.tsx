@@ -40,17 +40,14 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
                 onClose={handleOnClose}
                 closeAfterTransition
                 disableScrollLock={true}
+                aria-labelledby="__fd-dialog-title"
+                aria-describedby="__fd-dialog-description"
                 slots={{ backdrop: Backdrop }}
                 ref={ref}
             >
-                <div
-                    tabIndex={-1}
-                    className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center"
-                >
-                    <DialogContainer>
-                        {getContent(children)}
-                    </DialogContainer>
-                </div>
+                <DialogContainer>
+                    {getContent(children)}
+                </DialogContainer>
             </ModalUnstyled>
         </>
     );

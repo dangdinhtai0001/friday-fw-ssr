@@ -28,7 +28,7 @@ const DemoPage = () => {
             <div>
                 <Dialog title='Đây là title'>
                     <DialogActivator>
-                        <Button disabled={false} color='red'                        >
+                        <Button disabled={false} theme='primary'>
                             Open dialog
                         </Button>
                     </DialogActivator>

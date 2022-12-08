@@ -1,4 +1,5 @@
 import { ButtonUnstyledProps } from '@mui/base/ButtonUnstyled';
+import { BackgroundThemes } from '@packages/ravenclaw';
 import React from 'react';
 
 export type Loading = boolean | number;
@@ -24,4 +25,8 @@ export interface ButtonProps extends ButtonUnstyledProps {
    * The icon component of button
    */
   icon?: React.ReactNode;
+  /**
+   * Màu của button theo theme
+   */
+  theme?: BackgroundThemes;
 }

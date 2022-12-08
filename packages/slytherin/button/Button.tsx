@@ -1,7 +1,7 @@
 // react imports
 import * as React from 'react';
 // 3rd imports
-import ButtonUnstyled, { ButtonUnstyledOwnerState } from '@mui/base/ButtonUnstyled';
+import ButtonUnstyled from '@mui/base/ButtonUnstyled';
 import classNames from 'classnames';
 import { motion, useAnimation } from "framer-motion";
 // local imports
@@ -30,7 +30,7 @@ const coverVariants = {
 };
 
 function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
-    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style } = props;
+    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style, theme } = props;
 
     const [innerLoading, setLoading] = React.useState<Loading>(!!loading);
 
@@ -91,18 +91,19 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             [`rounded-full px-[0.5rem] py-[0.5rem]`]: (!children && children !== 0 && !!iconType) || rounded,
             [`rounded px-[0.3rem] py-[0.05rem]`]: children,
             [`w-full`]: block,
-            [`w-fit`]: !block
+            [`w-fit`]: !block,
+            [`bg-th-${theme}`]: theme
         },
     );
 
     return <ButtonUnstyled {...props}
         slotProps={{
-            root: (state: ButtonUnstyledOwnerState) => ({
+            root: () => ({
                 className: classes,
                 onClick: handleClick,
                 style: {
                     ...style,
-                    backgroundColor: color ? color : ''
+                    backgroundColor: (color && !theme) ? color : ''
                 }
             }),
         }}
