@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+}
+
+[data-theme='light'] {
+  --background: theme('colors.slate.300');
+  --foreground: theme('colors.slate.400');
+  /* --------------------------- */
+  --primary: theme('colors.blue.500');
+  --success: theme('colors.green.600');
+  --danger: theme('colors.red.600');
+  --warning: theme('colors.amber.400');
+  --info: theme('colors.sky.500');
+  /* --------------------------- */
+  --text-primary: theme('colors.slate.100');
+}
+
+[data-theme='dark'] {
+  --background: theme('colors.slate.900');
+  --foreground: theme('colors.slate.700');
+  /* --------------------------- */
+  --primary: theme('colors.fuchsia.700');
+  --success: theme('colors.emerald.700');
+  --danger: theme('colors.red.800');
+  --warning: theme('colors.amber.500');
+  --info: theme('colors.blue.500');
+  /* --------------------------- */
+  --text-primary: theme('colors.red.200');
+}
+
+[data-theme='emerald'] {
+  --background: theme('colors.slate.200');
+  --foreground: theme('colors.slate.300');
+  /* --------------------------- */
+  --primary: theme('colors.blue.500');
+  --success: theme('colors.green.600');
+  --danger: theme('colors.red.700');
+  --warning: theme('colors.amber.300');
+  --info: theme('colors.sky.500');
+  /* --------------------------- */
+  --text-primary: theme('colors.slate.900');
+}
+
+[data-theme='pink'] {
+  --background: theme('colors.slate.900');
+  --foreground: theme('colors.slate.700');
+  /* --------------------------- */
+  --primary: theme('colors.fuchsia.700');
+  --success: theme('colors.emerald.700');
+  --danger: theme('colors.red.800');
+  --warning: theme('colors.amber.500');
+  --info: theme('colors.blue.500');
+  /* --------------------------- */
+  --text-primary: theme('colors.red.200');
+}
