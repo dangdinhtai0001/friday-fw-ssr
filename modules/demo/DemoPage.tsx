@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActivator, TabItem, Tabs } from '@packages/slytherin';
+import { Button, Dialog, DialogActivator, DialogContent, TabItem, Tabs } from '@packages/slytherin';
 
 const DemoPage = () => {
     return (
@@ -36,10 +36,12 @@ const DemoPage = () => {
                             Open dialog
                         </Button>
                     </DialogActivator>
-                    <div>
-                        <h2 id="unstyled-modal-title">Text in a modal</h2>
-                        <p id="unstyled-modal-description">Aliquid amet deserunt earum!</p>
-                    </div>
+                    <DialogContent>
+                        <div>
+                            <h2 id="unstyled-modal-title">Text in a modal</h2>
+                            <p id="unstyled-modal-description">Aliquid amet deserunt earum!</p>
+                        </div>
+                    </DialogContent>
                 </Dialog>
             </div>
         </>

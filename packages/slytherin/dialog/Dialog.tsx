@@ -23,14 +23,20 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
 
     const { context, helper } = useDialogContext();
 
+    const handleOnClickActivator = () => {
+        helper.commitOpened(true);
+        console.log("click activator");
+    }
+
     const handleOnClose = () => {
         helper.commitOpened(false);
     }
     return (
         <>
-            {getActivator(children)}
+            {React.cloneElement(getActivator(children)!, { onClick: handleOnClickActivator })}
             <ModalUnstyled
                 open={context.opened}
+                // open={true}
                 onClose={handleOnClose}
                 slots={{ backdrop: Backdrop }}
                 ref={ref}
