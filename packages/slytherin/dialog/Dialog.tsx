@@ -5,10 +5,11 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 // local imports
 import { getChildrenByType } from '@packages/ravenclaw';
 import Backdrop from './Backdrop';
+import DialogContainer from './dialog-container/Container';
 import { DialogProps } from './Dialog.d';
-import DialogActivator from './DialogActivator';
-import DialogContent from './DialogContent';
 import { useDialogContext } from './DialogContext';
+import DialogActivator from './sub-components/DialogActivator';
+import DialogContent from './sub-components/DialogContent';
 
 function getActivator(children: JSX.Element | JSX.Element[]): JSX.Element | null {
     return getChildrenByType(children, DialogActivator);
@@ -25,10 +26,10 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
 
     const handleOnClickActivator = () => {
         helper.commitOpened(true);
-        console.log("click activator");
     }
 
-    const handleOnClose = () => {
+    const handleOnClose = (event: object, reason: string): void => {
+        console.debug("Close event with reason: ", reason);
         helper.commitOpened(false);
     }
     return (
@@ -36,13 +37,19 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
             {React.cloneElement(getActivator(children)!, { onClick: handleOnClickActivator })}
             <ModalUnstyled
                 open={context.opened}
-                // open={true}
                 onClose={handleOnClose}
+                closeAfterTransition
+                disableScrollLock={true}
                 slots={{ backdrop: Backdrop }}
                 ref={ref}
             >
-                <div>
-                    {getContent(children)}
+                <div
+                    tabIndex={-1}
+                    className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center"
+                >
+                    <DialogContainer>
+                        {getContent(children)}
+                    </DialogContainer>
                 </div>
             </ModalUnstyled>
         </>

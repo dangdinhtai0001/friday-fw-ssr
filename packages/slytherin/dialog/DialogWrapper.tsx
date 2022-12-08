@@ -7,7 +7,7 @@ import { DialogProps } from './Dialog.d';
 import { DialogContextProvider } from './DialogContext';
 
 function getDialogContextInitial(props: DialogProps) {
-    return { opened: false }
+    return { opened: false, title: props.title }
 }
 
 const DialogWrapper = (props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element => {

@@ -8,7 +8,10 @@ function Backdrop(props: { open?: boolean; className: string }, ref: React.Forwa
     const { open, className, ...other } = props;
 
     const classname = classnames(
-        `${className}`,
+        `
+            ${className}
+            absolute top-0 left-0 bg-black opacity-50 h-screen w-screen 
+        `,
         { [`MuiBackdrop-open`]: open }
     )
 
@@ -16,7 +19,7 @@ function Backdrop(props: { open?: boolean; className: string }, ref: React.Forwa
         <div
             className={classname}
             ref={ref}
-            {...other}
+        // {...other}
         />
     );
 }

@@ -26,13 +26,9 @@ const DemoPage = () => {
                 </Tabs>
             </div>
             <div>
-                <Dialog>
+                <Dialog title='Đây là title'>
                     <DialogActivator>
-                        <Button
-                            disabled={false}
-                            onClick={() => console.log('click!')}
-                            color='red'
-                        >
+                        <Button disabled={false} color='red'                        >
                             Open dialog
                         </Button>
                     </DialogActivator>
