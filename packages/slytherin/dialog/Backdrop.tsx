@@ -10,7 +10,7 @@ function Backdrop(props: { open?: boolean; className: string }, ref: React.Forwa
     const classname = classnames(
         `
             ${className}
-            absolute top-0 left-0 bg-black opacity-50 h-screen w-screen
+            fixed top-0 left-0 left-0 right-0 bottom-0 bg-black opacity-50 h-full w-full
         `,
         { [`MuiBackdrop-open`]: open }
     )
@@ -19,6 +19,9 @@ function Backdrop(props: { open?: boolean; className: string }, ref: React.Forwa
         <div
             className={classname}
             ref={ref}
+            style={{
+                WebkitTapHighlightColor: 'transparent'
+            }}
         // {...other}
         />
     );

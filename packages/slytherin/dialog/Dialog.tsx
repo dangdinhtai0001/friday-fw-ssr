@@ -5,8 +5,8 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 // local imports
 import { getChildrenByType } from '@packages/ravenclaw';
 import Backdrop from './Backdrop';
-import DialogContainer from './dialog-container/Container';
 import { DialogProps } from './Dialog.d';
+import DialogContainer from './DialogContainer';
 import { useDialogContext } from './DialogContext';
 import DialogActivator from './sub-components/DialogActivator';
 import DialogContent from './sub-components/DialogContent';
