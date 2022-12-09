@@ -71,9 +71,9 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
 
         // kisch hoajt animation tap
 
-        await controls.start('tap');
+        controls.start('tap');
 
-        (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
+        await (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
     };
 
     const classes = classNames(

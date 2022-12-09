@@ -25,6 +25,7 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
     const { context, helper } = useDialogContext();
 
     const handleOnClickActivator = () => {
+        console.debug("Click activator ");
         helper.commitOpened(true);
     }
 
