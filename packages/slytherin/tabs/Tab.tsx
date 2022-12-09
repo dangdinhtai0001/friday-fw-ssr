@@ -25,7 +25,7 @@ function Tab(props: TabProps, ref: React.ForwardedRef<any>): JSX.Element {
                     }),
                 }} ref={ref}
             />
-            {value === context.activedId ? (<motion.div className="bg-red-100 h-[0.2rem] rounded-full w-full" layoutId="underline" />) : null}
+            {value === context.activedId ? (<motion.div className="bg-th-primary h-[0.2rem] rounded-full w-full" layoutId="underline" />) : null}
         </div>
     )
 }

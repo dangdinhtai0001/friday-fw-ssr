@@ -29,4 +29,8 @@ export interface ButtonProps extends ButtonUnstyledProps {
    * Màu của button theo theme
    */
   theme?: BackgroundThemes;
+  /**
+   * style
+   */
+  style?: Object;
 }

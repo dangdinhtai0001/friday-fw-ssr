@@ -30,7 +30,7 @@ const coverVariants = {
 };
 
 function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
-    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style, theme } = props;
+    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style = {}, theme } = props;
 
     const [innerLoading, setLoading] = React.useState<Loading>(!!loading);
 
@@ -69,11 +69,10 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             return;
         }
 
-        // kisch hoajt animation tap
-
+        //Kích hoạt animation `tap`
         controls.start('tap');
 
-        await (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
+        (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
     };
 
     const classes = classNames(
@@ -103,10 +102,12 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
                 onClick: handleClick,
                 style: {
                     ...style,
-                    backgroundColor: (color && !theme) ? color : ''
+                    background: color ? color : 'null'
                 }
             }),
         }}
+
+
         onMouseEnter={async () => {
             await controls.start("hover");
         }}

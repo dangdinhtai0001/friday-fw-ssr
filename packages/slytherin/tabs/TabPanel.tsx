@@ -42,7 +42,7 @@ function TabPanel(props: TabPanelProps, ref: React.ForwardedRef<any>): JSX.Eleme
                 <TabPanelUnstyled {...props}
                     slotProps={{
                         root: () => ({
-                            className: 'bg-blue-100',
+                            className: 'bg-th-background',
                         }),
                     }} />
             </motion.div>
