@@ -1,8 +1,11 @@
 // react imports
 import * as React from 'react';
 // 3rd imports
+import classNames from 'classnames';
 import { AnimatePresence, motion, PanInfo, useAnimation, useMotionValue } from 'framer-motion';
 // local imports
+import { useValidSize } from '@packages/hufflepuff/hooks';
+import { resizeableDirection } from '@packages/ravenclaw/global-interface';
 import { DialogContainerProps } from './Dialog.d';
 import { useDialogContext } from './DialogContext';
 
@@ -32,23 +35,96 @@ const variants = {
 };
 
 function Container(props: DialogContainerProps, ref: React.ForwardedRef<any>): JSX.Element {
-    const { children } = props;
+    const { children, minHeight = 200, maxHeight = 700, minWidth = 600, maxWidth = 1000 } = props;
 
     const { context } = useDialogContext();
 
     const controls = useAnimation();
-    const mHeight = useMotionValue(200);
+    const mHeight = useMotionValue(300);
+    const mWidth = useMotionValue(600);
 
     const [isResizing, setIsResizing] = React.useState(false);
+    const { isResizableVertical, isResizableHorizontal, isValidWidth, isValidHeight, setIsResizableVertical } = useValidSize({ width: mWidth.get(), height: mHeight.get(), minHeight, maxHeight, minWidth, maxWidth });
     const constraintsRef = React.useRef(null);
+    const containerRef = React.useRef(null);
 
 
-    const handleOnResize = React.useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo, direction: 'top' | 'bottom' | 'left' | 'right') => {
-        let newHeight = mHeight.get() + info.delta.y;
-        if (newHeight > 200 && newHeight < 400) {
-            mHeight.set(mHeight.get() + info.delta.y);
+    const handleOnResize = React.useCallback((event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo, direction: resizeableDirection) => {
+        let newHeight = mHeight.get();
+        let newWidth = mWidth.get();
+
+        if (direction === 'bottom') {
+            newHeight = mHeight.get() + info.delta.y;
+
         }
+        if (direction === 'top') {
+            newHeight = mHeight.get() - info.delta.y;
+
+        }
+
+        if (direction === 'left') {
+            newWidth = mWidth.get() - info.delta.x;
+        }
+        if (direction === 'right') {
+            newWidth = mWidth.get() + info.delta.x;
+        }
+
+        if (isValidHeight(newHeight)) {
+            mHeight.set(newHeight);
+        } else {
+            setIsResizableVertical(false);
+
+        }
+        mWidth.set(newWidth);
+
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const renderResizeableAnchor = (direction: resizeableDirection) => {
+        let drag: 'x' | "y" | boolean = "x";
+
+        if (direction === 'top' || direction === 'bottom') {
+            console.log("re render drag", isResizableVertical);
+
+            drag = isResizableVertical ? 'y' : false;
+        }
+
+        if (direction === 'left' || direction === 'right') {
+            drag = isResizableHorizontal ? 'x' : false;
+        }
+
+
+        const _classname = classNames(
+            `bg-red-200`,
+            {
+                [`w-full h-[10px]  cursor-ns-resize`]: direction === 'top' || direction === 'bottom',
+                [`h-full w-[10px] cursor-ew-resize`]: direction === 'left' || direction === 'right',
+                [`__fd-resize-top`]: direction === 'top',
+                [`__fd-resize-bottom`]: direction === 'bottom',
+                [`__fd-resize-left`]: direction === 'left',
+                [`__fd-resize-right`]: direction === 'right',
+            }
+        )
+        return (
+            <motion.div
+                className={_classname}
+                drag={drag}
+                dragConstraints={containerRef}
+                dragElastic={0}
+                dragMomentum={false}
+                // transition={{ type: 'spring', velocity: 0 }}
+                dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+                onDragEnd={() => {
+                    setIsResizing(false);
+                }}
+                onDragStart={() => {
+                    setIsResizing(true);
+                }}
+                onDrag={(e, info) => { handleOnResize(e, info, direction) }}
+            />
+        )
+    }
 
     React.useEffect(() => {
         controls.start("visible");
@@ -56,12 +132,13 @@ function Container(props: DialogContainerProps, ref: React.ForwardedRef<any>): J
             controls.start("exit");
         }
 
-    }, [context.opened])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [context.opened]);
 
     return (
         <AnimatePresence mode="wait">
             <motion.div
-                className="__fd--dialog-panel absolute top-0 left-0 w-full h-full px-[0.5rem] py-[0.3rem] flex justify-center items-center overflow-hidden"
+                className="__fd--dialog-panel absolute top-0 left-0 w-full h-full px-[0.5rem] py-[0.3rem] flex flex-col justify-center items-center overflow-hidden"
                 variants={variants}
                 initial="hidden"
                 animate={controls}
@@ -71,73 +148,38 @@ function Container(props: DialogContainerProps, ref: React.ForwardedRef<any>): J
                 <motion.div
                     drag={!isResizing}
                     dragConstraints={constraintsRef}
-                    className=' flex flex-col rounded-t-[0.5rem] rounded-b-[0.5rem] bg-th-background'
-                    style={{
-                        height: mHeight,
-                        width: 200,
-                        cursor: isResizing ? "row-resize" : "",
-                    }}
+                    className='rounded-t-[0.5rem] rounded-b-[0.5rem] relative '
+
                 >
-                    {/* ========================================================= resize top =========================================================*/}
-                    <motion.div
-                        style={{
-                            cursor: "row-resize",
-                            textAlign: "center",
-                            userSelect: "none",
-                            width: '100%',
-                            height: '5px',
-                        }}
-                        className='bg-transparent'
-                        drag="y"
-                        dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-                        dragElastic={0}
-                        dragMomentum={false}
-                        onDrag={(e, info) => { handleOnResize(e, info, 'top') }}
-                        onDragEnd={() => {
-                            setIsResizing(false);
-                        }}
-                        onDragStart={() => {
-                            setIsResizing(true);
-                        }}
-                    ></motion.div>
-                    {/* ========================================================= resize top =========================================================*/}
-
-                    {/* ------------------ | header | ------------------ */}
-                    <div id="__fd-dialog-title" className="flex items-center justify-center text-th-text-primary font-[600] text-[1.3rem] h-[2.1rem] w-full py-[1rem] bg-th-primary rounded-t-[0.5rem]">
-                        {context.title}
+                    <div className='flex flex-col w-full h-full' >
+                        {/* ------------------------------------ | header | ------------------------------------ */}
+                        <div id="__fd-dialog-title" className="flex items-center justify-center text-th-text-primary font-[600] text-[1.3rem] h-[2.1rem] w-full py-[1rem] bg-th-primary rounded-t-[0.5rem]">
+                            {context.title}
+                        </div>
+                        {/* ------------------------------------ | content | ------------------------------------ */}
+                        <div id="__fd-dialog-description" className='w-full h-full px-[0.5rem] py-[0.3rem] bg-th-background'>
+                            {children}
+                        </div>
+                        {/* ------------------------------------ | footer | ------------------------------------ */}
+                        <div className="h-fit rounded-b-[0.5rem] border-t-[0.1rem] flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem] bg-th-background">
+                            Đây là footer
+                        </div>
                     </div>
-                    {/* ------------------ | content | ------------------ */}
-                    <div id="__fd-dialog-description" className='w-full h-full px-[0.5rem] py-[0.3rem]'>
-                        {children}
+                    <div>
+                        <motion.div className="absolute select-none w-[100%] h-[10px] top-[-5px] left-[0px] cursor-row-resize bg-red-200"
+                            drag="y"
+                            dragConstraints={constraintsRef}
+                            dragElastic={0}
+                            dragMomentum={false}
+                        />
+                        <motion.div className="absolute select-none w-[10px] h-[100%] top-[0px] right-[-5px] cursor-col-resize bg-orange-500" />
+                        <motion.div className="absolute select-none w-[100%] h-[10px] bottom-[-5px] left-[0px] cursor-row-resize bg-red-200" />
+                        <motion.div className="absolute select-none w-[10px] h-[100%] top-[0px]  left-[-5px] cursor-col-resize bg-red-200" />
+                        <motion.div className="absolute select-none w-[20px] h-[20px] top-[-10px] right-[-10px] cursor-ne-resize bg-red-200" />
+                        <motion.div className="absolute select-none w-[20px] h-[20px] bottom-[-10px] right-[-10px] cursor-se-resize bg-red-200" />
+                        <motion.div className="absolute select-none w-[20px] h-[20px] bottom-[-10px] left-[-10px] cursor-sw-resize bg-red-200" />
+                        <motion.div className="absolute select-none w-[20px] h-[20px] top-[-10px] left-[-10px] cursor-nw-resize bg-red-200" />
                     </div>
-                    {/* ------------------ | footer | ------------------ */}
-                    <div className="h-fit rounded-b-[0.5rem] border-t-[0.1rem] flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem]">
-                        Đây là footer
-                    </div>
-
-                    {/* ========================================================= resize bot =========================================================*/}
-                    <motion.div
-                        style={{
-                            cursor: "row-resize",
-                            textAlign: "center",
-                            userSelect: "none",
-                            width: '100%',
-                            height: '1px',
-                        }}
-                        drag="y"
-                        dragConstraints={{ top: -5, left: 0, right: 0, bottom: 0 }}
-                        dragElastic={0}
-                        dragMomentum={false}
-                        onDrag={(e, info) => { handleOnResize(e, info, 'bottom') }}
-                        onDragEnd={() => {
-                            setIsResizing(false);
-                        }}
-                        onDragStart={() => {
-                            setIsResizing(true);
-                        }}
-                    />
-                    {/* ========================================================= resize bot =========================================================*/}
-
                 </motion.div>
             </motion.div>
         </AnimatePresence>

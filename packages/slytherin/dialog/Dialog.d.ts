@@ -2,6 +2,12 @@ import { ModalUnstyledProps } from '@mui/base/ModalUnstyled';
 
 // ==========================================================================
 export interface DialogContainerProps {
+  initalHeight: number;
+  minHeight: number;
+  maxHeight: number;
+  initalWidth: number;
+  minWidth: number;
+  maxWidth: number;
   /**
    * Nội dung hiển thị của dialog
    */

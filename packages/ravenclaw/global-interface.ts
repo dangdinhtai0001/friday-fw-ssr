@@ -1,5 +1,6 @@
 import { tuple } from './type';
 
+// ==================================================================================================
 const _BackgroundThemes = tuple(
   'primary',
   'secondary',
@@ -8,5 +9,8 @@ const _BackgroundThemes = tuple(
   'warning',
   'info'
 );
-
 export type BackgroundThemes = (typeof _BackgroundThemes)[number];
+// ==================================================================================================
+const _resizeableDirection = tuple('top', 'bottom', 'left', 'right');
+export type resizeableDirection =
+  (typeof _resizeableDirection)[number];
