@@ -11,6 +11,15 @@ const _BackgroundThemes = tuple(
 );
 export type BackgroundThemes = (typeof _BackgroundThemes)[number];
 // ==================================================================================================
-const _resizeableDirection = tuple('top', 'bottom', 'left', 'right');
+const _resizeableDirection = tuple(
+  'top',
+  'bottom',
+  'left',
+  'right',
+  'top-left',
+  'top-right',
+  'bottom-left',
+  'bottom-right'
+);
 export type resizeableDirection =
   (typeof _resizeableDirection)[number];

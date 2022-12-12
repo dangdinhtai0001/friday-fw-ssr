@@ -1,10 +1,9 @@
 // react imports
 import * as React from 'react';
 // 3rd imports
-import classNames from 'classnames';
 import { AnimatePresence, motion, PanInfo, useAnimation, useMotionValue } from 'framer-motion';
+import { inRange } from 'lodash';
 // local imports
-import { useValidSize } from '@packages/hufflepuff/hooks';
 import { resizeableDirection } from '@packages/ravenclaw/global-interface';
 import { DialogContainerProps } from './Dialog.d';
 import { useDialogContext } from './DialogContext';
@@ -44,7 +43,6 @@ function Container(props: DialogContainerProps, ref: React.ForwardedRef<any>): J
     const mWidth = useMotionValue(600);
 
     const [isResizing, setIsResizing] = React.useState(false);
-    const { isResizableVertical, isResizableHorizontal, isValidWidth, isValidHeight, setIsResizableVertical } = useValidSize({ width: mWidth.get(), height: mHeight.get(), minHeight, maxHeight, minWidth, maxWidth });
     const constraintsRef = React.useRef(null);
     const containerRef = React.useRef(null);
 
@@ -55,11 +53,9 @@ function Container(props: DialogContainerProps, ref: React.ForwardedRef<any>): J
 
         if (direction === 'bottom') {
             newHeight = mHeight.get() + info.delta.y;
-
         }
         if (direction === 'top') {
             newHeight = mHeight.get() - info.delta.y;
-
         }
 
         if (direction === 'left') {
@@ -69,62 +65,51 @@ function Container(props: DialogContainerProps, ref: React.ForwardedRef<any>): J
             newWidth = mWidth.get() + info.delta.x;
         }
 
-        if (isValidHeight(newHeight)) {
-            mHeight.set(newHeight);
-        } else {
-            setIsResizableVertical(false);
-
+        switch (direction) {
+            case 'top':
+                newHeight = mHeight.get() - info.delta.y;
+                break;
+            case 'bottom':
+                newHeight = mHeight.get() + info.delta.y;
+                break;
+            case 'left':
+                newWidth = mWidth.get() - info.delta.x;
+                break;
+            case 'right':
+                newWidth = mWidth.get() + info.delta.x;
+                break;
+            case 'top-left':
+                newHeight = mHeight.get() - info.delta.y;
+                newWidth = mWidth.get() - info.delta.x;
+                break;
+            case 'top-right':
+                newHeight = mHeight.get() - info.delta.y;
+                newWidth = mWidth.get() + info.delta.x;
+                break;
+            case 'bottom-left':
+                newHeight = mHeight.get() + info.delta.y;
+                newWidth = mWidth.get() - info.delta.x;
+                break;
+            case 'bottom-right':
+                newHeight = mHeight.get() + info.delta.y;
+                newWidth = mWidth.get() + info.delta.x;
+                break;
+            default:
+                break;
         }
-        mWidth.set(newWidth);
+
+        if (inRange(newHeight, minHeight, maxHeight)) {
+            mHeight.set(newHeight);
+        }
+        if (inRange(newWidth, minWidth, maxWidth)) {
+            mWidth.set(newWidth);
+        }
+
+
 
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const renderResizeableAnchor = (direction: resizeableDirection) => {
-        let drag: 'x' | "y" | boolean = "x";
-
-        if (direction === 'top' || direction === 'bottom') {
-            console.log("re render drag", isResizableVertical);
-
-            drag = isResizableVertical ? 'y' : false;
-        }
-
-        if (direction === 'left' || direction === 'right') {
-            drag = isResizableHorizontal ? 'x' : false;
-        }
-
-
-        const _classname = classNames(
-            `bg-red-200`,
-            {
-                [`w-full h-[10px]  cursor-ns-resize`]: direction === 'top' || direction === 'bottom',
-                [`h-full w-[10px] cursor-ew-resize`]: direction === 'left' || direction === 'right',
-                [`__fd-resize-top`]: direction === 'top',
-                [`__fd-resize-bottom`]: direction === 'bottom',
-                [`__fd-resize-left`]: direction === 'left',
-                [`__fd-resize-right`]: direction === 'right',
-            }
-        )
-        return (
-            <motion.div
-                className={_classname}
-                drag={drag}
-                dragConstraints={containerRef}
-                dragElastic={0}
-                dragMomentum={false}
-                // transition={{ type: 'spring', velocity: 0 }}
-                dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
-                onDragEnd={() => {
-                    setIsResizing(false);
-                }}
-                onDragStart={() => {
-                    setIsResizing(true);
-                }}
-                onDrag={(e, info) => { handleOnResize(e, info, direction) }}
-            />
-        )
-    }
 
     React.useEffect(() => {
         controls.start("visible");
@@ -134,6 +119,9 @@ function Container(props: DialogContainerProps, ref: React.ForwardedRef<any>): J
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [context.opened]);
+
+    console.log(constraintsRef);
+
 
     return (
         <AnimatePresence mode="wait">
@@ -149,7 +137,10 @@ function Container(props: DialogContainerProps, ref: React.ForwardedRef<any>): J
                     drag={!isResizing}
                     dragConstraints={constraintsRef}
                     className='rounded-t-[0.5rem] rounded-b-[0.5rem] relative '
-
+                    style={{
+                        height: mHeight,
+                        width: mWidth
+                    }}
                 >
                     <div className='flex flex-col w-full h-full' >
                         {/* ------------------------------------ | header | ------------------------------------ */}
@@ -166,19 +157,78 @@ function Container(props: DialogContainerProps, ref: React.ForwardedRef<any>): J
                         </div>
                     </div>
                     <div>
-                        <motion.div className="absolute select-none w-[100%] h-[10px] top-[-5px] left-[0px] cursor-row-resize bg-red-200"
+                        <motion.div className="__fd-resizable-top absolute select-none w-[100%] h-[10px] top-[-5px] left-[0px] cursor-row-resize"
                             drag="y"
-                            dragConstraints={constraintsRef}
+                            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
                             dragElastic={0}
                             dragMomentum={false}
+                            onDragStart={() => { setIsResizing(true) }}
+                            onDrag={(e, info) => { handleOnResize(e, info, 'top') }}
+                            onDragEnd={() => { setIsResizing(false) }}
                         />
-                        <motion.div className="absolute select-none w-[10px] h-[100%] top-[0px] right-[-5px] cursor-col-resize bg-orange-500" />
-                        <motion.div className="absolute select-none w-[100%] h-[10px] bottom-[-5px] left-[0px] cursor-row-resize bg-red-200" />
-                        <motion.div className="absolute select-none w-[10px] h-[100%] top-[0px]  left-[-5px] cursor-col-resize bg-red-200" />
-                        <motion.div className="absolute select-none w-[20px] h-[20px] top-[-10px] right-[-10px] cursor-ne-resize bg-red-200" />
-                        <motion.div className="absolute select-none w-[20px] h-[20px] bottom-[-10px] right-[-10px] cursor-se-resize bg-red-200" />
-                        <motion.div className="absolute select-none w-[20px] h-[20px] bottom-[-10px] left-[-10px] cursor-sw-resize bg-red-200" />
-                        <motion.div className="absolute select-none w-[20px] h-[20px] top-[-10px] left-[-10px] cursor-nw-resize bg-red-200" />
+                        <motion.div className="__fd-resizable-right absolute select-none w-[10px] h-[100%] top-[0px] right-[-5px] cursor-col-resize "
+                            drag="x"
+                            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+                            dragElastic={0}
+                            dragMomentum={false}
+                            onDragStart={() => { setIsResizing(true) }}
+                            onDrag={(e, info) => { handleOnResize(e, info, 'right') }}
+                            onDragEnd={() => { setIsResizing(false) }}
+                        />
+                        <motion.div className="__fd-resizable-bottom absolute select-none w-[100%] h-[10px] bottom-[-5px] left-[0px] cursor-row-resize "
+                            drag="y"
+                            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+                            dragElastic={0}
+                            dragMomentum={false}
+                            onDragStart={() => { setIsResizing(true) }}
+                            onDrag={(e, info) => { handleOnResize(e, info, 'bottom') }}
+                            onDragEnd={() => { setIsResizing(false) }}
+                        />
+                        <motion.div className="__fd-resizable-left absolute select-none w-[10px] h-[100%] top-[0px]  left-[-5px] cursor-col-resize "
+                            drag="x"
+                            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+                            dragElastic={0}
+                            dragMomentum={false}
+                            onDragStart={() => { setIsResizing(true) }}
+                            onDrag={(e, info) => { handleOnResize(e, info, 'left') }}
+                            onDragEnd={() => { setIsResizing(false) }}
+                        />
+                        <motion.div className="absolute select-none w-[20px] h-[20px] top-[-10px] right-[-10px] cursor-ne-resize "
+                            drag
+                            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+                            dragElastic={0}
+                            dragMomentum={false}
+                            onDragStart={() => { setIsResizing(true) }}
+                            onDrag={(e, info) => { handleOnResize(e, info, 'top-right') }}
+                            onDragEnd={() => { setIsResizing(false) }}
+                        />
+                        <motion.div className="absolute select-none w-[20px] h-[20px] bottom-[-10px] right-[-10px] cursor-se-resize "
+                            drag
+                            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+                            dragElastic={0}
+                            dragMomentum={false}
+                            onDragStart={() => { setIsResizing(true) }}
+                            onDrag={(e, info) => { handleOnResize(e, info, 'bottom-right') }}
+                            onDragEnd={() => { setIsResizing(false) }}
+                        />
+                        <motion.div className="absolute select-none w-[20px] h-[20px] bottom-[-10px] left-[-10px] cursor-sw-resize "
+                            drag
+                            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+                            dragElastic={0}
+                            dragMomentum={false}
+                            onDragStart={() => { setIsResizing(true) }}
+                            onDrag={(e, info) => { handleOnResize(e, info, 'bottom-left') }}
+                            onDragEnd={() => { setIsResizing(false) }}
+                        />
+                        <motion.div className="__fd-resizable-topleft absolute select-none w-[20px] h-[20px] top-[-10px] left-[-10px] cursor-nw-resize "
+                            drag
+                            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+                            dragElastic={0}
+                            dragMomentum={false}
+                            onDragStart={() => { setIsResizing(true) }}
+                            onDrag={(e, info) => { handleOnResize(e, info, 'top-left') }}
+                            onDragEnd={() => { setIsResizing(false) }}
+                        />
                     </div>
                 </motion.div>
             </motion.div>
