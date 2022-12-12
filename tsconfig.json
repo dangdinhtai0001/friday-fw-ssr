@@ -20,6 +20,6 @@
       "@modules/*": ["modules/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js", "packages/hufflepuff/Portal/Portal.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js"],
   "exclude": ["node_modules"]
 }

@@ -4,8 +4,11 @@ import * as React from 'react';
 // local imports
 import { TabItemProps } from './Tabs.d';
 
-function TabItem(props: TabItemProps, ref: React.ForwardedRef<any>): JSX.Element {
-    return <></>;
+function TabItem(
+  props: TabItemProps,
+  ref: React.ForwardedRef<any>
+): JSX.Element {
+  return <></>;
 }
 
 export default React.forwardRef(TabItem);

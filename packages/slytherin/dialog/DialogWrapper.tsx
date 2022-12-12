@@ -7,15 +7,20 @@ import { DialogProps } from './Dialog.d';
 import { DialogContextProvider } from './DialogContext';
 
 function getDialogContextInitial(props: DialogProps) {
-    return { opened: false, title: props.title }
+  return { opened: false, title: props.title };
 }
 
-const DialogWrapper = (props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element => {
-    return (
-        <DialogContextProvider initialState={getDialogContextInitial(props)}>
-            <Dialog {...props} ref={ref} />
-        </DialogContextProvider>
-    );
-}
+const DialogWrapper = (
+  props: DialogProps,
+  ref: React.ForwardedRef<any>
+): JSX.Element => {
+  return (
+    <DialogContextProvider
+      initialState={getDialogContextInitial(props)}
+    >
+      <Dialog {...props} ref={ref} />
+    </DialogContextProvider>
+  );
+};
 
 export default React.forwardRef(DialogWrapper);

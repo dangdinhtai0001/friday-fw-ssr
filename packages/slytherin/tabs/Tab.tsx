@@ -8,26 +8,36 @@ import { motion } from 'framer-motion';
 import { TabProps } from './Tabs.d';
 import { useTabsContext } from './TabsContext';
 
-function Tab(props: TabProps, ref: React.ForwardedRef<any>): JSX.Element {
+function Tab(
+  props: TabProps,
+  ref: React.ForwardedRef<any>
+): JSX.Element {
+  const { value } = props;
+  const { context } = useTabsContext();
 
-    const { value } = props;
-    const { context } = useTabsContext();
+  const classes = classNames(
+    `inline-block p-[0.4rem] mx-[0.1rem] rounded-t-lg `
+  );
 
-    const classes = classNames(`inline-block p-[0.4rem] mx-[0.1rem] rounded-t-lg `);
-
-    return (
-        <div className="w-fit">
-            <TabUnstyled
-                {...props}
-                slotProps={{
-                    root: () => ({
-                        className: classes,
-                    }),
-                }} ref={ref}
-            />
-            {value === context.activedId ? (<motion.div className="bg-th-primary h-[0.2rem] rounded-full w-full" layoutId="underline" />) : null}
-        </div>
-    )
+  return (
+    <div className="w-fit">
+      <TabUnstyled
+        {...props}
+        slotProps={{
+          root: () => ({
+            className: classes,
+          }),
+        }}
+        ref={ref}
+      />
+      {value === context.activedId ? (
+        <motion.div
+          className="bg-th-primary h-[0.2rem] rounded-full w-full"
+          layoutId="underline"
+        />
+      ) : null}
+    </div>
+  );
 }
 
 export default React.forwardRef(Tab);

@@ -2,7 +2,12 @@ import type { NextPage } from 'next';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 
-const themes = [{ name: 'Light' }, { name: 'Dark' }, { name: 'Emerald' }, { name: 'Pink' }];
+const themes = [
+  { name: 'Light' },
+  { name: 'Dark' },
+  { name: 'Emerald' },
+  { name: 'Pink' },
+];
 
 const Home: NextPage = () => {
   const { theme, setTheme } = useTheme();
@@ -22,15 +27,16 @@ const Home: NextPage = () => {
         >
           <option value="">Select Theme</option>
           {themes.map(t => (
-            <option key={t.name.toLowerCase()} value={t.name.toLowerCase()}>
+            <option
+              key={t.name.toLowerCase()}
+              value={t.name.toLowerCase()}
+            >
               {t.name}
             </option>
           ))}
         </select>
 
         <Link href="/demo">demo</Link>
-
-
       </div>
     </div>
   );
