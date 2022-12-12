@@ -35,6 +35,30 @@ export interface DialogContainerProps {
 
 export interface DialogProps extends ModalUnstyledProps {
   /**
+   * Height mặc định
+   */
+  initialHeight?: number;
+  /**
+   *
+   */
+  minHeight?: number;
+  /**
+   *
+   */
+  maxHeight?: number;
+  /**
+   *
+   */
+  initialWidth?: number;
+  /**
+   *
+   */
+  minWidth?: number;
+  /**
+   *
+   */
+  maxWidth?: number;
+  /**
    * Title của dialog
    */
   title?: string;

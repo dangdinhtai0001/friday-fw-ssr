@@ -81,6 +81,11 @@ function Tabs(
       ) => {
         handleOnChange(event, value);
       }}
+      slotProps={{
+        root: () => ({
+          className: 'w-full h-full'
+        })
+      }}
     >
       <TabsList
         slotProps={{

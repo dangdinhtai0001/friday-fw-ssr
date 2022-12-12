@@ -23,7 +23,7 @@ const DemoPage = () => {
       <div>
         <Tabs defaultValue="id-000" destroyInactiveTabPane={true}>
           <TabItem id="id-000" label="label 000">
-            <div>Tab panel 000</div>
+            <div className='w-[1000px] h-[800px] bg-red-400'>Tab panel 000</div>
           </TabItem>
           <TabItem id="id-001" label="label 001">
             <div>Tab panel 001</div>
@@ -31,19 +31,21 @@ const DemoPage = () => {
         </Tabs>
       </div>
       <div>
-        <Dialog title="Đây là title">
+        <Dialog title="Đây là title" initialHeight={500}>
           <DialogActivator>
             <Button disabled={false} theme="primary">
               Open dialog
             </Button>
           </DialogActivator>
           <DialogContent>
-            <div>
-              <h2 id="unstyled-modal-title">Text in a modal</h2>
-              <p id="unstyled-modal-description">
-                Aliquid amet deserunt earum!
-              </p>
-            </div>
+            <Tabs defaultValue="id-000" destroyInactiveTabPane={true}>
+              <TabItem id="id-000" label="label 000">
+                <div className='w-[1000px] h-[800px] bg-red-400'>Tab panel 000</div>
+              </TabItem>
+              <TabItem id="id-001" label="label 001">
+                <div>Tab panel 001</div>
+              </TabItem>
+            </Tabs>
           </DialogContent>
         </Dialog>
       </div>

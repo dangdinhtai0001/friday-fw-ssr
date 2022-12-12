@@ -20,7 +20,15 @@ function getContent(children: JSX.Element | JSX.Element[]): JSX.Element | null {
 }
 
 function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
-    const { children } = props;
+    const {
+        children,
+        minHeight = 200,
+        maxHeight = 800,
+        minWidth = 600,
+        maxWidth = 1000,
+        initialHeight = 300,
+        initialWidth = 600,
+    } = props;
 
     const { context, helper } = useDialogContext();
 
@@ -46,7 +54,7 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
                 slots={{ backdrop: Backdrop }}
                 ref={ref}
             >
-                <DialogContainer>
+                <DialogContainer initialHeight={initialHeight} initialWidth={initialWidth}>
                     {getContent(children)}
                 </DialogContainer>
             </ModalUnstyled>

@@ -50,7 +50,7 @@ function TabPanel(
           slotProps={{
             root: () => ({
               className: 'bg-th-background',
-            }),
+            })
           }}
         />
       </motion.div>

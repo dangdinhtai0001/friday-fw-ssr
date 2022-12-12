@@ -46,7 +46,7 @@ function Container(
   const {
     children,
     minHeight = 200,
-    maxHeight = 700,
+    maxHeight = 800,
     minWidth = 600,
     maxWidth = 1000,
     initialHeight = 300,
@@ -154,7 +154,7 @@ function Container(
             {/* ------------------------------------ | content | ------------------------------------ */}
             <div
               id="__fd-dialog-description"
-              className="w-full h-full px-[0.5rem] py-[0.3rem] bg-th-background"
+              className="w-full h-full px-[0.5rem] py-[0.3rem] overflow-auto bg-th-background"
             >
               {children}
             </div>
@@ -208,7 +208,7 @@ function Container(
               }}
             />
             <motion.div
-              className="__fd-resizable-bottom absolute select-none w-[100%] h-[10px] bottom-[-5px] left-[0px] cursor-row-resize "
+              className="__fd-resizable-bottom absolute select-none w-[100%] h-[10px] bottom-[-5px] left-[0px] cursor-row-resize bg-red-200"
               drag="y"
               dragConstraints={{
                 top: 0,
