@@ -21,5 +21,5 @@ const _resizeableDirection = tuple(
   'bottom-left',
   'bottom-right'
 );
-export type resizeableDirection =
+export type ResizeableDirection =
   (typeof _resizeableDirection)[number];

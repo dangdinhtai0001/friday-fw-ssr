@@ -10,7 +10,8 @@ import {
 } from 'framer-motion';
 import { inRange } from 'lodash';
 // local imports
-import { resizeableDirection } from '@packages/ravenclaw/global-interface';
+import { Resizable } from '@packages/hufflepuff/resizable';
+import { ResizeableDirection } from '@packages/ravenclaw/global-interface';
 import { DialogContainerProps } from './Dialog.d';
 import { useDialogContext } from './DialogContext';
 
@@ -66,7 +67,7 @@ function Container(
     (
       event: MouseEvent | TouchEvent | PointerEvent,
       info: PanInfo,
-      direction: resizeableDirection
+      direction: ResizeableDirection
     ) => {
       let newHeight = mHeight.get();
       let newWidth = mWidth.get();
@@ -131,7 +132,7 @@ function Container(
         variants={variants}
         initial="hidden"
         animate={controls}
-        key="fd--dialog-panel"
+        key="__fd--dialog-panel"
         ref={constraintsRef}
       >
         <motion.div
@@ -164,7 +165,7 @@ function Container(
             </div>
           </div>
           {/* -------------------------------------------- | resizable container | -------------------------------------------- */}
-          <div>
+          {/* <div>
             <motion.div
               className="__fd-resizable-top absolute select-none w-[100%] h-[10px] top-[-5px] left-[0px] cursor-row-resize"
               drag="y"
@@ -333,7 +334,8 @@ function Container(
                 setIsResizing(false);
               }}
             />
-          </div>
+          </div> */}
+          <Resizable onResizeStart={() => { setIsResizing(true); }} onResizeEnd={() => { setIsResizing(true); }} onResize={handleOnResize} />
         </motion.div>
       </motion.div>
     </AnimatePresence>
