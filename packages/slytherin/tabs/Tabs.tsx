@@ -3,30 +3,11 @@ import * as React from 'react';
 // 3rd importsgetTabHeader
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 // local imports
-import Tab from './Tab';
+import TabHeaders from './TabHeaders';
 import TabItem from './TabItem';
 import TabPanel from './TabPanel';
 import { ContextState, TabsProps } from './Tabs.d';
 import { useTabsContext } from './TabsContext';
-import TabsList from './TabsList';
-
-const getTabHeader = (
-  children: JSX.Element | JSX.Element[] | undefined
-): JSX.Element | JSX.Element[] | null => {
-  if (!children) return null;
-  return React.Children.map(children, child => {
-    if (child.type === TabItem) {
-      let { props } = child;
-      return (
-        <Tab value={props.id} disabled={props.disabled}>
-          {props.label}
-        </Tab>
-      );
-    }
-
-    return null;
-  });
-};
 
 const getTabPanel = (
   children: JSX.Element | JSX.Element[] | undefined,
@@ -87,15 +68,7 @@ function Tabs(
         })
       }}
     >
-      <TabsList
-        slotProps={{
-          root: () => ({
-            className: 'flex',
-          }),
-        }}
-      >
-        {getTabHeader(props.children)}
-      </TabsList>
+      <TabHeaders {...props} />
       {getTabPanel(props.children, context, props)}
     </TabsUnstyled>
   );

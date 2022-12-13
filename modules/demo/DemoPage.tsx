@@ -24,7 +24,7 @@ const DemoPage = () => {
       <div>
         <Tabs defaultValue="id-000" destroyInactiveTabPane={true}>
           <TabItem id="id-000" label="label 000">
-            <div className='w-[1000px] h-[800px] bg-red-400'>Tab panel 000</div>
+            <div className=''>Tab panel 000</div>
           </TabItem>
           <TabItem id="id-001" label="label 001">
             <div>Tab panel 001</div>
