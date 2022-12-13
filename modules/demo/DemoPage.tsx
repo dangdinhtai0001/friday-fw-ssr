@@ -32,7 +32,22 @@ const DemoPage = () => {
         </Tabs>
       </div>
       <div>
-        <Dialog title="Đây là title" initialHeight={500}>
+        <Dialog
+          title="Đây là title"
+          initialHeight={500}
+          initialWidth={600}
+          minHeight={200}
+          minWidth={600}
+          actions={[
+            { key: "key-0001", label: "Xác nhận", disabled: false, visible: true, others: { theme: 'primary' } },
+            { key: "key-0002", label: "Hủy", disabled: true, visible: true, },
+          ]}
+          onActiveAction={(event, key, context, helper) => {
+            if (key === 'key-0001') {
+              helper.applyDisable('key-0002', false);
+            }
+          }}
+        >
           <DialogExtraHeader>
             <div>Đây là phần header mở rộng</div>
           </DialogExtraHeader>

@@ -1,31 +1,15 @@
 import { ModalUnstyledProps } from '@mui/base/ModalUnstyled';
 
+interface ActionDef {
+  key: string;
+  label?: string;
+  component?: JSX.Element;
+  disabled?: boolean;
+  visible?: boolean;
+  others?: Object 
+}
 // ==========================================================================
-export interface DialogContainerProps {
-  /**
-   * Height mặc định
-   */
-  initialHeight?: number;
-  /**
-   *
-   */
-  minHeight?: number;
-  /**
-   *
-   */
-  maxHeight?: number;
-  /**
-   *
-   */
-  initialWidth?: number;
-  /**
-   *
-   */
-  minWidth?: number;
-  /**
-   *
-   */
-  maxWidth?: number;
+export interface DialogContainerProps extends DialogProps {
   /**
    * Nội dung hiển thị của dialog
    */
@@ -41,11 +25,11 @@ export interface DialogProps extends ModalUnstyledProps {
   /**
    * Height mặc định
    */
-  initialHeight?: number;
+  initialHeight: number;
   /**
    *
    */
-  minHeight?: number;
+  minHeight: number;
   /**
    *
    */
@@ -53,11 +37,11 @@ export interface DialogProps extends ModalUnstyledProps {
   /**
    *
    */
-  initialWidth?: number;
+  initialWidth: number;
   /**
    *
    */
-  minWidth?: number;
+  minWidth: number;
   /**
    *
    */
@@ -70,6 +54,14 @@ export interface DialogProps extends ModalUnstyledProps {
    * Không có ý nghĩa lắm, nhưng do @MUI base đòi nên phải override
    */
   open?: boolean;
+  /**
+   * Định nghĩa metadata cho các action của dialog
+   */
+  actions?: ActionDef[]
+  /**
+   * Hàm xử lý sự kiện khi active action
+   */
+  onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: any) => void
   /**
    * @MUI cũng có định nghĩa rồi, nhưng chỉ cho phép 1 children. Nên cần định nghĩa lại để dùng đc activator và content
    */
@@ -86,6 +78,10 @@ export interface ContextState {
    * Title của dialog
    */
   title?: string;
+    /**
+   * Định nghĩa metadata cho các action của dialog
+   */
+  actions?: ActionDef[]
 }
 
 export interface ContextProviderProps {

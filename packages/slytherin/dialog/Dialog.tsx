@@ -33,6 +33,7 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
         maxWidth = 1000,
         initialHeight = 300,
         initialWidth = 600,
+        onActiveAction
     } = props;
 
     const { context, helper } = useDialogContext();
@@ -68,6 +69,7 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
                     minHeight={minHeight}
                     maxHeight={maxHeight}
                     extraHeader={getExtraHeader(children)}
+                    onActiveAction={onActiveAction}
                 >
                     {getContent(children)}
                 </DialogContainer>

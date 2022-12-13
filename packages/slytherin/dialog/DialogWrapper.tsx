@@ -7,7 +7,7 @@ import { DialogProps } from './Dialog.d';
 import { DialogContextProvider } from './DialogContext';
 
 function getDialogContextInitial(props: DialogProps) {
-  return { opened: false, title: props.title };
+  return { opened: false, title: props.title, actions: props.actions };
 }
 
 const DialogWrapper = (
