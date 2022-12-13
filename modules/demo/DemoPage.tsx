@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogActivator,
   DialogContent,
+  DialogExtraHeader,
   TabItem,
   Tabs,
 } from '@packages/slytherin';
@@ -32,6 +33,9 @@ const DemoPage = () => {
       </div>
       <div>
         <Dialog title="Đây là title" initialHeight={500}>
+          <DialogExtraHeader>
+            <div>Đây là phần header mở rộng</div>
+          </DialogExtraHeader>
           <DialogActivator>
             <Button disabled={false} theme="primary">
               Open dialog

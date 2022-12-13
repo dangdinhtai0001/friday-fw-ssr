@@ -10,6 +10,7 @@ import DialogContainer from './DialogContainer';
 import { useDialogContext } from './DialogContext';
 import DialogActivator from './sub-components/DialogActivator';
 import DialogContent from './sub-components/DialogContent';
+import DialogExtraHeader from './sub-components/DialogExtraHeader';
 
 function getActivator(children: JSX.Element | JSX.Element[]): JSX.Element | null {
     return getChildrenByType(children, DialogActivator);
@@ -17,6 +18,10 @@ function getActivator(children: JSX.Element | JSX.Element[]): JSX.Element | null
 
 function getContent(children: JSX.Element | JSX.Element[]): JSX.Element | null {
     return getChildrenByType(children, DialogContent);
+}
+
+function getExtraHeader(children: JSX.Element | JSX.Element[]): JSX.Element | null {
+    return getChildrenByType(children, DialogExtraHeader);
 }
 
 function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
@@ -41,6 +46,7 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
         console.debug("Close event with reason: ", reason);
         helper.commitOpened(false);
     }
+
     return (
         <>
             {React.cloneElement(getActivator(children)!, { onClick: handleOnClickActivator })}
@@ -54,7 +60,15 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
                 slots={{ backdrop: Backdrop }}
                 ref={ref}
             >
-                <DialogContainer initialHeight={initialHeight} initialWidth={initialWidth}>
+                <DialogContainer
+                    initialHeight={initialHeight}
+                    initialWidth={initialWidth}
+                    minWidth={minWidth}
+                    maxWidth={maxWidth}
+                    minHeight={minHeight}
+                    maxHeight={maxHeight}
+                    extraHeader={getExtraHeader(children)}
+                >
                     {getContent(children)}
                 </DialogContainer>
             </ModalUnstyled>

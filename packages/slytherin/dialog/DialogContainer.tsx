@@ -46,12 +46,13 @@ function Container(
 ): JSX.Element {
   const {
     children,
-    minHeight = 200,
-    maxHeight = 800,
-    minWidth = 600,
-    maxWidth = 1000,
-    initialHeight = 300,
-    initialWidth = 600,
+    minHeight,
+    maxHeight,
+    minWidth,
+    maxWidth,
+    initialHeight,
+    initialWidth,
+    extraHeader,
   } = props;
 
   const { context } = useDialogContext();
@@ -144,13 +145,17 @@ function Container(
             width: mWidth,
           }}
         >
-          <div className="flex flex-col w-full h-full">
+          <div className="flex flex-col w-full h-full ">
             {/* ------------------------------------ | header | ------------------------------------ */}
             <div
               id="__fd-dialog-title"
               className="flex items-center justify-center text-th-text-primary font-[600] text-[1.3rem] h-[2.1rem] w-full py-[1rem] bg-th-primary rounded-t-[0.5rem]"
             >
               {context.title}
+            </div>
+            {/* ------------------------------------ | extra header | ------------------------------------ */}
+            <div className='w-full  bg-th-background'>
+              {extraHeader}
             </div>
             {/* ------------------------------------ | content | ------------------------------------ */}
             <div
@@ -165,7 +170,11 @@ function Container(
             </div>
           </div>
           {/* -------------------------------------------- | resizable container | -------------------------------------------- */}
-          <Resizable onResizeStart={() => { setIsResizing(true); }} onResizeEnd={() => { setIsResizing(true); }} onResize={handleOnResize} />
+          <Resizable
+            onResizeStart={() => { setIsResizing(true); }}
+            onResizeEnd={() => { setIsResizing(true); }}
+            onResize={handleOnResize}
+          />
         </motion.div>
       </motion.div>
     </AnimatePresence>

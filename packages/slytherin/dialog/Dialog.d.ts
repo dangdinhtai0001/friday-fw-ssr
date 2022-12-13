@@ -30,6 +30,10 @@ export interface DialogContainerProps {
    * Nội dung hiển thị của dialog
    */
   children: JSX.Element | JSX.Element[] | null;
+  /**
+   * Phần mở rộng của header
+   */
+  extraHeader?: JSX.Element | JSX.Element[] | null;
 }
 // ==========================================================================
 
