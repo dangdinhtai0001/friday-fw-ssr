@@ -14,4 +14,4 @@ Các tab được triển khai bằng cách sử dụng các components:
 Để tiện cho việc tạo component `Tabbed dialog` (Dialog có content là Tab) thì sẽ wrap lại thành
 - `Tabs`: Thành phần bọc `TabsList` và `TabPanel` để các tab và panel của chúng có thể giao tiếp với nhau.
 - `TabHeaders`: Thành phần bọc `TabsList` và `Tab`
-- `TabPanelWrapper`: Thành phần bọc `TabPanel`
+- `TabPanelWrapper`: Thành phần bọc `TabPanel` 
