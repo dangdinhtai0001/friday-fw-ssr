@@ -21,7 +21,12 @@ export interface DialogContainerProps{
   /**
    * Hàm xử lý sự kiện khi active action
    */
-  onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: any) => void
+  onActiveAction ?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: any) => void;  onActiveAction?: (
+    event: React.MouseEvent<unknown, MouseEvent>,
+    key: string,
+    context: ContextState,
+    helper: any
+  ) => void;
 }
 // ==========================================================================
 

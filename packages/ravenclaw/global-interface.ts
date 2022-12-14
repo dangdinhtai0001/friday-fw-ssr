@@ -23,3 +23,13 @@ const _resizeableDirection = tuple(
 );
 export type ResizeableDirection =
   (typeof _resizeableDirection)[number];
+
+// ==================================================================================================
+export type ResizableMetadata = {
+  minHeight: number,
+  maxHeight?: number,
+  minWidth: number,
+  maxWidth?: number,
+  initialHeight: number,
+  initialWidth: number,
+};
