@@ -48,6 +48,7 @@ function Container(
     props: DialogContainerProps,
     ref: React.ForwardedRef<any>
 ): JSX.Element {
+    const { context } = useDialogContext();
     const {
         minHeight,
         maxHeight,
@@ -55,9 +56,7 @@ function Container(
         maxWidth,
         initialHeight,
         initialWidth
-    } = props;
-
-    const { context } = useDialogContext();
+    } = context;
 
     const controls = useAnimation();
     const mHeight = useMotionValue(initialHeight);

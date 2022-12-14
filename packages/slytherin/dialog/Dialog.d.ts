@@ -9,7 +9,7 @@ interface ActionDef {
   others?: Object 
 }
 // ==========================================================================
-export interface DialogContainerProps extends DialogProps {
+export interface DialogContainerProps{
   /**
    * Nội dung hiển thị của dialog
    */
@@ -18,6 +18,10 @@ export interface DialogContainerProps extends DialogProps {
    * Phần mở rộng của header
    */
   extraHeader?: JSX.Element | JSX.Element[] | null;
+  /**
+   * Hàm xử lý sự kiện khi active action
+   */
+  onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: any) => void
 }
 // ==========================================================================
 
@@ -27,7 +31,7 @@ export interface DialogProps extends ModalUnstyledProps {
    */
   initialHeight: number;
   /**
-   *
+   * 
    */
   minHeight: number;
   /**
@@ -81,7 +85,31 @@ export interface ContextState {
     /**
    * Định nghĩa metadata cho các action của dialog
    */
-  actions?: ActionDef[]
+  actions?: ActionDef[];
+  /**
+   * Height mặc định
+   */
+  initialHeight: number;
+  /**
+   * 
+   */
+  minHeight: number;
+  /**
+   *
+   */
+  maxHeight?: number;
+  /**
+   *
+   */
+  initialWidth: number;
+  /**
+   *
+   */
+  minWidth: number;
+  /**
+   *
+   */
+  maxWidth?: number;
 }
 
 export interface ContextProviderProps {

@@ -5,9 +5,8 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 // local imports
 import { getChildrenByType } from '@packages/ravenclaw';
 import Backdrop from './Backdrop';
-import { DialogProps } from './Dialog.d';
-// import DialogContainer from './DialogContainer';
 import DialogContainer from './dialog-container/Container';
+import { DialogProps } from './Dialog.d';
 import { useDialogContext } from './DialogContext';
 import DialogActivator from './sub-components/DialogActivator';
 import DialogContent from './sub-components/DialogContent';
@@ -28,12 +27,6 @@ function getExtraHeader(children: JSX.Element | JSX.Element[]): JSX.Element | nu
 function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
     const {
         children,
-        minHeight = 200,
-        maxHeight = 800,
-        minWidth = 600,
-        maxWidth = 1000,
-        initialHeight = 300,
-        initialWidth = 600,
         onActiveAction
     } = props;
 
@@ -63,12 +56,6 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
                 ref={ref}
             >
                 <DialogContainer
-                    initialHeight={initialHeight}
-                    initialWidth={initialWidth}
-                    minWidth={minWidth}
-                    maxWidth={maxWidth}
-                    minHeight={minHeight}
-                    maxHeight={maxHeight}
                     extraHeader={getExtraHeader(children)}
                     onActiveAction={onActiveAction}
                 >
