@@ -69,8 +69,21 @@ export interface DialogProps extends ModalUnstyledProps {
   actions?: ActionDef[]
   /**
    * Hàm xử lý sự kiện khi active action
+   * @param event Event mặc định
+   * @param key key kích hoạt sự kiện
+   * @param context context 
+   * @param helper helper của context
+   * @returns void
    */
   onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: any) => void
+  /**
+   * hàm xử lý sự kiện khi close 
+   * @param context context
+   * @param helper helper của context
+   * @param reason Lý do close
+   * @returns void
+   */
+  onClose?: (context: ContextState, helper: any, reason: string) => void
   /**
    * @MUI cũng có định nghĩa rồi, nhưng chỉ cho phép 1 children. Nên cần định nghĩa lại để dùng đc activator và content
    */

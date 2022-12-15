@@ -13,7 +13,7 @@ import { useTabsContext } from './TabsContext';
 
 const variants = {
   initial: { x: 100, opacity: 0 },
-  animate: { x: 0, opacity: 1, scale: [0.5, 1], },
+  animate: { x: 0, opacity: 1 },
   exit: { x: 100, opacity: 0 },
 };
 

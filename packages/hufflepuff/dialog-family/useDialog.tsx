@@ -3,7 +3,7 @@
 // local imports
 import { useResizable } from '@packages/hufflepuff/resizable';
 
-const useDialog = (context: any, helper: any) => {
+const useDialog = (props: any, context: any, helper: any) => {
     const {
         minHeight,
         maxHeight,
@@ -27,9 +27,12 @@ const useDialog = (context: any, helper: any) => {
         helper.commitOpened(true);
     }
 
-    const handleOnClose = (event: object, reason: string): void => {
+    const handleOnClose = (event: object, reason: "backdropClick" | "escapeKeyDown"): void => {
         console.debug("Close event with reason: ", reason);
         helper.commitOpened(false);
+
+        // trigger cho sự kiện close
+        props.onClose?.()
     }
 
     return {

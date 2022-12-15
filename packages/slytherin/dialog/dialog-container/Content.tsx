@@ -11,10 +11,7 @@ function Content(
     const { children } = props;
 
     return (
-        <div
-            id="__fd-dialog-description"
-            className="w-full h-full px-[0.5rem] py-[0.3rem] overflow-auto bg-th-background"
-        >
+        <div className="w-full h-full px-[0.5rem] py-[0.3rem] overflow-auto bg-th-background "        >
             {children}
         </div>
     );

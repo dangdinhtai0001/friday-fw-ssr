@@ -32,7 +32,7 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
     } = props;
 
     const { context, helper } = useDialogContext();
-    const { handleOnClickActivator, handleOnClose } = useDialog(context, helper);
+    const { handleOnClickActivator, handleOnClose } = useDialog(props, context, helper);
 
     return (
         <>
@@ -42,8 +42,6 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
                 onClose={handleOnClose}
                 closeAfterTransition
                 disableScrollLock={true}
-                aria-labelledby="__fd-dialog-title"
-                aria-describedby="__fd-dialog-description"
                 slots={{ backdrop: Backdrop }}
                 ref={ref}
             >
