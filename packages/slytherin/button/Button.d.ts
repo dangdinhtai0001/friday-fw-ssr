@@ -36,5 +36,5 @@ export interface ButtonProps extends ButtonUnstyledProps {
   /**
    * CÓ sử dụng border hay không
    */
-  border?: boolean;
+  useBorder?: boolean;
 }

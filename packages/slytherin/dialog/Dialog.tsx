@@ -6,9 +6,9 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import useDialog from '@packages/hufflepuff/dialog-family/useDialog';
 import { getChildrenByType } from '@packages/ravenclaw';
 import Backdrop from './Backdrop';
-import DialogContainer from './dialog-container/Container';
 import { DialogProps } from './Dialog.d';
 import { useDialogContext } from './DialogContext';
+import DialogContainer from './dialog-container/Container';
 import DialogActivator from './sub-components/DialogActivator';
 import DialogContent from './sub-components/DialogContent';
 import DialogExtraHeader from './sub-components/DialogExtraHeader';
@@ -28,7 +28,8 @@ function getExtraHeader(children: JSX.Element | JSX.Element[]): JSX.Element | nu
 function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
     const {
         children,
-        onActiveAction
+        onActiveAction,
+        onClose
     } = props;
 
     const { context, helper } = useDialogContext();
@@ -48,6 +49,7 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
                 <DialogContainer
                     extraHeader={getExtraHeader(children)}
                     onActiveAction={onActiveAction}
+                    onClose={onClose}
                 >
                     {getContent(children)}
                 </DialogContainer>

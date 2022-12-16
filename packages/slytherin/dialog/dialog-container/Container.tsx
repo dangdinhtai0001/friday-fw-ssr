@@ -31,7 +31,7 @@ const variants = {
     },
     exit: {
         y: '100%',
-        opacity: 0,
+        opacity: 1,
         transition: {
             duration: 0.25,
             type: 'spring',
@@ -99,7 +99,7 @@ function Container(
                 >
                     <div className="flex flex-col w-full h-full ">
                         {/* ------------------------------------ | header | ------------------------------------ */}
-                        <Header {...props} />
+                        <Header {...props} animationControls={controls} />
                         {/* ------------------------------------ | content | ------------------------------------ */}
                         <Content {...props} />
                         {/* ------------------------------------ | footer | ------------------------------------ */}

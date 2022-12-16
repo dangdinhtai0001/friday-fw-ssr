@@ -27,12 +27,16 @@ const useDialog = (props: any, context: any, helper: any) => {
         helper.commitOpened(true);
     }
 
-    const handleOnClose = (event: object, reason: "backdropClick" | "escapeKeyDown"): void => {
-        console.debug("Close event with reason: ", reason);
-        helper.commitOpened(false);
+    const handleOnClose = async (event: object, reason: "backdropClick" | "escapeKeyDown" | "headerClick"): Promise<any> => {
+        // animation cho sự kiện close
+        await props.animationControls.start("exit");
 
         // trigger cho sự kiện close
-        props.onClose?.()
+        await props.onClose?.();
+
+
+        console.debug("Close event with reason: ", reason);
+        helper.commitOpened(false);
     }
 
     return {

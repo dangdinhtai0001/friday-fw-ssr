@@ -30,7 +30,9 @@ const coverVariants = {
 };
 
 function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
-    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style = {}, theme, border = true } = props;
+    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style = {}, theme, } = props;
+
+    const { useBorder = true, ..._props } = props;
 
     const [innerLoading, setLoading] = React.useState<Loading>(!!loading);
 
@@ -91,11 +93,12 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             [`w-full`]: block,
             [`w-fit`]: !block,
             [`bg-th-${theme}`]: theme,
-            [`border-[0.1rem] border-th-foreground `]: border
+            [`border-[0.1rem] border-th-foreground `]: useBorder
         },
     );
 
-    return <ButtonUnstyled {...props}
+    return <ButtonUnstyled
+        {..._props}
         slotProps={{
             root: () => ({
                 className: classes,

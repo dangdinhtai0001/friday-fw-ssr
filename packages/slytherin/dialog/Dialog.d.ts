@@ -27,6 +27,20 @@ export interface DialogContainerProps{
     context: ContextState,
     helper: any
   ) => void;
+    /**
+   * hàm xử lý sự kiện khi close 
+   * @param context context
+   * @param helper helper của context
+   * @param reason Lý do close
+   * @returns void
+   */
+    onClose?: (context: ContextState, helper: any, reason: string) => void
+    /**
+     * @MUI cũng có định nghĩa rồi, nhưng chỉ cho phép 1 children. Nên cần định nghĩa lại để dùng đc activator và content
+     */
+    children: JSX.Element | JSX.Element[];
+
+    animationControls?: any
 }
 // ==========================================================================
 
