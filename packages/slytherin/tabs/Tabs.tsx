@@ -3,6 +3,7 @@ import * as React from 'react';
 // 3rd importsgetTabHeader
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 // local imports
+import useTabs from '@packages/hufflepuff/tabs-family/useTabs';
 import TabHeaders from './TabHeaders';
 import TabPanelWrapper from './TabPanelWrapper';
 import { TabsProps } from './Tabs.d';
@@ -15,17 +16,7 @@ function Tabs(
   const { onChange, destroyInactiveTabPane, ..._props } = props;
 
   const { context, helper } = useTabsContext();
-
-  const handleOnChange = (
-    event: React.SyntheticEvent<Element, Event>,
-    tabId: string | number | boolean
-  ) => {
-    // update lại tab id mỗi khi thay đổi
-    helper.commitActivedId(tabId);
-
-    // Gọi hàm onchange từ props
-    onChange?.(event, tabId, context, helper);
-  };
+  const { handleOnChange } = useTabs(props, context, helper);
 
   return (
     <TabsUnstyled

@@ -10,35 +10,10 @@ import {
 import { Resizable, useResizable } from '@packages/hufflepuff/resizable';
 import { DialogContainerProps } from '../Dialog.d';
 import { useDialogContext } from '../DialogContext';
+import { containerVariants } from '../constant.d';
 import Content from './Content';
 import Footer from './Footer';
 import Header from './Header';
-
-const variants = {
-    hidden: {
-        y: '-100%',
-        opacity: 0,
-    },
-    visible: {
-        y: '0',
-        opacity: 1,
-        transition: {
-            duration: 0.1,
-            type: 'spring',
-            damping: 25,
-            stiffness: 500,
-        },
-    },
-    exit: {
-        y: '100%',
-        opacity: 1,
-        transition: {
-            duration: 0.25,
-            type: 'spring',
-        },
-    },
-};
-
 
 function Container(
     props: DialogContainerProps,
@@ -82,7 +57,7 @@ function Container(
         <AnimatePresence mode="wait">
             <motion.div
                 className="__fd--dialog-panel absolute top-0 left-0 w-full h-full px-[0.5rem] py-[0.3rem] flex flex-col justify-center items-center overflow-hidden"
-                variants={variants}
+                variants={containerVariants}
                 initial="hidden"
                 animate={controls}
                 key="__fd--dialog-panel"
