@@ -32,7 +32,7 @@ const useDialog = (props: any, context: any, helper: any) => {
         await props.animationControls.start("exit");
 
         // trigger cho sự kiện close
-        await props.onClose?.();
+        await props.onClose?.(context, helper);
 
 
         console.debug("Close event with reason: ", reason);
