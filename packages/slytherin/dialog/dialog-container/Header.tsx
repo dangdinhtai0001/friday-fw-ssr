@@ -27,7 +27,7 @@ function Header(
                     useBorder={false}
                     theme='danger'
                     onClick={(event) => { handleOnClose(event, "headerClick") }}
-                    icon={<AiFillCloseCircle className='scale-[1.6] h-full w-full fill-th-danger bg-th-background rounded-full' />}
+                    icon={<AiFillCloseCircle className='scale-[1.4] h-full w-full fill-th-danger bg-th-background rounded-full' />}
                 />
             </div>
             {/* ------------------------------------ | extra header | ------------------------------------ */}
