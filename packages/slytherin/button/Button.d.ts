@@ -33,4 +33,8 @@ export interface ButtonProps extends ButtonUnstyledProps {
    * style
    */
   style?: Object;
+  /**
+   * CÓ sử dụng border hay không
+   */
+  border?: boolean;
 }

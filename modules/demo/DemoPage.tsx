@@ -8,6 +8,8 @@ import {
   Tabs,
 } from '@packages/slytherin';
 
+import { AiFillCloseCircle } from 'react-icons/ai';
+
 const DemoPage = () => {
   return (
     <>
@@ -20,7 +22,17 @@ const DemoPage = () => {
         >
           Hello World
         </Button>
+
+        <Button
+          border={false}
+          theme='danger'
+          onClick={() => console.log('click!')}
+          icon={<AiFillCloseCircle className='scale-[1.6] h-full w-full fill-th-danger' />}
+        >
+
+        </Button>
       </div>
+
       <div>
         <Tabs defaultValue="id-000" destroyInactiveTabPane={true}>
           <TabItem id="id-000" label="label 000">

@@ -30,7 +30,7 @@ const coverVariants = {
 };
 
 function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
-    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style = {}, theme } = props;
+    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style = {}, theme, border = true } = props;
 
     const [innerLoading, setLoading] = React.useState<Loading>(!!loading);
 
@@ -77,7 +77,6 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
 
     const classes = classNames(
         `
-            border-[0.1rem] border-th-foreground 
             h-fit
             group btn relative overflow-hidden 
             inline-flex items-center justify-start 
@@ -91,7 +90,8 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             [`rounded px-[0.3rem] py-[0.05rem]`]: children,
             [`w-full`]: block,
             [`w-fit`]: !block,
-            [`bg-th-${theme}`]: theme
+            [`bg-th-${theme}`]: theme,
+            [`border-[0.1rem] border-th-foreground `]: border
         },
     );
 
@@ -130,7 +130,7 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             animate={controls}
             className='bg-black w-full h-full absolute top-0 left-0 '
         />
-        {children}
+        {icon ? icon : children}
     </ButtonUnstyled>;
 }
 
