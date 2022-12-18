@@ -30,7 +30,7 @@ function Tab(
         }}
         ref={ref}
       />
-      {value === context.activedId ? (
+      {value === context.activedTabId ? (
         <motion.div
           className="bg-th-primary h-[0.2rem] rounded-full w-full"
           layoutId="underline"

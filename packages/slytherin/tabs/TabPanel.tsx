@@ -4,40 +4,28 @@ import * as React from 'react';
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import {
   AnimatePresence,
-  motion,
-  useAnimation,
+  motion
 } from 'framer-motion';
 // local imports
 import { TabPanelProps } from './Tabs.d';
-import { useTabsContext } from './TabsContext';
-
-const variants = {
-  initial: { x: 100, opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  exit: { x: 100, opacity: 0 },
-};
+import { TabVariants } from './TabsUtils';
+import useTabs from './useTabs';
 
 function TabPanel(
   props: TabPanelProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-  const controls = useAnimation();
 
-  const { context } = useTabsContext();
-
-  React.useEffect(() => {
-    controls.start('animate');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context.activedId]);
+  const { tabAnimationControls } = useTabs({});
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
         key={props.value}
-        variants={variants}
+        variants={TabVariants}
         initial="initial"
         exit="exit"
-        animate={controls}
+        animate={tabAnimationControls}
         transition={{
           duration: 0.2,
           type: 'spring',

@@ -31,14 +31,14 @@ function mutations(context: ContextState, setContext: Dispatch<any>) {
     return {
         /**
          * hàm cập nhật giá trị actived id trong context
-         * @param activedId : id của tab đc actived và cần đc update
+         * @param activedTabId : id của tab đc actived và cần đc update
          */
-        commitActivedId(activedId: string | number | boolean): void {
-            console.debug('actived id commited', activedId);
+        commitActivedId(activedTabId: string | number | boolean): void {
+            console.debug('actived id commited', activedTabId);
 
             setContext((prevState: ContextState) => ({
                 ...prevState,
-                activedId: activedId,
+                activedTabId: activedTabId,
             }));
         }
     }

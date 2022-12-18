@@ -4,7 +4,7 @@ function getChildrenByType(
   children: JSX.Element | JSX.Element[],
   type: any,
   mappingFunc?: (
-    child: JSX.Element | JSX.Element[]
+    child: JSX.Element
   ) => JSX.Element | JSX.Element[] | null
 ) {
   if (!children) return null;
@@ -31,7 +31,7 @@ function getAllChildrenByType(
   children: JSX.Element | JSX.Element[],
   type: any,
   mappingFunc?: (
-    child: JSX.Element | JSX.Element[]
+    child: JSX.Element
   ) => JSX.Element | JSX.Element[] | null
 ) {
   if (!children) return null;

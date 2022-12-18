@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { TabPanelUnstyledProps } from '@mui/base/TabPanelUnstyled';
+import { TabUnstyledProps } from '@mui/base/TabUnstyled';
 import { TabsListUnstyledProps } from '@mui/base/TabsListUnstyled';
 import { TabsUnstyledProps } from '@mui/base/TabsUnstyled';
-import { TabUnstyledProps } from '@mui/base/TabUnstyled';
 import * as React from 'react';
 
 export interface TabsProps extends TabsUnstyledProps {
@@ -65,7 +65,7 @@ export interface ContextState {
   /**
    * Id của tab đang đc active
    */
-  activedId?: number | string | boolean;
+  activedTabId?: number | string | boolean;
 }
 
 export interface ContextProviderProps {

@@ -2,35 +2,9 @@
 import * as React from 'react';
 // 3rd importspanel
 // local imports
-import TabItem from './TabItem';
-import TabPanel from './TabPanel';
-import { ContextState, TabsProps } from './Tabs.d';
+import { TabsProps } from './Tabs.d';
 import { useTabsContext } from './TabsContext';
-
-const getTabPanel = (
-    children: JSX.Element | JSX.Element[] | undefined,
-    context: ContextState,
-    _props: TabsProps
-): JSX.Element | JSX.Element[] | null => {
-    if (!children) return null;
-    return React.Children.map(children, child => {
-        if (child.type === TabItem) {
-            let { props } = child;
-
-            if (_props.destroyInactiveTabPane) {
-                return context.activedId === props.id ? (
-                    <TabPanel value={props.id}>{props.children}</TabPanel>
-                ) : null;
-            } else {
-                return (
-                    <TabPanel value={props.id}>{props.children}</TabPanel>
-                );
-            }
-        }
-
-        return null;
-    });
-};
+import { getTabPanels } from './TabsUtils';
 
 function TabPanelWrapper(
     props: TabsProps,
@@ -40,7 +14,7 @@ function TabPanelWrapper(
 
     return (
         <>
-            {getTabPanel(props.children!, context, props)}
+            {getTabPanels(props.children!, context, props)}
         </>
     );
 }

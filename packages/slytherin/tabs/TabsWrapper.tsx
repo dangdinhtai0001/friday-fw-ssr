@@ -3,24 +3,16 @@ import * as React from 'react';
 // 3rd imports
 // local imports
 import Tabs from './Tabs';
-import { ContextState, TabsProps } from './Tabs.d';
+import { TabsProps } from './Tabs.d';
 import { TabsContextProvider } from './TabsContext';
+import { getTabInitialContext } from './TabsUtils';
 
-const getTabDefinitions = (props: TabsProps): ContextState => {
-  const { value, defaultValue } = props;
-
-  let tabContextInitial: ContextState = {
-    activedId: value ? value : defaultValue,
-  };
-
-  return tabContextInitial;
-};
 function TabsWrapper(
   props: TabsProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
   return (
-    <TabsContextProvider initialState={getTabDefinitions(props)}>
+    <TabsContextProvider initialState={getTabInitialContext(props)}>
       <Tabs {...props} ref={ref} />
     </TabsContextProvider>
   );

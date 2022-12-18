@@ -3,11 +3,11 @@ import * as React from 'react';
 // 3rd importsgetTabHeader
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 // local imports
-import useTabs from '@packages/hufflepuff/tabs-family/useTabs';
+// import useTabs from '@packages/hufflepuff/tabs-family/useTabs';
 import TabHeaders from './TabHeaders';
 import TabPanelWrapper from './TabPanelWrapper';
 import { TabsProps } from './Tabs.d';
-import { useTabsContext } from './TabsContext';
+import useTabs from './useTabs';
 
 function Tabs(
   props: TabsProps,
@@ -16,8 +16,7 @@ function Tabs(
   // eslint-disable-next-line no-unused-vars
   const { onChange, destroyInactiveTabPane, ..._props } = props;
 
-  const { context, helper } = useTabsContext();
-  const { handleOnChange } = useTabs(props, context, helper);
+  const { handleOnChange } = useTabs(props);
 
   return (
     <TabsUnstyled
