@@ -13,6 +13,7 @@ function Tabs(
   props: TabsProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
+  // eslint-disable-next-line no-unused-vars
   const { onChange, destroyInactiveTabPane, ..._props } = props;
 
   const { context, helper } = useTabsContext();

@@ -8,9 +8,9 @@ import {
 } from 'framer-motion';
 // local imports
 import { Resizable, useResizable } from '@packages/hufflepuff/resizable';
+import { containerVariants } from '../constant.d';
 import { DialogContainerProps } from '../Dialog.d';
 import { useDialogContext } from '../DialogContext';
-import { containerVariants } from '../constant.d';
 import Content from './Content';
 import Footer from './Footer';
 import Header from './Header';
@@ -46,10 +46,6 @@ function Container(
 
     React.useEffect(() => {
         controls.start('visible');
-        return () => {
-            controls.start('exit');
-        };
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [context.opened]);
 

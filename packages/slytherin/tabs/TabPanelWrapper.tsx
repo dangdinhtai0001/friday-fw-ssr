@@ -40,7 +40,7 @@ function TabPanelWrapper(
 
     return (
         <>
-            {getTabPanel(props.children, context, props)}
+            {getTabPanel(props.children!, context, props)}
         </>
     );
 }

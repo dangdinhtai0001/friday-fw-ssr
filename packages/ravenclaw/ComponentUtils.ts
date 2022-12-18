@@ -2,7 +2,10 @@ import * as React from 'react';
 
 function getChildrenByType(
   children: JSX.Element | JSX.Element[],
-  type: any
+  type: any,
+  mappingFunc?: (
+    child: JSX.Element | JSX.Element[]
+  ) => JSX.Element | JSX.Element[] | null
 ) {
   if (!children) return null;
 
@@ -10,6 +13,10 @@ function getChildrenByType(
 
   React.Children.forEach(children, child => {
     if (child.type === type) {
+      if (mappingFunc) {
+        return mappingFunc(child);
+      }
+
       let { props } = child;
       _result = props.children;
 
@@ -20,4 +27,25 @@ function getChildrenByType(
   return _result;
 }
 
-export { getChildrenByType };
+function getAllChildrenByType(
+  children: JSX.Element | JSX.Element[],
+  type: any,
+  mappingFunc?: (
+    child: JSX.Element | JSX.Element[]
+  ) => JSX.Element | JSX.Element[] | null
+) {
+  if (!children) return null;
+
+  return React.Children.map(children, child => {
+    if (child.type === type) {
+      if (mappingFunc) {
+        return mappingFunc(child);
+      }
+
+      let { props } = child;
+      return props.children;
+    }
+  });
+}
+
+export { getChildrenByType, getAllChildrenByType };

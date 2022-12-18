@@ -31,7 +31,7 @@ function Header(
                 />
             </div>
             {/* ------------------------------------ | extra header | ------------------------------------ */}
-            <div className='w-full  bg-th-background'>
+            <div className='w-full h-fit bg-th-background'>
                 {extraHeader}
             </div>
         </>

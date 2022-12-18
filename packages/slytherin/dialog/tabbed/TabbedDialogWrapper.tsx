@@ -2,9 +2,9 @@
 import * as React from 'react';
 // 3rd imports
 // local imports
-import { DialogProps } from '../Dialog.d';
-import { DialogContextProvider } from '../DialogContext';
 import TabbedDialog from './TabbedDialog';
+import { DialogProps } from './TabbedDialog.d';
+import { TabbedDialogContextProvider } from './TabbedDialogContext';
 
 function getDialogContextInitial(props: DialogProps) {
   const {
@@ -15,7 +15,8 @@ function getDialogContextInitial(props: DialogProps) {
     initialHeight,
     initialWidth,
     title,
-    actions
+    actions,
+    defaultActiveTabId
   } = props;
 
 
@@ -23,6 +24,8 @@ function getDialogContextInitial(props: DialogProps) {
     opened: false,
     title: title,
     actions: actions,
+    defaultActiveTabId: defaultActiveTabId,
+    activeTabId: defaultActiveTabId,
     minHeight: minHeight ? minHeight : 200,
     maxHeight: maxHeight ? maxHeight : 800,
     minWidth: minWidth ? minWidth : 600,
@@ -37,11 +40,11 @@ const TabbedDialogWrapper = (
   ref: React.ForwardedRef<any>
 ): JSX.Element => {
   return (
-    <DialogContextProvider
+    <TabbedDialogContextProvider
       initialState={getDialogContextInitial(props)}
     >
       <TabbedDialog {...props} ref={ref} />
-    </DialogContextProvider>
+    </TabbedDialogContextProvider>
   );
 };
 

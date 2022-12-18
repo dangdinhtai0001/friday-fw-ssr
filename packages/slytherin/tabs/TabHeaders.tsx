@@ -8,7 +8,7 @@ import { TabsProps } from './Tabs.d';
 import TabsList from './TabsList';
 
 const getTabHeader = (
-    children: JSX.Element | JSX.Element[] | undefined
+    children?: JSX.Element | JSX.Element[] | null
 ): JSX.Element | JSX.Element[] | null => {
     if (!children) return null;
     return React.Children.map(children, child => {

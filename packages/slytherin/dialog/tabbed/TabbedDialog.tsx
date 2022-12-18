@@ -6,11 +6,11 @@ import ModalUnstyled from '@mui/base/ModalUnstyled';
 import useDialog from '@packages/hufflepuff/dialog-family/useDialog';
 import { getChildrenByType } from '@packages/ravenclaw';
 import Backdrop from '../Backdrop';
-import { DialogProps } from '../Dialog.d';
-import { useDialogContext } from '../DialogContext';
 import DialogActivator from '../sub-components/DialogActivator';
 import DialogContent from '../sub-components/DialogContent';
 import TabbedDialogContainer from './TabbedContainer';
+import { DialogProps } from './TabbedDialog.d';
+import { useTabbedDialogContext } from './TabbedDialogContext';
 
 function getActivator(children: JSX.Element | JSX.Element[]): JSX.Element | null {
     return getChildrenByType(children, DialogActivator);
@@ -25,10 +25,10 @@ function TabbedDialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Ele
     const {
         children,
         onActiveAction,
-        onClose
+        onClose,
     } = props;
 
-    const { context, helper } = useDialogContext();
+    const { context, helper } = useTabbedDialogContext();
     const { handleOnClickActivator, handleOnClose } = useDialog(props, context, helper);
 
     return (

@@ -6,7 +6,7 @@ import { TabUnstyledProps } from '@mui/base/TabUnstyled';
 import * as React from 'react';
 
 export interface TabsProps extends TabsUnstyledProps {
-  children?: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[] | null;
   /**
    * Giá trị id mặc định của tab được active
    */
