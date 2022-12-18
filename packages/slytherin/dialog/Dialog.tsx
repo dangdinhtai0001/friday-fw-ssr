@@ -4,26 +4,11 @@ import * as React from 'react';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 // local imports
 import useDialog from '@packages/hufflepuff/dialog-family/useDialog';
-import { getChildrenByType } from '@packages/ravenclaw';
 import Backdrop from './Backdrop';
 import { DialogProps } from './Dialog.d';
+import DialogContainer from './DialogContainer';
 import { useDialogContext } from './DialogContext';
-import DialogContainer from './dialog-container/Container';
-import DialogActivator from './sub-components/DialogActivator';
-import DialogContent from './sub-components/DialogContent';
-import DialogExtraHeader from './sub-components/DialogExtraHeader';
-
-function getActivator(children: JSX.Element | JSX.Element[]): JSX.Element | null {
-    return getChildrenByType(children, DialogActivator);
-}
-
-function getContent(children: JSX.Element | JSX.Element[]): JSX.Element | null {
-    return getChildrenByType(children, DialogContent);
-}
-
-function getExtraHeader(children: JSX.Element | JSX.Element[]): JSX.Element | null {
-    return getChildrenByType(children, DialogExtraHeader);
-}
+import { getActivator, getContent } from './DialogUtils';
 
 function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
     const {
@@ -37,7 +22,7 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
 
     return (
         <>
-            {React.cloneElement(getActivator(children)!, { onClick: handleOnClickActivator })}
+            {React.cloneElement(getActivator(children!)!, { onClick: handleOnClickActivator })}
             <ModalUnstyled
                 open={context.opened}
                 onClose={handleOnClose}
@@ -47,11 +32,11 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
                 ref={ref}
             >
                 <DialogContainer
-                    extraHeader={getExtraHeader(children)}
+                    {...props}
                     onActiveAction={onActiveAction}
                     onClose={onClose}
                 >
-                    {getContent(children)}
+                    {getContent(children!)}
                 </DialogContainer>
             </ModalUnstyled>
         </>

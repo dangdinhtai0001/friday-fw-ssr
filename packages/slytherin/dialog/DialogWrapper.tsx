@@ -5,32 +5,7 @@ import * as React from 'react';
 import Dialog from './Dialog';
 import { DialogProps } from './Dialog.d';
 import { DialogContextProvider } from './DialogContext';
-
-function getDialogContextInitial(props: DialogProps) {
-  const {
-    minHeight,
-    maxHeight,
-    minWidth,
-    maxWidth,
-    initialHeight,
-    initialWidth,
-    title,
-    actions
-  } = props;
-
-
-  return {
-    opened: false,
-    title: title,
-    actions: actions,
-    minHeight: minHeight ? minHeight : 200,
-    maxHeight: maxHeight ? maxHeight : 800,
-    minWidth: minWidth ? minWidth : 600,
-    maxWidth: maxWidth ? maxWidth : 1000,
-    initialHeight: initialHeight ? initialHeight : 300,
-    initialWidth: initialWidth ? initialWidth : 600
-  };
-}
+import { getDialogInitialContext } from './DialogUtils';
 
 const DialogWrapper = (
   props: DialogProps,
@@ -38,7 +13,7 @@ const DialogWrapper = (
 ): JSX.Element => {
   return (
     <DialogContextProvider
-      initialState={getDialogContextInitial(props)}
+      initialState={getDialogInitialContext(props)}
     >
       <Dialog {...props} ref={ref} />
     </DialogContextProvider>

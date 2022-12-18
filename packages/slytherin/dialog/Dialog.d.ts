@@ -101,7 +101,7 @@ export interface DialogProps extends ModalUnstyledProps {
   /**
    * @MUI cũng có định nghĩa rồi, nhưng chỉ cho phép 1 children. Nên cần định nghĩa lại để dùng đc activator và content
    */
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | null;
 }
 
 // ==========================================================================
