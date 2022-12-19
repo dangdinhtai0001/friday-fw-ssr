@@ -3,12 +3,12 @@ import * as React from 'react';
 // 3rd imports
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 // local imports
-import useDialog from '@packages/hufflepuff/dialog-family/useDialog';
 import Backdrop from './Backdrop';
 import { DialogProps } from './Dialog.d';
 import DialogContainer from './DialogContainer';
 import { useDialogContext } from './DialogContext';
 import { getActivator, getContent } from './DialogUtils';
+import useDialog from './useDialog';
 
 function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
     const {
@@ -17,8 +17,8 @@ function Dialog(props: DialogProps, ref: React.ForwardedRef<any>): JSX.Element {
         onClose
     } = props;
 
-    const { context, helper } = useDialogContext();
-    const { handleOnClickActivator, handleOnClose } = useDialog(props, context, helper);
+    const { context } = useDialogContext();
+    const { handleOnClickActivator, handleOnClose } = useDialog(props);
 
     return (
         <>

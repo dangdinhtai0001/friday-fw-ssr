@@ -4,9 +4,10 @@ import * as React from 'react';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 // local imports
 // import useTabs from '@packages/hufflepuff/tabs-family/useTabs';
-import TabHeaders from './TabHeaders';
-import TabPanelWrapper from './TabPanelWrapper';
 import { TabsProps } from './Tabs.d';
+import { useTabsContext } from './TabsContext';
+import TabsList from './TabsList';
+import { getTabHeaders, getTabPanels } from './TabsUtils';
 import useTabs from './useTabs';
 
 function Tabs(
@@ -16,7 +17,9 @@ function Tabs(
   // eslint-disable-next-line no-unused-vars
   const { onChange, destroyInactiveTabPane, ..._props } = props;
 
-  const { handleOnChange } = useTabs(props);
+  const { context } = useTabsContext();
+
+  const { handleOnChange, tabAnimationControls } = useTabs(props);
 
   return (
     <TabsUnstyled
@@ -33,8 +36,18 @@ function Tabs(
         })
       }}
     >
-      <TabHeaders {...props} />
-      <TabPanelWrapper {...props} />
+      {/* ================================== || Header || ================================== */}
+      <TabsList
+        slotProps={{
+          root: () => ({
+            className: 'flex',
+          }),
+        }}
+      >
+        {getTabHeaders(props.children, context)}
+      </TabsList>
+      {/* ================================== || Panel || ================================== */}
+      {getTabPanels(props, context, { tabAnimationControls })}
     </TabsUnstyled>
   );
 }

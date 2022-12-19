@@ -9,14 +9,13 @@ import {
 // local imports
 import { TabPanelProps } from './Tabs.d';
 import { TabVariants } from './TabsUtils';
-import useTabs from './useTabs';
 
 function TabPanel(
   props: TabPanelProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
 
-  const { tabAnimationControls } = useTabs({});
+  const { tabAnimationControls, ..._props } = props;
 
   return (
     <AnimatePresence mode="wait">
@@ -34,7 +33,7 @@ function TabPanel(
         }}
       >
         <TabPanelUnstyled
-          {...props}
+          {..._props}
           slotProps={{
             root: () => ({
               className: 'bg-th-background',

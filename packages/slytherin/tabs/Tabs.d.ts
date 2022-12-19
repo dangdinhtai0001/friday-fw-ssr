@@ -6,7 +6,7 @@ import { TabsUnstyledProps } from '@mui/base/TabsUnstyled';
 import * as React from 'react';
 
 export interface TabsProps extends TabsUnstyledProps {
-  children?: JSX.Element | JSX.Element[] | null;
+  children: JSX.Element | JSX.Element[] | null;
   /**
    * Giá trị id mặc định của tab được active
    */
@@ -39,8 +39,15 @@ export interface TabsProps extends TabsUnstyledProps {
   maxContentHeight?: number;
 }
 export interface TabListProps extends TabsListUnstyledProps {}
-export interface TabProps extends TabUnstyledProps {}
-export interface TabPanelProps extends TabPanelUnstyledProps {}
+export interface TabProps extends TabUnstyledProps {
+  /**
+   * Tab có đang được active hay không
+   */
+  isActivedTab: boolean;
+}
+export interface TabPanelProps extends TabPanelUnstyledProps {
+  tabAnimationControls: AnimationControls;
+}
 export interface TabItemProps {
   /**
    * TabPane's head display content
@@ -65,7 +72,7 @@ export interface ContextState {
   /**
    * Id của tab đang đc active
    */
-  activedTabId?: number | string | boolean;
+  activedTabId?: number | string | false;
 }
 
 export interface ContextProviderProps {

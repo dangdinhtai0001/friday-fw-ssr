@@ -4,63 +4,26 @@ import * as React from 'react';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 import {
     AnimatePresence,
-    motion,
-    useAnimation
+    motion
 } from 'framer-motion';
 import { AiFillCloseCircle } from 'react-icons/ai';
 // local imports
-import useDialog from '@packages/hufflepuff/dialog-family/useDialog';
 import { Resizable, useResizable } from '@packages/hufflepuff/resizable';
-import { getAllChildrenByType } from '@packages/ravenclaw';
 import { Button } from '@packages/slytherin/button';
-import TabHeaders from '@packages/slytherin/tabs/TabHeaders';
-import TabItem from '@packages/slytherin/tabs/TabItem';
-import TabPanelWrapper from '@packages/slytherin/tabs/TabPanelWrapper';
-import { containerVariants } from '../constant.d';
-import { ActionDef, DialogContainerProps } from './TabbedDialog.d';
+import TabsList from '@packages/slytherin/tabs/TabsList';
+import { getTabHeaders, getTabPanels } from '@packages/slytherin/tabs/TabsUtils';
+import { TabbedDialogProps } from './TabbedDialog.d';
 import { useTabbedDialogContext } from './TabbedDialogContext';
-
-function getTabItems(children: JSX.Element | JSX.Element[]): JSX.Element | JSX.Element[] | null {
-    return getAllChildrenByType(children, TabItem, (child) => { return child });
-}
-
-function renderDialogActions(actions?: ActionDef[], handleOnActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, key: string) => void): JSX.Element[] | null {
-    if (!actions || actions.length <= 0) {
-        return null;
-    }
-
-    return actions.map((actionDef) => {
-        const { key, component, disabled, visible, label, others } = actionDef;
-        if (component) {
-            return (
-                <div key={key}>
-                    visible && {React.cloneElement(component, { ...others, onClick: handleOnActiveAction, disabled })}
-                </div>
-            );
-        } else {
-            return (
-                <div key={key}>
-                    {visible && <Button
-                        {...others}
-                        onClick={(e) => { handleOnActiveAction?.(e, key) }}
-                        disabled={disabled}
-                    >
-                        {label}
-                    </Button>}
-                </div>
-            );
-        }
-
-    });
-}
+import { containerVariants, renderDialogActions } from './TabbedDialogUtils';
+import useTabbedDialog from './useTabbedDialog';
 
 function Container(
-    props: DialogContainerProps,
+    props: TabbedDialogProps,
     ref: React.ForwardedRef<any>
 ): JSX.Element {
-    const { children, onActiveAction } = props;
-    const { context, helper } = useTabbedDialogContext();
+    const { children } = props;
 
+    const { context } = useTabbedDialogContext();
     const {
         minHeight,
         maxHeight,
@@ -69,12 +32,9 @@ function Container(
         initialHeight,
         initialWidth
     } = context;
-
-    const controls = useAnimation();
-
-
     const constraintsRef = React.useRef(null);
 
+    const { containerAnimationControls, handleOnClose, handleOnActiveAction, handleOnChangeTab, tabAnimationControls } = useTabbedDialog(props);
     const { handleOnResize, mHeight, mWidth } = useResizable({
         minHeight,
         maxHeight,
@@ -84,28 +44,6 @@ function Container(
         initialWidth
     });
 
-    const { handleOnClose } = useDialog({ ...props, animationControls: controls }, context, helper);
-
-    const handleOnChangeTab = (event: React.SyntheticEvent<Element, Event>, tabId: string | number | boolean) => {
-        // update lại tab id mỗi khi thay đổi
-        helper.commitActivedTabId(tabId);
-
-        // Gọi hàm onchange từ props
-        props.onChangeTab?.(event, tabId, context, helper);
-
-        console.log("on change tab");
-
-    }
-
-    const handleOnActiveAction = async (event: React.MouseEvent<unknown, MouseEvent>, key: string) => {
-        await onActiveAction?.(event, key, context, helper);
-    }
-
-
-    React.useEffect(() => {
-        controls.start('visible');
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [context.opened]);
 
     return (
         <AnimatePresence mode="wait">
@@ -113,7 +51,7 @@ function Container(
                 className="__fd--dialog-panel absolute top-0 left-0 w-full h-full px-[0.5rem] py-[0.3rem] flex flex-col justify-center items-center overflow-hidden"
                 variants={containerVariants}
                 initial="hidden"
-                animate={controls}
+                animate={containerAnimationControls}
                 key="__fd--dialog-panel"
                 ref={constraintsRef}
             >
@@ -127,6 +65,7 @@ function Container(
                     }}
                 >
                     <TabsUnstyled
+                        value={context.activedTabId}
                         onChange={(
                             event: React.SyntheticEvent<Element, Event>,
                             value: string | number | boolean
@@ -152,11 +91,19 @@ function Container(
                         </div>
                         {/* ------------------------------------ | extra header | ------------------------------------ */}
                         <div className='w-full h-fit bg-th-background'>
-                            <TabHeaders>{getTabItems(children!)}</TabHeaders>
+                            <TabsList
+                                slotProps={{
+                                    root: () => ({
+                                        className: 'flex',
+                                    }),
+                                }}
+                            >
+                                {getTabHeaders(children, context)}
+                            </TabsList>
                         </div>
                         {/* ------------------------------------ | content | ------------------------------------ */}
                         <div className="w-full h-full px-[0.5rem] py-[0.3rem] overflow-auto bg-th-background "        >
-                            <TabPanelWrapper>{getTabItems(children!)}</TabPanelWrapper>
+                            {getTabPanels(props, context, { tabAnimationControls })}
                         </div>
                         {/* ------------------------------------ | footer | ------------------------------------ */}
                         <div className="h-fit rounded-b-[0.5rem] border-t-[0.1rem] flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem] bg-th-background">

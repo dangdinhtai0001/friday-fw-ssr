@@ -28,10 +28,11 @@ function getChildrenByType(
 }
 
 function getAllChildrenByType(
-  children: JSX.Element | JSX.Element[],
+  children: JSX.Element | JSX.Element[] | null,
   type: any,
   mappingFunc?: (
-    child: JSX.Element
+    child: JSX.Element,
+    index?: number
   ) => JSX.Element | JSX.Element[] | null
 ) {
   if (!children) return null;

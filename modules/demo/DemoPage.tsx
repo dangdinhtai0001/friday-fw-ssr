@@ -4,8 +4,8 @@ import {
   DialogActivator,
   DialogContent,
   DialogExtraHeader,
-  TabbedDialog,
   TabItem,
+  TabbedDialog,
   Tabs
 } from '@packages/slytherin';
 
@@ -85,7 +85,8 @@ const DemoPage = () => {
       <div>
         <TabbedDialog
           title="Đây là title"
-          defaultActiveTabId="id-001"
+          defaultValue="id-000"
+          destroyInactiveTabPane={true}
           initialHeight={500}
           initialWidth={600}
           minHeight={200}
@@ -100,22 +101,17 @@ const DemoPage = () => {
             }
           }}
         >
-          <DialogExtraHeader>
-            <div>Đây là phần header mở rộng</div>
-          </DialogExtraHeader>
           <DialogActivator>
             <Button disabled={false} theme="primary">
-              Open dialog
+              Open tabbed dialog
             </Button>
           </DialogActivator>
-          <DialogContent>
-            <TabItem id="id-000" label="label 000">
-              <div className='w-[1000px] h-[800px] bg-red-400'>Tab panel 000</div>
-            </TabItem>
-            <TabItem id="id-001" label="label 001">
-              <div>Tab panel 001</div>
-            </TabItem>
-          </DialogContent>
+          <TabItem id="id-000" label="label 000">
+            <div className='w-[1000px] h-[800px] bg-red-400'>Tab panel 000</div>
+          </TabItem>
+          <TabItem id="id-001" label="label 001">
+            <div>Tab panel 001</div>
+          </TabItem>
         </TabbedDialog>
       </div>
     </>

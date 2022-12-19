@@ -6,14 +6,12 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 // local imports
 import { TabProps } from './Tabs.d';
-import { useTabsContext } from './TabsContext';
 
 function Tab(
   props: TabProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-  const { value } = props;
-  const { context } = useTabsContext();
+  const { isActivedTab, ..._props } = props;
 
   const classes = classNames(
     `inline-block p-[0.4rem] mx-[0.1rem] rounded-t-lg `
@@ -22,7 +20,7 @@ function Tab(
   return (
     <div className="w-fit">
       <TabUnstyled
-        {...props}
+        {..._props}
         slotProps={{
           root: () => ({
             className: classes,
@@ -30,7 +28,7 @@ function Tab(
         }}
         ref={ref}
       />
-      {value === context.activedTabId ? (
+      {isActivedTab ? (
         <motion.div
           className="bg-th-primary h-[0.2rem] rounded-full w-full"
           layoutId="underline"

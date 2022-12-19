@@ -33,3 +33,9 @@ export type ResizableMetadata = {
   initialHeight: number,
   initialWidth: number,
 };
+// ==================================================================================================
+export type _childrenType =
+  | JSX.Element
+  | JSX.Element[]
+  | null
+  | undefined;

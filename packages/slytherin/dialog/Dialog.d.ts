@@ -1,6 +1,6 @@
 import { ModalUnstyledProps } from '@mui/base/ModalUnstyled';
 
-interface ActionDef {
+export interface ActionDef {
   key: string;
   label?: string;
   component?: JSX.Element;
@@ -44,7 +44,7 @@ export interface DialogContainerProps{
 }
 // ==========================================================================
 
-export interface DialogProps extends ModalUnstyledProps {
+export interface DialogProps extends Omit<ModalUnstyledProps, "defaultValue" | "onChange"> {
   /**
    * Height mặc định
    */

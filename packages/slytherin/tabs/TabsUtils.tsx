@@ -1,7 +1,7 @@
 // react imports
 // 3rd imports
 // local imports
-import { getAllChildrenByType } from '@packages/ravenclaw';
+import { _childrenType, getAllChildrenByType } from '@packages/ravenclaw';
 import Tab from './Tab';
 import TabItem from './TabItem';
 import TabPanel from './TabPanel';
@@ -18,12 +18,12 @@ const getTabInitialContext = (props: TabsProps): ContextState => {
 };
 
 const getTabHeaders = (
-    children?: JSX.Element | JSX.Element[] | null
+    children: _childrenType, context: ContextState
 ): JSX.Element | JSX.Element[] | null => {
     return getAllChildrenByType(children!, TabItem, (child) => {
         let { props } = child;
         return (
-            <Tab value={props.id} disabled={props.disabled}>
+            <Tab value={props.id} disabled={props.disabled} isActivedTab={props.id === context.activedTabId}>
                 {props.label}
             </Tab>
         );
@@ -31,26 +31,29 @@ const getTabHeaders = (
 };
 
 const TabVariants = {
-    initial: { x: 100, opacity: 0 },
-    animate: { x: 0, opacity: 1 },
+    initial: { x: 0, opacity: 1 },
+    animate: { x: [100, 0], opacity: [0.5, 1] },
     exit: { x: 100, opacity: 0 },
 };
 
 const getTabPanels = (
-    children: JSX.Element | JSX.Element[] | undefined,
+    _props: TabsProps,
     context: ContextState,
-    _props: TabsProps
+    useTabs: any
 ): JSX.Element | JSX.Element[] | null => {
-    return getAllChildrenByType(children!, TabItem, (child) => {
+    const { children, destroyInactiveTabPane } = _props;
+    const { tabAnimationControls } = useTabs;
+
+    return getAllChildrenByType(children, TabItem, (child) => {
         let { props } = child;
 
-        if (_props.destroyInactiveTabPane) {
+        if (destroyInactiveTabPane) {
             return context.activedTabId === props.id ? (
-                <TabPanel value={props.id}>{props.children}</TabPanel>
+                <TabPanel value={props.id} tabAnimationControls={tabAnimationControls}>{props.children}</TabPanel>
             ) : null;
         } else {
             return (
-                <TabPanel value={props.id}>{props.children}</TabPanel>
+                <TabPanel value={props.id} tabAnimationControls={tabAnimationControls}>{props.children}</TabPanel>
             );
         }
     });
