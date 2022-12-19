@@ -1,0 +1,1 @@
+Là kết hợp của `dialog` và `tabs`. Một cửa sổ hiển thị thông tin và yêu cầu thực hiện hành động gì đó. Nhưng được phân tách thành nhiều view

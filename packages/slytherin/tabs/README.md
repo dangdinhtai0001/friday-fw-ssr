@@ -10,8 +10,5 @@ Các tab được triển khai bằng cách sử dụng các components:
 - `Tabs`: Thành phần bọc `TabsList` và `TabPanel` để các tab và panel của chúng có thể giao tiếp với nhau.
 - `TabItem`: Thành phần dùng để cấu hình thông tin cho `Tab`, `TabsList`, `TabPanel`
 - `TabsWrapper`: Thành phần bọc `Tabs`, để có thể sử dụng được `TabContext`
-
-Để tiện cho việc tạo component `Tabbed dialog` (Dialog có content là Tab) thì sẽ wrap lại thành
-- `Tabs`: Thành phần bọc `TabsList` và `TabPanel` để các tab và panel của chúng có thể giao tiếp với nhau.
-- `TabHeaders`: Thành phần bọc `TabsList` và `Tab`
-- `TabPanelWrapper`: Thành phần bọc `TabPanel` 
+- `TabsUtils`: Các hàm dùng chung 
+- `useTabs`: Hooks xử lý logic cho Tabs
