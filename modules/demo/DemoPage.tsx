@@ -9,6 +9,8 @@ import {
   Tabs
 } from '@packages/slytherin';
 
+import Form from '@packages/gryffindor/form/FormWrapper';
+
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 const DemoPage = () => {
@@ -114,6 +116,21 @@ const DemoPage = () => {
           </TabItem>
         </TabbedDialog>
       </div>
+      {/* ======================================================================================================== */}
+      <Form
+        fields={[
+          { name: 'first_name' },
+          { name: 'last_name' },
+        ]}
+        refreshRuleConfig={{
+          onMounted: ['disabled', 'visible'],
+          onChange: ['disabled', 'visible', 'valid']
+        }}
+        refreshRule={(rule, cMode) => { console.log(`apply rules: '${rule}' on mode: '${cMode}'`) }}
+        onMounted={(context) => {
+          console.log("trigger on mounted event", context);
+        }}
+      ></Form>
     </>
   );
 };
