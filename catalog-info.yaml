@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: friday-fw-ssr
+  annotations:
+    github.com/project-slug: dangdinhtai0001/friday-fw-ssr
+spec:
+  type: other
+  lifecycle: unknown
+  owner: guests
