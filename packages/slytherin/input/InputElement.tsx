@@ -10,21 +10,22 @@ function Input(
   ref: React.ForwardedRef<any>
 ): JSX.Element {
 
-  const { className, ..._props } = props;
-  const { disabled } = _props;
+  const { className, ownerState, ..._props } = props;
+  const { disabled, readOnly } = _props;
 
   const classes = classNames(
     `
-      border border-th-foreground 
-      h-fit w-fit
+      border-[0.1rem] border-th-foreground 
+      h-full w-full
       px-[0.1rem] py-[0.1rem]
       rounded-[0.3rem]
-      focus:outline-none focus:ring focus:border-th-primary 
+      focus:outline-none focus:ring focus:border-th-primary focus:border-0
       hover:border-th-primary
     `,
     {
       [className!]: className,
       [`opacity-50 cursor-not-allowed`]: disabled,
+      [`cursor-not-allowed`]: readOnly,
       [`cursor-text`]: !disabled
     }
   );

@@ -3,4 +3,6 @@ import React from 'react';
 
 export interface InputProps
   extends InputUnstyledProps,
-    React.InputHTMLAttributes<HTMLInputElement> {}
+    React.InputHTMLAttributes<HTMLInputElement> {
+  ownerState?: any;
+}

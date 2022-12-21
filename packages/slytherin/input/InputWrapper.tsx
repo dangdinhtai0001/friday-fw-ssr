@@ -10,8 +10,7 @@ function InputWrapper(
   props: InputProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-
-  return <InputUnstyled slots={{ input: InputElement }} {...props} ref={ref} />;
+  return <InputUnstyled slots={{ input: InputElement, }} {...props} ref={ref} />;
 }
 
 export default React.forwardRef(InputWrapper);
