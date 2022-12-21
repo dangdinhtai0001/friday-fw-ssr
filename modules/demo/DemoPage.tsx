@@ -127,6 +127,9 @@ const DemoPage = () => {
           { name: 'first_name' },
           { name: 'last_name' },
         ]}
+        formLayout={{
+          column: 2
+        }}
         refreshRuleConfig={{
           onMounted: ['disabled', 'visible'],
           onChange: ['disabled', 'visible', 'valid']

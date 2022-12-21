@@ -16,37 +16,55 @@ export type FormStatus =
   | 'idle'
   | 'validating'
   | 'submiting';
-export type refreshRulesMode = 'onMounted' | 'onChange' | 'onSubmit';
-export type formRules = 'disabled' | 'visible' | 'valid';
-export interface refreshRuleConfig {
-  [key: string]: formRules[];
+export type RefreshRulesMode = 'onMounted' | 'onChange' | 'onSubmit';
+export type FormRules = 'disabled' | 'visible' | 'valid';
+export interface RefreshRuleConfig {
+  [key: string]: FormRules[];
 }
-//
+export interface FormLayout {
+  /**
+   * Số cột
+   */
+  column?: number;
+  span?: number;
+  start?: number;
+  end?: number;
+  /**
+   * Khoảng cách giữa các cột, tính bằng rem
+   */
+  gap?: number;
+}
+// ================================= || Props ||  =================================
+
 export interface FormProps {
   /**
    * Danh sách các field của form
    */
   fields: FieldDef[];
   /**
+   * @type {FormLayout} Cấu hình layout cho form 
+   */
+  formLayout?: FormLayout;
+  /**
    * Cấu hình các rule đc gọi tuwong ứng với các mode <br/>
    * refreshRulesMode = 'onMounted' | 'onChange' | 'onSubmit'
-   * formRules = 'disabled' | 'visible' | 'valid';
+   * FormRules = 'disabled' | 'visible' | 'valid';
    * @example 
   *       {
             onMounted: ['disabled', 'visible'],
             onChange: ['disabled', 'visible', 'valid']
           }
    */
-  refreshRuleConfig?: refreshRuleConfig;
+  refreshRuleConfig?: RefreshRuleConfig;
 /**
  * hàm thực thi rule ứng với mode
- * @param {formRules | formRules[]} rule Các rule sẽ đc thực thi
+ * @param {FormRules | FormRules[]} rule Các rule sẽ đc thực thi
  * @param {refreshRulesMode} currentMode Mode đã yêu cầu thực hiện rule
  * @param {ContextState} context Form context
  * @param {ContextHelper} helper Form context helper 
  * @returns void
  */
-  refreshRule?: (rule: formRules | formRules[] , currentMode: refreshRulesMode,  context: ContextState, helper: ContextHelper ) => void
+  refreshRule?: (rule: FormRules | FormRules[] , currentMode: refreshRulesMode,  context: ContextState, helper: ContextHelper ) => void
   // ----------------------------------------------------
   onMounted?: (context?: ContextState, helper?: any) => void;
 }

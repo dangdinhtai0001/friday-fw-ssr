@@ -2,7 +2,7 @@
 import * as React from 'react';
 // 3rd imports
 // local imports
-import { ContextHelper, ContextState, FormProps, refreshRulesMode } from "./Form.d";
+import { ContextHelper, ContextState, FormProps, RefreshRulesMode } from "./Form.d";
 
 let mounted = false;
 const useBaseForm = (props: FormProps, context: ContextState, helper: ContextHelper) => {
@@ -13,7 +13,7 @@ const useBaseForm = (props: FormProps, context: ContextState, helper: ContextHel
      * Hàm thực thi khi cần thực hiện rules. Sẽ chỉ thực hiện theo cấu hình tương ứng
      * @param currentMode Mode yêu cầu thực hiện
      */
-    const handleOnRefreshRule = (currentMode: refreshRulesMode) => {
+    const handleOnRefreshRule = (currentMode: RefreshRulesMode) => {
         // lấy ra danh sách các rule cần apply ở mode 'onMounted'
         let _rules = refreshRuleConfig?.[currentMode];
         // thực hiện rule

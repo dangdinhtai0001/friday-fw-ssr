@@ -20,6 +20,8 @@ sample:
 git commit -m "fix: clear code & fix lỗi không build được"
 ```
 
+React-flexbox-grid đang bị lỗi như sau: https://github.com/roylee0704/react-flexbox-grid/issues/173
+
 ### Một số hook 
 
 [@Reactivers/hooks](https://hooks.reactivers.com/)
