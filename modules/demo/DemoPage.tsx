@@ -4,6 +4,7 @@ import {
   DialogActivator,
   DialogContent,
   DialogExtraHeader,
+  Input,
   TabItem,
   TabbedDialog,
   Tabs
@@ -83,6 +84,8 @@ const DemoPage = () => {
           </DialogContent>
         </Dialog>
       </div>
+      {/* ======================================================================================================== */}
+      <Input placeholder='Đây là placeholder...' readOnly={false} disabled={true}></Input>
       {/* ======================================================================================================== */}
       <div>
         <TabbedDialog
