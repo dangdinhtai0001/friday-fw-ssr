@@ -4513,7 +4513,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.8, prop-types@^15.8.1:
+prop-types@^15.5.8, prop-types@^15.8.0, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -4572,6 +4572,13 @@ react-flexbox-grid@^2.1.2:
   dependencies:
     flexboxgrid2 "^7.2.0"
     prop-types "^15.5.8"
+
+react-grid-system@^8.1.6:
+  version "8.1.6"
+  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-8.1.6.tgz#1ee145ca694e480d98a96a8d9ae34520e913d934"
+  integrity sha512-1CuQNbT0FRw6iBZrUxOT9S42uRnJOUQsG2iahZUrPGAMul7uHkrov90OfBGLrA2C0hrZ1PFq3UCbRalvwrvkuQ==
+  dependencies:
+    prop-types "^15.8.0"
 
 react-hook-form@^7.41.0:
   version "7.41.0"
