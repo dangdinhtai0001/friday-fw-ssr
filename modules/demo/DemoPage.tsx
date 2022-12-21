@@ -85,7 +85,7 @@ const DemoPage = () => {
         </Dialog>
       </div>
       {/* ======================================================================================================== */}
-      <Input placeholder='Đây là placeholder...' readOnly={false} disabled={true}></Input>
+      <Input placeholder='Đây là placeholder...' readOnly={false} disabled={false}></Input>
       {/* ======================================================================================================== */}
       <div>
         <TabbedDialog
