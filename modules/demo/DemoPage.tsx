@@ -9,6 +9,7 @@ import {
   TabbedDialog,
   Tabs
 } from '@packages/slytherin';
+import { GridItem, GridLayout } from '@packages/slytherin/grid-layout';
 
 import Form from '@packages/gryffindor/form/FormWrapper';
 
@@ -120,6 +121,21 @@ const DemoPage = () => {
             <div>Tab panel 001</div>
           </TabItem>
         </TabbedDialog>
+      </div>
+      {/* ======================================================================================================== */}
+      <div>
+        <GridLayout fluid columnCount={3}>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+          <GridItem><div className='bg-blue-500 h-[10px] w-full' /></GridItem>
+        </GridLayout>
       </div>
       {/* ======================================================================================================== */}
       <Form

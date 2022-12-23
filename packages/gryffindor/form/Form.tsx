@@ -1,7 +1,6 @@
 // react imports
 import * as React from 'react';
 // 3rd imports
-import classNames from 'classnames';
 import { Col, Container, Row } from 'react-grid-system';
 // local imports
 import { FormProps } from './Form.d';
@@ -16,13 +15,8 @@ function Form(
 
   const { } = useForm(props);
 
-  const classes = classNames(
-    `
-      grid grid-cols-${formLayout?.column} gap-4
-    `,
-    {
-    }
-  );
+  console.log(formLayout);
+
 
   return <>
     <Container>
