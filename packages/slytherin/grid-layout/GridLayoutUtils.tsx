@@ -1,29 +1,42 @@
-import { getAllChildrenByType } from '@packages/ravenclaw/ComponentUtils';
+import { uniqueId } from 'lodash';
 import { Col, Row } from 'react-grid-system';
-import GridItem from './GridItem';
+import { GridLayoutProps } from './GridLayout.d';
 
-function findAllGridItemProps(children: JSX.Element | JSX.Element[] | null) {
-    return getAllChildrenByType(children, GridItem, (child) => {
-        return child.props;
-    });
-}
-
-function convertListItems2Grid(items: JSX.Element[], columnCount: number = 2) {
+function convertListItems2Grid(items: JSX.Element[], props: GridLayoutProps) {
     let k = 0;
 
     let _rows = [];
     let _cols = [];
 
+    const { columnCount = 2, align, direction, gutterWidth, justify, style, wrap } = props;
+
     while (k <= items.length) {
         for (let i = 0; i < columnCount; i++) {
             if (i <= items.length) {
-                _cols.push(items[k + i]);
+                _cols.push(items[k + i]?.props);
             } else {
                 break;
             }
         }
 
-        _rows.push(_cols);
+        _rows.push(
+            <Row
+                key={k}
+                className="py-[0.1rem]"
+                align={align}
+                direction={direction}
+                gutterWidth={gutterWidth}
+                justify={justify}
+                style={style}
+                wrap={wrap}
+            >
+                {_cols.map((col) => {
+                    return (
+                        <Col {...col} key={uniqueId(`__fd-${k}-`)} />
+                    )
+                })}
+            </Row>
+        );
         k += columnCount;
         _cols = [];
     }
@@ -31,27 +44,5 @@ function convertListItems2Grid(items: JSX.Element[], columnCount: number = 2) {
     return _rows;
 }
 
-function convert1dArrTo2dArr(_arr: any[], col: number) {
-    const _result = [];
-    while (_arr.length) {
-        _result.push(_arr.splice(0, col))
-    };
-    return _result;
-}
-
-function convertItemtable2Grid(table: any[][]) {
-    return table.map((row, rIndex) => {
-        return (
-            <Row key={rIndex} className="py-[0.1rem]">
-                {row.map((col, cIndex) => {
-                    return (
-                        <Col {...col} key={`${rIndex}-${cIndex}`} />
-                    )
-                })}
-            </Row>
-        )
-    })
-}
-
-export { findAllGridItemProps, convertListItems2Grid, convert1dArrTo2dArr, convertItemtable2Grid };
+export { convertListItems2Grid };
 

@@ -4,32 +4,17 @@ import * as React from 'react';
 import { Container } from 'react-grid-system';
 // local imports
 import { GridLayoutProps } from './GridLayout.d';
-import { convert1dArrTo2dArr, convertItemtable2Grid, findAllGridItemProps } from './GridLayoutUtils';
+import { convertListItems2Grid } from './GridLayoutUtils';
 
 function GridLayout(
   props: GridLayoutProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-  const { columnCount, children } = props;
-
-  let allItemProps = findAllGridItemProps(children!);
-  let itemTableProps = convert1dArrTo2dArr(allItemProps!, columnCount!);
-  console.log(itemTableProps);
+  const { children, fluid } = props;
 
   return (
-    <Container>
-      {/* <Row>
-        <Col sm={4}>
-          One of three columns
-        </Col>
-        <Col sm={4}>
-          One of three columns
-        </Col>
-        <Col sm={4}>
-          One of three columns
-        </Col>
-      </Row> */}
-      {convertItemtable2Grid(itemTableProps)}
+    <Container fluid={fluid}>
+      {Array.isArray(children) && convertListItems2Grid(children, props)}
     </Container>
   );
 }

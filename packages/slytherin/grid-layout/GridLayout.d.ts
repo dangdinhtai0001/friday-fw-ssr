@@ -24,6 +24,10 @@ export interface GridLayoutProps {
    */
   style?: Object;
   /**
+   * 	flex-wrap style attribute
+   */
+  wrap?: "nowrap"| "wrap"| "reverse"
+  /**
    * Số lượng column
    */
   columnCount?: number;
