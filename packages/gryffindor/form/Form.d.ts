@@ -34,6 +34,11 @@ export interface FormLayout {
    */
   gap?: number;
 }
+// ================================= || Form field ||  =================================
+export interface FormFieldProps {
+  labelPosition?: 'top'| 'left';
+}
+
 // ================================= || Props ||  =================================
 
 export interface FormProps {
