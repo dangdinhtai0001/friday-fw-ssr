@@ -7,7 +7,7 @@ import {
   Input,
   TabItem,
   TabbedDialog,
-  Tabs
+  Tabs,
 } from '@packages/slytherin';
 
 import Form from '@packages/gryffindor/form/FormWrapper';
@@ -124,11 +124,16 @@ const DemoPage = () => {
       {/* ======================================================================================================== */}
       <Form
         fields={[
-          { name: 'first_name' },
-          { name: 'last_name' },
+          { name: 'first_name', component: Input, componentParams: { className: 'w-full' } },
+          { name: 'last_name', component: Input, componentParams: { className: 'w-full' } },
+          { name: 'age', component: Input, componentParams: { className: 'w-full' } },
         ]}
         formLayout={{
-          column: 2
+          column: 2,
+          field: {
+            labelWidth: '200px',
+            labelAlign: 'left'
+          }
         }}
         refreshRuleConfig={{
           onMounted: ['disabled', 'visible'],

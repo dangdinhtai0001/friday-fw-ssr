@@ -2,20 +2,24 @@
 import * as React from 'react';
 // 3rd imports
 // local imports
+import { GridLayout } from '@packages/slytherin/grid-layout';
 import { FormProps } from './Form.d';
-import FormField from './FormField';
+import { generateGridItemFromFields } from './FormUtils';
 import useForm from './useForm';
 
 function Form(
   props: FormProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-  const { formLayout } = props;
+  const { formLayout, fields } = props;
 
-  const { } = useForm(props);
+
+  const a = useForm(props);
 
   return <>
-    <FormField></FormField>
+    <GridLayout fluid columnCount={formLayout?.column}>
+      {generateGridItemFromFields(props)}
+    </GridLayout>
   </>;
 }
 

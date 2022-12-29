@@ -1,7 +1,13 @@
 // react imports
+import * as React from 'react';
 // 3rd imports
+import { uniqueId } from 'lodash';
 // local imports
+import {
+  GridItem
+} from '@packages/slytherin/grid-layout';
 import { ContextState, FormProps } from './Form.d';
+import FormField from './FormField';
 
 function createFormInitialContext(props: FormProps): ContextState {
   let { fields } = props;
@@ -28,4 +34,20 @@ function createFormInitialContext(props: FormProps): ContextState {
   };
 }
 
-export { createFormInitialContext };
+function generateGridItemFromFields(props: FormProps) {
+  const { fields, formLayout } = props;
+  const { field } = formLayout!;
+
+  return fields.map((_field, index) => {
+    return (
+      <GridItem key={uniqueId(`__fd-${index}-`)}>
+        <FormField {...field} label={_field.name}>
+          {React.createElement(_field.component, _field.componentParams)}
+        </FormField>
+      </GridItem>
+    );
+  });
+}
+
+export { createFormInitialContext, generateGridItemFromFields };
+

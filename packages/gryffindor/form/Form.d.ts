@@ -6,7 +6,7 @@ export interface FieldDef {
   description?: string;
   required?: boolean;
   initialValue?: any;
-  component?: JSX.Element;
+  component?: JSX.ElementType;
   componentParams?: any;
 }
 
@@ -27,8 +27,7 @@ export interface FormLayout {
    */
   column?: number;
   span?: number;
-  start?: number;
-  end?: number;
+  field?: FormFieldProps;
   /**
    * Khoảng cách giữa các cột, tính bằng rem
    */
@@ -37,6 +36,10 @@ export interface FormLayout {
 // ================================= || Form field ||  =================================
 export interface FormFieldProps {
   labelPosition?: 'top'| 'left';
+  labelWidth?: string;
+  labelAlign?: 'left' | 'right';
+  label?: string; 
+  children?: JSX.Element;
 }
 
 // ================================= || Props ||  =================================
