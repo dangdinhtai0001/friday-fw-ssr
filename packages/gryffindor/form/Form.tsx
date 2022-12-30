@@ -3,24 +3,29 @@ import * as React from 'react';
 // 3rd imports
 // local imports
 import { GridLayout } from '@packages/slytherin/grid-layout';
+import { FormProvider } from "react-hook-form";
 import { FormProps } from './Form.d';
-import { generateGridItemFromFields } from './FormUtils';
-import useForm from './useForm';
+import useInternalForm from './useInternalForm';
 
 function Form(
   props: FormProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-  const { formLayout, fields } = props;
+  const { formLayout } = props;
 
+  const { generateGridItemFromFields, useFormMethods, handleOnSubmit } = useInternalForm(props);
 
-  const a = useForm(props);
-
-  return <>
-    <GridLayout fluid columnCount={formLayout?.column}>
-      {generateGridItemFromFields(props)}
-    </GridLayout>
-  </>;
+  return (
+    <FormProvider {...useFormMethods} >
+      {/* pass all methods into the context */}
+      <form onSubmit={handleOnSubmit}>
+        <GridLayout fluid columnCount={formLayout?.column}>
+          {generateGridItemFromFields()}
+        </GridLayout>
+        <input type="submit" />
+      </form>
+    </FormProvider>
+  );
 }
 
 export default React.forwardRef(Form);

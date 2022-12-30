@@ -1,3 +1,4 @@
+import { Mode, UseFormProps } from 'react-hook-form';
 // ================================= || Common ||  =================================
 
 export interface FieldDef {
@@ -33,12 +34,22 @@ export interface FormLayout {
    */
   gap?: number;
 }
+
+export interface GeneralFormProps extends UseFormProps{
+  formMode?: Mode;
+  /**
+   * Có cần đợi validate hay không? Cụ thể là khi nào validate mà cần fetch api thì sẽ đợi nó
+   * lấy xong rồi mới đc thao tác tiếp vs form. Nếu như hàm validate mà ko cần fetch thì thôi, nên set thuộc tính này thành false
+   */
+  waitForValidate?: boolean;
+}
 // ================================= || Form field ||  =================================
 export interface FormFieldProps {
   labelPosition?: 'top'| 'left';
   labelWidth?: string;
   labelAlign?: 'left' | 'right';
   label?: string; 
+  fieldDef?: FieldDef;
   children?: JSX.Element;
 }
 
@@ -74,7 +85,15 @@ export interface FormProps {
  */
   refreshRule?: (rule: FormRules | FormRules[] , currentMode: refreshRulesMode,  context: ContextState, helper: ContextHelper ) => void
   // ----------------------------------------------------
-  onMounted?: (context?: ContextState, helper?: any) => void;
+  general?: GeneralFormProps;
+  // ----------------------------------------------------
+  // =============== || Event || ===============
+  // ----------------------------------------------------
+  onMounted?: (context?: ContextState, helper?: any) => Promise<void> | void;
+  onValidate?: (data: any, context?: ContextState, helper?: any) => Promise<Resolver<any>> | Resolver<any>;
+  onSubmitSuccess?: (data: any, context?: ContextState, helper?: any) => void | Promise<void>;
+  onSubmitError?: (data: any, errors?:any, context?: ContextState, helper?: any) => void | Promise<void>;
+  onChange?: (props?: {value?: any, allValues?: any, fieldName?: string, context?: ContextState, helper?: any}) => void | Promise<void>;
 }
 
 // ================================= || Context ||  =================================

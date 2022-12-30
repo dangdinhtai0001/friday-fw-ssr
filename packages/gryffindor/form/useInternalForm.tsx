@@ -5,12 +5,12 @@ import { FormProps } from "./Form.d";
 import { useFormContext } from './FormContext';
 import useBaseForm from './useBaseForm';
 
-const useForm = (props: FormProps) => {
+const useInternalForm = (props: FormProps) => {
     const { context, helper } = useFormContext();
 
-    const { } = useBaseForm(props, context, helper);
+    const baseFormHooks = useBaseForm(props, context, helper);
 
-    return {};
+    return { ...baseFormHooks };
 }
 
-export default useForm;
+export default useInternalForm;

@@ -86,7 +86,13 @@ const DemoPage = () => {
       </div>
       {/* ======================================================================================================== */}
       <div className='px-[10px] py-[5px]'>
-        <Input placeholder='Đây là placeholder...' required readOnly={false} disabled={false} className=' bg-red-100'></Input>
+        <Input
+          onChange={(e) => {
+            console.log(e);
+          }}
+          placeholder='Đây là placeholder...'
+          required readOnly={false} disabled={false}
+          className=' bg-red-100'></Input>
       </div>
       {/* ======================================================================================================== */}
       <div>
@@ -124,9 +130,10 @@ const DemoPage = () => {
       {/* ======================================================================================================== */}
       <Form
         fields={[
-          { name: 'first_name', component: Input, componentParams: { className: 'w-full' } },
-          { name: 'last_name', component: Input, componentParams: { className: 'w-full' } },
-          { name: 'age', component: Input, componentParams: { className: 'w-full' } },
+          { name: 'first_name', initialValue: "first name", component: Input, componentParams: { className: 'w-full' } },
+          { name: 'last_name', initialValue: "Last name", component: Input, componentParams: { className: 'w-full' } },
+          { name: 'full_name', initialValue: "", component: Input, componentParams: { className: 'w-full' } },
+          { name: 'age', initialValue: 18, component: Input, componentParams: { className: 'w-full' } },
         ]}
         formLayout={{
           column: 2,
@@ -135,13 +142,44 @@ const DemoPage = () => {
             labelAlign: 'left'
           }
         }}
+        general={{
+          formMode: "all",
+          reValidateMode: "onChange",
+          criteriaMode: 'all',
+          shouldFocusError: true,
+          delayError: 0
+        }}
         refreshRuleConfig={{
           onMounted: ['disabled', 'visible'],
           onChange: ['disabled', 'visible', 'valid']
         }}
-        refreshRule={(rule, cMode) => { console.log(`apply rules: '${rule}' on mode: '${cMode}'`) }}
+        refreshRule={(rule, cMode) => {
+          console.log(`apply rules: '${rule}' on mode: '${cMode}'`)
+        }}
         onMounted={(context) => {
           console.log("trigger on mounted event", context);
+        }}
+        onValidate={(data, context, helper) => {
+          console.log("trigger on validate event", data);
+
+          return {
+            values: data,
+            errors: {
+              full_name: {
+                type: 'custom',
+                message: 'This is required.',
+              }
+            }
+          }
+        }}
+        onSubmitSuccess={(data, context, helper) => {
+          console.log("Trigger on submit success", data);
+        }}
+        onSubmitError={(data, context, helper) => {
+          console.log("Trigger on submit error", data);
+        }}
+        onChange={(props) => {
+          console.log("Trigger on change", props);
         }}
       ></Form>
     </>
