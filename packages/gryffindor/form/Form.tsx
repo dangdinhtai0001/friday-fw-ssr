@@ -12,17 +12,30 @@ function Form(
   ref: React.ForwardedRef<any>
 ): JSX.Element {
   const { formLayout } = props;
+  const formRef = React.useRef<HTMLFormElement>(null);
 
   const { generateGridItemFromFields, useFormMethods, handleOnSubmit } = useInternalForm(props);
+
+  React.useImperativeHandle(ref, () => {
+    return {
+      submit(): void {
+        formRef.current?.dispatchEvent(
+          new Event("submit", { bubbles: true, cancelable: true })
+        )
+      },
+      getValues(): any {
+        return useFormMethods.getValues();
+      }
+    }
+  }, [])
 
   return (
     <FormProvider {...useFormMethods} >
       {/* pass all methods into the context */}
-      <form onSubmit={handleOnSubmit}>
+      <form onSubmit={handleOnSubmit} ref={formRef}>
         <GridLayout fluid columnCount={formLayout?.column}>
           {generateGridItemFromFields()}
         </GridLayout>
-        <input type="submit" />
       </form>
     </FormProvider>
   );

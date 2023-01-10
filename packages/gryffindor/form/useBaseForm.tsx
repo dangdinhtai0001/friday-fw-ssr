@@ -90,6 +90,9 @@ const useBaseForm = (props: FormProps, context: ContextState, helper: ContextHel
         // ghi trạng thái của form vào context
         helper.commitStatus('submiting');
 
+        // tăng số lần submit lên
+        helper.increaseSubmitCount();
+
         // Gọi hàm onSubmit success trong cấu hình
         await onSubmitSuccess?.(values, context, helper);
 
@@ -103,6 +106,9 @@ const useBaseForm = (props: FormProps, context: ContextState, helper: ContextHel
     const handleOnSubmitError = async (values: any) => {
         // ghi trạng thái của form vào context
         helper.commitStatus('submiting');
+
+        // tăng số lần submit lên
+        helper.increaseSubmitCount();
 
         // Gọi hàm onSubmit success trong cấu hình
         await onSubmitError?.(getValues(), values, context, helper);

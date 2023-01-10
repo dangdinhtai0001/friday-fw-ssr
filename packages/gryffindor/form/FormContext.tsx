@@ -27,6 +27,7 @@ const FormContextProvider = (props: ContextProviderProps) => {
 
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 // - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính 
+// - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
 // - refresh... ==> Thay đổi 1 phần giá trị của thuộc tính đó 
 // --------------------------------------------------------------------------------
 function mutations(context: ContextState, setContext: Dispatch<any>): ContextHelper {
@@ -72,7 +73,22 @@ function mutations(context: ContextState, setContext: Dispatch<any>): ContextHel
                     visible: _visible
                 }
             });
-        }
+        },
+        /**
+         * hàm đếm số lần submit của form. Tăng lên 1 mỗi khi đc gọi đến 
+         */
+        increaseSubmitCount(): void {
+            setContext((prevState: ContextState) => {
+                let currentCount = prevState.submitCount;
+                let newCount = currentCount ? currentCount + 1 : 0;
+
+                return {
+                    ...prevState,
+                    submitCount: newCount
+                }
+            });
+        },
+
     }
 }
 // --------------------------------------------------------------------------------

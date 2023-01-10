@@ -27,6 +27,7 @@ const BaseComponentContextProvider = (props: ContextProviderProps) => {
 
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 // - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính 
+// - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
 // - apply... ==> Thay đổi 1 phần giá trị của thuộc tính đó 
 // --------------------------------------------------------------------------------
 function mutations(context: ContextState, setContext: Dispatch<any>) {

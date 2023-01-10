@@ -121,4 +121,5 @@ export interface ContextHelper {
   commitStatus: (newStatus: FormStatus) => void;
   refreshDisabled: (field: string, status: boolean) => void;
   refreshVisible: (field: string, status: boolean) => void;
+  increaseSubmitCount: () => void;
 }

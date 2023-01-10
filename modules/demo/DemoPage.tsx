@@ -12,9 +12,12 @@ import {
 
 import Form from '@packages/gryffindor/form/FormWrapper';
 
+import React from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 const DemoPage = () => {
+  const formRef = React.useRef<any>(null);
+
   return (
     <>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
@@ -162,14 +165,21 @@ const DemoPage = () => {
         onValidate={(data, context, helper) => {
           console.log("trigger on validate event", data);
 
-          return {
-            values: data,
-            errors: {
-              full_name: {
-                type: 'custom',
-                message: 'This is required.',
+          if (!data.full_name) {
+            return {
+              values: data,
+              errors: {
+                full_name: {
+                  type: 'custom',
+                  message: 'This is required.',
+                }
               }
             }
+          }
+
+          return {
+            values: data,
+            errors: {}
           }
         }}
         onSubmitSuccess={(data, context, helper) => {
@@ -181,7 +191,18 @@ const DemoPage = () => {
         onChange={(props) => {
           console.log("Trigger on change", props);
         }}
+        ref={formRef}
       ></Form>
+
+      <button onClick={() => {
+        console.log(" ----------------------------------");
+        formRef.current?.submit();
+        let values = formRef.current?.getValues();
+        let validateStatus = formRef.current?.getErrors();
+
+        console.log(`values: ${values}, validate status: ${JSON.stringify(validateStatus)}`);
+
+      }}>Submit form</button>
     </>
   );
 };
