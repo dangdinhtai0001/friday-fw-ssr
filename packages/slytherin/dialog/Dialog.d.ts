@@ -21,11 +21,11 @@ export interface DialogContainerProps{
   /**
    * Hàm xử lý sự kiện khi active action
    */
-  onActiveAction ?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: any) => void;  onActiveAction?: (
+  onActiveAction?: (
     event: React.MouseEvent<unknown, MouseEvent>,
     key: string,
     context: ContextState,
-    helper: any
+    helper: ContextHelper
   ) => void;
     /**
    * hàm xử lý sự kiện khi close 
@@ -89,7 +89,7 @@ export interface DialogProps extends Omit<ModalUnstyledProps, "defaultValue" | "
    * @param helper helper của context
    * @returns void
    */
-  onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: any) => void
+  onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: ContextHelper) => void
   /**
    * hàm xử lý sự kiện khi close 
    * @param context context
@@ -152,4 +152,10 @@ export interface ContextProviderProps {
 export interface ContextProviderValue {
   context: ContextState;
   setContext: React.Dispatch<any>;
+}
+
+export interface ContextHelper {
+  commitOpened: (opened: boolean) => void ;
+  applyDisable: (key: string, disabled: boolean) => void ;
+  applyVisible: (key: string, visible: boolean) => void ;
 }

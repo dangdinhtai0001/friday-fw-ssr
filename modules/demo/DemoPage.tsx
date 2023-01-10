@@ -59,11 +59,17 @@ const DemoPage = () => {
           minWidth={600}
           actions={[
             { key: "key-0001", label: "Xác nhận", disabled: false, visible: true, others: { theme: 'primary' } },
-            { key: "key-0002", label: "Hủy", disabled: true, visible: true, },
+            { key: "key-0002", label: "Hủy", disabled: false, visible: true, },
           ]}
           onActiveAction={(event, key, context, helper) => {
             if (key === 'key-0001') {
-              helper.applyDisable('key-0002', false);
+              formRef.current?.submit();
+            }
+
+            if (key === 'key-0002') {
+              formRef.current?.submit();
+
+              helper.commitOpened(false);
             }
           }}
         >
@@ -76,14 +82,68 @@ const DemoPage = () => {
             </Button>
           </DialogActivator>
           <DialogContent>
-            <Tabs defaultValue="id-000" destroyInactiveTabPane={true}>
-              <TabItem id="id-000" label="label 000">
-                <div className='w-[1000px] h-[800px] bg-red-400'>Tab panel 000</div>
-              </TabItem>
-              <TabItem id="id-001" label="label 001">
-                <div>Tab panel 001</div>
-              </TabItem>
-            </Tabs>
+            <Form
+              fields={[
+                { name: 'first_name', initialValue: "first name", component: Input, componentParams: { className: 'w-full' } },
+                { name: 'last_name', initialValue: "Last name", component: Input, componentParams: { className: 'w-full' } },
+                { name: 'full_name', initialValue: "", component: Input, componentParams: { className: 'w-full' } },
+                { name: 'age', initialValue: 18, component: Input, componentParams: { className: 'w-full' } },
+              ]}
+              formLayout={{
+                column: 2,
+                field: {
+                  labelWidth: '200px',
+                  labelAlign: 'left'
+                }
+              }}
+              general={{
+                formMode: "all",
+                reValidateMode: "onChange",
+                criteriaMode: 'all',
+                shouldFocusError: true,
+                delayError: 0
+              }}
+              refreshRuleConfig={{
+                onMounted: ['disabled', 'visible'],
+                onChange: ['disabled', 'visible', 'valid']
+              }}
+              refreshRule={(rule, cMode) => {
+                console.log(`apply rules: '${rule}' on mode: '${cMode}'`)
+              }}
+              onMounted={(context) => {
+                console.log("trigger on mounted event", context);
+              }}
+              onValidate={(data, context, helper) => {
+                console.log("trigger on validate event", data);
+
+                if (!data.full_name) {
+                  return {
+                    values: data,
+                    errors: {
+                      full_name: {
+                        type: 'custom',
+                        message: 'This is required.',
+                      }
+                    }
+                  }
+                }
+
+                return {
+                  values: data,
+                  errors: {}
+                }
+              }}
+              onSubmitSuccess={(data, context, helper) => {
+                console.log("Trigger on submit success", data);
+              }}
+              onSubmitError={(data, context, helper) => {
+                console.log("Trigger on submit error", data);
+              }}
+              onChange={(props) => {
+                console.log("Trigger on change", props);
+              }}
+              ref={formRef}
+            ></Form>
           </DialogContent>
         </Dialog>
       </div>
@@ -131,68 +191,6 @@ const DemoPage = () => {
         </TabbedDialog>
       </div>
       {/* ======================================================================================================== */}
-      <Form
-        fields={[
-          { name: 'first_name', initialValue: "first name", component: Input, componentParams: { className: 'w-full' } },
-          { name: 'last_name', initialValue: "Last name", component: Input, componentParams: { className: 'w-full' } },
-          { name: 'full_name', initialValue: "", component: Input, componentParams: { className: 'w-full' } },
-          { name: 'age', initialValue: 18, component: Input, componentParams: { className: 'w-full' } },
-        ]}
-        formLayout={{
-          column: 2,
-          field: {
-            labelWidth: '200px',
-            labelAlign: 'left'
-          }
-        }}
-        general={{
-          formMode: "all",
-          reValidateMode: "onChange",
-          criteriaMode: 'all',
-          shouldFocusError: true,
-          delayError: 0
-        }}
-        refreshRuleConfig={{
-          onMounted: ['disabled', 'visible'],
-          onChange: ['disabled', 'visible', 'valid']
-        }}
-        refreshRule={(rule, cMode) => {
-          console.log(`apply rules: '${rule}' on mode: '${cMode}'`)
-        }}
-        onMounted={(context) => {
-          console.log("trigger on mounted event", context);
-        }}
-        onValidate={(data, context, helper) => {
-          console.log("trigger on validate event", data);
-
-          if (!data.full_name) {
-            return {
-              values: data,
-              errors: {
-                full_name: {
-                  type: 'custom',
-                  message: 'This is required.',
-                }
-              }
-            }
-          }
-
-          return {
-            values: data,
-            errors: {}
-          }
-        }}
-        onSubmitSuccess={(data, context, helper) => {
-          console.log("Trigger on submit success", data);
-        }}
-        onSubmitError={(data, context, helper) => {
-          console.log("Trigger on submit error", data);
-        }}
-        onChange={(props) => {
-          console.log("Trigger on change", props);
-        }}
-        ref={formRef}
-      ></Form>
 
       <button onClick={() => {
         console.log(" ----------------------------------");

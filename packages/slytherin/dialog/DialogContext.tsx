@@ -1,6 +1,6 @@
 import { createContext, Dispatch, useContext, useEffect, useState } from 'react';
 // ------------------------ || define interface || ------------------------
-import { ContextProviderProps, ContextProviderValue, ContextState } from './Dialog.d';
+import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './Dialog.d';
 // ================================================== || CONTEXT || ================================================== //
 
 
@@ -27,7 +27,7 @@ const DialogContextProvider = (props: ContextProviderProps) => {
 
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 // --------------------------------------------------------------------------------
-function mutations(context: ContextState, setContext: Dispatch<any>) {
+function mutations(context: ContextState, setContext: Dispatch<any>): ContextHelper {
     return {
         /**
          * Hàm cập nhật trạng thái của biến opened trong context, ===> nó sẽ thay đổi trạng thái open/close của dialog
