@@ -1,14 +1,15 @@
 import { Dispatch, createContext, useContext, useEffect, useMemo, useState } from 'react';
 // ------------------------ || define interface || ------------------------
-import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './BaseComponent.d';
+import { FieldValues } from 'react-hook-form';
+import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './Form.d';
 // ================================================== || CONTEXT || ================================================== //
 
 
 // ---------------------- || Khởi tạo context || ---------------------- //
-const BaseComponentContext = createContext<ContextProviderValue | null>(null);
+const FormContext = createContext<ContextProviderValue | null>(null);
 
 // ---------------------- || Định nghĩa context provider || ---------------------- //
-const BaseComponentContextProvider = <T extends unknown>(props: ContextProviderProps) => {
+const FormContextProvider = <T extends FieldValues>(props: ContextProviderProps) => {
     const [context, setContext] = useState<ContextState<T>>(props.initialState);
 
     useEffect(() => {
@@ -23,9 +24,9 @@ const BaseComponentContextProvider = <T extends unknown>(props: ContextProviderP
     }, []);
 
     return (
-        <BaseComponentContext.Provider value={defaultValue}>
+        <FormContext.Provider value={defaultValue}>
             {props.children}
-        </BaseComponentContext.Provider>
+        </FormContext.Provider>
     );
 };
 
@@ -34,7 +35,7 @@ const BaseComponentContextProvider = <T extends unknown>(props: ContextProviderP
 // - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
 // - apply... ==> Thay đổi 1 phần giá trị của thuộc tính đó 
 // --------------------------------------------------------------------------------
-function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): ContextHelper<T> {
+function mutations<T extends FieldValues>(context: ContextState<T>, setContext: Dispatch<any>): ContextHelper<T> {
     return {
 
     }
@@ -43,14 +44,14 @@ function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): Cont
 
 
 // ---------------------- || Định nghĩa hook || ---------------------- //
-const useBaseComponentContext = <T extends unknown>(): { context: ContextState<T>, helper: ContextHelper<T> } => {
+const useFormContext = <T extends FieldValues>(): { context: ContextState<T>, helper: ContextHelper<T> } => {
     // lấy giá trị của context
-    const { context, setContext } = useContext(BaseComponentContext)!;
+    const { context, setContext } = useContext(FormContext)!;
 
     const helper: ContextHelper<T> = mutations(context, setContext);
 
     return { context, helper };
 };
 
-export { BaseComponentContextProvider, useBaseComponentContext };
+export { FormContextProvider, useFormContext };
 

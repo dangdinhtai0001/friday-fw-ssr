@@ -3,7 +3,6 @@ import * as React from 'react';
 // 3rd imports
 // local imports
 import { GridLayout } from '@packages/slytherin/grid-layout';
-import { FormProvider } from "react-hook-form";
 import { FormProps } from './Form.d';
 import useInternalForm from './useInternalForm';
 
@@ -25,19 +24,27 @@ function Form(
       },
       getValues(): any {
         return useFormMethods.getValues();
-      }
+      },
     }
-  }, [])
+  }, []);
+
+  // return (
+  //   <FormProvider {...useFormMethods} >
+  //     {/* pass all methods into the context */}
+  //     <form onSubmit={handleOnSubmit} ref={formRef}>
+  //       <GridLayout fluid columnCount={formLayout?.column}>
+  //         {generateGridItemFromFields()}
+  //       </GridLayout>
+  //     </form>
+  //   </FormProvider>
+  // );
 
   return (
-    <FormProvider {...useFormMethods} >
-      {/* pass all methods into the context */}
-      <form onSubmit={handleOnSubmit} ref={formRef}>
-        <GridLayout fluid columnCount={formLayout?.column}>
-          {generateGridItemFromFields()}
-        </GridLayout>
-      </form>
-    </FormProvider>
+    <form onSubmit={handleOnSubmit} ref={formRef}>
+      <GridLayout fluid columnCount={formLayout?.column}>
+        {generateGridItemFromFields()}
+      </GridLayout>
+    </form>
   );
 }
 

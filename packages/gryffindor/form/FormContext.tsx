@@ -1,6 +1,6 @@
 import { createContext, Dispatch, useContext, useEffect, useState } from 'react';
 // ------------------------ || define interface || ------------------------
-import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState, FormStatus } from './Form.d';
+import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState, FormStatus, SubmittedStatus } from './Form.d';
 // ================================================== || CONTEXT || ================================================== //
 
 
@@ -88,6 +88,18 @@ function mutations(context: ContextState, setContext: Dispatch<any>): ContextHel
                 }
             });
         },
+        /**
+         * Hàm cập nhật trạng thái submitted mới nhất 
+         * @param status submitted status của form
+         */
+        commitLastSubmittedStatus(status: SubmittedStatus): void {
+            setContext((prevState: ContextState) => {
+                return {
+                    ...prevState,
+                    lastSubmittedStatus: status
+                }
+            });
+        }
 
     }
 }

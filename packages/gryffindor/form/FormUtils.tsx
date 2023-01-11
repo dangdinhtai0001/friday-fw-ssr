@@ -25,6 +25,7 @@ function createFormInitialContext(props: FormProps): ContextState {
     submitCount: 0,
     errors: {},
     status: 'initial',
+    lastSubmittedStatus: null
   };
 }
 

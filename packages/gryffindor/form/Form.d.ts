@@ -17,6 +17,7 @@ export type FormStatus =
   | 'idle'
   | 'validating'
   | 'submiting';
+export type SubmittedStatus = 'success' | 'error' | null;
 export type RefreshRulesMode = 'onMounted' | 'onChange' | 'onSubmit';
 export type FormRules = 'disabled' | 'visible' | 'valid';
 export interface RefreshRuleConfig {
@@ -107,6 +108,7 @@ export interface ContextState {
   submitCount: number;
   errors: { [key: string]: any };
   status: FormStatus;
+  lastSubmittedStatus: SubmittedStatus;
 }
 export interface ContextProviderProps {
   initialState: ContextState;
@@ -122,4 +124,5 @@ export interface ContextHelper {
   refreshDisabled: (field: string, status: boolean) => void;
   refreshVisible: (field: string, status: boolean) => void;
   increaseSubmitCount: () => void;
+  commitLastSubmittedStatus: (String: SubmittedStatus) => void;
 }

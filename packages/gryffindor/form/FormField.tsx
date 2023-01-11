@@ -19,6 +19,9 @@ function FormField(
     const { formState } = useFormContext(); // retrieve all hook methods
     const { errors } = formState;
 
+    console.log("FormField", formState, errors);
+
+
     const [fieldErrorMessage] = React.useState(get(errors, [name, 'message']));
 
     const fieldLabelClasses = classNames(

@@ -67,8 +67,6 @@ const DemoPage = () => {
             }
 
             if (key === 'key-0002') {
-              formRef.current?.submit();
-
               helper.commitOpened(false);
             }
           }}

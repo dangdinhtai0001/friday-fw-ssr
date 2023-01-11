@@ -2,7 +2,9 @@ export interface BaseComponentProps {}
 
 // ================================= || Context ||  =================================
 
-export interface ContextState {}
+export interface ContextState<T> {}
+export interface ContextHelper<T> {}
+
 export interface ContextProviderProps {
   initialState: ContextState;
   children: React.ReactElement;

@@ -42,6 +42,7 @@ const useBaseForm = (props: FormProps, context: ContextState, helper: ContextHel
     }, []);
 
     const useFormMethods = useForm<any>(rhfUseFormProps);
+
     const { control, handleSubmit, getValues, setValue } = useFormMethods;
 
     /**
@@ -96,6 +97,9 @@ const useBaseForm = (props: FormProps, context: ContextState, helper: ContextHel
         // Gọi hàm onSubmit success trong cấu hình
         await onSubmitSuccess?.(values, context, helper);
 
+        // Cập nhật trạng thái submit mới nhất của form
+        helper.commitLastSubmittedStatus('success');
+
         // ghi trạng thái của form vào context
         helper.commitStatus('idle');
     };
@@ -112,6 +116,9 @@ const useBaseForm = (props: FormProps, context: ContextState, helper: ContextHel
 
         // Gọi hàm onSubmit success trong cấu hình
         await onSubmitError?.(getValues(), values, context, helper);
+
+        // Cập nhật trạng thái submit mới nhất của form
+        helper.commitLastSubmittedStatus('error');
 
         // ghi trạng thái của form vào context
         helper.commitStatus('idle');
@@ -235,8 +242,8 @@ const useBaseForm = (props: FormProps, context: ContextState, helper: ContextHel
         generateGridItemFromFields,
         handleOnMounted,
         handleOnValidate,
-        handleOnSubmit,
         useFormMethods,
+        handleOnSubmit,
     };
 }
 
