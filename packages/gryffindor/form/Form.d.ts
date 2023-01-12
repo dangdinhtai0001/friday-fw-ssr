@@ -90,7 +90,7 @@ export interface FormFieldProps {
   label?: string; 
   fieldDef?: FieldDef;
   children?: JSX.Element;
-  useFormMethods?: UseFormReturn;
+  useFormMethods?: UseFormReturn<T>;
   // ------------ event
   onChange?: (values: any, field:  ControllerRenderProps) => void | Promise<void>;
 }
