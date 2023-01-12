@@ -190,13 +190,77 @@ const DemoPage = () => {
       </div>
       {/* ======================================================================================================== */}
 
-      <button onClick={() => {
-        console.log(" ----------------------------------");
-        formRef.current?.submit();
-        let values = formRef.current?.getValues();
-        let validateStatus = formRef.current?.getErrors();
+      <Form
+        fields={[
+          { name: 'first_name', initialValue: "first name", component: Input, componentParams: { className: 'w-full' } },
+          { name: 'last_name', initialValue: "Last name", component: Input, componentParams: { className: 'w-full' } },
+          { name: 'full_name', initialValue: "", component: Input, componentParams: { className: 'w-full' } },
+          { name: 'age', initialValue: 18, component: Input, componentParams: { className: 'w-full' } },
+        ]}
+        formLayout={{
+          column: 2,
+          field: {
+            labelWidth: '200px',
+            labelAlign: 'left'
+          }
+        }}
+        general={{
+          formMode: "all",
+          reValidateMode: "onChange",
+          criteriaMode: 'all',
+          shouldFocusError: true,
+          delayError: 0
+        }}
+        refreshRuleConfig={{
+          onMounted: ['disabled', 'visible'],
+          onChange: ['disabled', 'visible', 'valid']
+        }}
+        refreshRule={(rule, cMode) => {
+          console.log(`apply rules: '${rule}' on mode: '${cMode}'`)
+        }}
+        onMounted={(context) => {
+          console.log("trigger on mounted event", context);
+        }}
+        onValidate={(data, context, helper) => {
+          console.log("trigger on validate event", data);
 
-        console.log(`values: ${values}, validate status: ${JSON.stringify(validateStatus)}`);
+          if (!data.full_name) {
+            return {
+              values: data,
+              errors: {
+                full_name: {
+                  type: 'custom',
+                  message: 'This is required.',
+                }
+              }
+            }
+          }
+
+          return {
+            values: data,
+            errors: {}
+          }
+        }}
+        onSubmitSuccess={(data, context, helper) => {
+          console.log("Trigger on submit success", data);
+        }}
+        onSubmitError={(data, context, helper) => {
+          console.log("Trigger on submit error", data);
+        }}
+        onChange={(props) => {
+          console.log("Trigger on change", props);
+        }}
+        ref={formRef}
+      ></Form>
+
+      <button onClick={() => {
+        formRef.current?.submit();
+
+        let formState = formRef.current?.getFormState();
+
+        console.log('formState', formState);
+
+
 
       }}>Submit form</button>
     </>

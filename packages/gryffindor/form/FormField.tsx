@@ -2,25 +2,24 @@
 import * as React from 'react';
 // 3rd imports
 import classNames from 'classnames';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { get } from 'lodash';
-import { useFormContext } from "react-hook-form";
+import { Controller, ControllerRenderProps, useFormContext } from "react-hook-form";
 // local imports
 import { FormFieldProps } from './Form.d';
-import { fieldMessageVariant } from './FormUtils';
+import { fieldContainerLeftVariant, fieldContainerTransition, fieldMessageVariant } from './FormUtils';
 
 function FormField(
     props: FormFieldProps,
     ref: React.ForwardedRef<any>
 ): JSX.Element {
-    const { labelWidth, labelAlign = 'right', label, fieldDef, children } = props;
+    const { labelWidth, labelAlign = 'right', fieldDef, useFormMethods, onChange } = props;
     const { name } = fieldDef!;
 
     const { formState } = useFormContext(); // retrieve all hook methods
     const { errors } = formState;
 
-    console.log("FormField", formState, errors);
-
+    const { control } = useFormMethods!;
 
     const [fieldErrorMessage] = React.useState(get(errors, [name, 'message']));
 
@@ -32,40 +31,70 @@ function FormField(
         }
     );
 
-    const fieldContainerClasses = classNames(
-        `__fd-form-field-container flex flex-col w-full my-[0.1rem] px-[0.1rem] py-[0.1rem]`,
-        {
-            [`border-[0.1rem] border-th-danger`]: fieldErrorMessage
+    const onRenderController = React.useCallback(({ field }: { field: ControllerRenderProps }) => {
+        return React.createElement(
+            fieldDef?.component,
+            {
+                ...fieldDef?.componentParams,
+                ...field,
+                onChange: async (values: any) => {
+                    await onChange?.(values, field);
+                }
+            }
+        );
+    }, []);
+
+    const fieldContainerControls = useAnimation();
+
+    React.useEffect(() => {
+        if (fieldErrorMessage) {
+            fieldContainerControls.start("visible");
         }
-    );
+    }, [fieldErrorMessage]);
+
 
     return (
         <>
-            <div className={fieldContainerClasses}>
-                {/* ----------------------------------- row 1  ----------------------------------- */}
-                <div className="__fd-field flex w-full mb-[0.1rem]">
-                    <div className={fieldLabelClasses} style={{ width: labelWidth }}>
-                        {label}
+            <div className='flex'>
+                {/* ------------- | LEFT | */}
+                <motion.div
+                    className='w-[0.3rem] mr-[0.2rem] bg-th-danger'
+                    variants={fieldContainerLeftVariant}
+                    initial="hidden"
+                    animate={fieldContainerControls}
+                    transition={fieldContainerTransition}
+                />
+
+                <div className="__fd-form-field-container flex flex-col w-full my-[0.1rem] px-[0.1rem] pb-[0.1rem] pt-[0.2rem]">
+                    {/* ----------------------------------- row 1  ----------------------------------- */}
+                    <div className="__fd-field flex w-full mb-[0.1rem]">
+                        <div className={fieldLabelClasses} style={{ width: labelWidth }}>
+                            {fieldDef?.label ? fieldDef.label : fieldDef?.name}
+                        </div>
+                        <div className=' flex w-full ml-[0.1rem] items-center'>
+                            <Controller
+                                render={onRenderController}
+                                name={fieldDef?.name!}
+                                control={control}
+                            />
+                        </div>
                     </div>
-                    <div className=' flex w-full ml-[0.1rem] items-center'>
-                        {children}
+                    {/* ----------------------------------- row 2  ----------------------------------- */}
+                    <div className="__fd-field-message flex w-full mt-[0.1rem]">
+                        <div style={{ width: labelWidth }} />
+                        <motion.div
+                            variants={fieldMessageVariant}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            className='flex w-full ml-[0.1rem] items-center'
+                        >
+                            {fieldErrorMessage &&
+                                <div className='text-th-danger'>
+                                    {fieldErrorMessage}
+                                </div>}
+                        </motion.div>
                     </div>
-                </div>
-                {/* ----------------------------------- row 2  ----------------------------------- */}
-                <div className="__fd-field-message flex w-full mt-[0.1rem]">
-                    <div style={{ width: labelWidth }} />
-                    <motion.div
-                        variants={fieldMessageVariant}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
-                        className='flex w-full ml-[0.1rem] items-center'
-                    >
-                        {fieldErrorMessage &&
-                            <div className='text-th-danger'>
-                                {fieldErrorMessage}
-                            </div>}
-                    </motion.div>
                 </div>
             </div>
         </>

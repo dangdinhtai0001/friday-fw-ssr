@@ -1,6 +1,7 @@
-import { createContext, Dispatch, useContext, useEffect, useState } from 'react';
+import { Dispatch, createContext, useContext, useEffect, useMemo, useState } from 'react';
 // ------------------------ || define interface || ------------------------
-import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState, FormStatus, SubmittedStatus } from './Form.d';
+import { FieldValues } from 'react-hook-form';
+import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState, FormStatus } from './Form.d';
 // ================================================== || CONTEXT || ================================================== //
 
 
@@ -8,8 +9,8 @@ import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState
 const FormContext = createContext<ContextProviderValue | null>(null);
 
 // ---------------------- || Định nghĩa context provider || ---------------------- //
-const FormContextProvider = (props: ContextProviderProps) => {
-    const [context, setContext] = useState<ContextState>(props.initialState);
+const FormContextProvider = <T extends FieldValues>(props: ContextProviderProps) => {
+    const [context, setContext] = useState<ContextState<T>>(props.initialState);
 
     useEffect(() => {
         return () => {
@@ -18,8 +19,12 @@ const FormContextProvider = (props: ContextProviderProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const defaultValue = useMemo(() => {
+        return { context, setContext }
+    }, []);
+
     return (
-        <FormContext.Provider value={{ context, setContext }}>
+        <FormContext.Provider value={defaultValue}>
             {props.children}
         </FormContext.Provider>
     );
@@ -28,16 +33,16 @@ const FormContextProvider = (props: ContextProviderProps) => {
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 // - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính 
 // - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
-// - refresh... ==> Thay đổi 1 phần giá trị của thuộc tính đó 
+// - apply... ==> Thay đổi 1 phần giá trị của thuộc tính đó 
 // --------------------------------------------------------------------------------
-function mutations(context: ContextState, setContext: Dispatch<any>): ContextHelper {
+function mutations<T extends FieldValues>(context: ContextState<T>, setContext: Dispatch<any>): ContextHelper<T> {
     return {
         /**
          * hàm cập nhật trạng thái của form
          * @param {FormStatus} newStatus Status mới của form 
          */
         commitStatus(newStatus: FormStatus): void {
-            setContext((prevState: ContextState) => {
+            setContext((prevState: ContextState<T>) => {
                 return {
                     ...prevState,
                     status: newStatus
@@ -50,7 +55,7 @@ function mutations(context: ContextState, setContext: Dispatch<any>): ContextHel
          * @param status Trạng thái mới
          */
         refreshDisabled(field: string, status: boolean): void {
-            setContext((prevState: ContextState) => {
+            setContext((prevState: ContextState<T>) => {
                 let _disabled = { ...prevState.disabled, [field]: status };
 
                 return {
@@ -65,7 +70,7 @@ function mutations(context: ContextState, setContext: Dispatch<any>): ContextHel
          * @param status Trạng thái mới
          */
         refreshVisible(field: string, status: boolean): void {
-            setContext((prevState: ContextState) => {
+            setContext((prevState: ContextState<T>) => {
                 let _visible = { ...prevState.visible, [field]: status };
 
                 return {
@@ -77,41 +82,32 @@ function mutations(context: ContextState, setContext: Dispatch<any>): ContextHel
         /**
          * hàm đếm số lần submit của form. Tăng lên 1 mỗi khi đc gọi đến 
          */
-        increaseSubmitCount(): void {
-            setContext((prevState: ContextState) => {
+        increaseSubmitCount(): number {
+            let newCount = -1;
+
+            setContext((prevState: ContextState<T>) => {
                 let currentCount = prevState.submitCount;
-                let newCount = currentCount ? currentCount + 1 : 0;
+                newCount = currentCount ? currentCount + 1 : 0;
 
                 return {
                     ...prevState,
                     submitCount: newCount
                 }
             });
-        },
-        /**
-         * Hàm cập nhật trạng thái submitted mới nhất 
-         * @param status submitted status của form
-         */
-        commitLastSubmittedStatus(status: SubmittedStatus): void {
-            setContext((prevState: ContextState) => {
-                return {
-                    ...prevState,
-                    lastSubmittedStatus: status
-                }
-            });
-        }
 
+            return newCount;
+        }
     }
 }
 // --------------------------------------------------------------------------------
 
 
 // ---------------------- || Định nghĩa hook || ---------------------- //
-const useFormContext = () => {
+const useFormContext = <T extends FieldValues>(): { context: ContextState<T>, helper: ContextHelper<T> } => {
     // lấy giá trị của context
     const { context, setContext } = useContext(FormContext)!;
 
-    const helper = mutations(context, setContext);
+    const helper: ContextHelper<T> = mutations(context, setContext);
 
     return { context, helper };
 };

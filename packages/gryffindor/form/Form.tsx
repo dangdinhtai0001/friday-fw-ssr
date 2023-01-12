@@ -1,19 +1,78 @@
 // react imports
 import * as React from 'react';
 // 3rd imports
+import { uniqueId } from 'lodash';
+import { FieldValues, useFormContext, useFormState } from 'react-hook-form';
 // local imports
-import { GridLayout } from '@packages/slytherin/grid-layout';
+import { GridItem, GridLayout } from '@packages/slytherin/grid-layout';
 import { FormProps } from './Form.d';
-import useInternalForm from './useInternalForm';
+import FormField from './FormField';
+import useFormAction from './useFormAction';
 
-function Form(
-  props: FormProps,
+let mounted = false;
+function Form<T extends FieldValues>(
+  props: FormProps<T>,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-  const { formLayout } = props;
+  const { useFormMethods, ..._props } = props;
+  const { formLayout, fields } = _props;
+  const { handleSubmit } = useFormMethods!;
+
   const formRef = React.useRef<HTMLFormElement>(null);
 
-  const { generateGridItemFromFields, useFormMethods, handleOnSubmit } = useInternalForm(props);
+  const { handleOnSubmitSuccess, handleOnSubmitError, handleOnChange, handleOnMounted } = useFormAction(_props, useFormMethods!);
+
+  const formContext = useFormContext(); // retrieve those props
+  const formState = useFormState();
+
+  const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    handleSubmit(handleOnSubmitSuccess, handleOnSubmitError)(event)
+  }
+
+  const generateGridItemFromFields = () => {
+    const { field } = formLayout!;
+
+    return fields.map((_field, index) => {
+      return (
+        <GridItem key={uniqueId(`__fd-${index}-`)}>
+          <FormField
+            {...field}
+            label={_field.label ? _field.label : _field.name}
+            fieldDef={_field}
+            useFormMethods={useFormMethods}
+            onChange={handleOnChange}
+          >
+            {React.createElement(
+              _field.component,
+              _field.componentParams
+            )}
+          </FormField>
+        </GridItem>
+      );
+    });
+  };
+
+  /**
+ * Sự kiện diễn ra khi mount form
+ */
+  React.useEffect(() => {
+    let ignore = false;
+
+    async function handleOnMountForm() {
+      await handleOnMounted();
+    };
+
+    if (!ignore && !mounted) {
+      handleOnMountForm();
+    }
+
+    mounted = true;
+    return () => {
+      ignore = true;
+      mounted = false;
+    }
+  }, []);
+
 
   React.useImperativeHandle(ref, () => {
     return {
@@ -22,22 +81,14 @@ function Form(
           new Event("submit", { bubbles: true, cancelable: true })
         )
       },
-      getValues(): any {
-        return useFormMethods.getValues();
+      getValues() {
+        return useFormMethods?.getValues();
       },
+      getFormState() {
+        return formState;
+      }
     }
   }, []);
-
-  // return (
-  //   <FormProvider {...useFormMethods} >
-  //     {/* pass all methods into the context */}
-  //     <form onSubmit={handleOnSubmit} ref={formRef}>
-  //       <GridLayout fluid columnCount={formLayout?.column}>
-  //         {generateGridItemFromFields()}
-  //       </GridLayout>
-  //     </form>
-  //   </FormProvider>
-  // );
 
   return (
     <form onSubmit={handleOnSubmit} ref={formRef}>

@@ -1,11 +1,12 @@
 // react imports
 // 3rd imports
 // local imports
-import { FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form';
+import { ControllerRenderProps, FieldErrors, FieldValues, UseFormReturn } from 'react-hook-form';
+// UnPackAsyncDefaultValues
 import { FormActionHooks, FormProps, RefreshRulesMode } from './Form.d';
 import { useFormContext } from './FormContext';
 
-const useFormAction = <T extends FieldValues>(props: FormProps<T>, useFormMethods: UseFormReturn<T>): FormActionHooks<T> => {
+const useFormAction = <T extends FieldValues>(props: FormProps<T>, useFormMethods: UseFormReturn<any>): FormActionHooks<T> => {
     const {
         general,
         refreshRuleConfig,
@@ -72,8 +73,8 @@ const useFormAction = <T extends FieldValues>(props: FormProps<T>, useFormMethod
         // ghi trạng thái của form vào context
         helper.commitStatus('idle');
     };
-    const handleOnChange = async (values: T, name: string) => {
-        let transformedValue = values;
+    const handleOnChange = async (value: any, field: ControllerRenderProps) => {
+        let transformedValue = value;
 
         // https://react-hook-form.com/api/usecontroller/controller
 
@@ -81,20 +82,18 @@ const useFormAction = <T extends FieldValues>(props: FormProps<T>, useFormMethod
          * It should be assigned to the onChange prop of the input and value should not be undefined.
          */
         // Kiểm tra xem value này có phải lấy từ đối tượng input hay ko , nếu đúng thì set giá trị của transformedValue
-        if (values.nativeEvent instanceof Event) {
-            transformedValue = values.target.value;
+        if (value.nativeEvent instanceof Event) {
+            transformedValue = value.target.value;
         }
 
         // Lấy giá trị của form
         let allValues = getValues();
 
-        /**
-         * This prop update formState and you should avoid manually invoke setValue or other API related to field update.
-         */
-        setValue(name, transformedValue);
+        // Sự kiện onChange của RHF
+        field.onChange(transformedValue);
 
         // Gọi sự kiện thay đổi
-        await onChange?.({ value: transformedValue, allValues, fieldName: name, context, helper });
+        await onChange?.({ value: transformedValue, fieldName: field.name, allValues, context, helper });
     };
     const handleOnRefreshRule = async (currentMode: RefreshRulesMode) => {
         // lấy ra danh sách các rule cần apply ở mode 'onMounted'
