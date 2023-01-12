@@ -35,7 +35,7 @@ function RhfWrapper<T extends FieldValues>(
         return _props;
     }, []);
 
-    const useFormMethods = useForm<T>(rhfUseFormProps);
+    const useFormMethods = useForm(rhfUseFormProps);
 
     const { handleOnValidate } = useFormAction<T>(props, useFormMethods);
 
