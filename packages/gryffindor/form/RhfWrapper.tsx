@@ -1,7 +1,7 @@
 // react imports
 import * as React from 'react';
 // 3rd imports
-import { FieldValues, FormProvider, Resolver, UseFormProps, UseFormReturn, useForm } from "react-hook-form";
+import { FieldValues, FormProvider, Resolver, UseFormProps, useForm } from "react-hook-form";
 // local imports
 import Form from './Form';
 import { FormProps } from './Form.d';
@@ -35,7 +35,7 @@ function RhfWrapper<T extends FieldValues>(
         return _props;
     }, []);
 
-    const useFormMethods: UseFormReturn = useForm(rhfUseFormProps);
+    const useFormMethods = useForm<T>(rhfUseFormProps);
 
     const { handleOnValidate } = useFormAction<T>(props, useFormMethods);
 
