@@ -17,6 +17,7 @@
   --info: theme('colors.sky.500');
   /* --------------------------- */
   --text-primary: theme('colors.slate.100');
+  --text-secondary: theme('colors.slate.900');
 }
 
 [data-theme='dark'] {
@@ -29,7 +30,8 @@
   --warning: theme('colors.amber.500');
   --info: theme('colors.blue.500');
   /* --------------------------- */
-  --text-primary: theme('colors.red.200');
+  --text-primary: theme('colors.slate.900');
+  --text-secondary: theme('colors.slate.100');
 }
 
 [data-theme='emerald'] {

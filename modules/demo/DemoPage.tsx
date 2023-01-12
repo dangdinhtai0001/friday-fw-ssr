@@ -32,9 +32,9 @@ const DemoPage = () => {
 
         <Button
           useBorder={false}
-          theme='danger'
+          // theme='danger'
           onClick={() => console.log('click!')}
-          icon={<AiFillCloseCircle className='scale-[1.6] h-full w-full fill-th-danger' />}
+          icon={<AiFillCloseCircle className='scale-[1.2] h-full w-full fill-th-danger ' />}
         >
 
         </Button>

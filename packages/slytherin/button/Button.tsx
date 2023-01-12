@@ -3,7 +3,6 @@ import * as React from 'react';
 // 3rd imports
 import ButtonUnstyled from '@mui/base/ButtonUnstyled';
 import classNames from 'classnames';
-import { motion, useAnimation } from "framer-motion";
 // local imports
 import { ButtonProps, Loading } from './Button.d';
 
@@ -35,8 +34,6 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
     const { useBorder = true, ..._props } = props;
 
     const [innerLoading, setLoading] = React.useState<Loading>(!!loading);
-
-    const controls = useAnimation();
 
     // =============== Update Loading ===============
     const loadingOrDelay: Loading = typeof loading === 'boolean' ? loading : loading?.delay || true;
@@ -71,9 +68,6 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             return;
         }
 
-        //Kích hoạt animation `tap`
-        controls.start('tap');
-
         (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
     };
 
@@ -84,6 +78,8 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             inline-flex items-center justify-start 
             cursor-pointer
             text-th-text-primary font-roboto font-[500] text-[0.9rem] leading-[1.5715rem]
+            transform hover:translate-y-[-0.2rem]
+            shadow hover:shadow-xl shadow-inherit
         `,
         {
             ['opacity-50 cursor-not-allowed']: disabled || innerLoading,
@@ -93,7 +89,7 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             [`w-full`]: block,
             [`w-fit`]: !block,
             [`bg-th-${theme}`]: theme,
-            [`border-[0.1rem] border-th-foreground `]: useBorder
+            [`border-[0.1rem] border-th-foreground`]: useBorder
         },
     );
 
@@ -109,30 +105,8 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
                 }
             }),
         }}
-
-
-        onMouseEnter={async () => {
-            await controls.start("hover");
-        }}
-        onMouseLeave={async () => {
-            controls.stop();
-            await controls.start("initial");
-        }}
         ref={ref}
     >
-        <motion.div
-            transition={{
-                duration: 0.2,
-                type: 'spring',
-                damping: 25,
-                stiffness: 500,
-            }}
-            variants={coverVariants}
-            initial="initial"
-            exit="exit"
-            animate={controls}
-            className='bg-black w-full h-full absolute top-0 left-0 '
-        />
         {icon ? icon : children}
     </ButtonUnstyled>;
 }
