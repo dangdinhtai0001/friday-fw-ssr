@@ -4,12 +4,14 @@ export interface FieldDef {
   name: string;
   label?: string;
   description?: string;
-  isDivider?: boolean
+  isDivider?: boolean;
+  isFieldArray?: boolean;
   required?: boolean;
   initialValue?: any;
   component?: JSX.ElementType;
   componentParams?: any;
 }
+
 export type FormStatus =
   | 'initial'
   | 'mounted'
@@ -94,6 +96,11 @@ export interface FormFieldProps {
   useFormMethods?: UseFormReturn;
   // ------------ event
   onChange?: (values: any, field:  ControllerRenderProps) => void | Promise<void>;
+}
+
+export interface FieldArrayProps {
+  // Name of the field array. Note: Do not support dynamic name.
+  name: string;
 }
 // ================================= || Form action ||  =================================
 export interface FormActionProps<T> {

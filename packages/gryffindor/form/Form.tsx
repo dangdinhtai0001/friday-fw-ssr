@@ -42,6 +42,8 @@ function Form<T extends FieldValues>(
         )
       }
 
+      // Xử lý trong TH là field array
+
       let w = 12 / column!;
       return (
         <GridItem key={uniqueId(`__fd-${index}-`)} xs={w} sm={w} md={w} lg={w} >

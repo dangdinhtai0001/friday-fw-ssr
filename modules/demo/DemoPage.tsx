@@ -194,9 +194,9 @@ const DemoPage = () => {
         fields={[
           { name: 'first_name', initialValue: "first name", component: Input, componentParams: { className: 'w-full' } },
           { name: 'last_name', initialValue: "Last name", component: Input, componentParams: { className: 'w-full' } },
-          { name: 'divider', label: 'divider - ', isDivider: true },
           { name: 'full_name', initialValue: "", component: Input, componentParams: { className: 'w-full' } },
           { name: 'age', initialValue: 18, component: Input, componentParams: { className: 'w-full' } },
+          { name: 'divider', label: 'divider - ', isDivider: true },
         ]}
         formLayout={{
           column: 2,
