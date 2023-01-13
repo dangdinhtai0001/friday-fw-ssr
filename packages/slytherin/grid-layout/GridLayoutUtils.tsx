@@ -28,7 +28,7 @@ function convertListItems2Grid(items: JSX.Element[], props: GridLayoutProps) {
                 gutterWidth={gutterWidth}
                 justify={justify}
                 style={style}
-                wrap={wrap}
+                wrap='nowrap'
             >
                 {_cols.map((col) => {
                     return (

@@ -34,5 +34,15 @@ export interface GridLayoutProps {
   children?: JSX.Element | JSX.Element[];
 }
 export interface GridItemProps {
+  // 	Content of the column
   children?: JSX.Element | JSX.Element[];
+  // The offset of this column for all screenclasses
+  offset?: { xs?: number, sm?: number, md?: number, lg?: number, xl?: number, xxl?: number, xxxl?: number };
+  xs?: number;
+  sm?: number;
+  md?: number;
+  lg?: number;
+  xl?: number;
+  xxl?: number;
+  xxxl?: number;
 }

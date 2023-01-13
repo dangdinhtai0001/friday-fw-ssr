@@ -2,8 +2,9 @@
 import * as React from 'react';
 // 3rd imports
 import { uniqueId } from 'lodash';
-import { FieldValues, useFormContext, useFormState } from 'react-hook-form';
+import { FieldValues, useFormState } from 'react-hook-form';
 // local imports
+import { Divider } from '@packages/slytherin';
 import { GridItem, GridLayout } from '@packages/slytherin/grid-layout';
 import { FormProps } from './Form.d';
 import FormField from './FormField';
@@ -22,7 +23,6 @@ function Form<T extends FieldValues>(
 
   const { handleOnSubmitSuccess, handleOnSubmitError, handleOnChange, handleOnMounted } = useFormAction(_props, useFormMethods!);
 
-  const formContext = useFormContext(); // retrieve those props
   const formState = useFormState();
 
   const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -33,6 +33,14 @@ function Form<T extends FieldValues>(
     const { field } = formLayout!;
 
     return fields.map((_field, index) => {
+      // xử lý trong TH là divider
+      if (_field.isDivider) {
+        return (
+          <GridItem key={uniqueId(`__fd-${index}-`)} xs={12} sm={12} md={12} lg={12}>
+            <Divider content={_field.label ? _field.label : _field.name} />
+          </GridItem>
+        )
+      }
       return (
         <GridItem key={uniqueId(`__fd-${index}-`)}>
           <FormField
