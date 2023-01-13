@@ -26,10 +26,12 @@ const fieldMessageVariant = {
 const fieldContainerLeftVariant = {
   hidden: {
     y: '-100%',
-    opacity: 0,
+    height: '0',
+    opacity: 1,
   },
   visible: {
     y: '0',
+    height: 'inherit',
     opacity: 1,
   },
 };

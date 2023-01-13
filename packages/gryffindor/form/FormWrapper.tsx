@@ -15,9 +15,11 @@ function getInitialContext<T extends FieldValues>(props: FormProps<T>): ContextS
     let _visible: { [key: string]: boolean } = {};
 
     fields.forEach(fieldDef => {
-        _initialValues = {
-            ..._initialValues,
-            [fieldDef.name]: fieldDef.initialValue
+        if (!fieldDef.isDivider) {
+            _initialValues = {
+                ..._initialValues,
+                [fieldDef.name]: fieldDef.initialValue
+            }
         }
         _disabled[fieldDef.name] = false;
         _visible[fieldDef.name] = true;
