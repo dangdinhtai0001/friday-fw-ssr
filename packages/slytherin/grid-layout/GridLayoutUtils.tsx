@@ -28,7 +28,7 @@ function convertListItems2Grid(items: JSX.Element[], props: GridLayoutProps) {
                 gutterWidth={gutterWidth}
                 justify={justify}
                 style={style}
-                wrap='nowrap'
+                wrap={wrap}
             >
                 {_cols.map((col) => {
                     return (
@@ -44,5 +44,31 @@ function convertListItems2Grid(items: JSX.Element[], props: GridLayoutProps) {
     return _rows;
 }
 
-export { convertListItems2Grid };
+
+function convertListItems2Grid2(items: JSX.Element[], props: GridLayoutProps) {
+    const { columnCount = 2, align, direction, gutterWidth, justify, style } = props;
+
+    let w = 12 / columnCount;
+
+    return (
+        <Row
+            key={uniqueId(`__fd`)}
+            className="py-[0.1rem]"
+            align={align}
+            direction={direction}
+            gutterWidth={gutterWidth}
+            justify={justify}
+            style={style}
+            wrap='wrap'
+        >
+            {items.map((item) => {
+                return (
+                    <Col key={uniqueId(`__fd-`)} xs={w} sm={w} md={w} lg={w} xl={w} xxl={w} {...item.props} />
+                )
+            })}
+        </Row>
+    )
+}
+
+export { convertListItems2Grid, convertListItems2Grid2 };
 

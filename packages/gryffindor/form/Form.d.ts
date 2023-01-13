@@ -4,7 +4,7 @@ export interface FieldDef {
   name: string;
   label?: string;
   description?: string;
-  isDivider?: boolean;
+  isDivider?: boolean
   required?: boolean;
   initialValue?: any;
   component?: JSX.ElementType;

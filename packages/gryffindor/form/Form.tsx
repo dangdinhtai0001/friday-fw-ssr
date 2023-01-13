@@ -30,19 +30,21 @@ function Form<T extends FieldValues>(
   }
 
   const generateGridItemFromFields = () => {
-    const { field } = formLayout!;
+    const { field, column } = formLayout!;
 
     return fields.map((_field, index) => {
       // xử lý trong TH là divider
       if (_field.isDivider) {
         return (
-          <GridItem key={uniqueId(`__fd-${index}-`)} xs={12} sm={12} md={12} lg={12}>
+          <GridItem key={uniqueId(`__fd-${index}-`)} xs={12} sm={12} md={12} lg={12} xl={12} xxl={12} xxxl={12}>
             <Divider content={_field.label ? _field.label : _field.name} />
           </GridItem>
         )
       }
+
+      let w = 12 / column!;
       return (
-        <GridItem key={uniqueId(`__fd-${index}-`)}>
+        <GridItem key={uniqueId(`__fd-${index}-`)} xs={w} sm={w} md={w} lg={w} >
           <FormField
             {...field}
             label={_field.label ? _field.label : _field.name}

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Container } from 'react-grid-system';
 // local imports
 import { GridLayoutProps } from './GridLayout.d';
-import { convertListItems2Grid } from './GridLayoutUtils';
+import { convertListItems2Grid2 } from './GridLayoutUtils';
 
 function GridLayout(
   props: GridLayoutProps,
@@ -14,7 +14,7 @@ function GridLayout(
 
   return (
     <Container fluid={fluid}>
-      {Array.isArray(children) && convertListItems2Grid(children, props)}
+      {Array.isArray(children) && convertListItems2Grid2(children, props)}
     </Container>
   );
 }
