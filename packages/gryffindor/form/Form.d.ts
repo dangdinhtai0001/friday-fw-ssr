@@ -6,6 +6,7 @@ export interface FieldDef {
   description?: string;
   isDivider?: boolean;
   isFieldArray?: boolean;
+  subFields? : FieldDef | FieldDef[];
   required?: boolean;
   initialValue?: any;
   component?: JSX.ElementType;
@@ -93,7 +94,6 @@ export interface FormFieldProps {
   label?: string; 
   fieldDef?: FieldDef;
   children?: JSX.Element;
-  useFormMethods?: UseFormReturn;
   // ------------ event
   onChange?: (values: any, field:  ControllerRenderProps) => void | Promise<void>;
 }

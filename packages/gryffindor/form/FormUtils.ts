@@ -1,10 +1,12 @@
 const fieldMessageVariant = {
   hidden: {
-    y: '-100%',
+    // y: '-100%',
+    x: '-100%',
     opacity: 0,
   },
   visible: {
-    y: '0',
+    // y: '0',
+    x: '0',
     opacity: 1,
     transition: {
       duration: 0.1,

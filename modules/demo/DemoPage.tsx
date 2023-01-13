@@ -64,6 +64,10 @@ const DemoPage = () => {
           onActiveAction={(event, key, context, helper) => {
             if (key === 'key-0001') {
               formRef.current?.submit();
+
+              let values = formRef.current?.getValues();
+
+              console.log(values);
             }
 
             if (key === 'key-0002') {

@@ -13,13 +13,11 @@ function FormField(
     props: FormFieldProps,
     ref: React.ForwardedRef<any>
 ): JSX.Element {
-    const { labelWidth, labelAlign = 'right', fieldDef, useFormMethods, onChange } = props;
+    const { labelWidth, labelAlign = 'right', fieldDef, onChange } = props;
     const { name } = fieldDef!;
 
     const { formState } = useFormContext(); // retrieve all hook methods
     const { errors } = formState;
-
-    const { control } = useFormMethods!;
 
     const [fieldErrorMessage] = React.useState(get(errors, [name, 'message']));
 
@@ -55,7 +53,7 @@ function FormField(
 
     return (
         <>
-            <div className='flex'>
+            <div className='flex px-[0.1rem]'>
                 {/* ------------- | LEFT | */}
                 <motion.div
                     className='w-[0.3rem] mr-[0.2rem] bg-th-danger'
@@ -75,7 +73,6 @@ function FormField(
                             <Controller
                                 render={onRenderController}
                                 name={fieldDef?.name!}
-                                control={control}
                             />
                         </div>
                     </div>

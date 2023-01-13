@@ -51,7 +51,6 @@ function Form<T extends FieldValues>(
             {...field}
             label={_field.label ? _field.label : _field.name}
             fieldDef={_field}
-            useFormMethods={useFormMethods}
             onChange={handleOnChange}
           >
             {React.createElement(
