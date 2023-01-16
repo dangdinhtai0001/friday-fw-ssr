@@ -8,9 +8,9 @@ import useBaseTabs from './useBaseTabs';
 const useTabs = (props: TabsProps) => {
     const { context, helper } = useTabsContext();
 
-    const { tabAnimationControls, handleOnChange } = useBaseTabs(props, context, helper);
+    const _baseTabsHooks = useBaseTabs(props, context, helper);
 
-    return { tabAnimationControls, handleOnChange };
+    return { ..._baseTabsHooks };
 };
 
 export default useTabs;

@@ -6,28 +6,6 @@ import classNames from 'classnames';
 // local imports
 import { ButtonProps, Loading } from './Button.d';
 
-const coverVariants = {
-    initial: {
-        x: "-100%",
-        scale: 1,
-        opacity: 0.3,
-        borderRadius: "0%"
-    },
-    hover: {
-        x: "0",
-        scale: [1, 1.1],
-    },
-    tap: {
-        opacity: [0.5, 0],
-        scale: [1.1, 0.5, 0],
-        borderRadius: "100%"
-
-    },
-    exit: {
-        opacity: 0,
-    },
-};
-
 function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
     const { children, rounded, icon, disabled, loading = false, block, onClick, color, style = {}, theme, } = props;
 
@@ -68,7 +46,7 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             return;
         }
 
-        (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
+        await (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
     };
 
     const classes = classNames(

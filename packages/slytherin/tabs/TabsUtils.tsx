@@ -7,10 +7,10 @@ import TabItem from './TabItem';
 import TabPanel from './TabPanel';
 import { ContextState, TabsProps } from './Tabs.d';
 
-const getTabInitialContext = (props: TabsProps): ContextState => {
+const getTabInitialContext = (props: TabsProps): ContextState<any> => {
     const { value, defaultValue } = props;
 
-    let tabContextInitial: ContextState = {
+    let tabContextInitial: ContextState<any> = {
         activedTabId: value ? value : defaultValue,
     };
 
@@ -18,7 +18,7 @@ const getTabInitialContext = (props: TabsProps): ContextState => {
 };
 
 const getTabHeaders = (
-    children: _childrenType, context: ContextState
+    children: _childrenType, context: ContextState<any>
 ): JSX.Element | JSX.Element[] | null => {
     return getAllChildrenByType(children!, TabItem, (child) => {
         let { props } = child;
@@ -38,7 +38,7 @@ const TabVariants = {
 
 const getTabPanels = (
     _props: TabsProps,
-    context: ContextState,
+    context: ContextState<any>,
     useTabs: any
 ): JSX.Element | JSX.Element[] | null => {
     const { children, destroyInactiveTabPane } = _props;
@@ -59,5 +59,5 @@ const getTabPanels = (
     });
 };
 
-export { getTabInitialContext, getTabHeaders, TabVariants, getTabPanels };
+export { getTabInitialContext, getTabHeaders, TabVariants };
 

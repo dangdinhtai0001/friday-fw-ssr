@@ -1,11 +1,10 @@
 import * as React from 'react';
+import { _childrenType } from './global-interface';
 
 function getChildrenByType(
-  children: JSX.Element | JSX.Element[],
+  children: _childrenType,
   type: any,
-  mappingFunc?: (
-    child: JSX.Element
-  ) => JSX.Element | JSX.Element[] | null
+  mappingFunc?: (child: JSX.Element) => _childrenType
 ) {
   if (!children) return null;
 

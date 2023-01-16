@@ -1,14 +1,14 @@
 import { Dispatch, createContext, useContext, useEffect, useMemo, useState } from 'react';
 // ------------------------ || define interface || ------------------------
-import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './TabbedDialog.d';
+import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './Dialog.d';
 // ================================================== || CONTEXT || ================================================== //
 
 
 // ---------------------- || Khởi tạo context || ---------------------- //
-const TabbedDialogContext = createContext<ContextProviderValue | null>(null);
+const DialogContext = createContext<ContextProviderValue | null>(null);
 
 // ---------------------- || Định nghĩa context provider || ---------------------- //
-const TabbedDialogContextProvider = <T extends unknown>(props: ContextProviderProps) => {
+const DialogContextProvider = <T extends unknown>(props: ContextProviderProps) => {
     const [context, setContext] = useState<ContextState<T>>(props.initialState);
 
     useEffect(() => {
@@ -20,12 +20,12 @@ const TabbedDialogContextProvider = <T extends unknown>(props: ContextProviderPr
 
     const defaultValue = useMemo(() => {
         return { context, setContext }
-    }, []);
+    }, [context, setContext]);
 
     return (
-        <TabbedDialogContext.Provider value={defaultValue}>
+        <DialogContext.Provider value={defaultValue}>
             {props.children}
-        </TabbedDialogContext.Provider>
+        </DialogContext.Provider>
     );
 };
 
@@ -37,9 +37,9 @@ const TabbedDialogContextProvider = <T extends unknown>(props: ContextProviderPr
 function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): ContextHelper<T> {
     return {
         /**
-         * Hàm cập nhật trạng thái của biến opened trong context, ===> nó sẽ thay đổi trạng thái open/close của dialog
-         * @param opened 
-         */
+             * Hàm cập nhật trạng thái của biến opened trong context, ===> nó sẽ thay đổi trạng thái open/close của dialog
+             * @param opened 
+             */
         commitOpened(opened: boolean): void {
             setContext((prevState: ContextState<T>) => ({
                 ...prevState,
@@ -93,18 +93,6 @@ function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): Cont
             });
 
             console.debug('visible applied', visible);
-        },
-        /**
-         * hàm cập nhật giá trị actived id trong context
-         * @param activedTabId : id của tab đc actived và cần đc update
-         */
-        commitActivedId(activedTabId: string | number | boolean): void {
-            console.debug('actived id commited', activedTabId);
-
-            setContext((prevState: ContextState<T>) => ({
-                ...prevState,
-                activedTabId: activedTabId,
-            }));
         }
     }
 }
@@ -112,14 +100,14 @@ function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): Cont
 
 
 // ---------------------- || Định nghĩa hook || ---------------------- //
-const useTabbedDialogContext = <T extends unknown>(): { context: ContextState<T>, helper: ContextHelper<T> } => {
+const useDialogContext = <T extends unknown>(): { context: ContextState<T>, helper: ContextHelper<T> } => {
     // lấy giá trị của context
-    const { context, setContext } = useContext(TabbedDialogContext)!;
+    const { context, setContext } = useContext(DialogContext)!;
 
     const helper: ContextHelper<T> = mutations(context, setContext);
 
     return { context, helper };
 };
 
-export { TabbedDialogContextProvider, useTabbedDialogContext };
+export { DialogContextProvider, useDialogContext };
 

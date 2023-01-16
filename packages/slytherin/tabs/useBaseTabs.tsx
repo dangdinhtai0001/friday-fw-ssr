@@ -2,13 +2,17 @@
 import * as React from 'react';
 // 3rd imports
 import {
+    AnimationControls,
     useAnimation
 } from 'framer-motion';
 // local imports
-import { ContextState, TabsProps } from './Tabs.d';
+import { getAllChildrenByType } from '@packages/ravenclaw';
+import TabItem from './TabItem';
+import TabPanel from './TabPanel';
+import { ContextHelper, ContextState, TabsProps } from './Tabs.d';
 
-const useBaseTabs = (props: TabsProps, context: ContextState, helper: any) => {
-    const tabAnimationControls = useAnimation();
+const useBaseTabs = (props: TabsProps, context: ContextState<any>, helper: ContextHelper<any>) => {
+    const tabAnimationControls: AnimationControls = useAnimation();
 
     const handleOnChange = async (
         event: React.SyntheticEvent<Element, Event>,
@@ -24,7 +28,28 @@ const useBaseTabs = (props: TabsProps, context: ContextState, helper: any) => {
         await tabAnimationControls.start("animate");
     };
 
-    return { tabAnimationControls, handleOnChange };
+    const generateTabPanels = (
+        _props: TabsProps,
+        context: ContextState<any>,
+    ): JSX.Element | JSX.Element[] | null => {
+        const { children, destroyInactiveTabPane } = _props;
+
+        return getAllChildrenByType(children, TabItem, (child) => {
+            let { props } = child;
+
+            if (destroyInactiveTabPane) {
+                return context.activedTabId === props.id ? (
+                    <TabPanel value={props.id} tabAnimationControls={tabAnimationControls}>{props.children}</TabPanel>
+                ) : null;
+            } else {
+                return (
+                    <TabPanel value={props.id} tabAnimationControls={tabAnimationControls}>{props.children}</TabPanel>
+                );
+            }
+        });
+    };
+
+    return { tabAnimationControls, handleOnChange, generateTabPanels };
 };
 
 export default useBaseTabs;

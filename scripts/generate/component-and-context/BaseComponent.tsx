@@ -4,6 +4,7 @@ import * as React from 'react';
 // local imports
 import { BaseComponentProps } from './BaseComponent.d';
 import { useBaseComponentContext } from './BaseComponentContext';
+import useBaseComponent from './useBaseComponent';
 
 
 function BaseComponent(
@@ -11,6 +12,7 @@ function BaseComponent(
   ref: React.ForwardedRef<any>
 ): JSX.Element {
   const { context, helper } = useBaseComponentContext();
+  const { } = useBaseComponent(props);
 
   return <></>;
 }

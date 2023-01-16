@@ -1,14 +1,14 @@
 import { Dispatch, createContext, useContext, useEffect, useMemo, useState } from 'react';
 // ------------------------ || define interface || ------------------------
-import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './BaseComponent.d';
+import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './Tabs.d';
 // ================================================== || CONTEXT || ================================================== //
 
 
 // ---------------------- || Khởi tạo context || ---------------------- //
-const BaseComponentContext = createContext<ContextProviderValue | null>(null);
+const TabsContext = createContext<ContextProviderValue | null>(null);
 
 // ---------------------- || Định nghĩa context provider || ---------------------- //
-const BaseComponentContextProvider = <T extends unknown>(props: ContextProviderProps) => {
+const TabsContextProvider = <T extends unknown>(props: ContextProviderProps) => {
     const [context, setContext] = useState<ContextState<T>>(props.initialState);
 
     useEffect(() => {
@@ -23,9 +23,9 @@ const BaseComponentContextProvider = <T extends unknown>(props: ContextProviderP
     }, [context]);
 
     return (
-        <BaseComponentContext.Provider value={defaultValue}>
+        <TabsContext.Provider value={defaultValue}>
             {props.children}
-        </BaseComponentContext.Provider>
+        </TabsContext.Provider>
     );
 };
 
@@ -36,21 +36,32 @@ const BaseComponentContextProvider = <T extends unknown>(props: ContextProviderP
 // --------------------------------------------------------------------------------
 function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): ContextHelper<T> {
     return {
+        /**
+         * hàm cập nhật giá trị actived id trong context
+         * @param activedTabId : id của tab đc actived và cần đc update
+         */
+        commitActivedId(activedTabId: string | number | boolean): void {
+            console.debug('actived id commited', activedTabId);
 
+            setContext((prevState: ContextState<T>) => ({
+                ...prevState,
+                activedTabId: activedTabId,
+            }));
+        }
     }
 }
 // --------------------------------------------------------------------------------
 
 
 // ---------------------- || Định nghĩa hook || ---------------------- //
-const useBaseComponentContext = <T extends unknown>(): { context: ContextState<T>, helper: ContextHelper<T> } => {
+const useTabsContext = <T extends unknown>(): { context: ContextState<T>, helper: ContextHelper<T> } => {
     // lấy giá trị của context
-    const { context, setContext } = useContext(BaseComponentContext)!;
+    const { context, setContext } = useContext(TabsContext)!;
 
     const helper: ContextHelper<T> = mutations(context, setContext);
 
     return { context, helper };
 };
 
-export { BaseComponentContextProvider, useBaseComponentContext };
+export { TabsContextProvider, useTabsContext };
 

@@ -1,25 +1,23 @@
 // react imports
 import * as React from 'react';
-// 3rd importsgetTabHeader
+// 3rd imports
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 // local imports
-// import useTabs from '@packages/hufflepuff/tabs-family/useTabs';
 import { TabsProps } from './Tabs.d';
 import { useTabsContext } from './TabsContext';
-import TabsList from './TabsList';
-import { getTabHeaders } from './TabsUtils';
+import TabsListWrapper from './TabsListWrapper';
 import useTabs from './useTabs';
+
 
 function Tabs(
   props: TabsProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-  // eslint-disable-next-line no-unused-vars
   const { onChange, destroyInactiveTabPane, ..._props } = props;
 
-  const { context } = useTabsContext();
+  const { handleOnChange, generateTabHeaders, generateTabPanels } = useTabs(props);
 
-  const { handleOnChange, generateTabPanels } = useTabs(props);
+  const { context } = useTabsContext<any>();
 
   return (
     <TabsUnstyled
@@ -35,19 +33,20 @@ function Tabs(
           className: 'w-full h-full'
         })
       }}
+
     >
       {/* ================================== || Header || ================================== */}
-      <TabsList
+      <TabsListWrapper
         slotProps={{
           root: () => ({
             className: 'flex',
           }),
         }}
       >
-        {getTabHeaders(props.children, context)}
-      </TabsList>
+        {generateTabHeaders()}
+      </TabsListWrapper>
       {/* ================================== || Panel || ================================== */}
-      {generateTabPanels(props, context)}
+      {generateTabPanels()}
     </TabsUnstyled>
   );
 }

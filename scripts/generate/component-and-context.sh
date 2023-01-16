@@ -49,6 +49,7 @@ echo "Start generate component $COMPONENT_NAME in $COMPONENT_DIR"
 mkdir $COMPONENT_DIR
 
 sed 's/BaseComponent/'$COMPONENT_NAME'/g' component-and-context/BaseComponent.d.ts > $COMPONENT_DIR/$COMPONENT_NAME.d.ts
+sed 's/BaseComponent/'$COMPONENT_NAME'/g' component-and-context/useBaseComponent.tsx > $COMPONENT_DIR/use$COMPONENT_NAME.tsx
 sed 's/BaseComponent/'$COMPONENT_NAME'/g' component-and-context/BaseComponent.tsx > $COMPONENT_DIR/$COMPONENT_NAME.tsx
 sed 's/BaseComponent/'$COMPONENT_NAME'/g' component-and-context/BaseComponentContext.tsx > $COMPONENT_DIR/${COMPONENT_NAME}Context.tsx
 sed 's/BaseComponent/'$COMPONENT_NAME'/g' component-and-context/BaseComponentWrapper.tsx > $COMPONENT_DIR/${COMPONENT_NAME}Wrapper.tsx

@@ -10,9 +10,17 @@ const useTabbedDialog = (props: TabbedDialogProps) => {
     const { context, helper } = useTabbedDialogContext();
 
     const { containerAnimationControls, handleOnClose, handleOnClickActivator, handleOnActiveAction } = useBaseDialog(props, context, helper);
-    const { handleOnChange: handleOnChangeTab, tabAnimationControls } = useBaseTabs(props, context, helper);
+    const { handleOnChange: handleOnChangeTab, tabAnimationControls, generateTabPanels } = useBaseTabs(props, context, helper);
 
-    return { containerAnimationControls, handleOnClose, handleOnClickActivator, handleOnActiveAction, handleOnChangeTab, tabAnimationControls }
+    return {
+        containerAnimationControls,
+        handleOnClose,
+        handleOnClickActivator,
+        handleOnActiveAction,
+        handleOnChangeTab,
+        tabAnimationControls,
+        generateTabPanels
+    }
 };
 
 export default useTabbedDialog;

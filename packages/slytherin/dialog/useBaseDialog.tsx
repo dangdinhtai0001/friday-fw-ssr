@@ -5,9 +5,9 @@ import {
     useAnimation
 } from 'framer-motion';
 // local imports
-import { ContextState, DialogProps } from './Dialog.d';
+import { ContextHelper, ContextState, DialogProps } from './Dialog.d';
 
-const useBaseDialog = (props: DialogProps, context: ContextState, helper: any) => {
+const useBaseDialog = (props: DialogProps, context: ContextState, helper: ContextHelper) => {
     const containerAnimationControls = useAnimation();
 
     React.useEffect(() => {

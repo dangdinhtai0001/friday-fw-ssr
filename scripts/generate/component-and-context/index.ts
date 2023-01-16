@@ -1,1 +1,1 @@
-export { default as BaseComponent } from './BaseComponent';
+export { default as BaseComponent } from './BaseComponentWrapper';

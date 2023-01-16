@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import { TabPanelUnstyledProps } from '@mui/base/TabPanelUnstyled';
 import { TabUnstyledProps } from '@mui/base/TabUnstyled';
 import { TabsListUnstyledProps } from '@mui/base/TabsListUnstyled';
 import { TabsUnstyledProps } from '@mui/base/TabsUnstyled';
-import * as React from 'react';
+import { AnimationControls } from 'framer-motion';
 
 export interface TabsProps extends TabsUnstyledProps {
   children: JSX.Element | JSX.Element[] | null;
@@ -38,16 +37,21 @@ export interface TabsProps extends TabsUnstyledProps {
    */
   maxContentHeight?: number;
 }
-export interface TabListProps extends TabsListUnstyledProps {}
-export interface TabProps extends TabUnstyledProps {
+
+export interface TabsListWrapperProps
+  extends TabsListUnstyledProps {}
+
+export interface TabWrapperProps extends TabUnstyledProps {
   /**
    * Tab có đang được active hay không
    */
   isActivedTab: boolean;
 }
-export interface TabPanelProps extends TabPanelUnstyledProps {
+
+export interface TabPanelWrapperProps extends TabPanelUnstyledProps {
   tabAnimationControls: AnimationControls;
 }
+
 export interface TabItemProps {
   /**
    * TabPane's head display content
@@ -67,7 +71,20 @@ export interface TabItemProps {
   disabled?: boolean;
 }
 
-// ==========================================================================
+// ================================= || HOOKS ||  =================================
+export interface TabsHook {
+  handleOnChange: (
+    event: React.SyntheticEvent<Element, Event>,
+    tabId: string | number | boolean
+  ) => void | Promise<void>;
+
+  generateTabHeaders: () => _childrenType;
+
+  generateTabPanels: () => _childrenType;
+}
+
+// ================================= || Context ||  =================================
+
 export interface ContextState<T> {
   /**
    * Id của tab đang đc active
@@ -80,11 +97,10 @@ export interface ContextHelper<T> {
 }
 
 export interface ContextProviderProps {
-  initialState: ContextState;
+  initialState: ContextState<T>;
   children: React.ReactElement;
 }
-
 export interface ContextProviderValue {
-  context: ContextState;
+  context: ContextState<T>;
   setContext: React.Dispatch<any>;
 }
