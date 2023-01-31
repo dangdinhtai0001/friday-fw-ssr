@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ModalUnstyledProps } from '@mui/base/ModalUnstyled';
 import { AnimationControls } from 'framer-motion';
 
@@ -9,7 +10,7 @@ export interface ActionDef {
   component?: JSX.Element;
   disabled?: boolean;
   visible?: boolean;
-  others?: Object 
+  others?: Object
 }
 
 // ================================= || PROPS ||  =================================
@@ -68,16 +69,15 @@ export interface DialogProps
    * @param reason Lý do close
    * @returns void
    */
-  onClose?: (context: ContextState, helper: any, reason: string) => void
+  onClose?: (context: ContextState, helper: any, reason: string) => void | Promise<void>
   /**
    * @MUI cũng có định nghĩa rồi, nhưng chỉ cho phép 1 children. Nên cần định nghĩa lại để dùng đc activator và content
    */
   children: JSX.Element | JSX.Element[] | null;
-  }
+}
 
 export interface DialogContainerProps extends DialogProps {
-  containerAnimationControls: AnimationControls;
-  handleOnClose: (event: object, reason: "backdropClick" | "escapeKeyDown" | "headerClick")=> Promise<any>;
+  // handleOnClose: (event: object, reason: "backdropClick" | "escapeKeyDown" | "headerClick") => Promise<any>;
   extraHeader?: JSX.Element | null;
   footer?: JSX.Element | null;
 }
@@ -86,7 +86,7 @@ export interface DialogContainerProps extends DialogProps {
 export interface DialogHook {
   generateActivator: () => JSX.Element | null;
   handleOnClickActivator: () => void | Promise<void>;
-  handleOnClose: (event: object, reason: "backdropClick" | "escapeKeyDown" | "headerClick")=> Promise<any>;
+  handleOnClose: (event: object, reason: "backdropClick" | "escapeKeyDown" | "headerClick") => Promise<any>;
   containerAnimationControls: AnimationControls;
 }
 
@@ -101,9 +101,9 @@ export interface ContextState<T> {
    * Title của dialog
    */
   title?: string;
-    /**
-   * Định nghĩa metadata cho các action của dialog
-   */
+  /**
+ * Định nghĩa metadata cho các action của dialog
+ */
   actions?: ActionDef[];
   /**
    * Height mặc định

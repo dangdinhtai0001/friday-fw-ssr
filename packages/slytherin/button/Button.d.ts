@@ -2,7 +2,7 @@ import { ButtonUnstyledProps } from '@mui/base/ButtonUnstyled';
 import { BackgroundThemes } from '@packages/ravenclaw';
 import React from 'react';
 
-export type Loading = boolean | number;
+export type LoadingType = boolean | number;
 
 export interface ButtonProps extends ButtonUnstyledProps {
   /**
@@ -37,4 +37,13 @@ export interface ButtonProps extends ButtonUnstyledProps {
    * CÓ sử dụng border hay không
    */
   useBorder?: boolean;
+  /**
+   * Set the handler to handle click event
+   */
+  onClick: (
+    event: React.MouseEvent<
+      HTMLButtonElement | HTMLAnchorElement,
+      MouseEvent
+    >
+  ) => void | Promise<void>;
 }

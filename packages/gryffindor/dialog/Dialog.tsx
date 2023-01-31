@@ -19,8 +19,6 @@ function Dialog(
   const {
     generateActivator,
     handleOnClickActivator,
-    handleOnClose,
-    containerAnimationControls
   } = useDialog(props);
 
   return (
@@ -28,7 +26,6 @@ function Dialog(
       {React.cloneElement(generateActivator()!, { onClick: handleOnClickActivator })}
       <ModalUnstyled
         open={context.opened}
-        onClose={handleOnClose}
         closeAfterTransition={false}
         disableScrollLock={true}
         hideBackdrop={false}
@@ -37,8 +34,6 @@ function Dialog(
       >
         <DialogContainer
           {...props}
-          containerAnimationControls={containerAnimationControls}
-          handleOnClose={handleOnClose}
           extraHeader={<div>Extra header</div>}
           footer={<div> footer</div>}
         >

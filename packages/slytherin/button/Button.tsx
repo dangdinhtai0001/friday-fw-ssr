@@ -4,53 +4,73 @@ import * as React from 'react';
 import ButtonUnstyled from '@mui/base/ButtonUnstyled';
 import classNames from 'classnames';
 // local imports
-import { ButtonProps, Loading } from './Button.d';
+import { ButtonProps, LoadingType } from './Button.d';
 
-function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
-    const { children, rounded, icon, disabled, loading = false, block, onClick, color, style = {}, theme, } = props;
+function Button(
+  props: ButtonProps,
+  ref: React.ForwardedRef<any>
+): JSX.Element {
+  const {
+    children,
+    rounded,
+    icon,
+    disabled,
+    loading = false,
+    block,
+    onClick,
+    color,
+    style = {},
+    theme,
+  } = props;
 
-    const { useBorder = true, ..._props } = props;
+  const { useBorder = true, ..._props } = props;
 
-    const [innerLoading, setLoading] = React.useState<Loading>(!!loading);
+  const [innerLoading, setLoading] = React.useState<LoadingType>(!!loading);
 
-    // =============== Update Loading ===============
-    const loadingOrDelay: Loading = typeof loading === 'boolean' ? loading : loading?.delay || true;
-    const iconType = innerLoading ? 'loading' : icon;
+  // =============== Update Loading ===============
+  const loadingOrDelay: LoadingType =
+    typeof loading === 'boolean' ? loading : loading?.delay || true;
+  const iconType = innerLoading ? 'loading' : icon;
 
-    React.useEffect(() => {
-        let delayTimer: number | null = null;
+  React.useEffect(() => {
+    let delayTimer: number | null = null;
 
-        if (typeof loadingOrDelay === 'number') {
-            delayTimer = window.setTimeout(() => {
-                delayTimer = null;
-                setLoading(loadingOrDelay);
-            }, loadingOrDelay);
-        } else {
-            setLoading(loadingOrDelay);
-        }
+    if (typeof loadingOrDelay === 'number') {
+      delayTimer = window.setTimeout(() => {
+        delayTimer = null;
+        setLoading(loadingOrDelay);
+      }, loadingOrDelay);
+    } else {
+      setLoading(loadingOrDelay);
+    }
 
-        return () => {
-            if (delayTimer) {
-                // in order to not perform a React state update on an unmounted component
-                // and clear timer after 'loadingOrDelay' updated.
-                window.clearTimeout(delayTimer);
-                delayTimer = null;
-            }
-        };
-    }, [loadingOrDelay]);
-
-    const handleClick = async (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
-        // https://github.com/ant-design/ant-design/issues/30207
-        if (innerLoading || disabled) {
-            e.preventDefault();
-            return;
-        }
-
-        await (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
+    return () => {
+      if (delayTimer) {
+        // in order to not perform a React state update on an unmounted component
+        // and clear timer after 'loadingOrDelay' updated.
+        window.clearTimeout(delayTimer);
+        delayTimer = null;
+      }
     };
+  }, [loadingOrDelay]);
 
-    const classes = classNames(
-        `
+  const handleClick = async (
+    e: React.MouseEvent<
+      HTMLButtonElement | HTMLAnchorElement,
+      MouseEvent
+    >
+  ) => {
+    // https://github.com/ant-design/ant-design/issues/30207
+    if (innerLoading || disabled) {
+      e.preventDefault();
+      return;
+    }
+
+    await onClick?.(e);
+  };
+
+  const classes = classNames(
+    `
             h-fit
             group btn relative overflow-hidden 
             inline-flex items-center justify-start 
@@ -59,34 +79,38 @@ function Button(props: ButtonProps, ref: React.ForwardedRef<any>): JSX.Element {
             transform hover:translate-y-[-0.2rem]
             shadow hover:shadow-xl shadow-inherit
         `,
-        {
-            ['opacity-50 cursor-not-allowed']: disabled || innerLoading,
-            ['transition-all  hover:scale-105 transition-transform active:scale-[0.9]']: !disabled && !innerLoading,
-            [`rounded-full px-[0.5rem] py-[0.5rem]`]: (!children && children !== 0 && !!iconType) || rounded,
-            [`rounded px-[0.3rem] py-[0.05rem]`]: children,
-            [`w-full`]: block,
-            [`w-fit`]: !block,
-            [`bg-th-${theme}`]: theme,
-            [`border-[0.1rem] border-th-foreground`]: useBorder
-        },
-    );
+    {
+      ['opacity-50 cursor-not-allowed']: disabled || innerLoading,
+      ['transition-all  hover:scale-105 transition-transform active:scale-[0.9]']:
+        !disabled && !innerLoading,
+      [`rounded-full px-[0.5rem] py-[0.5rem]`]:
+        (!children && children !== 0 && !!iconType) || rounded,
+      [`rounded px-[0.3rem] py-[0.05rem]`]: children,
+      [`w-full`]: block,
+      [`w-fit`]: !block,
+      [`bg-th-${theme}`]: theme,
+      [`border-[0.1rem] border-th-foreground`]: useBorder,
+    }
+  );
 
-    return <ButtonUnstyled
-        {..._props}
-        slotProps={{
-            root: () => ({
-                className: classes,
-                onClick: handleClick,
-                style: {
-                    ...style,
-                    background: color ? color : 'null'
-                }
-            }),
-        }}
-        ref={ref}
+  return (
+    <ButtonUnstyled
+      {..._props}
+      slotProps={{
+        root: () => ({
+          className: classes,
+          onClick: handleClick,
+          style: {
+            ...style,
+            background: color ? color : 'null',
+          },
+        }),
+      }}
+      ref={ref}
     >
-        {icon ? icon : children}
-    </ButtonUnstyled>;
+      {icon ? icon : children}
+    </ButtonUnstyled>
+  );
 }
 
 export default React.forwardRef(Button);
