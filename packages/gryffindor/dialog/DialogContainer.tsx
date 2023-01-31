@@ -36,6 +36,7 @@ const containerVariants = {
 
 function DialogContainer(
   props: DialogContainerProps,
+  // eslint-disable-next-line no-unused-vars
   ref: React.ForwardedRef<any>
 ): JSX.Element {
   const {
@@ -48,8 +49,6 @@ function DialogContainer(
     initialWidth,
     // ----- header
     title,
-    // ----- content
-    children,
   } = props;
 
   const constraintsRef = React.useRef(null);
@@ -105,7 +104,7 @@ function DialogContainer(
             </div>
             {/* ------------------------------------ | content | ------------------------------------ */}
             <div className="w-full h-full px-[0.5rem] py-[0.3rem] overflow-auto bg-th-background ">
-              {children}
+              {renderContent()}
             </div>
             {/* ------------------------------------ | footer | ------------------------------------ */}
             <div className="h-fit rounded-b-[0.5rem] border-t-[0.1rem] flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem] bg-th-background">

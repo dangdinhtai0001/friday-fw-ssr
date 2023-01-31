@@ -2,25 +2,20 @@
 import React from 'react';
 // 3rd imports
 // local imports
+import { ActionDef, ActivedActionResponse, CloseReason } from '@packages/gryffindor/dialog/Dialog.d';
 import { getChildrenByType } from '@packages/ravenclaw';
 import { Button } from '@packages/slytherin/button';
 import { AnimationControls, useAnimation } from 'framer-motion';
 import Activator from './collector/Activator';
-import Content from './collector/Content';
-import ExtraHeader from './collector/ExtraHeader';
-import { ActionDef, ActivedActionResponse, CloseReason, DialogHook, DialogProps } from './Dialog.d';
-import { useDialogContext } from './DialogContext';
+import { TabbedDialogHook, TabbedDialogProps } from './TabbedDialog.d';
+import { useTabbedDialogContext } from './TabbedDialogContext';
 
-const useDialog = (props: DialogProps): DialogHook => {
+const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
     const { actions, children } = props;
 
-    const { context, helper } = useDialogContext<any>();
+    const { context, helper } = useTabbedDialogContext<any>();
 
     const containerAnimationControls: AnimationControls = useAnimation();
-
-    const generateActivator = React.useCallback((): JSX.Element | null => {
-        return getChildrenByType(children, Activator);
-    }, [children]);
 
     React.useEffect(() => {
         // Không rõ vì sao nếu gọi `containerAnimationControls.start` tại hàm click thì lỗi, 
@@ -33,6 +28,10 @@ const useDialog = (props: DialogProps): DialogHook => {
         return () => { };
 
     }, [containerAnimationControls, context.opened]);
+
+    const generateActivator = React.useCallback((): JSX.Element | null => {
+        return getChildrenByType(children, Activator);
+    }, [children]);
 
     const handleOnClickActivator = async () => {
         console.debug("Click activator ");
@@ -62,7 +61,7 @@ const useDialog = (props: DialogProps): DialogHook => {
     }
 
     const renderExtraHeader = (): JSX.Element | null => {
-        return getChildrenByType(children, ExtraHeader);
+        return null;
     }
 
     const renderFooter = (): JSX.Element[] | null => {
@@ -96,7 +95,7 @@ const useDialog = (props: DialogProps): DialogHook => {
     };
 
     const renderContent = (): JSX.Element | null => {
-        return getChildrenByType(children, Content);
+        return null;
     }
 
     return {
@@ -108,6 +107,7 @@ const useDialog = (props: DialogProps): DialogHook => {
         renderFooter,
         renderContent
     };
-}
 
-export default useDialog;
+};
+
+export default useTabbedDialog;

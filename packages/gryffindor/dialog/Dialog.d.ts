@@ -19,6 +19,8 @@ export interface ActivedActionResponse {
   isClose: boolean;
 }
 
+export type CloseReason = "backdropClick" | "escapeKeyDown" | "headerClick" | "activeAction";
+
 // ================================= || PROPS ||  =================================
 
 export interface DialogProps
@@ -90,7 +92,7 @@ export interface DialogContainerProps extends DialogProps {
 export interface DialogHook {
   generateActivator: () => JSX.Element | null;
   handleOnClickActivator: () => void | Promise<void>;
-  handleOnClose: (event: object, reason: "backdropClick" | "escapeKeyDown" | "headerClick") => Promise<any>;
+  handleOnClose: (event: object, reason: CloseReason) => Promise<any>;
   containerAnimationControls: AnimationControls;
   renderExtraHeader: () => JSX.Element | null;
   renderFooter: () => JSX.Element[] | null;

@@ -1,22 +1,21 @@
 // react imports
 import * as React from 'react';
 // 3rd imports
-// local imports
 import ModalUnstyled from '@mui/base/ModalUnstyled';
-import Backdrop from './Backdrop';
-import { DialogProps } from './Dialog.d';
-import DialogContainer from './DialogContainer';
-import { useDialogContext } from './DialogContext';
-import useDialog from './useDialog';
+// local imports
+import Backdrop from '@packages/gryffindor/dialog/Backdrop';
+import { TabbedDialogProps } from './TabbedDialog.d';
+import TabbedDialogContainer from './TabbedDialogContainer';
+import { useTabbedDialogContext } from './TabbedDialogContext';
+import useTabbedDialog from './useTabbedDialog';
 
 
-function Dialog(
-  props: DialogProps,
+function TabbedDialog(
+  props: TabbedDialogProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-  const { context } = useDialogContext<any>();
-
-  const { generateActivator, handleOnClickActivator } = useDialog(props);
+  const { context } = useTabbedDialogContext();
+  const { generateActivator, handleOnClickActivator } = useTabbedDialog(props);
 
   return (
     <>
@@ -29,7 +28,7 @@ function Dialog(
         slots={{ backdrop: Backdrop }}
         ref={ref}
       >
-        <DialogContainer
+        <TabbedDialogContainer
           {...props}
           // Phải thêm minHeight, maxHeight để tránh TH không khai báo tham số  này thì hook useResize sẽ bị sai
           minHeight={context.minHeight}
@@ -37,10 +36,10 @@ function Dialog(
           minWidth={context.minWidth}
           maxWidth={context.maxWidth}
         >
-        </DialogContainer>
+        </TabbedDialogContainer>
       </ModalUnstyled>
     </>
   );
 }
 
-export default React.forwardRef(Dialog);
+export default React.forwardRef(TabbedDialog);

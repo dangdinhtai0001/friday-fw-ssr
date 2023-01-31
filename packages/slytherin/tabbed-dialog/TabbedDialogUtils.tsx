@@ -2,7 +2,7 @@ import { containerVariants, getActivator, getContent, getDialogInitialContext, g
 import { getTabInitialContext } from '@packages/slytherin/tabs/TabsUtils';
 import { ContextState, TabbedDialogProps } from './TabbedDialog.d';
 
-const getTabbedInitialContext = (props: TabbedDialogProps): ContextState => {
+const getTabbedInitialContext = (props: TabbedDialogProps): ContextState<any> => {
     return {
         ...getDialogInitialContext(props),
         ...getTabInitialContext(props)
