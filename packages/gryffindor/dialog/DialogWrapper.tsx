@@ -23,7 +23,7 @@ function getInitialContext(props: DialogProps) {
     title: title,
     actions: actions,
     minHeight: minHeight ? minHeight : 200,
-    maxHeight: maxHeight ? maxHeight : 800,
+    maxHeight: maxHeight ? maxHeight : 900,
     minWidth: minWidth ? minWidth : 600,
     maxWidth: maxWidth ? maxWidth : 1000,
     initialHeight: initialHeight ? initialHeight : 300,

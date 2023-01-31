@@ -7,10 +7,16 @@ import { AnimationControls } from 'framer-motion';
 export interface ActionDef {
   key: string;
   label?: string;
+  isClose?: boolean;
   component?: JSX.Element;
   disabled?: boolean;
   visible?: boolean;
   others?: Object
+}
+
+export interface ActivedActionResponse {
+  // nếu là true thì sau khi thực hiện xong action sẽ đóng dialog
+  isClose: boolean;
 }
 
 // ================================= || PROPS ||  =================================
@@ -61,13 +67,14 @@ export interface DialogProps
    * @param helper helper của context
    * @returns void
    */
-  onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: ContextHelper) => void
+  onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, actionDef: ActionDef, context: ContextState, helper: ContextHelper)
+    => ActivedActionResponse | Promise<ActivedActionResponse>
   /**
    * hàm xử lý sự kiện khi close 
    * @param context context
    * @param helper helper của context
    * @param reason Lý do close
-   * @returns void
+   * @returns ActivedActionResponse Dùng trong TH kết quả của thao tác sẽ gây ra 1 hành động gì đó (VD: đóng dialog )
    */
   onClose?: (context: ContextState, helper: any, reason: string) => void | Promise<void>
   /**
@@ -77,9 +84,6 @@ export interface DialogProps
 }
 
 export interface DialogContainerProps extends DialogProps {
-  // handleOnClose: (event: object, reason: "backdropClick" | "escapeKeyDown" | "headerClick") => Promise<any>;
-  extraHeader?: JSX.Element | null;
-  footer?: JSX.Element | null;
 }
 
 // ================================= || HOOKS ||  =================================
@@ -88,6 +92,9 @@ export interface DialogHook {
   handleOnClickActivator: () => void | Promise<void>;
   handleOnClose: (event: object, reason: "backdropClick" | "escapeKeyDown" | "headerClick") => Promise<any>;
   containerAnimationControls: AnimationControls;
+  renderExtraHeader: () => JSX.Element | null;
+  renderFooter: () => JSX.Element[] | null;
+  renderContent: () => JSX.Element | null;
 }
 
 // ================================= || Context ||  =================================

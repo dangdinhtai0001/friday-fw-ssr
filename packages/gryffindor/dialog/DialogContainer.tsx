@@ -48,12 +48,8 @@ function DialogContainer(
     initialWidth,
     // ----- header
     title,
-    // ----- extra header
-    extraHeader,
     // ----- content
     children,
-    // ----- footer
-    footer,
   } = props;
 
   const constraintsRef = React.useRef(null);
@@ -67,7 +63,7 @@ function DialogContainer(
     initialWidth,
   });
 
-  const { handleOnClose, containerAnimationControls } = useDialog(props);
+  const { handleOnClose, containerAnimationControls, renderFooter, renderExtraHeader, renderContent } = useDialog(props);
 
   return (
     <AnimatePresence mode="wait">
@@ -105,7 +101,7 @@ function DialogContainer(
             </div>
             {/* ------------------------------------ | extra header | ------------------------------------ */}
             <div className="w-full h-fit bg-th-background">
-              {extraHeader}
+              {renderExtraHeader()}
             </div>
             {/* ------------------------------------ | content | ------------------------------------ */}
             <div className="w-full h-full px-[0.5rem] py-[0.3rem] overflow-auto bg-th-background ">
@@ -113,7 +109,7 @@ function DialogContainer(
             </div>
             {/* ------------------------------------ | footer | ------------------------------------ */}
             <div className="h-fit rounded-b-[0.5rem] border-t-[0.1rem] flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem] bg-th-background">
-              {footer}
+              {renderFooter()}
             </div>
           </div>
           {/* -------------------------------------------- | resizable container | -------------------------------------------- */}

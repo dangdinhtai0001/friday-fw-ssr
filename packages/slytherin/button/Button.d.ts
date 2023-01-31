@@ -40,10 +40,7 @@ export interface ButtonProps extends ButtonUnstyledProps {
   /**
    * Set the handler to handle click event
    */
-  onClick: (
-    event: React.MouseEvent<
-      HTMLButtonElement | HTMLAnchorElement,
-      MouseEvent
-    >
-  ) => void | Promise<void>;
+  onClick?: (
+    // eslint-disable-next-line no-unused-vars
+    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => void | Promise<void>;
 }

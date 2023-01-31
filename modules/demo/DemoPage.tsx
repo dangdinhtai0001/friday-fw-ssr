@@ -4,14 +4,12 @@ import {
   DialogActivator,
   DialogContent,
   DialogExtraHeader,
-  Input,
-  TabItem,
-  TabbedDialog,
-  Tabs,
+  Input, TabbedDialog, TabItem, Tabs
 } from '@packages/slytherin';
 
-import GryffindorDialog from '@packages/gryffindor/dialog/DialogWrapper';
 import GryffindorDialogActivator from '@packages/gryffindor/dialog/collector/Activator';
+import GryffindorDialogContent from '@packages/gryffindor/dialog/collector/Content';
+import GryffindorDialog from '@packages/gryffindor/dialog/DialogWrapper';
 // 
 import Form from '@packages/gryffindor/form/FormWrapper';
 import GryffindorTabItem from '@packages/gryffindor/tabs/TabItem';
@@ -179,9 +177,7 @@ const DemoPage = () => {
             { key: "key-0002", label: "Hủy", disabled: false, visible: true, },
           ]}
           onActiveAction={(event, key, context, helper) => {
-            if (key === 'key-0001') {
-
-            }
+            if (key === 'key-0001') { /* empty */ }
 
             if (key === 'key-0002') {
               helper.commitOpened(false);
@@ -354,23 +350,31 @@ const DemoPage = () => {
         initialHeight={500}
         initialWidth={600}
         minHeight={200}
+        // maxHeight={800}
         minWidth={600}
         actions={[
           { key: "key-0001", label: "Xác nhận", disabled: false, visible: true, others: { theme: 'primary' } },
-          { key: "key-0002", label: "Hủy", disabled: false, visible: true, },
+          { key: "key-0002", label: "Hủy", disabled: false, visible: true, isClose: true },
         ]}
-        onActiveAction={(event, key, context, helper) => {
+        onActiveAction={(event, actionDef, context, helper) => {
+          let { key } = actionDef;
           if (key === 'key-0001') {
             formRef.current?.submit();
 
             let values = formRef.current?.getValues();
 
-            console.log(values);
+            console.log(" Giá trị này được lấy tại button của dialog chứa form", values);
+
+            return { isClose: false }
           }
 
           if (key === 'key-0002') {
-            helper.commitOpened(false);
+            console.log(" Làm một vài thứ gì đó rồi ấn nút cancel");
+
+            return { isClose: false }
           }
+
+          return { isClose: false }
         }}
       >
         <GryffindorDialogActivator>
@@ -378,6 +382,70 @@ const DemoPage = () => {
             Open dialog
           </Button>
         </GryffindorDialogActivator>
+        <GryffindorDialogContent>
+          <Form
+            fields={[
+              { name: 'first_name', initialValue: "first name", component: Input, componentParams: { className: 'w-full' } },
+              { name: 'last_name', initialValue: "Last name", component: Input, componentParams: { className: 'w-full' } },
+              { name: 'full_name', initialValue: "", component: Input, componentParams: { className: 'w-full' } },
+              { name: 'age', initialValue: 18, component: Input, componentParams: { className: 'w-full' } },
+            ]}
+            formLayout={{
+              column: 2,
+              field: {
+                labelWidth: '200px',
+                labelAlign: 'left'
+              }
+            }}
+            general={{
+              formMode: "all",
+              reValidateMode: "onChange",
+              criteriaMode: 'all',
+              shouldFocusError: true,
+              delayError: 0
+            }}
+            refreshRuleConfig={{
+              onMounted: ['disabled', 'visible'],
+              onChange: ['disabled', 'visible', 'valid']
+            }}
+            refreshRule={(rule, cMode) => {
+              console.log(`apply rules: '${rule}' on mode: '${cMode}'`)
+            }}
+            onMounted={(context) => {
+              console.log("trigger on mounted event", context);
+            }}
+            onValidate={(data, context, helper) => {
+              console.log("trigger on validate event", data);
+
+              if (!data.full_name) {
+                return {
+                  values: data,
+                  errors: {
+                    full_name: {
+                      type: 'custom',
+                      message: 'This is required.',
+                    }
+                  }
+                }
+              }
+
+              return {
+                values: data,
+                errors: {}
+              }
+            }}
+            onSubmitSuccess={(data, context, helper) => {
+              console.log("Trigger on submit success", data);
+            }}
+            onSubmitError={(data, context, helper) => {
+              console.log("Trigger on submit error", data);
+            }}
+            onChange={(props) => {
+              console.log("Trigger on change", props);
+            }}
+            ref={formRef}
+          ></Form>
+        </GryffindorDialogContent>
       </GryffindorDialog>
     </>
   );

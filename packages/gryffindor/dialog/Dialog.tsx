@@ -19,6 +19,7 @@ function Dialog(
   const {
     generateActivator,
     handleOnClickActivator,
+    renderContent
   } = useDialog(props);
 
   return (
@@ -34,10 +35,13 @@ function Dialog(
       >
         <DialogContainer
           {...props}
-          extraHeader={<div>Extra header</div>}
-          footer={<div> footer</div>}
+          // Phải thêm minHeight, maxHeight để tránh TH không khai báo tham số  này thì hook useResize sẽ bị sai
+          minHeight={context.minHeight}
+          maxHeight={context.maxHeight}
+          minWidth={context.minWidth}
+          maxWidth={context.maxWidth}
         >
-          <div>content</div>
+          {renderContent()}
         </DialogContainer>
       </ModalUnstyled>
     </>
