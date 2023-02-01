@@ -1,21 +1,28 @@
 // react imports
 import React from 'react';
 // 3rd imports
+import { AnimationControls, useAnimation } from 'framer-motion';
 // local imports
 import { ActionDef, ActivedActionResponse, CloseReason } from '@packages/gryffindor/dialog/Dialog.d';
-import { getChildrenByType } from '@packages/ravenclaw';
+import TabPanelWrapper from '@packages/gryffindor/tabs/TabPanelWrapper';
+import TabWrapper from '@packages/gryffindor/tabs/TabWrapper';
+import TabsListWrapper from '@packages/gryffindor/tabs/TabsListWrapper';
+import { _childrenType, getAllChildrenByType, getChildrenByType } from '@packages/ravenclaw';
 import { Button } from '@packages/slytherin/button';
-import { AnimationControls, useAnimation } from 'framer-motion';
-import Activator from './collector/Activator';
 import { TabbedDialogHook, TabbedDialogProps } from './TabbedDialog.d';
 import { useTabbedDialogContext } from './TabbedDialogContext';
+import Activator from './collector/Activator';
+import TabItem from './collector/TabItem';
 
 const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
-    const { actions, children } = props;
+    const { actions, children, destroyInactiveTabPane } = props;
 
     const { context, helper } = useTabbedDialogContext<any>();
 
+    const { activedTabId } = context;
+
     const containerAnimationControls: AnimationControls = useAnimation();
+    const tabAnimationControls: AnimationControls = useAnimation();
 
     React.useEffect(() => {
         // Không rõ vì sao nếu gọi `containerAnimationControls.start` tại hàm click thì lỗi, 
@@ -60,9 +67,19 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
         }
     }
 
-    const renderExtraHeader = (): JSX.Element | null => {
-        return null;
-    }
+    const renderExtraHeader = React.useCallback((): JSX.Element | null => {
+        return (
+            <TabsListWrapper
+                slotProps={{
+                    root: () => ({
+                        className: 'flex',
+                    }),
+                }}
+            >
+                {generateTabHeaders()}
+            </TabsListWrapper>)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const renderFooter = (): JSX.Element[] | null => {
         if (!actions || actions.length <= 0 || !containerAnimationControls) {
@@ -94,9 +111,62 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
         });
     };
 
-    const renderContent = (): JSX.Element | null => {
-        return null;
-    }
+    // ==================================================================
+    const generateTabHeaders = React.useCallback((): _childrenType => {
+        return getAllChildrenByType(children, TabItem, (child) => {
+            let { props } = child;
+            let { id, disabled, label } = props;
+
+            return (
+                <TabWrapper value={id} disabled={disabled} isActivedTab={id === activedTabId}>
+                    {label}
+                </TabWrapper>
+            );
+        });
+    }, [activedTabId, children]);
+
+    const generateTabPanels = React.useCallback((): _childrenType => {
+        return getAllChildrenByType(children, TabItem, (child) => {
+            let { props } = child;
+            let { id } = props;
+
+            if (destroyInactiveTabPane) {
+                return activedTabId === id ? (
+                    <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
+                        {props.children}
+                    </TabPanelWrapper>
+                ) : null;
+            } else {
+                return (
+                    <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
+                        {props.children}
+                    </TabPanelWrapper>
+                );
+            }
+
+        })
+    }, [activedTabId, children, destroyInactiveTabPane, tabAnimationControls]);
+
+    const handleOnChangeTab = async (
+        event: React.SyntheticEvent<Element, Event>,
+        tabId: string | number | boolean
+    ) => {
+        // update lại tab id mỗi khi thay đổi
+        helper.commitActivedId(tabId);
+
+        // Gọi hàm onchange từ props
+        await props.onChange?.(event, tabId, context, helper);
+
+        // kích hoạt sự kiện animation
+        await tabAnimationControls.start("animate");
+
+        console.log("handleOnChangeTab");
+    };
+
+    const renderContent = React.useCallback((): _childrenType => {
+        return generateTabPanels();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return {
         generateActivator,
@@ -105,7 +175,10 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
         containerAnimationControls,
         renderExtraHeader,
         renderFooter,
-        renderContent
+        renderContent,
+        generateTabHeaders,
+        generateTabPanels,
+        handleOnChangeTab
     };
 
 };

@@ -4,6 +4,7 @@ import * as React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AiFillCloseCircle } from 'react-icons/ai';
 // local imports
+import TabsUnstyled from '@mui/base/TabsUnstyled';
 import { Resizable, useResizable } from '@packages/hufflepuff';
 import Button from '@packages/slytherin/button/Button';
 import { DialogContainerProps } from './TabbedDialog.d';
@@ -62,7 +63,14 @@ function TabbedDialogContainer(
         initialWidth,
     });
 
-    const { handleOnClose, containerAnimationControls, renderFooter, renderExtraHeader, renderContent } = useTabbedDialog(props);
+    const {
+        handleOnClose,
+        containerAnimationControls,
+        renderFooter,
+        renderExtraHeader,
+        renderContent,
+        handleOnChangeTab
+    } = useTabbedDialog(props);
 
     return (
         <AnimatePresence mode="wait">
@@ -83,34 +91,48 @@ function TabbedDialogContainer(
                         width: mWidth,
                     }}
                 >
-                    <div className="flex flex-col w-full h-full ">
-                        {/* ------------------------------------ | header | ------------------------------------ */}
-                        <div className="flex items-center justify-between text-th-text-primary font-[600] text-[1.3rem] h-[2.1rem] w-full py-[1rem] bg-th-primary rounded-t-[0.5rem] ">
-                            <div></div>
-                            {title}
-                            <Button
-                                useBorder={false}
-                                onClick={async (event) => {
-                                    await handleOnClose(event, 'headerClick');
-                                }}
-                                icon={
-                                    <AiFillCloseCircle className="scale-[1.2] h-full w-full fill-th-danger bg-th-background rounded-full" />
-                                }
-                            />
+                    <TabsUnstyled
+                        onChange={async (
+                            event: React.SyntheticEvent<Element, Event>,
+                            value: string | number | boolean
+                        ) => {
+                            await handleOnChangeTab(event, value);
+                        }}
+                        slotProps={{
+                            root: () => ({
+                                className: 'w-full h-full'
+                            })
+                        }}
+                    >
+                        <div className="flex flex-col w-full h-full ">
+                            {/* ------------------------------------ | header | ------------------------------------ */}
+                            <div className="flex items-center justify-between text-th-text-primary font-[600] text-[1.3rem] h-[2.1rem] w-full py-[1rem] bg-th-primary rounded-t-[0.5rem] ">
+                                <div></div>
+                                {title}
+                                <Button
+                                    useBorder={false}
+                                    onClick={async (event) => {
+                                        await handleOnClose(event, 'headerClick');
+                                    }}
+                                    icon={
+                                        <AiFillCloseCircle className="scale-[1.2] h-full w-full fill-th-danger bg-th-background rounded-full" />
+                                    }
+                                />
+                            </div>
+                            {/* ------------------------------------ | extra header | ------------------------------------ */}
+                            <div className="w-full h-fit bg-th-background">
+                                {renderExtraHeader()}
+                            </div>
+                            {/* ------------------------------------ | content | ------------------------------------ */}
+                            <div className="w-full h-full px-[0.5rem] py-[0.3rem] overflow-auto bg-th-background ">
+                                {renderContent()}
+                            </div>
+                            {/* ------------------------------------ | footer | ------------------------------------ */}
+                            <div className="h-fit rounded-b-[0.5rem] border-t-[0.1rem] flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem] bg-th-background">
+                                {renderFooter()}
+                            </div>
                         </div>
-                        {/* ------------------------------------ | extra header | ------------------------------------ */}
-                        <div className="w-full h-fit bg-th-background">
-                            {renderExtraHeader()}
-                        </div>
-                        {/* ------------------------------------ | content | ------------------------------------ */}
-                        <div className="w-full h-full px-[0.5rem] py-[0.3rem] overflow-auto bg-th-background ">
-                            {renderContent()}
-                        </div>
-                        {/* ------------------------------------ | footer | ------------------------------------ */}
-                        <div className="h-fit rounded-b-[0.5rem] border-t-[0.1rem] flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem] bg-th-background">
-                            {renderFooter()}
-                        </div>
-                    </div>
+                    </TabsUnstyled>
                     {/* -------------------------------------------- | resizable container | -------------------------------------------- */}
                     <Resizable
                         onResizeStart={() => { }}

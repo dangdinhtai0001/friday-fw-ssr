@@ -93,6 +93,18 @@ function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): Cont
             });
 
             console.debug('visible applied', visible);
+        },
+        /**
+         * hàm cập nhật giá trị actived id trong context
+         * @param activedTabId : id của tab đc actived và cần đc update
+         */
+        commitActivedId(activedTabId: string | number | boolean): void {
+            console.debug('actived id commited', activedTabId);
+
+            setContext((prevState: ContextState<T>) => ({
+                ...prevState,
+                activedTabId: activedTabId,
+            }));
         }
     }
 }
