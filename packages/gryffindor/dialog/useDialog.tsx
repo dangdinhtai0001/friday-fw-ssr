@@ -34,13 +34,13 @@ const useDialog = (props: DialogProps): DialogHook => {
 
     }, [containerAnimationControls, context.opened]);
 
-    const handleOnClickActivator = async () => {
+    const handleOnClickActivator = React.useCallback(async () => {
         console.debug("Click activator ");
 
         helper.commitOpened(true);
-    }
+    }, [helper]);
 
-    const handleOnClose = async (event: object, reason: CloseReason): Promise<any> => {
+    const handleOnClose = React.useCallback(async (event: object, reason: CloseReason): Promise<any> => {
         // animation cho sự kiện close
         await containerAnimationControls.start("exit");
 
@@ -49,9 +49,9 @@ const useDialog = (props: DialogProps): DialogHook => {
 
         console.debug("Close event with reason: ", reason);
         helper.commitOpened(false);
-    }
+    }, [containerAnimationControls, context, helper, props]);
 
-    const handleOnActiveAction = async (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>, actionDef: ActionDef) => {
+    const handleOnActiveAction = React.useCallback(async (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>, actionDef: ActionDef) => {
         let actionResponse: ActivedActionResponse | undefined = await props.onActiveAction?.(event, actionDef, context, helper);
 
         if (actionDef.isClose || actionResponse?.isClose === true) {
@@ -59,13 +59,17 @@ const useDialog = (props: DialogProps): DialogHook => {
             // Nếu action trả về kết quả yêu cầu close dialog thì gọi animation close
             await handleOnClose(event, "activeAction");
         }
-    }
+    }, [context, handleOnClose, helper, props])
 
-    const renderExtraHeader = (): JSX.Element | null => {
+    const extraHeader = React.useMemo(() => {
         return getChildrenByType(children, ExtraHeader);
-    }
+    }, [children]);
 
-    const renderFooter = (): JSX.Element[] | null => {
+    const content = React.useMemo(() => {
+        return getChildrenByType(children, Content);
+    }, [children]);
+
+    const footer = React.useMemo(() => {
         if (!actions || actions.length <= 0 || !containerAnimationControls) {
             return null;
         }
@@ -93,20 +97,16 @@ const useDialog = (props: DialogProps): DialogHook => {
             }
 
         });
-    };
-
-    const renderContent = (): JSX.Element | null => {
-        return getChildrenByType(children, Content);
-    }
+    }, [actions, containerAnimationControls, handleOnActiveAction]);
 
     return {
         generateActivator,
         handleOnClickActivator,
         handleOnClose,
         containerAnimationControls,
-        renderExtraHeader,
-        renderFooter,
-        renderContent
+        extraHeader,
+        content,
+        footer
     };
 }
 

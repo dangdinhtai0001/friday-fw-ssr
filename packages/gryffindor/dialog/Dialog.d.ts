@@ -94,9 +94,9 @@ export interface DialogHook {
   handleOnClickActivator: () => void | Promise<void>;
   handleOnClose: (event: object, reason: CloseReason) => Promise<any>;
   containerAnimationControls: AnimationControls;
-  renderExtraHeader: () => JSX.Element | null;
-  renderFooter: () => JSX.Element[] | null;
-  renderContent: () => JSX.Element | null;
+  extraHeader: JSX.Element | null;
+  content: JSX.Element | null;
+  footer: JSX.Element[] | null;
 }
 
 // ================================= || Context ||  =================================
