@@ -11,13 +11,9 @@ export interface DialogContainerProps extends TabbedDialogProps { }
 
 // ================================= || HOOKS ||  =================================
 export interface TabbedDialogHook {
-  generateActivator: () => JSX.Element | null;
   handleOnClickActivator: () => void | Promise<void>;
   handleOnClose: (event: object, reason: CloseReason) => Promise<any>;
   containerAnimationControls: AnimationControls;
-  renderExtraHeader: () => JSX.Element | null;
-  renderFooter: () => JSX.Element[] | null;
-  renderContent: () => _childrenType;
   // 
   handleOnChangeTab: (
     event: React.SyntheticEvent<Element, Event>,
@@ -25,6 +21,11 @@ export interface TabbedDialogHook {
   ) => void | Promise<void>;
   generateTabHeaders: () => _childrenType;
   generateTabPanels: () => _childrenType;
+
+  activator: JSX.Element | null;
+  extraHeader: JSX.Element | null;
+  content: _childrenType;
+  footer: JSX.Element[] | null;
 }
 
 // ================================= || Context ||  =================================

@@ -15,11 +15,11 @@ function TabbedDialog(
   ref: React.ForwardedRef<any>
 ): JSX.Element {
   const { context } = useTabbedDialogContext();
-  const { generateActivator, handleOnClickActivator } = useTabbedDialog(props);
+  const { activator, handleOnClickActivator } = useTabbedDialog(props);
 
   return (
     <>
-      {React.cloneElement(generateActivator()!, { onClick: handleOnClickActivator })}
+      {React.cloneElement(activator!, { onClick: handleOnClickActivator })}
       <ModalUnstyled
         open={context.opened}
         closeAfterTransition={false}

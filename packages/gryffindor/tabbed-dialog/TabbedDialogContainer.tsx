@@ -66,10 +66,11 @@ function TabbedDialogContainer(
     const {
         handleOnClose,
         containerAnimationControls,
-        renderFooter,
-        renderExtraHeader,
-        renderContent,
-        handleOnChangeTab
+        handleOnChangeTab,
+
+        extraHeader,
+        content,
+        footer
     } = useTabbedDialog(props);
 
     return (
@@ -121,15 +122,15 @@ function TabbedDialogContainer(
                             </div>
                             {/* ------------------------------------ | extra header | ------------------------------------ */}
                             <div className="w-full h-fit bg-th-background">
-                                {renderExtraHeader()}
+                                {extraHeader}
                             </div>
                             {/* ------------------------------------ | content | ------------------------------------ */}
                             <div className="w-full h-full px-[0.5rem] py-[0.3rem] overflow-auto bg-th-background ">
-                                {renderContent()}
+                                {content}
                             </div>
                             {/* ------------------------------------ | footer | ------------------------------------ */}
                             <div className="h-fit rounded-b-[0.5rem] border-t-[0.1rem] flex justify-end gap-[0.5rem] px-[0.5rem] py-[0.3rem] bg-th-background">
-                                {renderFooter()}
+                                {footer}
                             </div>
                         </div>
                     </TabsUnstyled>

@@ -19,8 +19,6 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
 
     const { context, helper } = useTabbedDialogContext<any>();
 
-    const { activedTabId } = context;
-
     const containerAnimationControls: AnimationControls = useAnimation();
     const tabAnimationControls: AnimationControls = useAnimation();
 
@@ -44,40 +42,33 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
             let { id, disabled, label } = props;
 
             return (
-                <TabWrapper value={id} disabled={disabled} isActivedTab={id === activedTabId}>
+                <TabWrapper value={id} disabled={disabled} isActivedTab={id === context.activedTabId}>
                     {label}
                 </TabWrapper>
             );
         });
-    }, [activedTabId, children]);
+    }, [children, context.activedTabId]);
 
     const generateTabPanels = React.useCallback((): _childrenType => {
         return getAllChildrenByType(children, TabItem, (child) => {
             let { props } = child;
             let { id } = props;
 
-            return (
-                <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
-                    {/* {props.children} */}
-                    <div>123456</div>
-                </TabPanelWrapper>
-            );
-
-            // if (destroyInactiveTabPane) {
-            //     return activedTabId === id ? (
-            //         <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
-            //             {props.children}
-            //         </TabPanelWrapper>
-            //     ) : null;
-            // } else {
-            //     return (
-            //         <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
-            //             {props.children}
-            //         </TabPanelWrapper>
-            //     );
-            // }
-        })
-    }, [activedTabId, children, destroyInactiveTabPane, tabAnimationControls]);
+            if (destroyInactiveTabPane) {
+                return context.activedTabId === id ? (
+                    <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
+                        {props.children}
+                    </TabPanelWrapper>
+                ) : null;
+            } else {
+                return (
+                    <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
+                        {props.children}
+                    </TabPanelWrapper>
+                );
+            }
+        });
+    }, [children, context.activedTabId, destroyInactiveTabPane, tabAnimationControls]);
 
     const handleOnChangeTab = React.useCallback(async (
         event: React.SyntheticEvent<Element, Event>,
@@ -95,23 +86,6 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
     }, [context, helper, onChange, tabAnimationControls]);
 
     // ==================================================================
-
-    const generateActivator = React.useCallback((): JSX.Element | null => {
-        return getChildrenByType(children, Activator);
-    }, [children]);
-
-    const renderExtraHeader = React.useCallback((): JSX.Element | null => {
-        return (
-            <TabsListWrapper
-                slotProps={{
-                    root: () => ({
-                        className: 'flex',
-                    }),
-                }}
-            >
-                {generateTabHeaders()}
-            </TabsListWrapper>)
-    }, [generateTabHeaders]);
 
     const handleOnClickActivator = React.useCallback(async () => {
         console.debug("Click activator ");
@@ -141,7 +115,25 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
         }
     }, [context, handleOnClose, helper, props]);
 
-    const renderFooter = React.useCallback((): JSX.Element[] | null => {
+    const extraHeader = React.useMemo(() => {
+        return (
+            <TabsListWrapper
+                slotProps={{
+                    root: () => ({
+                        className: 'flex',
+                    }),
+                }}
+            >
+                {generateTabHeaders()}
+            </TabsListWrapper>
+        )
+    }, [generateTabHeaders]);
+
+    const content = React.useMemo(() => {
+        return generateTabPanels();
+    }, [generateTabPanels]);
+
+    const footer = React.useMemo(() => {
         if (!actions || actions.length <= 0 || !containerAnimationControls) {
             return null;
         }
@@ -171,21 +163,21 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
         });
     }, [actions, containerAnimationControls, handleOnActiveAction]);
 
-    const renderContent = React.useCallback((): _childrenType => {
-        return generateTabPanels();
-    }, [generateTabPanels]);
+    const activator = React.useMemo(() => {
+        return getChildrenByType(children, Activator);
+    }, [children]);
 
     return {
-        generateActivator,
         handleOnClickActivator,
         handleOnClose,
         containerAnimationControls,
-        renderExtraHeader,
-        renderFooter,
-        renderContent,
         generateTabHeaders,
         generateTabPanels,
-        handleOnChangeTab
+        handleOnChangeTab,
+        activator,
+        extraHeader,
+        content,
+        footer
     };
 
 };

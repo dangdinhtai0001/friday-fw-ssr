@@ -455,7 +455,7 @@ const DemoPage = () => {
       <GryffindorTabbedDialog
         title="Đây là title"
         defaultValue="id-000"
-        destroyInactiveTabPane={true}
+        destroyInactiveTabPane={false}
         initialHeight={500}
         initialWidth={600}
         minHeight={200}

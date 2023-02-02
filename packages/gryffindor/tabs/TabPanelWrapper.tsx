@@ -22,9 +22,6 @@ function TabPanelWrapper(
 ): JSX.Element {
     const { tabAnimationControls, ..._props } = props;
 
-    console.log(props.value, props.children);
-
-
     return (
         <AnimatePresence mode="wait">
             <motion.div
