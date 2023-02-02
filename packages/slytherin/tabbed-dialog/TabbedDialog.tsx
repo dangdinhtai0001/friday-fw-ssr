@@ -7,7 +7,6 @@ import Backdrop from '@packages/slytherin/dialog/Backdrop';
 import { TabbedDialogProps } from './TabbedDialog.d';
 import TabbedDialogContainer from './TabbedDialogContainer';
 import { useTabbedDialogContext } from './TabbedDialogContext';
-import { getActivator } from './TabbedDialogUtils';
 import useTabbedDialog from './useTabbedDialog';
 
 
@@ -15,32 +14,29 @@ function TabbedDialog(
   props: TabbedDialogProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
-  const {
-    children,
-    onActiveAction,
-    onClose
-  } = props;
-
   const { context } = useTabbedDialogContext();
-  const { handleOnClickActivator, handleOnClose } = useTabbedDialog(props);
+  const { activator, handleOnClickActivator } = useTabbedDialog(props);
 
   return (
     <>
-      {React.cloneElement(getActivator(children!)!, { onClick: handleOnClickActivator })}
+      {React.cloneElement(activator!, { onClick: handleOnClickActivator })}
       <ModalUnstyled
         open={context.opened}
-        onClose={handleOnClose}
-        closeAfterTransition
+        closeAfterTransition={false}
         disableScrollLock={true}
+        hideBackdrop={false}
         slots={{ backdrop: Backdrop }}
+        keepMounted={false}
         ref={ref}
       >
         <TabbedDialogContainer
           {...props}
-          onActiveAction={onActiveAction}
-          onClose={onClose}
+          // Phải thêm minHeight, maxHeight để tránh TH không khai báo tham số  này thì hook useResize sẽ bị sai
+          minHeight={context.minHeight}
+          maxHeight={context.maxHeight}
+          minWidth={context.minWidth}
+          maxWidth={context.maxWidth}
         >
-          {children}
         </TabbedDialogContainer>
       </ModalUnstyled>
     </>

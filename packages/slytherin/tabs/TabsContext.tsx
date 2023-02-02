@@ -20,7 +20,7 @@ const TabsContextProvider = <T extends unknown>(props: ContextProviderProps) => 
 
     const defaultValue = useMemo(() => {
         return { context, setContext }
-    }, []);
+    }, [context]);
 
     return (
         <TabsContext.Provider value={defaultValue}>

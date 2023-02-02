@@ -3,7 +3,7 @@
 import * as React from 'react';
 // 3rd imports
 // local imports
-import { TabItemProps } from '@packages/gryffindor/tabs/Tabs.d';
+import { TabItemProps } from '@packages/slytherin/tabs/Tabs.d';
 
 function TabItem(
     props: TabItemProps,

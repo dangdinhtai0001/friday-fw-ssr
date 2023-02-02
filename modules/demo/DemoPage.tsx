@@ -3,15 +3,15 @@ import {
   Input
 } from '@packages/slytherin';
 
-import GryffindorDialogActivator from '@packages/gryffindor/dialog/collector/Activator';
-import GryffindorDialogContent from '@packages/gryffindor/dialog/collector/Content';
-import GryffindorDialog from '@packages/gryffindor/dialog/DialogWrapper';
+import SlytherinDialogActivator from '@packages/slytherin/dialog/collector/Activator';
+import SlytherinDialogContent from '@packages/slytherin/dialog/collector/Content';
+import SlytherinDialog from '@packages/slytherin/dialog/DialogWrapper';
 // 
 import Form from '@packages/gryffindor/form/FormWrapper';
 //
-import GryffindorTabbedDialogActivator from '@packages/gryffindor/tabbed-dialog/collector/Activator';
-import GryffindorTabbedDialogTabItem from '@packages/gryffindor/tabbed-dialog/collector/TabItem';
-import GryffindorTabbedDialog from '@packages/gryffindor/tabbed-dialog/TabbedDialogWrapper';
+import SlytherinTabbedDialogActivator from '@packages/slytherin/tabbed-dialog/collector/Activator';
+import SlytherinTabbedDialogTabItem from '@packages/slytherin/tabbed-dialog/collector/TabItem';
+import SlytherinTabbedDialog from '@packages/slytherin/tabbed-dialog/TabbedDialogWrapper';
 
 import React from 'react';
 
@@ -20,17 +20,17 @@ const DemoPage = () => {
 
   return (
     <>
-      {/* GryffindorTabs */}
-      {/* <GryffindorTabs defaultValue="id-000" destroyInactiveTabPane={false}>
-        <GryffindorTabItem id="id-000" label="label 000">
+      {/* SlytherinTabs */}
+      {/* <SlytherinTabs defaultValue="id-000" destroyInactiveTabPane={false}>
+        <SlytherinTabItem id="id-000" label="label 000">
           <div className='bg-amber-300'>Tab panel 000</div>
-        </GryffindorTabItem>
-        <GryffindorTabItem id="id-001" label="label 001">
+        </SlytherinTabItem>
+        <SlytherinTabItem id="id-001" label="label 001">
           <div>Tab panel 001</div>
-        </GryffindorTabItem>
-      </GryffindorTabs> */}
-      {/* GryffindorDialog */}
-      <GryffindorDialog
+        </SlytherinTabItem>
+      </SlytherinTabs> */}
+      {/* SlytherinDialog */}
+      <SlytherinDialog
         title="Đây là title"
         initialHeight={500}
         initialWidth={600}
@@ -62,12 +62,12 @@ const DemoPage = () => {
           return { isClose: false }
         }}
       >
-        <GryffindorDialogActivator>
+        <SlytherinDialogActivator>
           <Button disabled={false} theme="primary">
             Open dialog
           </Button>
-        </GryffindorDialogActivator>
-        <GryffindorDialogContent>
+        </SlytherinDialogActivator>
+        <SlytherinDialogContent>
           <Form
             fields={[
               { name: 'first_name', initialValue: "first name", component: Input, componentParams: { className: 'w-full' } },
@@ -130,10 +130,10 @@ const DemoPage = () => {
             }}
             ref={formRef}
           ></Form>
-        </GryffindorDialogContent>
-      </GryffindorDialog>
-      {/* GryffindorTabbedDialog */}
-      <GryffindorTabbedDialog
+        </SlytherinDialogContent>
+      </SlytherinDialog>
+      {/* SlytherinTabbedDialog */}
+      <SlytherinTabbedDialog
         title="Đây là title"
         defaultValue="id-000"
         destroyInactiveTabPane={false}
@@ -166,15 +166,15 @@ const DemoPage = () => {
           return { isClose: false }
         }}
       >
-        <GryffindorTabbedDialogActivator>
+        <SlytherinTabbedDialogActivator>
           <Button disabled={false} theme="primary">
             Open tabbed dialog
           </Button>
-        </GryffindorTabbedDialogActivator>
-        <GryffindorTabbedDialogTabItem id="id-000" label="label 000">
+        </SlytherinTabbedDialogActivator>
+        <SlytherinTabbedDialogTabItem id="id-000" label="label 000">
           <div className='w-[1000px] h-[800px] bg-red-400'>Tab panel 000</div>
-        </GryffindorTabbedDialogTabItem>
-        <GryffindorTabbedDialogTabItem id="id-001" label="label 001">
+        </SlytherinTabbedDialogTabItem>
+        <SlytherinTabbedDialogTabItem id="id-001" label="label 001">
           <Form
             fields={[
               { name: 'first_name', initialValue: "first name", component: Input, componentParams: { className: 'w-full' } },
@@ -237,11 +237,11 @@ const DemoPage = () => {
             }}
             ref={formRef}
           ></Form>
-        </GryffindorTabbedDialogTabItem>
-        <GryffindorTabbedDialogTabItem id="id-002" label="label 002">
+        </SlytherinTabbedDialogTabItem>
+        <SlytherinTabbedDialogTabItem id="id-002" label="label 002">
           <div className='w-[1000px] h-[800px] bg-blue-400'>Tab panel 002</div>
-        </GryffindorTabbedDialogTabItem>
-      </GryffindorTabbedDialog>
+        </SlytherinTabbedDialogTabItem>
+      </SlytherinTabbedDialog>
     </>
   );
 };

@@ -1,3 +1,0 @@
-`Dialog` thông báo cho người dùng về một task và có thể chứa thông tin quan trọng, yêu cầu quyết định hoặc liên quan đến nhiều task.
-
-`Dialog` là một loại cửa sổ phương thức xuất hiện trước nội dung ứng dụng để cung cấp thông tin quan trọng hoặc yêu cầu quyết định. Các `Dialog` sẽ tạm dừng hầu hết chức năng của ứng dụng khi chúng xuất hiện và vẫn hiển thị trên màn hình cho đến khi được xác nhận, loại bỏ hoặc thực hiện một hành động bắt buộc.

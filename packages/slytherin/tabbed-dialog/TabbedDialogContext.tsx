@@ -1,4 +1,4 @@
-import { Dispatch, createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, Dispatch, useContext, useEffect, useMemo, useState } from 'react';
 // ------------------------ || define interface || ------------------------
 import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './TabbedDialog.d';
 // ================================================== || CONTEXT || ================================================== //
@@ -20,7 +20,7 @@ const TabbedDialogContextProvider = <T extends unknown>(props: ContextProviderPr
 
     const defaultValue = useMemo(() => {
         return { context, setContext }
-    }, []);
+    }, [context]);
 
     return (
         <TabbedDialogContext.Provider value={defaultValue}>
@@ -53,7 +53,7 @@ function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): Cont
          * @param key Key của action
          * @param disabled Trạng thái disabled mới
          */
-        applyDisable(key: string, disabled: boolean): void {
+        applyDisableAction(key: string, disabled: boolean): void {
             setContext((prevState: ContextState<T>) => {
                 let _actions = prevState.actions?.map(item => {
                     if (key === item.key) {
@@ -76,7 +76,7 @@ function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): Cont
          * @param key Key của action
          * @param visible Trạng thái visible mới
          */
-        applyVisible(key: string, visible: boolean): void {
+        applyVisibleAction(key: string, visible: boolean): void {
             setContext((prevState: ContextState<T>) => {
                 let _actions = prevState.actions?.map(item => {
                     if (key === item.key) {

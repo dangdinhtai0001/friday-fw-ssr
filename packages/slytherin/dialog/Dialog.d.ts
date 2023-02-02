@@ -1,50 +1,30 @@
+/* eslint-disable no-unused-vars */
 import { ModalUnstyledProps } from '@mui/base/ModalUnstyled';
+import { AnimationControls } from 'framer-motion';
+
+// ================================= || COMMON ||  =================================
 
 export interface ActionDef {
   key: string;
   label?: string;
+  isClose?: boolean;
   component?: JSX.Element;
   disabled?: boolean;
   visible?: boolean;
-  others?: Object 
+  others?: Object
 }
-// ==========================================================================
-export interface DialogContainerProps{
-  /**
-   * Nội dung hiển thị của dialog
-   */
-  children: JSX.Element | JSX.Element[] | null;
-  /**
-   * Phần mở rộng của header
-   */
-  extraHeader?: JSX.Element | JSX.Element[] | null;
-  /**
-   * Hàm xử lý sự kiện khi active action
-   */
-  onActiveAction?: (
-    event: React.MouseEvent<unknown, MouseEvent>,
-    key: string,
-    context: ContextState,
-    helper: ContextHelper
-  ) => void;
-    /**
-   * hàm xử lý sự kiện khi close 
-   * @param context context
-   * @param helper helper của context
-   * @param reason Lý do close
-   * @returns void
-   */
-    onClose?: (context: ContextState, helper: any, reason: string) => void
-    /**
-     * @MUI cũng có định nghĩa rồi, nhưng chỉ cho phép 1 children. Nên cần định nghĩa lại để dùng đc activator và content
-     */
-    children: JSX.Element | JSX.Element[];
 
-    animationControls?: any
+export interface ActivedActionResponse {
+  // nếu là true thì sau khi thực hiện xong action sẽ đóng dialog
+  isClose: boolean;
 }
-// ==========================================================================
 
-export interface DialogProps extends Omit<ModalUnstyledProps, "defaultValue" | "onChange"> {
+export type CloseReason = "backdropClick" | "escapeKeyDown" | "headerClick" | "activeAction";
+
+// ================================= || PROPS ||  =================================
+
+export interface DialogProps
+  extends Omit<ModalUnstyledProps, 'defaultValue' | 'onChange'> {
   /**
    * Height mặc định
    */
@@ -89,23 +69,39 @@ export interface DialogProps extends Omit<ModalUnstyledProps, "defaultValue" | "
    * @param helper helper của context
    * @returns void
    */
-  onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, key: string, context: ContextState, helper: ContextHelper) => void
+  onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, actionDef: ActionDef, context: ContextState, helper: ContextHelper)
+    => ActivedActionResponse | Promise<ActivedActionResponse>
   /**
    * hàm xử lý sự kiện khi close 
    * @param context context
    * @param helper helper của context
    * @param reason Lý do close
-   * @returns void
+   * @returns ActivedActionResponse Dùng trong TH kết quả của thao tác sẽ gây ra 1 hành động gì đó (VD: đóng dialog )
    */
-  onClose?: (context: ContextState, helper: any, reason: string) => void
+  onClose?: (context: ContextState, helper: any, reason: string) => void | Promise<void>
   /**
    * @MUI cũng có định nghĩa rồi, nhưng chỉ cho phép 1 children. Nên cần định nghĩa lại để dùng đc activator và content
    */
   children: JSX.Element | JSX.Element[] | null;
 }
 
-// ==========================================================================
-export interface ContextState {
+export interface DialogContainerProps extends DialogProps {
+}
+
+// ================================= || HOOKS ||  =================================
+export interface DialogHook {
+  generateActivator: () => JSX.Element | null;
+  handleOnClickActivator: () => void | Promise<void>;
+  handleOnClose: (event: object, reason: CloseReason) => Promise<any>;
+  containerAnimationControls: AnimationControls;
+  extraHeader: JSX.Element | null;
+  content: JSX.Element | null;
+  footer: JSX.Element[] | null;
+}
+
+// ================================= || Context ||  =================================
+
+export interface ContextState<T> {
   /**
    * Trạng thái open hay không của dialog
    */
@@ -114,9 +110,9 @@ export interface ContextState {
    * Title của dialog
    */
   title?: string;
-    /**
-   * Định nghĩa metadata cho các action của dialog
-   */
+  /**
+ * Định nghĩa metadata cho các action của dialog
+ */
   actions?: ActionDef[];
   /**
    * Height mặc định
@@ -144,18 +140,17 @@ export interface ContextState {
   maxWidth?: number;
 }
 
+export interface ContextHelper<T> {
+  commitOpened: (opened: boolean) => void;
+  applyDisable: (key: string, disabled: boolean) => void;
+  applyVisible: (key: string, visible: boolean) => void;
+}
+
 export interface ContextProviderProps {
-  initialState: ContextState;
+  initialState: ContextState<T>;
   children: React.ReactElement;
 }
-
 export interface ContextProviderValue {
-  context: ContextState;
+  context: ContextState<T>;
   setContext: React.Dispatch<any>;
-}
-
-export interface ContextHelper {
-  commitOpened: (opened: boolean) => void ;
-  applyDisable: (key: string, disabled: boolean) => void ;
-  applyVisible: (key: string, visible: boolean) => void ;
 }

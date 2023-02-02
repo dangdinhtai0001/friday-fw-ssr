@@ -1,4 +1,4 @@
-import { createContext, Dispatch, useContext, useEffect, useState } from 'react';
+import { Dispatch, createContext, useContext, useEffect, useMemo, useState } from 'react';
 // ------------------------ || define interface || ------------------------
 import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './Dialog.d';
 // ================================================== || CONTEXT || ================================================== //
@@ -8,8 +8,8 @@ import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState
 const DialogContext = createContext<ContextProviderValue | null>(null);
 
 // ---------------------- || Định nghĩa context provider || ---------------------- //
-const DialogContextProvider = (props: ContextProviderProps) => {
-    const [context, setContext] = useState<ContextState>(props.initialState);
+const DialogContextProvider = <T extends unknown>(props: ContextProviderProps) => {
+    const [context, setContext] = useState<ContextState<T>>(props.initialState);
 
     useEffect(() => {
         return () => {
@@ -18,23 +18,30 @@ const DialogContextProvider = (props: ContextProviderProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const defaultValue = useMemo(() => {
+        return { context, setContext }
+    }, [context, setContext]);
+
     return (
-        <DialogContext.Provider value={{ context, setContext }}>
+        <DialogContext.Provider value={defaultValue}>
             {props.children}
         </DialogContext.Provider>
     );
 };
 
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
+// - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính 
+// - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
+// - apply... ==> Thay đổi 1 phần giá trị của thuộc tính đó 
 // --------------------------------------------------------------------------------
-function mutations(context: ContextState, setContext: Dispatch<any>): ContextHelper {
+function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): ContextHelper<T> {
     return {
         /**
-         * Hàm cập nhật trạng thái của biến opened trong context, ===> nó sẽ thay đổi trạng thái open/close của dialog
-         * @param opened 
-         */
+             * Hàm cập nhật trạng thái của biến opened trong context, ===> nó sẽ thay đổi trạng thái open/close của dialog
+             * @param opened 
+             */
         commitOpened(opened: boolean): void {
-            setContext((prevState: ContextState) => ({
+            setContext((prevState: ContextState<T>) => ({
                 ...prevState,
                 opened: opened,
             }));
@@ -47,7 +54,7 @@ function mutations(context: ContextState, setContext: Dispatch<any>): ContextHel
          * @param disabled Trạng thái disabled mới
          */
         applyDisable(key: string, disabled: boolean): void {
-            setContext((prevState: ContextState) => {
+            setContext((prevState: ContextState<T>) => {
                 let _actions = prevState.actions?.map(item => {
                     if (key === item.key) {
                         return { ...item, disabled: disabled }
@@ -70,7 +77,7 @@ function mutations(context: ContextState, setContext: Dispatch<any>): ContextHel
          * @param visible Trạng thái visible mới
          */
         applyVisible(key: string, visible: boolean): void {
-            setContext((prevState: ContextState) => {
+            setContext((prevState: ContextState<T>) => {
                 let _actions = prevState.actions?.map(item => {
                     if (key === item.key) {
                         return { ...item, visible: visible }
@@ -93,11 +100,11 @@ function mutations(context: ContextState, setContext: Dispatch<any>): ContextHel
 
 
 // ---------------------- || Định nghĩa hook || ---------------------- //
-const useDialogContext = () => {
+const useDialogContext = <T extends unknown>(): { context: ContextState<T>, helper: ContextHelper<T> } => {
     // lấy giá trị của context
     const { context, setContext } = useContext(DialogContext)!;
 
-    const helper = mutations(context, setContext);
+    const helper: ContextHelper<T> = mutations(context, setContext);
 
     return { context, helper };
 };

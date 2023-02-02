@@ -5,10 +5,10 @@ import * as React from 'react';
 import { TabItemProps } from './Tabs.d';
 
 function TabItem(
-  props: TabItemProps,
-  ref: React.ForwardedRef<any>
+    props: TabItemProps,
+    ref: React.ForwardedRef<any>
 ): JSX.Element {
-  return <></>;
+    return <></>;
 }
 
 export default React.forwardRef(TabItem);

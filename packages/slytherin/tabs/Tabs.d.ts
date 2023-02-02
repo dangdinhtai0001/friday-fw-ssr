@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { TabPanelUnstyledProps } from '@mui/base/TabPanelUnstyled';
-import { TabUnstyledProps } from '@mui/base/TabUnstyled';
 import { TabsListUnstyledProps } from '@mui/base/TabsListUnstyled';
 import { TabsUnstyledProps } from '@mui/base/TabsUnstyled';
-import * as React from 'react';
+import { TabUnstyledProps } from '@mui/base/TabUnstyled';
+import { _childrenType } from '@packages/ravenclaw';
+import { AnimationControls } from 'framer-motion';
+import { ReactNode } from 'react';
 
 export interface TabsProps extends TabsUnstyledProps {
   children: JSX.Element | JSX.Element[] | null;
@@ -32,22 +34,25 @@ export interface TabsProps extends TabsUnstyledProps {
     value: string | number | boolean,
     context: ContextState,
     helper: any
-  ) => void;
-  /**
-   *
-   */
+  ) => void | Promise<void>;
+  //
   maxContentHeight?: number;
 }
-export interface TabListProps extends TabsListUnstyledProps {}
-export interface TabProps extends TabUnstyledProps {
+
+export interface TabsListWrapperProps
+  extends TabsListUnstyledProps { }
+
+export interface TabWrapperProps extends TabUnstyledProps {
   /**
    * Tab có đang được active hay không
    */
   isActivedTab: boolean;
 }
-export interface TabPanelProps extends TabPanelUnstyledProps {
+
+export interface TabPanelWrapperProps extends TabPanelUnstyledProps {
   tabAnimationControls: AnimationControls;
 }
+
 export interface TabItemProps {
   /**
    * TabPane's head display content
@@ -67,12 +72,24 @@ export interface TabItemProps {
   disabled?: boolean;
 }
 
-// ==========================================================================
+// ================================= || HOOKS ||  =================================
+export interface TabsHook {
+  handleOnChange: (
+    event: React.SyntheticEvent<Element, Event>,
+    tabId: string | number | boolean
+  ) => void | Promise<void>;
+  tabHeaders: _childrenType | ReactNode;
+  tabPanels: _childrenType | ReactNode;
+}
+
+// ================================= || Context ||  =================================
+
 export interface ContextState<T> {
   /**
    * Id của tab đang đc active
    */
   activedTabId?: number | string | false;
+  defaultActiveId?: number | string | false;
 }
 
 export interface ContextHelper<T> {
@@ -80,11 +97,10 @@ export interface ContextHelper<T> {
 }
 
 export interface ContextProviderProps {
-  initialState: ContextState;
+  initialState: ContextState<T>;
   children: React.ReactElement;
 }
-
 export interface ContextProviderValue {
-  context: ContextState;
+  context: ContextState<T>;
   setContext: React.Dispatch<any>;
 }
