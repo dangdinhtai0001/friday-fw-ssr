@@ -11,6 +11,7 @@ function getInitialContext(props: TabsProps): ContextState<any> {
 
     let tabContextInitial: ContextState<any> = {
         activedTabId: value ? value : defaultValue,
+        defaultActiveId: defaultValue ? defaultValue : value
     };
 
     return tabContextInitial;

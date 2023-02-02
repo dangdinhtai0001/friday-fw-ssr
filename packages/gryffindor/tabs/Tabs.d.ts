@@ -89,6 +89,7 @@ export interface ContextState<T> {
    * Id của tab đang đc active
    */
   activedTabId?: number | string | false;
+  defaultActiveId?: number | string | false;
 }
 
 export interface ContextHelper<T> {

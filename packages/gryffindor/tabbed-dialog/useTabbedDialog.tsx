@@ -5,14 +5,14 @@ import { AnimationControls, useAnimation } from 'framer-motion';
 // local imports
 import { ActionDef, ActivedActionResponse, CloseReason } from '@packages/gryffindor/dialog/Dialog.d';
 import TabPanelWrapper from '@packages/gryffindor/tabs/TabPanelWrapper';
-import TabsListWrapper from '@packages/gryffindor/tabs/TabsListWrapper';
 import TabWrapper from '@packages/gryffindor/tabs/TabWrapper';
-import { getAllChildrenByType, getChildrenByType, _childrenType } from '@packages/ravenclaw';
+import TabsListWrapper from '@packages/gryffindor/tabs/TabsListWrapper';
+import { _childrenType, getAllChildrenByType, getChildrenByType } from '@packages/ravenclaw';
 import { Button } from '@packages/slytherin/button';
-import Activator from './collector/Activator';
-import TabItem from './collector/TabItem';
 import { TabbedDialogHook, TabbedDialogProps } from './TabbedDialog.d';
 import { useTabbedDialogContext } from './TabbedDialogContext';
+import Activator from './collector/Activator';
+import TabItem from './collector/TabItem';
 
 const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
     const { actions, children, onChange, destroyInactiveTabPane } = props;
@@ -62,7 +62,7 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
                 ) : null;
             } else {
                 return (
-                    <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
+                    <TabPanelWrapper key={props.id} value={props.id} tabAnimationControls={tabAnimationControls}>
                         {props.children}
                     </TabPanelWrapper>
                 );
@@ -103,6 +103,9 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
         console.debug("Close event with reason: ", reason);
 
         helper.commitOpened(false);
+
+        // Sau khi đóng dialog thì phải cập nhật lại giá trị cho actived tab 
+        helper.commitActivedId(context.defaultActiveId!);
     }, [containerAnimationControls, context, helper, props]);
 
     const handleOnActiveAction = React.useCallback(async (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>, actionDef: ActionDef) => {

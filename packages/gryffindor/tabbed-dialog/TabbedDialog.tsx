@@ -26,6 +26,7 @@ function TabbedDialog(
         disableScrollLock={true}
         hideBackdrop={false}
         slots={{ backdrop: Backdrop }}
+        keepMounted={false}
         ref={ref}
       >
         <TabbedDialogContainer

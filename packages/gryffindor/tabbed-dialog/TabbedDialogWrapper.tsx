@@ -33,6 +33,7 @@ function getInitialContext(props: TabbedDialogProps) {
         initialWidth: initialWidth ? initialWidth : 600,
         // 
         activedTabId: value ? value : defaultValue,
+        defaultActiveId: defaultValue ? defaultValue : value
     };
 }
 

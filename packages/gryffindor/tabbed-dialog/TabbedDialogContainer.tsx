@@ -8,6 +8,7 @@ import TabsUnstyled from '@mui/base/TabsUnstyled';
 import { Resizable, useResizable } from '@packages/hufflepuff';
 import Button from '@packages/slytherin/button/Button';
 import { DialogContainerProps } from './TabbedDialog.d';
+import { useTabbedDialogContext } from './TabbedDialogContext';
 import useTabbedDialog from './useTabbedDialog';
 
 const containerVariants = {
@@ -62,6 +63,7 @@ function TabbedDialogContainer(
         initialHeight,
         initialWidth,
     });
+    const { context } = useTabbedDialogContext();
 
     const {
         handleOnClose,
@@ -93,6 +95,7 @@ function TabbedDialogContainer(
                     }}
                 >
                     <TabsUnstyled
+                        value={context.activedTabId}
                         onChange={async (
                             event: React.SyntheticEvent<Element, Event>,
                             value: string | number | boolean
