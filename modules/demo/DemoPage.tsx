@@ -342,7 +342,7 @@ const DemoPage = () => {
       {/* GryffindorTabs */}
       <GryffindorTabs defaultValue="id-000" destroyInactiveTabPane={true}>
         <GryffindorTabItem id="id-000" label="label 000">
-          <div className=''>Tab panel 000</div>
+          <div className='bg-amber-300'>Tab panel 000</div>
         </GryffindorTabItem>
         <GryffindorTabItem id="id-001" label="label 001">
           <div>Tab panel 001</div>
@@ -455,7 +455,7 @@ const DemoPage = () => {
       <GryffindorTabbedDialog
         title="Đây là title"
         defaultValue="id-000"
-        destroyInactiveTabPane={false}
+        destroyInactiveTabPane={true}
         initialHeight={500}
         initialWidth={600}
         minHeight={200}

@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { TabPanelUnstyledProps } from '@mui/base/TabPanelUnstyled';
-import { TabUnstyledProps } from '@mui/base/TabUnstyled';
 import { TabsListUnstyledProps } from '@mui/base/TabsListUnstyled';
 import { TabsUnstyledProps } from '@mui/base/TabsUnstyled';
+import { TabUnstyledProps } from '@mui/base/TabUnstyled';
 import { AnimationControls } from 'framer-motion';
 
 export interface TabsProps extends TabsUnstyledProps {
@@ -31,15 +32,13 @@ export interface TabsProps extends TabsUnstyledProps {
     value: string | number | boolean,
     context: ContextState,
     helper: any
-  ) => void;
-  /**
-   *
-   */
+  ) => void | Promise<void>;
+  //
   maxContentHeight?: number;
 }
 
 export interface TabsListWrapperProps
-  extends TabsListUnstyledProps {}
+  extends TabsListUnstyledProps { }
 
 export interface TabWrapperProps extends TabUnstyledProps {
   /**
@@ -77,9 +76,7 @@ export interface TabsHook {
     event: React.SyntheticEvent<Element, Event>,
     tabId: string | number | boolean
   ) => void | Promise<void>;
-
   generateTabHeaders: () => _childrenType;
-
   generateTabPanels: () => _childrenType;
 }
 

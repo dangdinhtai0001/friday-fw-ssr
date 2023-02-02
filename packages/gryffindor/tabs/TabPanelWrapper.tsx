@@ -17,9 +17,13 @@ const TabVariants = {
 
 function TabPanelWrapper(
     props: TabPanelWrapperProps,
+    // eslint-disable-next-line no-unused-vars
     ref: React.ForwardedRef<any>
 ): JSX.Element {
     const { tabAnimationControls, ..._props } = props;
+
+    console.log(props.value, props.children);
+
 
     return (
         <AnimatePresence mode="wait">

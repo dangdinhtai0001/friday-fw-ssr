@@ -4,7 +4,6 @@ import * as React from 'react';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 // local imports
 import { TabsProps } from './Tabs.d';
-import { useTabsContext } from './TabsContext';
 import TabsListWrapper from './TabsListWrapper';
 import useTabs from './useTabs';
 
@@ -13,20 +12,19 @@ function Tabs(
   props: TabsProps,
   ref: React.ForwardedRef<any>
 ): JSX.Element {
+  // eslint-disable-next-line no-unused-vars
   const { onChange, destroyInactiveTabPane, ..._props } = props;
 
   const { handleOnChange, generateTabHeaders, generateTabPanels } = useTabs(props);
 
-  const { context } = useTabsContext<any>();
-
   return (
     <TabsUnstyled
       {..._props}
-      onChange={(
+      onChange={async (
         event: React.SyntheticEvent<Element, Event>,
         value: string | number | boolean
       ) => {
-        handleOnChange(event, value);
+        await handleOnChange(event, value);
       }}
       slotProps={{
         root: () => ({

@@ -3,12 +3,12 @@ import * as React from 'react';
 // 3rd imports
 import { AnimationControls, useAnimation } from 'framer-motion';
 // local imports
-import { _childrenType, getAllChildrenByType } from '@packages/ravenclaw';
+import { getAllChildrenByType, _childrenType } from '@packages/ravenclaw';
 import TabItem from './TabItem';
 import TabPanelWrapper from './TabPanelWrapper';
-import TabWrapper from './TabWrapper';
 import { TabsHook, TabsProps } from './Tabs.d';
 import { useTabsContext } from './TabsContext';
+import TabWrapper from './TabWrapper';
 
 const useTabs = (props: TabsProps): TabsHook => {
     const { children } = props;
@@ -19,19 +19,21 @@ const useTabs = (props: TabsProps): TabsHook => {
 
     const { activedTabId } = context;
 
-    const handleOnChange = (
+    const handleOnChange = React.useCallback(async (
         event: React.SyntheticEvent<Element, Event>,
         tabId: string | number | boolean
     ) => {
+        // kích hoạt sự kiện animation
+        await tabAnimationControls.start("animate");
+
         // update lại tab id mỗi khi thay đổi
         helper.commitActivedId(tabId);
 
         // Gọi hàm onchange từ props
-        props.onChange?.(event, tabId, context, helper);
+        await props.onChange?.(event, tabId, context, helper);
 
-        // kích hoạt sự kiện animation
-        tabAnimationControls.start("animate");
-    };
+
+    }, [context, helper, props, tabAnimationControls]);
 
     const generateTabHeaders = React.useCallback((): _childrenType => {
         return getAllChildrenByType(children, TabItem, (child) => {
@@ -44,7 +46,7 @@ const useTabs = (props: TabsProps): TabsHook => {
                 </TabWrapper>
             );
         });
-    }, [activedTabId]);
+    }, [activedTabId, children]);
 
     const generateTabPanels = React.useCallback((): _childrenType => {
         const { children, destroyInactiveTabPane } = props;
@@ -64,7 +66,7 @@ const useTabs = (props: TabsProps): TabsHook => {
             }
 
         })
-    }, [activedTabId]);
+    }, [activedTabId, props, tabAnimationControls]);
 
     return {
         handleOnChange,

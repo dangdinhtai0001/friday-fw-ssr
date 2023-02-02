@@ -23,9 +23,7 @@ export interface TabbedDialogHook {
     event: React.SyntheticEvent<Element, Event>,
     tabId: string | number | boolean
   ) => void | Promise<void>;
-
   generateTabHeaders: () => _childrenType;
-
   generateTabPanels: () => _childrenType;
 }
 

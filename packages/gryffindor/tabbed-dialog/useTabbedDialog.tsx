@@ -5,17 +5,17 @@ import { AnimationControls, useAnimation } from 'framer-motion';
 // local imports
 import { ActionDef, ActivedActionResponse, CloseReason } from '@packages/gryffindor/dialog/Dialog.d';
 import TabPanelWrapper from '@packages/gryffindor/tabs/TabPanelWrapper';
-import TabWrapper from '@packages/gryffindor/tabs/TabWrapper';
 import TabsListWrapper from '@packages/gryffindor/tabs/TabsListWrapper';
-import { _childrenType, getAllChildrenByType, getChildrenByType } from '@packages/ravenclaw';
+import TabWrapper from '@packages/gryffindor/tabs/TabWrapper';
+import { getAllChildrenByType, getChildrenByType, _childrenType } from '@packages/ravenclaw';
 import { Button } from '@packages/slytherin/button';
-import { TabbedDialogHook, TabbedDialogProps } from './TabbedDialog.d';
-import { useTabbedDialogContext } from './TabbedDialogContext';
 import Activator from './collector/Activator';
 import TabItem from './collector/TabItem';
+import { TabbedDialogHook, TabbedDialogProps } from './TabbedDialog.d';
+import { useTabbedDialogContext } from './TabbedDialogContext';
 
 const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
-    const { actions, children, destroyInactiveTabPane } = props;
+    const { actions, children, onChange, destroyInactiveTabPane } = props;
 
     const { context, helper } = useTabbedDialogContext<any>();
 
@@ -36,36 +36,69 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
 
     }, [containerAnimationControls, context.opened]);
 
+    // ==================================================================
+
+    const generateTabHeaders = React.useCallback((): _childrenType => {
+        return getAllChildrenByType(children, TabItem, (child) => {
+            let { props } = child;
+            let { id, disabled, label } = props;
+
+            return (
+                <TabWrapper value={id} disabled={disabled} isActivedTab={id === activedTabId}>
+                    {label}
+                </TabWrapper>
+            );
+        });
+    }, [activedTabId, children]);
+
+    const generateTabPanels = React.useCallback((): _childrenType => {
+        return getAllChildrenByType(children, TabItem, (child) => {
+            let { props } = child;
+            let { id } = props;
+
+            return (
+                <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
+                    {/* {props.children} */}
+                    <div>123456</div>
+                </TabPanelWrapper>
+            );
+
+            // if (destroyInactiveTabPane) {
+            //     return activedTabId === id ? (
+            //         <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
+            //             {props.children}
+            //         </TabPanelWrapper>
+            //     ) : null;
+            // } else {
+            //     return (
+            //         <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
+            //             {props.children}
+            //         </TabPanelWrapper>
+            //     );
+            // }
+        })
+    }, [activedTabId, children, destroyInactiveTabPane, tabAnimationControls]);
+
+    const handleOnChangeTab = React.useCallback(async (
+        event: React.SyntheticEvent<Element, Event>,
+        tabId: string | number | boolean
+    ) => {
+        // update lại tab id mỗi khi thay đổi
+        helper.commitActivedId(tabId);
+
+        // Gọi hàm onchange từ props
+        await onChange?.(event, tabId, context, helper);
+
+        // kích hoạt sự kiện animation
+        await tabAnimationControls.start("animate");
+
+    }, [context, helper, onChange, tabAnimationControls]);
+
+    // ==================================================================
+
     const generateActivator = React.useCallback((): JSX.Element | null => {
         return getChildrenByType(children, Activator);
     }, [children]);
-
-    const handleOnClickActivator = async () => {
-        console.debug("Click activator ");
-
-        helper.commitOpened(true);
-    }
-
-    const handleOnClose = async (event: object, reason: CloseReason): Promise<any> => {
-        // animation cho sự kiện close
-        await containerAnimationControls.start("exit");
-
-        // trigger cho sự kiện close
-        await props.onClose?.(context, helper, reason);
-
-        console.debug("Close event with reason: ", reason);
-        helper.commitOpened(false);
-    }
-
-    const handleOnActiveAction = async (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>, actionDef: ActionDef) => {
-        let actionResponse: ActivedActionResponse | undefined = await props.onActiveAction?.(event, actionDef, context, helper);
-
-        if (actionDef.isClose || actionResponse?.isClose === true) {
-            // Nếu action đc cấu hình là action close thì luôn gọi animation close
-            // Nếu action trả về kết quả yêu cầu close dialog thì gọi animation close
-            await handleOnClose(event, "activeAction");
-        }
-    }
 
     const renderExtraHeader = React.useCallback((): JSX.Element | null => {
         return (
@@ -78,10 +111,37 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
             >
                 {generateTabHeaders()}
             </TabsListWrapper>)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [generateTabHeaders]);
 
-    const renderFooter = (): JSX.Element[] | null => {
+    const handleOnClickActivator = React.useCallback(async () => {
+        console.debug("Click activator ");
+
+        helper.commitOpened(true);
+    }, [helper]);
+
+    const handleOnClose = React.useCallback(async (event: object, reason: CloseReason): Promise<any> => {
+        // animation cho sự kiện close
+        await containerAnimationControls.start("exit");
+
+        // trigger cho sự kiện close
+        await props.onClose?.(context, helper, reason);
+
+        console.debug("Close event with reason: ", reason);
+
+        helper.commitOpened(false);
+    }, [containerAnimationControls, context, helper, props]);
+
+    const handleOnActiveAction = React.useCallback(async (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>, actionDef: ActionDef) => {
+        let actionResponse: ActivedActionResponse | undefined = await props.onActiveAction?.(event, actionDef, context, helper);
+
+        if (actionDef.isClose || actionResponse?.isClose === true) {
+            // Nếu action đc cấu hình là action close thì luôn gọi animation close
+            // Nếu action trả về kết quả yêu cầu close dialog thì gọi animation close
+            await handleOnClose(event, "activeAction");
+        }
+    }, [context, handleOnClose, helper, props]);
+
+    const renderFooter = React.useCallback((): JSX.Element[] | null => {
         if (!actions || actions.length <= 0 || !containerAnimationControls) {
             return null;
         }
@@ -109,64 +169,11 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
             }
 
         });
-    };
-
-    // ==================================================================
-    const generateTabHeaders = React.useCallback((): _childrenType => {
-        return getAllChildrenByType(children, TabItem, (child) => {
-            let { props } = child;
-            let { id, disabled, label } = props;
-
-            return (
-                <TabWrapper value={id} disabled={disabled} isActivedTab={id === activedTabId}>
-                    {label}
-                </TabWrapper>
-            );
-        });
-    }, [activedTabId, children]);
-
-    const generateTabPanels = React.useCallback((): _childrenType => {
-        return getAllChildrenByType(children, TabItem, (child) => {
-            let { props } = child;
-            let { id } = props;
-
-            if (destroyInactiveTabPane) {
-                return activedTabId === id ? (
-                    <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
-                        {props.children}
-                    </TabPanelWrapper>
-                ) : null;
-            } else {
-                return (
-                    <TabPanelWrapper value={props.id} tabAnimationControls={tabAnimationControls}>
-                        {props.children}
-                    </TabPanelWrapper>
-                );
-            }
-
-        })
-    }, [activedTabId, children, destroyInactiveTabPane, tabAnimationControls]);
-
-    const handleOnChangeTab = async (
-        event: React.SyntheticEvent<Element, Event>,
-        tabId: string | number | boolean
-    ) => {
-        // update lại tab id mỗi khi thay đổi
-        helper.commitActivedId(tabId);
-
-        // Gọi hàm onchange từ props
-        await props.onChange?.(event, tabId, context, helper);
-
-        // kích hoạt sự kiện animation
-        await tabAnimationControls.start("animate");
-
-        console.log("handleOnChangeTab");
-    };
+    }, [actions, containerAnimationControls, handleOnActiveAction]);
 
     const renderContent = React.useCallback((): _childrenType => {
         return generateTabPanels();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [generateTabPanels]);
 
     return {
         generateActivator,
