@@ -35,20 +35,7 @@ const useTabs = (props: TabsProps): TabsHook => {
 
     }, [context, helper, props, tabAnimationControls]);
 
-    const generateTabHeaders = React.useCallback((): _childrenType => {
-        return getAllChildrenByType(children, TabItem, (child) => {
-            let { props } = child;
-            let { id, disabled, label } = props;
-
-            return (
-                <TabWrapper value={id} disabled={disabled} isActivedTab={id === activedTabId}>
-                    {label}
-                </TabWrapper>
-            );
-        });
-    }, [activedTabId, children]);
-
-    const generateTabPanels = React.useCallback((): _childrenType => {
+    const tabPanels = React.useMemo((): _childrenType | React.ReactNode => {
         const { children, destroyInactiveTabPane } = props;
 
         return getAllChildrenByType(children, TabItem, (child) => {
@@ -68,10 +55,23 @@ const useTabs = (props: TabsProps): TabsHook => {
         })
     }, [activedTabId, props, tabAnimationControls]);
 
+    const tabHeaders = React.useMemo((): _childrenType | React.ReactNode => {
+        return getAllChildrenByType(children, TabItem, (child) => {
+            let { props } = child;
+            let { id, disabled, label } = props;
+
+            return (
+                <TabWrapper value={id} disabled={disabled} isActivedTab={id === activedTabId}>
+                    {label}
+                </TabWrapper>
+            );
+        });
+    }, [activedTabId, children]);
+
     return {
         handleOnChange,
-        generateTabHeaders,
-        generateTabPanels,
+        tabPanels,
+        tabHeaders
     };
 
 };

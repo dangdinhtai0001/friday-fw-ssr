@@ -3,7 +3,9 @@ import { TabPanelUnstyledProps } from '@mui/base/TabPanelUnstyled';
 import { TabsListUnstyledProps } from '@mui/base/TabsListUnstyled';
 import { TabsUnstyledProps } from '@mui/base/TabsUnstyled';
 import { TabUnstyledProps } from '@mui/base/TabUnstyled';
+import { _childrenType } from '@packages/ravenclaw';
 import { AnimationControls } from 'framer-motion';
+import { ReactNode } from 'react';
 
 export interface TabsProps extends TabsUnstyledProps {
   children: JSX.Element | JSX.Element[] | null;
@@ -76,8 +78,8 @@ export interface TabsHook {
     event: React.SyntheticEvent<Element, Event>,
     tabId: string | number | boolean
   ) => void | Promise<void>;
-  generateTabHeaders: () => _childrenType;
-  generateTabPanels: () => _childrenType;
+  tabHeaders: _childrenType | ReactNode;
+  tabPanels: _childrenType | ReactNode;
 }
 
 // ================================= || Context ||  =================================

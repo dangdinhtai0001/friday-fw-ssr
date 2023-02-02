@@ -340,7 +340,7 @@ const DemoPage = () => {
       }}>Submit form</button>
 
       {/* GryffindorTabs */}
-      <GryffindorTabs defaultValue="id-000" destroyInactiveTabPane={true}>
+      <GryffindorTabs defaultValue="id-000" destroyInactiveTabPane={false}>
         <GryffindorTabItem id="id-000" label="label 000">
           <div className='bg-amber-300'>Tab panel 000</div>
         </GryffindorTabItem>

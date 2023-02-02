@@ -10,12 +10,15 @@ import useTabs from './useTabs';
 
 function Tabs(
   props: TabsProps,
+  // eslint-disable-next-line no-unused-vars
   ref: React.ForwardedRef<any>
 ): JSX.Element {
   // eslint-disable-next-line no-unused-vars
   const { onChange, destroyInactiveTabPane, ..._props } = props;
 
-  const { handleOnChange, generateTabHeaders, generateTabPanels } = useTabs(props);
+  const {
+    handleOnChange, tabPanels, tabHeaders
+  } = useTabs(props);
 
   return (
     <TabsUnstyled
@@ -41,10 +44,10 @@ function Tabs(
           }),
         }}
       >
-        {generateTabHeaders()}
+        {tabHeaders}
       </TabsListWrapper>
       {/* ================================== || Panel || ================================== */}
-      {generateTabPanels()}
+      {tabPanels}
     </TabsUnstyled>
   );
 }
