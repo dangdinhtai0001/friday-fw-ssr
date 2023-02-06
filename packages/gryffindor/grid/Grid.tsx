@@ -6,9 +6,9 @@ import { AgGridReact } from 'ag-grid-react';
 import { GridProps } from './Grid.d';
 import { useGridContext } from './GridContext';
 
-import '@styles/grynffindor-grid.module.scss';
-// import 'ag-grid-community/styles/ag-grid.css';
-// import 'ag-grid-community/styles/ag-theme-alpine.css';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+import styles from './grid.module.css';
 
 
 function Grid(
@@ -32,7 +32,7 @@ function Grid(
 
 
   return (
-    <div id="myGrid" className="g-theme-acmecorp" style={{ height: 400, width: 600 }}>
+    <div className={`ag-theme-alpine ${styles['ag-theme-gryffindor']}`} style={{ height: 400, width: 600 }}>
       <AgGridReact
         rowData={rowData}
         columnDefs={columnDefs}>

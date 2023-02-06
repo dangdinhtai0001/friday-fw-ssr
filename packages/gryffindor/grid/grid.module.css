@@ -1,0 +1,7 @@
+.ag-theme-gryffindor {
+    --ag-foreground-color:  var(--secondary);
+    --ag-background-color: var(--background);
+    --ag-data-color:  var(--secondary);
+    --ag-header-foreground-color:  var(--foreground);
+
+}
