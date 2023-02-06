@@ -12,23 +12,25 @@ import Form from '@packages/gryffindor/form/FormWrapper';
 import SlytherinTabbedDialogActivator from '@packages/slytherin/tabbed-dialog/collector/Activator';
 import SlytherinTabbedDialogTabItem from '@packages/slytherin/tabbed-dialog/collector/TabItem';
 import SlytherinTabbedDialog from '@packages/slytherin/tabbed-dialog/TabbedDialogWrapper';
+//
+import axios from 'axios';
+import useSWR, { Fetcher, Key } from 'swr';
+//
 
 import React from 'react';
 
 const DemoPage = () => {
   const formRef = React.useRef<any>(null);
 
+  const uid: Key = () => { return [`https://datausa.io/api/data?drilldowns=Nation&measures=Population`] };
+  const fetcher: Fetcher<any, string> = async (url: string) => await axios.get(url).then((res) => res.data);
+  const { data, error, isLoading, isValidating } = useSWR(uid, fetcher);
+
+  console.log(data, error, isLoading, isValidating);
+
+
   return (
     <>
-      {/* SlytherinTabs */}
-      {/* <SlytherinTabs defaultValue="id-000" destroyInactiveTabPane={false}>
-        <SlytherinTabItem id="id-000" label="label 000">
-          <div className='bg-amber-300'>Tab panel 000</div>
-        </SlytherinTabItem>
-        <SlytherinTabItem id="id-001" label="label 001">
-          <div>Tab panel 001</div>
-        </SlytherinTabItem>
-      </SlytherinTabs> */}
       {/* SlytherinDialog */}
       <SlytherinDialog
         title="Đây là title"
@@ -242,6 +244,7 @@ const DemoPage = () => {
           <div className='w-[1000px] h-[800px] bg-blue-400'>Tab panel 002</div>
         </SlytherinTabbedDialogTabItem>
       </SlytherinTabbedDialog>
+      {/* Fetch data */}
     </>
   );
 };
