@@ -18,6 +18,7 @@
     "paths": {
       "@packages/*": ["packages/*"],
       "@modules/*": ["modules/*"],
+      "@styles/*": ["styles/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js"],

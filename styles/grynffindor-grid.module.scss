@@ -1,0 +1,5 @@
+@use "~ag-grid-community/styles" as ag;
+@include ag.grid-styles((themes: (acmecorp: (extend-theme: alpine),
+            acmecorp-dark: (extend-theme: alpine-dark),
+        ),
+        alpine-active-color: red));
