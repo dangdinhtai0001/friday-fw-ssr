@@ -1,7 +1,13 @@
 .ag-theme-gryffindor {
-    --ag-foreground-color:  var(--secondary);
-    --ag-background-color: var(--background);
-    --ag-data-color:  var(--secondary);
-    --ag-header-foreground-color:  var(--foreground);
+    /* React Data Grid: Customising Colours & Fonts */
 
+    /* React Data Grid: Customising Compactness & Row Height */
+
+    /* React Data Grid: Customising Selections */
+
+    /* React Data Grid: Customising the Header */
+
+    /* React Data Grid: Customising Borders */
+
+    /* React Data Grid: Custom Icons */
 }

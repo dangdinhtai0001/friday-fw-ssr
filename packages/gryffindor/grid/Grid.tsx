@@ -5,6 +5,8 @@ import { AgGridReact } from 'ag-grid-react';
 // local imports
 import { GridProps } from './Grid.d';
 import { useGridContext } from './GridContext';
+import { defaultPropsValue } from './GridUtils';
+import useGrid from './useGrid';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
@@ -16,7 +18,12 @@ function Grid(
   ref: React.ForwardedRef<any>
 ): JSX.Element {
   const { context, helper } = useGridContext();
-  // const { } = useGrid(props);
+  const { columnDefs } = useGrid(props);
+
+  const {
+    width = defaultPropsValue.width,
+    height = defaultPropsValue.height
+  } = props;
 
   const [rowData] = React.useState([
     { make: "Toyota", model: "Celica", price: 35000 },
@@ -24,20 +31,25 @@ function Grid(
     { make: "Porsche", model: "Boxster", price: 72000 }
   ]);
 
-  const [columnDefs] = React.useState([
-    { field: 'make' },
-    { field: 'model' },
-    { field: 'price' }
-  ])
-
 
   return (
-    <div className={`ag-theme-alpine ${styles['ag-theme-gryffindor']}`} style={{ height: 400, width: 600 }}>
-      <AgGridReact
-        rowData={rowData}
-        columnDefs={columnDefs}>
-      </AgGridReact>
-    </div>
+    <>
+      {/* ------------------------------------------------ START: QUICKSEARCH PANEL ------------------------------------------------ */}
+      {/* ------------------------------------------------ END: QUICKSEARCH PANEL ------------------------------------------------ */}
+      {/* ------------------------------------------------ START: TOOL PANEL ------------------------------------------------ */}
+      {/* ------------------------------------------------ END: TOOL PANEL ------------------------------------------------ */}
+      {/* ------------------------------------------------ START: MAIN GRID ------------------------------------------------ */}
+      <div className={`ag-theme-alpine ${styles['ag-theme-gryffindor']} `} style={{ height: height, width: width }}>
+        <AgGridReact
+          rowData={rowData} // Row Data for Rows
+          columnDefs={columnDefs} // Column Defs for Columns
+          ref={ref} // Ref for accessing Grid's API
+        />
+      </div>
+      {/* ------------------------------------------------ END: MAIN GRID ------------------------------------------------ */}
+      {/* ------------------------------------------------ START: PAGINATION GRID ------------------------------------------------ */}
+      {/* ------------------------------------------------ END: PAGINATION GRID ------------------------------------------------ */}
+    </>
   )
 }
 
