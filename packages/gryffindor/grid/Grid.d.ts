@@ -1,13 +1,5 @@
-import { ColDef, ColGroupDef } from 'ag-grid-community';
-import { ToolboxItem } from './renderer/toolbox-cell/ToolboxCellRenderer.d';
-
-// ================================= || CUSTOM ||  =================================
-// export type actionKey = '__add' | '__edit' | '__remove' | '__details' | '__confirm' | '__cancel';
-
-export type defaultToolboxKey = '__edit' | '__remove' | '__details';
-export type defaultToolbarKey = '__add' | '__export';
-
-export type defaultActionKey = defaultToolboxKey & defaultToolbarKey;
+import { ColDef, ColGroupDef, GridOptions } from 'ag-grid-community';
+import { ToolboxDef } from './common-types.d';
 
 // ================================= || PROPS ||  =================================
 export interface GridProps {
@@ -18,12 +10,18 @@ export interface GridProps {
   // Array of Column / Column Group definitions
   columnDefs: ColDef[] | ColGroupDef[]
   //  có hiển thị toolbox column hay không. false nếu không hiển thị
-  toolboxItemDefs?: boolean | ToolboxItem[];
+  toolboxDef?: boolean | ToolboxDef;
+  // grid options của ag grid
+  gridOptions?: GridOptions;
+  // A default column definition. Items defined in the actual column definitions get precedence
+  defaultColDef?: ColDef;
 }
 
 // ================================= || HOOKS ||  =================================
 export interface GridHook {
   columnDefs: ColDef[] | ColGroupDef[];
+  gridOptions: GridOptions;
+  defaultColDef: ColDef;
 }
 
 // ================================= || Context ||  =================================

@@ -12,7 +12,6 @@ function Button(
 ): JSX.Element {
   const {
     children,
-    rounded,
     icon,
     disabled,
     loading = false,
@@ -23,7 +22,7 @@ function Button(
     theme,
   } = props;
 
-  const { useBorder = true, ..._props } = props;
+  const { useBorder = true, rounded = true, noPadding = false, ..._props } = props;
 
   const [innerLoading, setLoading] = React.useState<LoadingType>(!!loading);
 
@@ -76,15 +75,18 @@ function Button(
             inline-flex items-center justify-start 
             cursor-pointer
             text-th-text-primary font-roboto font-[500] text-[0.9rem] leading-[1.5715rem]
-            transform hover:translate-y-[-0.2rem]
+            transform hover:translate-y-[-0.1rem]
             shadow hover:shadow-xl shadow-inherit
         `,
     {
       ['opacity-50 cursor-not-allowed']: disabled || innerLoading,
       ['transition-all  hover:scale-105 transition-transform active:scale-[0.9]']:
         !disabled && !innerLoading,
-      [`rounded-full px-[0.5rem] py-[0.5rem]`]:
-        (!children && children !== 0 && !!iconType) || rounded,
+      [`rounded-full`]: rounded === true,
+      // (!children && children !== 0 && !!iconType) || rounded === true,
+      [`rounded-none`]: rounded === false,
+      [`px-0 py-0`]: noPadding === true,
+      [`px-[0.4rem] py-[0.4rem]`]: noPadding === false,
       [`rounded px-[0.3rem] py-[0.05rem]`]: children,
       [`w-full`]: block,
       [`w-fit`]: !block,
@@ -92,6 +94,10 @@ function Button(
       [`border-[0.1rem] border-th-foreground`]: useBorder,
     }
   );
+
+  const renderChildren = () => {
+    return icon ? <>{icon} {children}</> : children;
+  }
 
   return (
     <ButtonUnstyled
@@ -108,7 +114,7 @@ function Button(
       }}
       ref={ref}
     >
-      {icon ? icon : children}
+      {renderChildren()}
     </ButtonUnstyled>
   );
 }

@@ -12,9 +12,9 @@ function ToolboxCellRenderer(
   const { renderToolboxItem } = useToolboxCellRenderer(props);
 
   return (
-    <>
+    <div className='flex justify-center items-center gap-x-[0.4rem] h-full'>
       {renderToolboxItem()}
-    </>
+    </div>
   );
 }
 

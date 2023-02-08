@@ -1,5 +1,6 @@
 import { Grid as GrynffindorGrid } from '@packages/gryffindor/grid';
-import { ToolboxItem } from '@packages/gryffindor/grid/renderer/toolbox-cell/ToolboxCellRenderer.d';
+import { ToolboxDef } from '@packages/gryffindor/grid/common-types.d';
+
 const GridPage = () => {
     const columnDefs = [
         { field: 'make' },
@@ -7,20 +8,32 @@ const GridPage = () => {
         { field: 'price' }
     ];
 
-    const toolboxItemDefs: ToolboxItem[] = [
-        {
-            key: '__edit',
-            isDefault: true,
-            toolboxDisabledRule: (props) => { return { '__edit': false } },
-            toolboxVisibleRule: (props) => { return { '__edit': true } }
-        }
-    ];
+    const toolboxDef: ToolboxDef =
+    {
+        disableRule: () => { },
+        visibleRule: () => { return { '__edit': true, '__remove': true, '__details': true, } },
+        itemDefs: [
+            {
+                key: '__edit',
+                isDefault: true
+            },
+            {
+                key: '__remove',
+                isDefault: true
+            },
+            {
+                key: '__details',
+                isDefault: true
+            },
+        ]
+    }
+        ;
     return (
         <>
             <GrynffindorGrid
                 height='20rem'
                 columnDefs={columnDefs}
-                toolboxItemDefs={toolboxItemDefs}
+                toolboxDef={toolboxDef}
             ></GrynffindorGrid>
         </>
     );

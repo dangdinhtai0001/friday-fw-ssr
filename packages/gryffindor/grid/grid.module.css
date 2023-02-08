@@ -9,5 +9,7 @@
 
     /* React Data Grid: Customising Borders */
 
+    --ag-row-border-style: solid;
+
     /* React Data Grid: Custom Icons */
 }

@@ -1,29 +1,13 @@
+/* eslint-disable no-unused-vars */
 //
-import React from 'react';
+import { ICellRendererParams } from 'ag-grid-community';
 //
-import { GridApi, ICellRendererParams, IRowNode } from 'ag-grid-community';
-//
-import { ContextState, defaultToolboxKey } from '../../Grid.d';
-
-export interface ToolboxItemRuleProps {
-    gridContext: ContextState;
-    data?: any;
-    gridApi: GridApi;
-    node: IRowNode;
-}
+import { ToolboxDef } from '../../common-types';
 
 export interface ToolboxCellRendererProps extends ICellRendererParams {
     toolboxDisabledRule: (props: ToolboxItemRuleProps) => any;
     toolboxVisibleRule: (props: ToolboxItemRuleProps) => any;
-    toolboxItemDefs: ToolboxItem[];
-}
-
-export interface ToolboxItem {
-    key: defaultToolboxKey | string;
-    component?: JSX.Element | React.ReactNode;
-    isDefault: boolean;
-    toolboxDisabledRule: (props: ToolboxItemRuleProps) => any;
-    toolboxVisibleRule: (props: ToolboxItemRuleProps) => any;
+    toolboxDef: ToolboxDef;
 }
 
 export interface ToolboxCellRendererHooks {

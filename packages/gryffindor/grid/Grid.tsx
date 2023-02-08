@@ -18,11 +18,11 @@ function Grid(
   ref: React.ForwardedRef<any>
 ): JSX.Element {
   const { context, helper } = useGridContext();
-  const { columnDefs } = useGrid(props);
+  const { columnDefs, gridOptions, defaultColDef } = useGrid(props);
 
   const {
     width = defaultPropsValue.width,
-    height = defaultPropsValue.height
+    height = defaultPropsValue.height,
   } = props;
 
   const [rowData] = React.useState([
@@ -43,6 +43,8 @@ function Grid(
         <AgGridReact
           rowData={rowData} // Row Data for Rows
           columnDefs={columnDefs} // Column Defs for Columns
+          defaultColDef={defaultColDef} // A default column definition. Items defined in the actual column definitions get precedence.
+          {...gridOptions}  // Grid Options
           ref={ref} // Ref for accessing Grid's API
         />
       </div>
