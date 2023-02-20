@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { _childrenType } from '@packages/ravenclaw';
-import { CloseReason, ContextState as DialogContextState, DialogProps } from '@packages/slytherin/dialog/Dialog.d';
+import { CloseReason, ContextHelper as DialogContextHelper, ContextState as DialogContextState, DialogProps } from '@packages/slytherin/dialog/Dialog.d';
 import { ContextState as TabsContextState, TabsProps } from '@packages/slytherin/tabs/Tabs.d';
 import { AnimationControls } from 'framer-motion';
 
@@ -33,7 +33,7 @@ export interface TabbedDialogHook {
 export interface ContextState<T> extends DialogContextState<T>, TabsContextState<T> {
 }
 
-export interface ContextHelper<T> {
+export interface ContextHelper<T> extends DialogContextHelper {
   commitOpened: (opened: boolean) => void;
   applyDisableAction: (key: string, disabled: boolean) => void;
   applyVisibleAction: (key: string, visible: boolean) => void;

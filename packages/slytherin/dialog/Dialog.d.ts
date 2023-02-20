@@ -126,8 +126,8 @@ export interface ContextState<T> {
 
 export interface ContextHelper<T> {
   commitOpened: (opened: boolean) => void;
-  applyDisable: (key: string, disabled: boolean) => void;
-  applyVisible: (key: string, visible: boolean) => void;
+  applyDisable?: (key: string, disabled: boolean) => void;
+  applyVisible?: (key: string, visible: boolean) => void;
 }
 
 export interface ContextProviderProps {
