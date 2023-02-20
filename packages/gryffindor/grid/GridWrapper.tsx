@@ -3,11 +3,20 @@ import * as React from 'react';
 // 3rd imports
 // local imports
 import Grid from './Grid';
-import { GridProps } from './Grid.d';
+import { ContextState, GridProps } from './Grid.d';
 import { GridContextProvider } from './GridContext';
 
-function getInitialContext(props: GridProps) {
-    return {};
+function getInitialContext(props: GridProps): ContextState<any> {
+    let { popupDef } = props;
+    return {
+        processingRow: {
+            data: null,
+            id: null,
+            rowIndex: null,
+            triggerByAction: null
+        },
+        popupDef: popupDef
+    };
 }
 
 function GridWrapper(

@@ -12,15 +12,27 @@ import { ActionDef, ActivedActionResponse, CloseReason, DialogHook, DialogProps 
 import { useDialogContext } from './DialogContext';
 
 const useDialog = (props: DialogProps): DialogHook => {
-    const { actions, children } = props;
+    const { actions, forceOpen, children } = props;
 
     const { context, helper } = useDialogContext<any>();
 
     const containerAnimationControls: AnimationControls = useAnimation();
 
+    const handleOnClickActivator = React.useCallback(async () => {
+        console.debug("Click activator ");
+
+        helper.commitOpened(true);
+    }, [helper]);
+
     const generateActivator = React.useCallback((): JSX.Element | null => {
-        return getChildrenByType(children, Activator);
-    }, [children]);
+        let component = getChildrenByType(children, Activator);
+
+        if (component) {
+            return React.cloneElement(component!, { onClick: handleOnClickActivator });
+        }
+
+        return null;
+    }, [children, handleOnClickActivator]);
 
     React.useEffect(() => {
         // Không rõ vì sao nếu gọi `containerAnimationControls.start` tại hàm click thì lỗi, 
@@ -34,11 +46,13 @@ const useDialog = (props: DialogProps): DialogHook => {
 
     }, [containerAnimationControls, context.opened]);
 
-    const handleOnClickActivator = React.useCallback(async () => {
-        console.debug("Click activator ");
-
-        helper.commitOpened(true);
-    }, [helper]);
+    // trigger giá trị context.open theo giá trị của props forceOpen
+    React.useEffect(() => {
+        if (forceOpen) {
+            handleOnClickActivator();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [forceOpen]);
 
     const handleOnClose = React.useCallback(async (event: object, reason: CloseReason): Promise<any> => {
         // animation cho sự kiện close

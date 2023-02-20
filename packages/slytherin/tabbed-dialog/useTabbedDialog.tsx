@@ -3,19 +3,19 @@ import React from 'react';
 // 3rd imports
 import { AnimationControls, useAnimation } from 'framer-motion';
 // local imports
-import { _childrenType, getAllChildrenByType, getChildrenByType } from '@packages/ravenclaw';
+import { getAllChildrenByType, getChildrenByType, _childrenType } from '@packages/ravenclaw';
 import { Button } from '@packages/slytherin/button';
 import { ActionDef, ActivedActionResponse, CloseReason } from '@packages/slytherin/dialog/Dialog.d';
 import TabPanelWrapper from '@packages/slytherin/tabs/TabPanelWrapper';
-import TabWrapper from '@packages/slytherin/tabs/TabWrapper';
 import TabsListWrapper from '@packages/slytherin/tabs/TabsListWrapper';
-import { TabbedDialogHook, TabbedDialogProps } from './TabbedDialog.d';
-import { useTabbedDialogContext } from './TabbedDialogContext';
+import TabWrapper from '@packages/slytherin/tabs/TabWrapper';
 import Activator from './collector/Activator';
 import TabItem from './collector/TabItem';
+import { TabbedDialogHook, TabbedDialogProps } from './TabbedDialog.d';
+import { useTabbedDialogContext } from './TabbedDialogContext';
 
 const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
-    const { actions, children, onChange, destroyInactiveTabPane } = props;
+    const { actions, forceOpen, children, onChange, destroyInactiveTabPane } = props;
 
     const { context, helper } = useTabbedDialogContext<any>();
 
@@ -108,6 +108,14 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
         helper.commitActivedId(context.defaultActiveId!);
     }, [containerAnimationControls, context, helper, props]);
 
+    // trigger giá trị context.open theo giá trị của props forceOpen
+    React.useEffect(() => {
+        if (forceOpen) {
+            handleOnClickActivator();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [forceOpen]);
+
     const handleOnActiveAction = React.useCallback(async (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>, actionDef: ActionDef) => {
         let actionResponse: ActivedActionResponse | undefined = await props.onActiveAction?.(event, actionDef, context, helper);
 
@@ -166,9 +174,15 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
         });
     }, [actions, containerAnimationControls, handleOnActiveAction]);
 
-    const activator = React.useMemo(() => {
-        return getChildrenByType(children, Activator);
-    }, [children]);
+    const generateActivator = React.useCallback((): JSX.Element | null => {
+        let component = getChildrenByType(children, Activator);
+
+        if (component) {
+            return React.cloneElement(component!, { onClick: handleOnClickActivator });
+        }
+
+        return null;
+    }, [children, handleOnClickActivator]);
 
     return {
         handleOnClickActivator,
@@ -177,7 +191,7 @@ const useTabbedDialog = (props: TabbedDialogProps): TabbedDialogHook => {
         generateTabHeaders,
         generateTabPanels,
         handleOnChangeTab,
-        activator,
+        generateActivator,
         extraHeader,
         content,
         footer

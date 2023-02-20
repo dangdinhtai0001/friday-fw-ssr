@@ -18,7 +18,12 @@ function Grid(
   ref: React.ForwardedRef<any>
 ): JSX.Element {
   const { context, helper } = useGridContext();
-  const { columnDefs, gridOptions, defaultColDef } = useGrid(props);
+  const {
+    columnDefs,
+    gridOptions,
+    defaultColDef,
+    renderGridModal
+  } = useGrid(props);
 
   const {
     width = defaultPropsValue.width,
@@ -34,6 +39,9 @@ function Grid(
 
   return (
     <>
+      {/* ------------------------------------------------ START: GRID MODAL ------------------------------------------------ */}
+      {renderGridModal()}
+      {/* ------------------------------------------------ END: GRID MODAL ------------------------------------------------ */}
       {/* ------------------------------------------------ START: QUICKSEARCH PANEL ------------------------------------------------ */}
       {/* ------------------------------------------------ END: QUICKSEARCH PANEL ------------------------------------------------ */}
       {/* ------------------------------------------------ START: TOOL PANEL ------------------------------------------------ */}

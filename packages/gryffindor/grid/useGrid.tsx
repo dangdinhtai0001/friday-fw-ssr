@@ -3,7 +3,14 @@ import * as React from 'react';
 // 3rd imports
 import { CellClassParams, CellStyle, ColDef, ColGroupDef, GridOptions, RowClassParams, RowStyle } from 'ag-grid-community';
 // local imports
-import { GridHook, GridProps } from './Grid.d';
+import { getAllChildrenByType } from '@packages/ravenclaw/ComponentUtils';
+import SlytherinDialogContent from '@packages/slytherin/dialog/collector/Content';
+import SlytherinDialog from '@packages/slytherin/dialog/DialogWrapper';
+import SlytherinTabbedDialogTabItem from '@packages/slytherin/tabbed-dialog/collector/TabItem';
+import SlytherinTabbedDialog from '@packages/slytherin/tabbed-dialog/TabbedDialogWrapper';
+import GridPopup from './collector/GridPopup';
+import { GridHook, GridPopupProps, GridProps } from './Grid.d';
+import { useGridContext } from './GridContext';
 import ToolboxCellRenderer from './renderer/toolbox-cell/ToolboxCellRenderer';
 
 const defaultRowHeight = 2; // row height == 2rem;
@@ -49,7 +56,9 @@ const getCellClass = (cellClassParams: CellClassParams): string | string[] | nul
 
 const useGrid = (props: GridProps): GridHook => {
 
-    const { columnDefs, toolboxDef, gridOptions } = props;
+    const { columnDefs, toolboxDef, gridOptions, children } = props;
+
+    const { context, helper } = useGridContext();
 
     const generateColumnDefs = (): ColDef[] | ColGroupDef[] => {
         // Thêm các column mặc định (cột toolbox,...)
@@ -92,14 +101,130 @@ const useGrid = (props: GridProps): GridHook => {
         }
     }
 
+    const handleOnCloseModal = (dialogContextState: any, dialogContextHelper: any, reason: string) => {
+        // Cập nhật trạng thái khi đóng dialog
+        helper.applyPopupDef_Open(false);
+
+        let props = {
+            dialogContextState: dialogContextState,
+            dialogContextHelper: dialogContextHelper,
+            reason: reason,
+            gridContext: context,
+            gridContextHelper: helper
+        }
+
+        context.popupDef?.onClose?.(props);
+    }
+
+    const handleOnActiveAction = (
+        event: React.MouseEvent<unknown, MouseEvent>,
+        actionDef: any,
+        dialogContextState: any,
+        dialogContextHelper: any
+    ): any => {
+        let props = {
+            event: event,
+            actionDef: actionDef,
+            dialogContextState: dialogContextState,
+            dialogContextHelper: dialogContextHelper,
+            gridContext: context,
+            gridContextHelper: helper
+        }
+
+        return context.popupDef?.onActiveAction?.(props);
+    }
+
     const [_columnDefs] = React.useState(generateColumnDefs());
     const [_gridOptions] = React.useState(generateGridOptions());
     const [_defaultColDef] = React.useState(generateDefaultColDef());
 
+    const collectGridPopup = (): JSX.Element[] | null => {
+        return getAllChildrenByType(children, GridPopup);
+    };
+
+    const renderGridModal = (): JSX.Element | null => {
+        // Lấy ra tên của action đang kích hoạt modal
+        let processKey = context.processingRow.triggerByAction;
+
+        if (!processKey) {
+            return null;
+        }
+
+        //  Dựa vào số children có type là Popup mà quyết định hiển thị modal bình thường hay là modal có tab
+        const gridPopupItems = collectGridPopup();
+
+        if (!gridPopupItems) {
+            return null;
+        }
+
+        if (gridPopupItems.length === 1) {
+            let { popupDef } = context;
+            return (
+                <SlytherinDialog
+                    title={popupDef.title}
+                    initialHeight={popupDef.initialHeight}
+                    initialWidth={popupDef.initialWidth}
+                    minHeight={popupDef.minHeight}
+                    minWidth={popupDef.minWidth}
+                    maxHeight={popupDef.maxHeight}
+                    maxWidth={popupDef.maxWidth}
+                    forceOpen={popupDef.open}
+                    actions={popupDef.actions}
+                    onClose={handleOnCloseModal}
+                    onActiveAction={handleOnActiveAction}
+                >
+                    <SlytherinDialogContent>
+                        {gridPopupItems[0]}
+                    </SlytherinDialogContent>
+                </SlytherinDialog>
+            );
+        }
+
+        if (gridPopupItems.length > 1) {
+            let { popupDef } = context;
+
+            return (
+                <SlytherinTabbedDialog
+                    title={popupDef.title}
+                    initialHeight={popupDef.initialHeight}
+                    initialWidth={popupDef.initialWidth}
+                    minHeight={popupDef.minHeight}
+                    minWidth={popupDef.minWidth}
+                    maxHeight={popupDef.maxHeight}
+                    maxWidth={popupDef.maxWidth}
+                    forceOpen={popupDef.open}
+                    actions={popupDef.actions}
+                    onClose={handleOnCloseModal}
+                    onActiveAction={handleOnActiveAction}
+                    // 
+                    defaultValue={popupDef.defaultValue}
+                    destroyInactiveTabPane={popupDef.destroyInactiveTabPane}
+                >
+                    {getAllChildrenByType(children, GridPopup, (item, index) => {
+                        let _props: GridPopupProps = item.props;
+
+                        return (
+                            <SlytherinTabbedDialogTabItem key={index} id={_props.id} label={_props.title!}>
+                                {_props.children}
+                            </SlytherinTabbedDialogTabItem>
+                        );
+                    })}
+                </SlytherinTabbedDialog>
+            );
+        }
+
+
+
+        return null;
+    }
+
+
     return {
         columnDefs: _columnDefs,
         gridOptions: _gridOptions,
-        defaultColDef: _defaultColDef
+        defaultColDef: _defaultColDef,
+        // 
+        renderGridModal
     };
 
 };

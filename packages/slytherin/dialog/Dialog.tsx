@@ -16,11 +16,11 @@ function Dialog(
 ): JSX.Element {
   const { context } = useDialogContext<any>();
 
-  const { generateActivator, handleOnClickActivator } = useDialog(props);
+  const { generateActivator } = useDialog(props);
 
   return (
     <>
-      {React.cloneElement(generateActivator()!, { onClick: handleOnClickActivator })}
+      {generateActivator()}
       <ModalUnstyled
         open={context.opened}
         closeAfterTransition={false}

@@ -22,7 +22,7 @@ export interface TabbedDialogHook {
   generateTabHeaders: () => _childrenType;
   generateTabPanels: () => _childrenType;
 
-  activator: JSX.Element | null;
+  generateActivator: () => JSX.Element | null;
   extraHeader: JSX.Element | null;
   content: _childrenType;
   footer: JSX.Element[] | null;

@@ -1,5 +1,6 @@
-import { Dispatch, createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, Dispatch, useContext, useEffect, useMemo, useState } from 'react';
 // ------------------------ || define interface || ------------------------
+import { ProcessingRow } from './common-types.d';
 import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState } from './Grid.d';
 // ================================================== || CONTEXT || ================================================== //
 
@@ -36,7 +37,48 @@ const GridContextProvider = <T extends unknown>(props: ContextProviderProps) => 
 // --------------------------------------------------------------------------------
 function mutations<T>(context: ContextState<T>, setContext: Dispatch<any>): ContextHelper<T> {
     return {
-
+        /**
+         * Hàm cập nhật toàn bộ giá trị processingRow của grid
+         * @param processingRow 
+         */
+        commitProcessingRow(processingRow: ProcessingRow): void {
+            setContext((prevState: ContextState<T>) => {
+                return {
+                    ...prevState,
+                    processingRow: processingRow
+                }
+            });
+        },
+        /**
+         * Hàm cập nhật trạng thái open của grid modal
+         * @param open 
+         */
+        applyPopupDef_Open(open: boolean): void {
+            setContext((prevState: ContextState<T>) => {
+                return {
+                    ...prevState,
+                    popupDef: {
+                        ...prevState.popupDef,
+                        open: open
+                    }
+                }
+            });
+        },
+        /**
+         * Hàm cập nhật giá trị title của grid modal
+         * @param title 
+         */
+        applyPopupDef_Title(title: string): void {
+            setContext((prevState: ContextState<T>) => {
+                return {
+                    ...prevState,
+                    popupDef: {
+                        ...prevState.popupDef,
+                        title: title
+                    }
+                }
+            });
+        }
     }
 }
 // --------------------------------------------------------------------------------

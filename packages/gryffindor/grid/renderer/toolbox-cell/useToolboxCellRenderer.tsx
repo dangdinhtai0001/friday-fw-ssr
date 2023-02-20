@@ -20,11 +20,16 @@ const useToolboxCellRenderer = (props: ToolboxCellRendererProps): ToolboxCellRen
     }, [context, data, disableRule, gridApi, node]);
 
     const visibleStatus = React.useMemo(() => {
-        let r = visibleRule?.({ gridContext: context, data, gridApi, node })
-        console.log("visibleStatus", r);
-
-        return r;
+        return visibleRule?.({ gridContext: context, data, gridApi, node })
     }, [context, data, gridApi, node, visibleRule]);
+
+    const handleOnClickDetails = async (itemDef: ToolboxItem): Promise<void> => {
+        helper.commitProcessingRow({ data: data, id: node.id, rowIndex: node.rowIndex, triggerByAction: itemDef.key });
+
+        // TODO: Xem xét sử dụng translate ở đây 
+        helper.applyPopupDef_Title("Chi tiết");
+        helper.applyPopupDef_Open(true);
+    }
 
     const handleOnClickToolbox = async (itemDef: ToolboxItem): Promise<void> => {
         let key: string | defaultToolboxKey = itemDef.key;
@@ -35,6 +40,7 @@ const useToolboxCellRenderer = (props: ToolboxCellRendererProps): ToolboxCellRen
             case '__remove':
                 break;
             case '__details':
+                await handleOnClickDetails(itemDef);
                 break;
             default:
                 break;
@@ -48,18 +54,27 @@ const useToolboxCellRenderer = (props: ToolboxCellRendererProps): ToolboxCellRen
         switch (key) {
             case '__edit':
                 itemComponent = visibleStatus?.['__edit']
-                    ? <Button key={index} theme='primary' icon={<MdSettings className="scale-[1.1] mx-[0.2rem] my-[0.2rem] " />} useBorder={false} rounded={false} noPadding />
-                    : null;
+                    ? <Button key={index} theme='primary'
+                        onClick={() => { handleOnClickToolbox(itemDef) }}
+                        icon={<MdSettings className="scale-[1.1] mx-[0.2rem] my-[0.2rem] " />}
+                        useBorder={false} rounded={false} noPadding
+                    /> : null;
                 break;
             case '__remove':
                 itemComponent = visibleStatus?.['__remove']
-                    ? <Button key={index} theme='danger' icon={<MdDelete className="scale-[1.1] mx-[0.2rem] my-[0.2rem] " />} useBorder={false} rounded={false} noPadding />
-                    : null;
+                    ? <Button key={index} theme='danger'
+                        onClick={() => { handleOnClickToolbox(itemDef) }}
+                        icon={<MdDelete className="scale-[1.1] mx-[0.2rem] my-[0.2rem] " />}
+                        useBorder={false} rounded={false} noPadding
+                    /> : null;
                 break;
             case '__details':
                 itemComponent = visibleStatus?.['__details']
-                    ? <Button key={index} icon={<MdInfo className="scale-[1.3] fill-th-primary mx-[0.2rem] my-[0.2rem] " />} useBorder={true} rounded={false} noPadding />
-                    : null;
+                    ? <Button key={index}
+                        onClick={() => { handleOnClickToolbox(itemDef) }}
+                        icon={<MdInfo className="scale-[1.3] fill-th-primary mx-[0.2rem] my-[0.2rem] " />}
+                        useBorder={true} rounded={false} noPadding
+                    /> : null;
                 break;
             default:
                 itemComponent = null;

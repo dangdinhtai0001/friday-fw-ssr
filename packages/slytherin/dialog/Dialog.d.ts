@@ -25,49 +25,33 @@ export type CloseReason = "backdropClick" | "escapeKeyDown" | "headerClick" | "a
 
 export interface DialogProps
   extends Omit<ModalUnstyledProps, 'defaultValue' | 'onChange'> {
-  /**
-   * Height mặc định
-   */
+  //Height mặc định
   initialHeight: number;
-  /**
-   * 
-   */
+  //
   minHeight: number;
-  /**
-   *
-   */
+  //
   maxHeight?: number;
-  /**
-   *
-   */
+  //
   initialWidth: number;
-  /**
-   *
-   */
+  //
   minWidth: number;
-  /**
-   *
-   */
+  //
   maxWidth?: number;
-  /**
-   * Title của dialog
-   */
+  //Title của dialog
   title?: string;
-  /**
-   * Không có ý nghĩa lắm, nhưng do @MUI base đòi nên phải override
-   */
+  //Không có ý nghĩa lắm, nhưng do @MUI base đòi nên phải override
   open?: boolean;
-  /**
-   * Định nghĩa metadata cho các action của dialog
-   */
+  // giá trị dùng để update trạng thái đóng mở của popup (Dùng cho các TH ko muốn dùng activator)
+  forceOpen?: boolean;
+  //Định nghĩa metadata cho các action của dialog
   actions?: ActionDef[]
   /**
    * Hàm xử lý sự kiện khi active action
    * @param event Event mặc định
-   * @param key key kích hoạt sự kiện
+   * @param actionDef key kích hoạt sự kiện
    * @param context context 
    * @param helper helper của context
-   * @returns void
+   * @returns ActivedActionResponse | Promise<ActivedActionResponse>
    */
   onActiveAction?: (event: React.MouseEvent<unknown, MouseEvent>, actionDef: ActionDef, context: ContextState, helper: ContextHelper)
     => ActivedActionResponse | Promise<ActivedActionResponse>
@@ -78,7 +62,7 @@ export interface DialogProps
    * @param reason Lý do close
    * @returns ActivedActionResponse Dùng trong TH kết quả của thao tác sẽ gây ra 1 hành động gì đó (VD: đóng dialog )
    */
-  onClose?: (context: ContextState, helper: any, reason: string) => void | Promise<void>
+  onClose?: (context: ContextState, helper: ContextHelper<any>, reason: string) => void | Promise<void>
   /**
    * @MUI cũng có định nghĩa rồi, nhưng chỉ cho phép 1 children. Nên cần định nghĩa lại để dùng đc activator và content
    */
@@ -111,8 +95,8 @@ export interface ContextState<T> {
    */
   title?: string;
   /**
- * Định nghĩa metadata cho các action của dialog
- */
+   * Định nghĩa metadata cho các action của dialog
+   */
   actions?: ActionDef[];
   /**
    * Height mặc định
