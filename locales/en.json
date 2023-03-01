@@ -1,0 +1,6 @@
+{
+    "hello": "Hello",
+    "welcome": "Welcome to Friday",
+    "change_lang": "Change language",
+    "current_lang": "Current language is {{lng}}"
+  }
