@@ -50,20 +50,21 @@ function getAllChildrenByType(
 
 
 /**
- * Tìm tất cả các children của một component React cụ thể có kiểu và props nhất định, và áp dụng một hàm ánh xạ để chuyển đổi mỗi child thành một component React.
- *
- * @template T Kiểu component cần tìm.
- * @param children Các children cần tìm.
- * @param type Component cần tìm kiếm.
- * @param matchFunc Một hàm nhận vào các props của component và trả về boolean xác định xem component đó có nên được bao gồm trong kết quả hay không.
- * @param mappingFunc Một hàm nhận vào một component tìm thấy và trả về phiên bản đã chuyển đổi của component đó.
- * @returns Một mảng các component React có kiểu T thỏa mãn các điều kiện đã cho.
+ * Tìm kiếm tất cả các children của một component React dựa vào kiểu children và một hàm điều kiện matchFunc.
+ * Hàm cũng hỗ trợ một hàm mappingFunc tùy chọn để thực hiện transform children sang component khác.
+ * 
+ * @param children Children cần tìm kiếm
+ * @param type Kiểu component của children cần tìm kiếm
+ * @param matchFunc Hàm điều kiện để xác định khi nào lấy children ra
+ * @param mappingFunc Hàm tùy chọn để thực hiện transform children sang component khác
+ * 
+ * @returns Danh sách các children tìm thấy
  */
 function findChildrenByTypeAndProps<T extends React.ReactNode>(
   children: React.ReactNode,
   type: React.ComponentType<T>,
   matchFunc: (props: any) => boolean,
-  mappingFunc: (child: T) => React.ReactNode
+  mappingFunc?: (child: T) => React.ReactNode
 ): React.ReactNode[] {
   const matches: React.ReactNode[] = [];
 
@@ -72,7 +73,7 @@ function findChildrenByTypeAndProps<T extends React.ReactNode>(
       let match = matchFunc(child.props);
 
       if (match) {
-        matches.push(mappingFunc(child as T));
+        matches.push(mappingFunc ? mappingFunc(child as T) : child);
       }
     }
   });

@@ -3,7 +3,7 @@ import * as React from 'react';
 // 3rd imports
 import { CellClassParams, CellStyle, ColDef, ColGroupDef, GridOptions, RowClassParams, RowStyle } from 'ag-grid-community';
 // local imports
-import { getAllChildrenByType } from '@packages/ravenclaw/ComponentUtils';
+import { findChildrenByTypeAndProps, getAllChildrenByType } from '@packages/ravenclaw/ComponentUtils';
 import SlytherinDialogContent from '@packages/slytherin/dialog/collector/Content';
 import SlytherinDialog from '@packages/slytherin/dialog/DialogWrapper';
 import SlytherinTabbedDialogTabItem from '@packages/slytherin/tabbed-dialog/collector/TabItem';
@@ -138,8 +138,10 @@ const useGrid = (props: GridProps): GridHook => {
     const [_gridOptions] = React.useState(generateGridOptions());
     const [_defaultColDef] = React.useState(generateDefaultColDef());
 
-    const collectGridPopup = (): JSX.Element[] | null => {
-        return getAllChildrenByType(children, GridPopup);
+    const collectGridPopup = (): React.ReactNode[] | null => {
+        return findChildrenByTypeAndProps<GridPopupProps>(children, GridPopup, (props: any) => true);
+
+        // return getAllChildrenByType(children, GridPopup);
     };
 
     const renderGridModal = (): JSX.Element | null => {

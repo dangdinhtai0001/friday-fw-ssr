@@ -29,6 +29,8 @@ export interface GridPopupProps {
   title: string;
   id: string;
   children: JSX.Element;
+  key: any;
+  props: any;
 }
 
 // ================================= || HOOKS ||  =================================
