@@ -1,0 +1,11 @@
+.yarn
+.next
+dist
+node_modules
+build
+coverage
+script
+*.md
+*.json
+*.css
+.prettierrc
