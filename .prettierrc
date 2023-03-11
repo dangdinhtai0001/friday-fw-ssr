@@ -10,7 +10,6 @@
   "jsxSingleQuote": false,
   "quoteProps": "as-needed",
   "arrowParens": "avoid",
-  "insertPragma": false,
-  "parser": "babel"
+  "insertPragma": false
 }
 
