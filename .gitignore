@@ -1,5 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/yarn,vs,visualstudiocode,jetbrains+all,webstorm,git,windows,linux,nextjs
 # Edit at https://www.toptal.com/developers/gitignore?templates=yarn,vs,visualstudiocode,jetbrains+all,webstorm,git,windows,linux,nextjs
+.eslintcache
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:
