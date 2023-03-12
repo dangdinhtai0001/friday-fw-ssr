@@ -3,10 +3,10 @@ import * as React from 'react';
 import Box from '@mui/system/Box';
 import Grid from '@mui/system/Unstable_Grid';
 import styled from '@mui/system/styled';
-import useTheme from '@mui/system/useTheme';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/package/asura/store/configureStore';
 import { changePaletteMode } from '@/package/asura/store/slice/themeSlice';
+import useTrans from '@/package/asura/i18/useTrans';
 
 const Item = styled('div')(({ theme }) => ({
   border: '1px solid',
@@ -37,6 +37,8 @@ const ThemePage = () => {
   );
   const dispatch = useDispatch();
 
+  const trans = useTrans();
+
   const handleThemeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -45,6 +47,7 @@ const ThemePage = () => {
 
   return (
     <>
+      <h2>{trans.common.welcome}</h2>
       <h2>{`palette (mode='${palette.mode}')`}</h2>
       <div>
         <label htmlFor="theme-selector">Select Palette mode:</label>
