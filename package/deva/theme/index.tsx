@@ -17,17 +17,34 @@ const Item = styled('div')(({ theme }) => ({
   height: '5rem',
 }));
 
-const _theme = {
-  palette: [
-    'primary',
-    'secondary',
-    'danger',
-    'warning',
-    'success',
-    'text',
-    'background',
-  ],
-};
+const _theme = [
+  {
+    type: 'primary',
+    props: ['main', 'light', 'dark', 'contrastText'],
+  },
+  {
+    type: 'secondary',
+    props: ['main', 'light', 'dark', 'contrastText'],
+  },
+  {
+    type: 'error',
+    props: ['main', 'light', 'dark', 'contrastText'],
+  },
+  {
+    type: 'warning',
+    props: ['main', 'light', 'dark', 'contrastText'],
+  },
+  { type: 'info', props: ['main', 'light', 'dark', 'contrastText'] },
+  {
+    type: 'success',
+    props: ['main', 'light', 'dark', 'contrastText'],
+  },
+  { type: 'background', props: ['default', 'paper'] },
+  {
+    type: 'text',
+    props: ['primary', 'secondary', 'disabled', 'hint'],
+  },
+];
 
 type Theme = 'light' | 'dark';
 
@@ -61,17 +78,27 @@ const ThemePage = () => {
         </select>
       </div>
       <Box sx={{ flexGrow: 1, marginTop: '1rem' }}>
-        <Grid container spacing={2}>
-          {_theme.palette.map((color: string) => {
-            return (
-              <Grid xs={1} key={color}>
-                <Item sx={{ backgroundColor: color }}>
-                  <div>{color}</div>
-                </Item>
+        {_theme.map(item => {
+          return (
+            <div key={item.type}>
+              <Box>{item.type}</Box>
+              <Grid container spacing={2}>
+                {item.props.map(color => {
+                  return (
+                    <Grid xs={1} key={color}>
+                      <Item
+                        sx={{
+                          backgroundColor: `${item.type}.${color}`,
+                        }}
+                      ></Item>
+                      <div>{`${item.type}.${color}`}</div>
+                    </Grid>
+                  );
+                })}
               </Grid>
-            );
-          })}
-        </Grid>
+            </div>
+          );
+        })}
       </Box>
     </>
   );
