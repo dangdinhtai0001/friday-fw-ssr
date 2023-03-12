@@ -1,12 +1,15 @@
-import { ThemeProvider } from '@mui/system';
 import type { AppProps } from 'next/app';
-// local import
-import { lightTheme } from '@/utils/theme';
+// 3rd import
+import { Provider } from 'react-redux';
+// local import;
+import { store } from '@/package/asura/store/configureStore';
 
-export default function App({ Component, pageProps }: AppProps) {
+import App from '@/package/asura/app/App';
+
+export default function NextApp(props: AppProps) {
   return (
-    <ThemeProvider theme={lightTheme}>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <App {...props} />
+    </Provider>
   );
 }
