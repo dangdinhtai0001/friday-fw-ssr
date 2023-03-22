@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --write .",
+    "eslint:clear-cache": "eslint --clear-cache",
     "postinstall": "husky install",
     "precommit": "lint-staged",
     "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
@@ -14,18 +15,29 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "yarn lint --cache --fix",
-      "yarn format"
+    "*.js": [
+      "eslint --cache --fix",
+      "prettier --write ."
+    ],
+    "*.ts": [
+      "eslint --cache --fix --ext .ts",
+      "prettier --write ."
+    ],
+    "*.tsx": [
+      "eslint --cache --fix --ext .tsx",
+      "prettier --write ."
     ]
   },
   "husky": {
     "hooks": {
-      "commit-msg": "npm run commitmsg"
+      "commit-msg": "yarn commitmsg"
     }
   },
   "dependencies": {
-    "@mui/base": "^5.0.0-alpha.119",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/system": "^5.11.12",
+    "@reduxjs/toolkit": "^1.9.3",
     "@types/node": "18.14.4",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
@@ -34,11 +46,16 @@
     "next": "13.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.2",
     "typescript": "4.9.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
