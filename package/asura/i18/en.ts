@@ -2,6 +2,7 @@
 export default {
   common: {
     welcome: 'Have a nice day',
+    language_name: 'English',
   },
   pages: {},
 };

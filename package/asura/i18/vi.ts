@@ -2,6 +2,7 @@
 export default {
   common: {
     welcome: 'Chúc một ngày tốt lành',
+    language_name: 'Việt Nam',
   },
   pages: {},
 };

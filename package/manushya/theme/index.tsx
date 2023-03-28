@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/package/asura/store/configureStore';
 import { changePaletteMode } from '@/package/asura/store/slice/themeSlice';
 import useTrans from '@/package/asura/i18/useTrans';
+import DevaDivider from '@/package/deva/divider/Divider';
 
 const Item = styled('div')(({ theme }) => ({
   border: '1px solid',
@@ -63,8 +64,8 @@ const ThemePage = () => {
   };
 
   return (
-    <>
-      <h2>{trans.common.welcome}</h2>
+    <Box sx={{ justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+      <h2>{trans.common.language_name}</h2>
       <h2>{`palette (mode='${palette.mode}')`}</h2>
       <div>
         <label htmlFor="theme-selector">Select Palette mode:</label>
@@ -80,9 +81,9 @@ const ThemePage = () => {
       <Box sx={{ flexGrow: 1, marginTop: '1rem' }}>
         {_theme.map(item => {
           return (
-            <div key={item.type}>
-              <Box>{item.type}</Box>
-              <Grid container spacing={2}>
+            <Box key={item.type} sx={{ justifyContent: 'space-between' }}>
+              <DevaDivider text={item.type} color='#749363'></DevaDivider>
+              <Grid container spacing={2} gap={2} >
                 {item.props.map(color => {
                   return (
                     <Grid xs={1} key={color}>
@@ -96,11 +97,11 @@ const ThemePage = () => {
                   );
                 })}
               </Grid>
-            </div>
+            </Box>
           );
         })}
       </Box>
-    </>
+    </Box>
   );
 };
 

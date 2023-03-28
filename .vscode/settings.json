@@ -19,10 +19,12 @@
       "editor.formatOnSave": false
     },
     "[typescript]": {
-      "editor.formatOnSave": false
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "[typescriptreact]": {
-      "editor.formatOnSave": false
+      "editor.formatOnSave": false,
+      "editor.defaultFormatter": "vscode.typescript-language-features"
     }
   }
   
