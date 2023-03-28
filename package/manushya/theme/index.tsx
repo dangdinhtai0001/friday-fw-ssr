@@ -82,7 +82,7 @@ const ThemePage = () => {
         {_theme.map(item => {
           return (
             <Box key={item.type} sx={{ justifyContent: 'space-between' }}>
-              <DevaDivider text={item.type} color='#749363'></DevaDivider>
+              <DevaDivider text={item.type}></DevaDivider>
               <Grid container spacing={2} gap={2} >
                 {item.props.map(color => {
                   return (

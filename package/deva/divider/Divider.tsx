@@ -18,7 +18,7 @@ export interface IDividerLineProps {
 }
 
 export interface IDividerTextProps {
-  color: string;
+  color?: string;
 }
 
 const DividerContainer = styled(
@@ -47,9 +47,9 @@ const DividerText = styled(
 )<IDividerTextProps>(props => ({
   fontSize: '14px',
   fontWeight: 500,
-  backgroundColor: '#fff',
+  backgroundColor: props.theme.palette.background.default || '#fff',
   padding: '0 12px',
-  color: `${props.color}`,
+  color: props.color || props.theme.palette.text.primary,
   position: 'absolute',
   top: '50%',
   transform: 'translateY(-50%)',
@@ -61,7 +61,7 @@ export default function Divider(props: IDividerProps) {
   return (
     <DividerContainer height={height}>
       <DividerLine color={color} type={type} />
-      {text && <DividerText color={color}>{text}</DividerText>}
+      {text && <DividerText>{text}</DividerText>}
     </DividerContainer>
   );
 }
