@@ -1,4 +1,7 @@
 import React from 'react';
+import { SearchableContainerProps } from './SearchableContainer.d'
+
+// ================================= || Common ||  =================================
 
 export type SearchCondition = {
   key: string,
@@ -29,10 +32,12 @@ export interface InitialContextState {
 }
 
 export interface ContextState extends InitialContextState {
+  filterBlockParams?: any;
+  filterBlockComponent?: React.ComponentType<FilterBlockProps>;
 }
 
 export interface ContextHelper {
-
+  createContextFromProps: (props: SearchableContainerProps) => void
 }
 
 /**
@@ -45,5 +50,9 @@ export interface ContextProviderProps {
 export interface ContextProviderValue {
   context: ContextState;
   setContext: React.Dispatch<any>;
+}
+export interface ContextHookValue {
+  context: ContextState
+  helper: ContextHelper
 }
 

@@ -1,14 +1,14 @@
 import { Dispatch, createContext, useEffect, useState } from 'react';
 // ------------------------ || define interface || ------------------------
-import { ContextHelper, ContextProviderProps, ContextProviderValue, ContextState, InitialContextState } from './ContainerContext.d';
+import { ContainerContextType, SearchableContainerType } from '../types';
 // ================================================== || CONTEXT || ================================================== //
 
 
 // ---------------------- || Khởi tạo context || ---------------------- //
-export const ContainerContext = createContext<ContextProviderValue | null>(null);
+export const ContainerContext = createContext<ContainerContextType.ContextProviderValue | null>(null);
 
 // hàm định nghĩa giá trị default của context state
-const createDefaultContextStateValue = (initialState: InitialContextState): ContextState => {
+const createDefaultContextStateValue = (initialState: ContainerContextType.InitialContextState): ContainerContextType.ContextState => {
   return {
     searchConditions: [],
     sortConditions: [],
@@ -23,14 +23,14 @@ const createDefaultContextStateValue = (initialState: InitialContextState): Cont
 }
 
 // ---------------------- || Định nghĩa context provider || ---------------------- //
-export const ContainerContextProvider = (props: ContextProviderProps) => {
+export const ContainerContextProvider = (props: ContainerContextType.ContextProviderProps) => {
   const { initialState, children } = props;
 
-  const [context, setContext] = useState<ContextState>(createDefaultContextStateValue(initialState));
+  const [context, setContext] = useState<ContainerContextType.ContextState>(createDefaultContextStateValue(initialState));
 
   useEffect(() => {
     return () => {
-      setContext(props.initialState);
+      // setContext(props.initialState);
     };
   }, [props.initialState]);
 
@@ -43,11 +43,21 @@ export const ContainerContextProvider = (props: ContextProviderProps) => {
 
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 // - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính 
+// - create... ==> Tính toán và thay đổi hoàn toàn giá trị  cuẩ thuộc tính 
 // - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
 // - apply... ==> Thay đổi 1 phần giá trị của thuộc tính đó 
 // --------------------------------------------------------------------------------
-export function mutations(context: ContextState, setContext: Dispatch<any>): ContextHelper {
+export function mutations(context: ContainerContextType.ContextState, setContext: Dispatch<any>): ContainerContextType.ContextHelper {
   return {
+    createContextFromProps: (props: SearchableContainerType.SearchableContainerProps) => {
+      const updatedContext = {
+        ...context, // Giữ lại tất cả các thuộc tính khác
+        filterBlockComponent: props.filterBlockComponent,
+        filterBlockParams: props.filterBlockParams,
+      };
+
+      setContext(updatedContext);
+    }
   }
 }
 // --------------------------------------------------------------------------------
