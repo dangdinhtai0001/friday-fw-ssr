@@ -1,6 +1,7 @@
 import { Dispatch, createContext, useEffect, useState } from 'react';
 // ------------------------ || define interface || ------------------------
-import { ContainerContextType, SearchableContainerType } from '../types';
+import { ContainerContextType, SearchableContainerType, CommonType } from '../types';
+import Queue from 'queue-fifo';
 // ================================================== || CONTEXT || ================================================== //
 
 
@@ -9,8 +10,10 @@ export const ContainerContext = createContext<ContainerContextType.ContextProvid
 
 // hàm định nghĩa giá trị default của context state
 const createDefaultContextStateValue = (initialState: ContainerContextType.InitialContextState): ContainerContextType.ContextState => {
+  let queue = new Queue();
+
   return {
-    searchConditions: [],
+    filterInstance: [],
     sortConditions: [],
     paginationData: {
       totalItems: 100,
@@ -18,7 +21,8 @@ const createDefaultContextStateValue = (initialState: ContainerContextType.Initi
       currentPage: 1,
       itemsPerPage: 10
     },
-    data: []
+    data: [],
+    taskQueue: queue
   }
 }
 
@@ -49,15 +53,46 @@ export const ContainerContextProvider = (props: ContainerContextType.ContextProv
 // --------------------------------------------------------------------------------
 export function mutations(context: ContainerContextType.ContextState, setContext: Dispatch<any>): ContainerContextType.ContextHelper {
   return {
-    createContextFromProps: (props: SearchableContainerType.SearchableContainerProps) => {
+    /**
+     * Hàm tạo context từ props
+     */
+    createContextFromProps: (props: SearchableContainerType.SearchableContainerProps): void => {
       const updatedContext = {
         ...context, // Giữ lại tất cả các thuộc tính khác
         filterBlockComponent: props.filterBlockComponent,
         filterBlockParams: props.filterBlockParams,
+        //  ------------------------------------
+        taskControls: props.taskControls
+      };
+
+      setContext(updatedContext);
+    },
+    /**
+     * 
+     */
+    commitFilterInstance: (filterInstance: CommonType.FilterCriteria[]): void => {
+      const updatedContext = {
+        ...context, // Giữ lại tất cả các thuộc tính khác
+        filterInstance: filterInstance
+      };
+
+      setContext(updatedContext);
+    },
+    /**
+     * 
+     */
+    createTask: (task: CommonType.TaskPayload) : void => {
+      let queue = context.taskQueue;
+      queue.enqueue(task);
+
+      const updatedContext = {
+        ...context, // Giữ lại tất cả các thuộc tính khác
+        taskQueue: queue
       };
 
       setContext(updatedContext);
     }
+
   }
 }
 // --------------------------------------------------------------------------------

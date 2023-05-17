@@ -36,7 +36,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@mui/base": "^5.0.0-alpha.122",
+    "@mui/base": "^5.0.0-beta.0",
     "@mui/system": "^5.11.14",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/node": "18.14.4",
@@ -45,16 +45,19 @@
     "eslint": "^8.35.0",
     "eslint-config-next": "13.2.3",
     "next": "13.2.3",
+    "queue-fifo": "^0.2.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
+    "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "eslint-config-prettier": "^8.6.0",

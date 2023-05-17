@@ -1,30 +1,11 @@
 import React from 'react';
 import { SearchableContainerProps } from './SearchableContainer.d'
-
-// ================================= || Common ||  =================================
-
-export type SearchCondition = {
-  key: string,
-  value: unknown
-}
-
-export type SortCondition = {
-  key: string,
-  direction: "ASC" | "DESC"
-  order?: number
-}
-
-export type Pagination = {
-  totalItems: number;
-  totalPages: number;
-  currentPage: number;
-  itemsPerPage: number;
-}
+import { FilterCriteria, Pagination, SortCondition, TaskControlType } from './Common.d'
 
 // ================================= || Context ||  =================================
 
 export interface InitialContextState {
-  searchConditions: SearchCondition[];
+  filterInstance: FilterCriteria[];
   sortConditions: SortCondition[];
   paginationData: Pagination;
   data: unknown[];
@@ -34,10 +15,15 @@ export interface InitialContextState {
 export interface ContextState extends InitialContextState {
   filterBlockParams?: any;
   filterBlockComponent?: React.ComponentType<FilterBlockProps>;
+  // =====================
+  taskControls?: TaskControlType[],
+  taskQueue?: any,
 }
 
 export interface ContextHelper {
-  createContextFromProps: (props: SearchableContainerProps) => void
+  createContextFromProps: (props: SearchableContainerProps) => void;
+  commitFilterInstance: (filterInstance: CommonType.FilterCriteria[]) => void;
+  createTask: (task: CommonType.TaskPayload) => void;
 }
 
 /**

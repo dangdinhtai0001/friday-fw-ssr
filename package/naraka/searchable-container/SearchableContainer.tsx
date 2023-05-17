@@ -2,7 +2,7 @@ import React from 'react';
 import { useContainerContext } from './container-context/useContainerContext';
 import { SearchableContainerType, ContainerContextType } from './types'
 // panel import
-import { FilterPanel } from './panels';
+import { FilterPanel, TaskControlPanel, DataGridPanel, PaginationPanel, TaskWorkerPanel } from './panels';
 
 
 let mounted = false;
@@ -10,9 +10,7 @@ let initialized = false;
 
 const SearchableContainer: React.FC<SearchableContainerType.SearchableContainerProps> = (props: SearchableContainerType.SearchableContainerProps) => {
 
-  const { } = props;
-
-  const { context, helper }: ContainerContextType.ContextHookValue = useContainerContext();
+  const { helper }: ContainerContextType.ContextHookValue = useContainerContext();
 
   React.useEffect(() => {
     mounted = true;
@@ -28,12 +26,14 @@ const SearchableContainer: React.FC<SearchableContainerType.SearchableContainerP
     };
   }, []);
 
-  console.log(context)
-
   return (
     <div>
       SearchableContainer
       <FilterPanel ></FilterPanel>
+      <TaskControlPanel></TaskControlPanel>
+      <DataGridPanel></DataGridPanel>
+      <PaginationPanel></PaginationPanel>
+      <TaskWorkerPanel></TaskWorkerPanel>
     </div>
   );
 };

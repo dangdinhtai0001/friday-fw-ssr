@@ -3,11 +3,26 @@ import { ContainerContextProvider, SearchableContainer } from '@/package/naraka/
 import { SearchableContainerType } from '@/package/naraka/searchable-container/types'
 
 import FilterBlock from './FilterBlock';
+import TaskControlBlock from './TaskControlBlock';
 
 export default function ComponentPage() {
   const searchableContainerProps: SearchableContainerType.SearchableContainerProps = {
+    // ------------
     filterBlockParams: {},
-    filterBlockComponent: FilterBlock
+    filterBlockComponent: FilterBlock,
+    // ------------
+    taskControls: [
+      {
+        id: 'add',
+        taskControlComponent: TaskControlBlock,
+        taskControlParams: {},
+      },
+      {
+        id: 'delete',
+        taskControlComponent: TaskControlBlock,
+        taskControlParams: {},
+      }
+    ]
   };
 
   return (
