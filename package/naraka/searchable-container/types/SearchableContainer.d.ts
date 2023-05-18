@@ -6,6 +6,5 @@ export type SearchableContainerProps = {
   filterBlockParams: any;
   filterBlockComponent: React.ComponentType<FilterBlockProps>;
   // ==================================================
-  taskControls: TaskControlType[]
+  taskControls: TaskControlType[];
 };
-

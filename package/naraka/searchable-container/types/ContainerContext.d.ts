@@ -1,6 +1,12 @@
 import React from 'react';
-import { SearchableContainerProps } from './SearchableContainer.d'
-import { FilterCriteria, Pagination, SortCondition, TaskControlType } from './Common.d'
+import { SearchableContainerProps } from './SearchableContainer.d';
+import {
+  FilterCriteria,
+  Pagination,
+  SortCondition,
+  TaskControlType,
+  TaskBlock
+} from './Common.d';
 
 // ================================= || Context ||  =================================
 
@@ -16,14 +22,19 @@ export interface ContextState extends InitialContextState {
   filterBlockParams?: any;
   filterBlockComponent?: React.ComponentType<FilterBlockProps>;
   // =====================
-  taskControls?: TaskControlType[],
-  taskQueue?: any,
+  taskControls?: TaskControlType[];
+  taskQueue?: any;
+  taskChain?: TaskBlock[];
+  containerReady: boolean
 }
 
 export interface ContextHelper {
   createContextFromProps: (props: SearchableContainerProps) => void;
-  commitFilterInstance: (filterInstance: CommonType.FilterCriteria[]) => void;
-  createTask: (task: CommonType.TaskPayload) => void;
+  commitFilterInstance: (
+    filterInstance: CommonType.FilterCriteria[]
+  ) => void;
+  createTaskChain: (taskChain: CommonType.TaskPayload[]) => void;
+  dequeueTaskChain: () => CommonType.TaskPayload
 }
 
 /**
@@ -38,7 +49,6 @@ export interface ContextProviderValue {
   setContext: React.Dispatch<any>;
 }
 export interface ContextHookValue {
-  context: ContextState
-  helper: ContextHelper
+  context: ContextState;
+  helper: ContextHelper;
 }
-

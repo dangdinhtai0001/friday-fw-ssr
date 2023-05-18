@@ -1,3 +1,1 @@
-export interface DataGridPanelProps {
-  
-}
+export interface DataGridPanelProps {}

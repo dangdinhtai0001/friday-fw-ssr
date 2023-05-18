@@ -64,7 +64,13 @@ const ThemePage = () => {
   };
 
   return (
-    <Box sx={{ justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+    <Box
+      sx={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+      }}
+    >
       <h2>{trans.common.language_name}</h2>
       <h2>{`palette (mode='${palette.mode}')`}</h2>
       <div>
@@ -81,9 +87,12 @@ const ThemePage = () => {
       <Box sx={{ flexGrow: 1, marginTop: '1rem' }}>
         {_theme.map(item => {
           return (
-            <Box key={item.type} sx={{ justifyContent: 'space-between' }}>
+            <Box
+              key={item.type}
+              sx={{ justifyContent: 'space-between' }}
+            >
               <DevaDivider text={item.type}></DevaDivider>
-              <Grid container spacing={2} gap={2} >
+              <Grid container spacing={2} gap={2}>
                 {item.props.map(color => {
                   return (
                     <Grid xs={1} key={color}>

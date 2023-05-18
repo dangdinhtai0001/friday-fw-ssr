@@ -1,8 +1,8 @@
-import { ContextHelper, ContextState } from './ContainerContext'
-import { FilterCriteria } from './Common.d'
+import { ContextHelper, ContextState } from './ContainerContext';
+import { FilterCriteria } from './Common.d';
 
 export interface BaseEvent {
-  // Event identifier 
+  // Event identifier
   type: string;
 }
 
@@ -12,4 +12,5 @@ export interface FilterModifiedEvent extends BaseEvent {
 
 export interface CreateTaskEvent extends BaseEvent {
   name: string;
+  data?: any;
 }

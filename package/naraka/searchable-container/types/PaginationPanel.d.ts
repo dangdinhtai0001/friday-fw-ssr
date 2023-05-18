@@ -1,3 +1,1 @@
-export interface PaginationGridPanelProps {
-  
-}
+export interface PaginationGridPanelProps {}
