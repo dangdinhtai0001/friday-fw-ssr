@@ -3,13 +3,12 @@ import { FilterPanelProps, ContextHookValue, FilterModifiedEvent } from '../type
 import { useContainerContext } from '../context/useContainerContext';
 
 const FilterPanel: React.FC<FilterPanelProps> = (props: FilterPanelProps) => {
-  const { context, contextApi }: ContextHookValue =
-    useContainerContext();
+  const { context, contextApi }: ContextHookValue = useContainerContext();
 
   const handleOnFilterModified = (
     event: FilterModifiedEvent
   ): void => {
-    contextApi.commitFilterInstance(event.filterInstance);
+    contextApi.applyFilterInstance(event.filterInstance);
   };
 
   const createFilterBlock = () => {
@@ -26,7 +25,7 @@ const FilterPanel: React.FC<FilterPanelProps> = (props: FilterPanelProps) => {
         params
       );
     } else {
-      return <></>;
+      return <>Không có </>;
     }
   };
 

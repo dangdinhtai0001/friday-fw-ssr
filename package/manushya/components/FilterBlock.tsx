@@ -1,11 +1,10 @@
 import * as React from 'react';
 import Button from '@mui/base/Button';
-import { useContainerContext } from '@/package/naraka/searchable-container';
-import { ContainerContextType } from '@/package/naraka/searchable-container/types';
+import { useContainerContext } from '@/package/naraka/searchable-container2';
+import { ContextHookValue } from '@/package/naraka/searchable-container2/types';
 
 const FilterBlock: React.FC = (props: any) => {
-  const { context, helper }: ContainerContextType.ContextHookValue =
-    useContainerContext();
+  const { context, contextApi }: ContextHookValue = useContainerContext();
 
   const { onFilterModified } = props;
 

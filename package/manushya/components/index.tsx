@@ -1,15 +1,12 @@
 import * as React from 'react';
-import {
-  ContainerContextProvider,
-  SearchableContainer,
-} from '@/package/naraka/searchable-container';
-import { SearchableContainerType } from '@/package/naraka/searchable-container/types';
+import { ContainerProvider } from '@/package/naraka/searchable-container2';
+import { ContainerProviderProps, TaskBlock } from '@/package/naraka/searchable-container2/types';
 
 import FilterBlock from './FilterBlock';
 import TaskControlBlock from './TaskControlBlock';
 
 export default function ComponentPage() {
-  const searchableContainerProps: SearchableContainerType.SearchableContainerProps =
+  const searchableContainerProps: ContainerProviderProps =
   {
     // ------------
     filterBlockParams: {},
@@ -20,7 +17,7 @@ export default function ComponentPage() {
         id: 'add',
         taskControlComponent: TaskControlBlock,
         taskControlParams: {},
-        onProcessTask(payload) {
+        onProcessTask(payload: TaskBlock) {
           console.log("onProcessTask add", payload);
         },
       },
@@ -28,15 +25,13 @@ export default function ComponentPage() {
         id: 'delete',
         taskControlComponent: TaskControlBlock,
         taskControlParams: {},
-        onProcessTask(payload) {
+        onProcessTask(payload: TaskBlock) {
           console.log("onProcessTask delete", payload);
         },
       },
       {
         id: 'search',
-        taskControlComponent: TaskControlBlock,
-        taskControlParams: {},
-        onProcessTask(payload) {
+        onProcessTask(payload: TaskBlock) {
           console.log("onProcessTask search", payload);
         },
       },
@@ -45,11 +40,7 @@ export default function ComponentPage() {
 
   return (
     <div>
-      <ContainerContextProvider initialState={{}}>
-        <SearchableContainer
-          {...searchableContainerProps}
-        ></SearchableContainer>
-      </ContainerContextProvider>
+      <ContainerProvider {...searchableContainerProps}></ContainerProvider>
     </div>
   );
 }

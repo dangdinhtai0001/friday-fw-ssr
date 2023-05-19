@@ -1,10 +1,6 @@
 import { ContextHelper, ContextState } from './Context';
 import { FilterCriteria } from './Common.d';
-
-export type FilterCriteria = {
-  key: string;
-  value: unknown;
-};
+import { TaskRequest } from './Task.d'
 
 export interface BaseEvent {
   // Event identifier
@@ -13,6 +9,10 @@ export interface BaseEvent {
 
 export interface FilterModifiedEvent extends BaseEvent {
   filterInstance: FilterCriteria[];
+}
+
+export interface CreateTaskChainEvent extends BaseEvent {
+  requests: TaskRequest[];
 }
 
 
