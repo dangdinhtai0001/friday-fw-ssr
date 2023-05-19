@@ -1,5 +1,5 @@
 import { ContextHelper, ContextState } from './Context';
-import { FilterCriteria } from './Common.d';
+import { FilterCriteria, PaginationModel } from './Common.d';
 import { TaskRequest } from './Task.d'
 
 export interface BaseEvent {
@@ -9,6 +9,10 @@ export interface BaseEvent {
 
 export interface FilterModifiedEvent extends BaseEvent {
   filterInstance: FilterCriteria[];
+}
+
+export interface PaginationModifiedEvent extends BaseEvent {
+  value: PaginationModel;
 }
 
 export interface CreateTaskChainEvent extends BaseEvent {

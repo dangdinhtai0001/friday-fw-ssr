@@ -1,4 +1,4 @@
-import { FilterCriteria } from '../types';
+import { FilterCriteria, PaginationModel } from '../types';
 
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 import { Dispatch } from 'react';
@@ -45,6 +45,14 @@ export function mutations(context: ContextState, setContext: Dispatch<ContextSta
       setContext(updatedContext);
 
       return task;
+    },
+    applyPaginationInstance: (paginationModel: PaginationModel): void => {
+      const updatedContext = {
+        ...context, // Giữ lại tất cả các thuộc tính khác
+        paginationModel: paginationModel,
+      };
+
+      setContext(updatedContext);
     }
   }
 }

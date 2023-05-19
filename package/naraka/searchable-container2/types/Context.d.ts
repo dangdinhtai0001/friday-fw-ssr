@@ -1,23 +1,27 @@
 import React from 'react';
 import { FilterModifiedEvent } from './Event.d';
-import { FilterCriteria } from './Common.d';
+import { FilterCriteria, PaginationModel } from './Common.d';
 import { TaskControl, TaskBlock } from './Task.d';
 
 export interface ContextState {
-  filterInstance: FilterCriteria[];
   containerReady: boolean;
+
+  filterInstance: FilterCriteria[];
 
   filterBlockParams?: any;
   filterBlockComponent?: React.ComponentType<FilterBlockProps>;
 
   taskControls?: TaskControl[];
   taskQueue: any;
+
+  paginationInstance: PaginationModel;
 }
 
 export interface ContextApi {
-  applyFilterInstance: (event: FilterCriteria[]) => void;
+  applyFilterInstance: (filterInstance: FilterCriteria[]) => void;
   createTaskChain: (taskChain: TaskBlock[]) => void;
-  dequeueTaskChain: () => TaskBlock
+  dequeueTaskChain: () => TaskBlock;
+  applyPaginationInstance: (paginationModel: PaginationModel) => void;
 }
 
 /**
