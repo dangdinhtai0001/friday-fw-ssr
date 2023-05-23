@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { FilterPanelProps, ContextHookValue, FilterModifiedEvent, DefaultTaskName } from '../types';
+import { FilterPanelProps, ContextHookValue, FilterModifiedEvent } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import useTask from '../task/useTask';
+import { DefaultTaskName } from '../Constant';
 
 const FilterPanel: React.FC<FilterPanelProps> = (props: FilterPanelProps) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
@@ -10,8 +11,7 @@ const FilterPanel: React.FC<FilterPanelProps> = (props: FilterPanelProps) => {
   const handleOnFilterModified = (
     event: FilterModifiedEvent
   ): void => {
-    // contextApi.applyFilterInstance(event.filterInstance);
-    let name: DefaultTaskName = 'filter_modified';
+    let name = DefaultTaskName.FILTER_MODIFIED;
     onCreateTaskChain([{ name, data: event.filterInstance }]);
   };
 

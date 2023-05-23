@@ -1,7 +1,6 @@
 import { ToolbarPanelProps } from './Panel.d';
 import { ContextState, ContextApi } from './Context.d';
-
-export type DefaultTaskName = "search" | "filter_modified";
+import { DefaultTaskName } from '../Constant';
 
 export interface TaskRequest {
   name: string | DefaultTaskName;
@@ -15,7 +14,7 @@ export interface TaskBlock extends TaskRequest {
 };
 
 export type TaskControl = {
-  id: string;
+  id: DefaultTaskName | string;
   taskControlComponent?: React.ComponentType<ToolbarPanelProps>;
   taskControlParams?: any;
   onProcessTask: (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => void | Promise<void>;

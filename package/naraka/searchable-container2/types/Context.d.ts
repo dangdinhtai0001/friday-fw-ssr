@@ -15,6 +15,9 @@ export interface ContextState {
   taskQueue: any;
 
   paginationInstance: PaginationModel;
+
+  paginationBlockParams?: any;
+  paginationBlockComponent?: React.ComponentType<PaginationBlockProps>;
 }
 
 export interface ContextApi {

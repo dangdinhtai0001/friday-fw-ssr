@@ -49,7 +49,7 @@ export function mutations(context: ContextState, setContext: Dispatch<ContextSta
     applyPaginationInstance: (paginationModel: PaginationModel): void => {
       const updatedContext = {
         ...context, // Giữ lại tất cả các thuộc tính khác
-        paginationModel: paginationModel,
+        paginationInstance: paginationModel,
       };
 
       setContext(updatedContext);

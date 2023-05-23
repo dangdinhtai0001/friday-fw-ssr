@@ -4,6 +4,7 @@ import { ContainerProviderProps, TaskBlock } from '@/package/naraka/searchable-c
 
 import FilterBlock from './FilterBlock';
 import TaskControlBlock from './TaskControlBlock';
+import PaginationBlock from './PaginationBlock';
 
 export default function ComponentPage() {
   const searchableContainerProps: ContainerProviderProps =
@@ -37,6 +38,10 @@ export default function ComponentPage() {
       },
 
     ],
+    // ------------
+    paginationBlockParams: {},
+    paginationBlockComponent: PaginationBlock,
+    // ------------
   };
 
   return (

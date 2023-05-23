@@ -13,18 +13,20 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
     containerReady: true,
     filterInstance: [],
     paginationInstance: {
-      itemsPerPage: 1,
+      itemsPerPage: 10,
       currentPage: 1,
-      totalItems: 10,
+      totalItems: 100,
       totalPages: 10
     },
     // ---------------------------
     filterBlockComponent: props.filterBlockComponent,
     filterBlockParams: props.filterBlockParams,
     // ---------------------------
-    // taskControls: { [...createDefaultTaskControls(), ...props.taskControls },
     taskControls: createDefaultTaskControls().concat(props.taskControls!),
     taskQueue: queue,
+    // ---------------------------
+    paginationBlockComponent: props.paginationBlockComponent,
+    paginationBlockParams: props.paginationBlockParams,
   };
 };
 
