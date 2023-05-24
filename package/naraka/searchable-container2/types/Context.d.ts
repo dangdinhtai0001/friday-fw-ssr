@@ -5,6 +5,7 @@ import { TaskControl, TaskBlock } from './Task.d';
 
 export interface ContextState {
   containerReady: boolean;
+  containerLoading: boolean;
 
   filterInstance: FilterCriteria[];
 
@@ -18,6 +19,11 @@ export interface ContextState {
 
   paginationBlockParams?: any;
   paginationBlockComponent?: React.ComponentType<PaginationBlockProps>;
+
+  containerData: any[];
+  processingData?: any;
+
+  onFetchData?: (taskBlock?: TaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 }
 
 export interface ContextApi {
@@ -25,6 +31,8 @@ export interface ContextApi {
   createTaskChain: (taskChain: TaskBlock[]) => void;
   dequeueTaskChain: () => TaskBlock;
   applyPaginationInstance: (paginationModel: PaginationModel) => void;
+  applyContainerData: (data: any[]) => void;
+  applyContainerLoadingStatus: (isLoading: boolean) => void;
 }
 
 /**

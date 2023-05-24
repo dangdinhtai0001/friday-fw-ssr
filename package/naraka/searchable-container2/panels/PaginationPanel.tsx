@@ -3,6 +3,7 @@ import { PaginationPanelProps, ContextHookValue, PaginationModel, CreateTaskChai
 import { useContainerContext } from '../context/useContainerContext';
 import useTask from '../task/useTask';
 import { DefaultTaskName } from '../Constant';
+import JSONPretty from 'react-json-prettify';
 
 const PaginationPanel: React.FC<PaginationPanelProps> = (props: PaginationPanelProps) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
@@ -74,7 +75,7 @@ const PaginationPanel: React.FC<PaginationPanelProps> = (props: PaginationPanelP
     <div>
       Pagination panel
       {createPaginationBlock()}
-      {JSON.stringify(context.paginationInstance)}
+      <JSONPretty json={context.paginationInstance} />
     </div>
   );
 };

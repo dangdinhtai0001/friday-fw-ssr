@@ -3,7 +3,7 @@ import Queue from 'queue-fifo';
 import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
 import { ContextState, ContainerProviderProps, TaskBlock, TaskControl } from './types';
-import {createDefaultTaskControls} from './task/DefaultTaskControl'
+import { createDefaultTaskControls } from './task/DefaultTaskControl'
 
 // hàm định nghĩa giá trị default của context state
 const createDefaultContextStateValue = (props: ContainerProviderProps): ContextState => {
@@ -11,6 +11,8 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
 
   return {
     containerReady: true,
+    containerLoading: false,
+
     filterInstance: [],
     paginationInstance: {
       itemsPerPage: 10,
@@ -27,6 +29,10 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
     // ---------------------------
     paginationBlockComponent: props.paginationBlockComponent,
     paginationBlockParams: props.paginationBlockParams,
+
+    containerData: [],
+
+    onFetchData: props.onFetchData
   };
 };
 

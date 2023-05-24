@@ -11,8 +11,10 @@ const FilterPanel: React.FC<FilterPanelProps> = (props: FilterPanelProps) => {
   const handleOnFilterModified = (
     event: FilterModifiedEvent
   ): void => {
-    let name = DefaultTaskName.FILTER_MODIFIED;
-    onCreateTaskChain([{ name, data: event.filterInstance }]);
+    onCreateTaskChain([
+      { name: DefaultTaskName.FILTER_MODIFIED, data: event.filterInstance },
+      { name: DefaultTaskName.FETCH_DATA }
+    ]);
   };
 
   const createFilterBlock = () => {

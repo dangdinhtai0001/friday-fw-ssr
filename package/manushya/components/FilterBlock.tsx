@@ -2,6 +2,7 @@ import * as React from 'react';
 import Button from '@mui/base/Button';
 import { useContainerContext } from '@/package/naraka/searchable-container2';
 import { ContextHookValue } from '@/package/naraka/searchable-container2/types';
+import JSONPretty from 'react-json-prettify';
 
 const FilterBlock: React.FC = (props: any) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
@@ -23,9 +24,7 @@ const FilterBlock: React.FC = (props: any) => {
     <div>
       Filter block
       <Button onClick={handleOnclick}>apply filter</Button>
-      {context.filterInstance.map((item, index) => (
-        <p key={index}>{item.key}</p>
-      ))}
+      <JSONPretty json={context.filterInstance} />
     </div>
   );
 };

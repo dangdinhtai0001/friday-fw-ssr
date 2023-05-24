@@ -16,3 +16,9 @@ export type PaginationBlockProps = {
   // Định nghĩa props cho PaginationBlock tại đây (nếu có)
 };
 
+export type DataPanelProps = {};
+
+export type DataBlockProps = {
+  // Định nghĩa props cho PaginationBlock tại đây (nếu có)
+};
+

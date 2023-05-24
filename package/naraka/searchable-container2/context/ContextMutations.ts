@@ -11,7 +11,7 @@ import { ContextState, ContextApi, TaskBlock } from '../types'
 export function mutations(context: ContextState, setContext: Dispatch<ContextState>): ContextApi {
   return {
     applyFilterInstance: (filterInstance: FilterCriteria[]): void => {
-      const updatedContext = {
+      const updatedContext: ContextState = {
         ...context, // Giữ lại tất cả các thuộc tính khác
         filterInstance: filterInstance,
       };
@@ -25,7 +25,7 @@ export function mutations(context: ContextState, setContext: Dispatch<ContextSta
         queue.enqueue(task);
       });
 
-      const updatedContext = {
+      const updatedContext: ContextState = {
         ...context, // Giữ lại tất cả các thuộc tính khác
         taskQueue: queue,
       };
@@ -37,7 +37,7 @@ export function mutations(context: ContextState, setContext: Dispatch<ContextSta
 
       let task: TaskBlock = queue.dequeue();
 
-      const updatedContext = {
+      const updatedContext: ContextState = {
         ...context, // Giữ lại tất cả các thuộc tính khác
         taskQueue: queue,
       };
@@ -47,9 +47,25 @@ export function mutations(context: ContextState, setContext: Dispatch<ContextSta
       return task;
     },
     applyPaginationInstance: (paginationModel: PaginationModel): void => {
-      const updatedContext = {
+      const updatedContext: ContextState = {
         ...context, // Giữ lại tất cả các thuộc tính khác
         paginationInstance: paginationModel,
+      };
+
+      setContext(updatedContext);
+    },
+    applyContainerData: (data: any[]): void => {
+      const updatedContext: ContextState = {
+        ...context, // Giữ lại tất cả các thuộc tính khác
+        containerData: [...data],
+      };
+
+      setContext(updatedContext);
+    },
+    applyContainerLoadingStatus: (isLoading: boolean) => {
+      const updatedContext: ContextState = {
+        ...context, // Giữ lại tất cả các thuộc tính khác
+        containerLoading: isLoading
       };
 
       setContext(updatedContext);

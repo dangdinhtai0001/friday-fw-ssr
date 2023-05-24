@@ -37,11 +37,18 @@ const useTask = (): TaskHook => {
 
   // Hàm xử lý một task
   const processTask = async (task: TaskBlock): Promise<void> => {
+    // contextApi.applyContainerLoadingStatus(true);
+
+    console.log('process task -----------', task);
+
+
     const taskControl = context.taskControls?.find((control) => task && control.id === task.name);
 
     if (taskControl) {
       await taskControl.onProcessTask?.(task, context, contextApi);
     }
+
+    // contextApi.applyContainerLoadingStatus(false);
   }
 
 

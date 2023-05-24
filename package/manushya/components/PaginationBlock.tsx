@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/base/Button';
 import Input from '@mui/base/Input';
-import useInput from '@mui/base/useInput';
 import { useContainerContext } from '@/package/naraka/searchable-container2';
 import { ContextHookValue } from '@/package/naraka/searchable-container2/types';
 
