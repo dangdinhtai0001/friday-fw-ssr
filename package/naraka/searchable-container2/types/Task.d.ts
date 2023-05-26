@@ -21,5 +21,5 @@ export type TaskControl = {
 export interface TaskHook {
   onCreateTask: <T extends TaskRequest>(request: T) => void;
   onCreateTaskChain: <T extends TaskRequest>(requests: T[]) => void;
-  onProcessTask: (task: TaskBlock) => Promise<void>;
+  onProcessTaskChain: (tasks: TaskBlock[]) => Promise<void>;
 }

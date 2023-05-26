@@ -34,7 +34,7 @@ export default function ComponentPage() {
 
           await sleep(2000);
 
-          // contextApi?.applyProcessingData(null);
+          contextApi?.applyProcessingData(null);
         },
       }
 

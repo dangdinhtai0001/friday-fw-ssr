@@ -8,75 +8,77 @@ import { ContextState, ContextApi, TaskBlock } from '../types'
 // - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
 // - apply... ==> Thay đổi 1 phần giá trị của thuộc tính đó
 // --------------------------------------------------------------------------------
-export function mutations(context: ContextState, setContext: Dispatch<ContextState>): ContextApi {
+export function mutations(context: ContextState, setContext: Dispatch<React.SetStateAction<ContextState>>): ContextApi {
   return {
     applyFilterInstance: (filterInstance: FilterCriteria[]): void => {
-      const updatedContext: ContextState = {
-        ...context, // Giữ lại tất cả các thuộc tính khác
-        filterInstance: filterInstance,
-      };
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          filterInstance: filterInstance,
+        };
 
-      setContext(updatedContext);
+        return updatedContext;
+      });
     },
     createTaskChain: (taskChain: TaskBlock[]): void => {
-      const queue = context.taskQueue;
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          taskChain: taskChain,
+        };
 
-      taskChain.forEach(task => {
-        queue.enqueue(task);
+        return updatedContext;
       });
-
-      const updatedContext: ContextState = {
-        ...context, // Giữ lại tất cả các thuộc tính khác
-        taskQueue: queue,
-      };
-
-      setContext(updatedContext);
-    },
-    dequeueTaskChain: (): TaskBlock => {
-      let queue = context.taskQueue;
-
-      let task: TaskBlock = queue.dequeue();
-
-      const updatedContext: ContextState = {
-        ...context, // Giữ lại tất cả các thuộc tính khác
-        taskQueue: queue,
-      };
-
-      setContext(updatedContext);
-
-      return task;
     },
     applyPaginationInstance: (paginationModel: PaginationModel): void => {
-      const updatedContext: ContextState = {
-        ...context, // Giữ lại tất cả các thuộc tính khác
-        paginationInstance: { ...paginationModel },
-      };
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          paginationInstance: { ...paginationModel },
+        };
 
-      setContext(updatedContext);
+        return updatedContext;
+      });
     },
     applyContainerData: (data: any[]): void => {
-      const updatedContext: ContextState = {
-        ...context, // Giữ lại tất cả các thuộc tính khác
-        containerData: [...data],
-      };
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          containerData: [...data],
+        };
 
-      setContext(updatedContext);
+        return updatedContext;
+      });
     },
     applyProcessingData: (data: any | null): void => {
-      const updatedContext: ContextState = {
-        ...context, // Giữ lại tất cả các thuộc tính khác
-        processingData: data === null ? null : { ...data },
-      };
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          processingData: data === null ? null : { ...data },
+        };
 
-      setContext(updatedContext);
+        return updatedContext;
+      });
     },
     applyContainerLoadingStatus: (isLoading: boolean) => {
-      const updatedContext: ContextState = {
-        ...context, // Giữ lại tất cả các thuộc tính khác
-        containerLoading: isLoading
-      };
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          containerLoading: isLoading
+        };
 
-      setContext(updatedContext);
+        return updatedContext;
+      });
+    },
+    applyTaskBatch: (taskChain: TaskBlock[]): void => {
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          taskChain: taskChain,
+        };
+
+        return updatedContext;
+      });
     }
   }
 }

@@ -6,21 +6,21 @@ import useAsyncEffect from "@n1ru4l/use-async-effect";
 
 const TaskWorkerPanel: React.FC = () => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
-  const { onProcessTask } = useTask();
+  const { onProcessTaskChain } = useTask();
 
   useAsyncEffect(function* (onCancel, cast) {
     try {
       // Hành động được thực hiện mỗi khi context.taskQueue thay đổi
       if (context.containerReady) {
         // khi nào container ready thì mới chạy
-        yield onProcessTask(contextApi.dequeueTaskChain());
+        yield onProcessTaskChain(context.taskChain);
       }
     } catch (error) {
       console.error('Error occurred:', error);
     }
-  }, [context.taskQueue.size()]);
+  }, [context.taskChain?.length]);
 
-  return <>{context.taskQueue?.size()}</>;
+  return <></>;
 };
 
 export default TaskWorkerPanel;

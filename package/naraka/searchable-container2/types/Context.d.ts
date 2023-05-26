@@ -17,7 +17,7 @@ export interface ContextState {
   toolbarBlockComponent?: React.ComponentType<ToolbarBlockProps>;
 
   taskControls?: TaskControl[];
-  taskQueue: any;
+  taskChain: TaskBlock[];
 
   paginationInstance: PaginationModel;
 
@@ -33,11 +33,11 @@ export interface ContextState {
 export interface ContextApi {
   applyFilterInstance: (filterInstance: FilterCriteria[]) => void;
   createTaskChain: (taskChain: TaskBlock[]) => void;
-  dequeueTaskChain: () => TaskBlock;
   applyPaginationInstance: (paginationModel: PaginationModel) => void;
   applyProcessingData: (data: any | null) => void;
   applyContainerData: (data: any[]) => void;
   applyContainerLoadingStatus: (isLoading: boolean) => void;
+  applyTaskBatch: (tasks: TaskBlock[]) => void;
 }
 
 /**

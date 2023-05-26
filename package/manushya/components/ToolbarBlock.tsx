@@ -20,7 +20,6 @@ const ToolbarBlock: React.FC<any> = (props: any) => {
     onCreateTask({
       requests: [
         { name: 'delete' },
-        { name: DefaultTaskName.FETCH_DATA }
       ]
     });
   };
