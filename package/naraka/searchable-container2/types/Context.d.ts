@@ -18,6 +18,7 @@ export interface ContextState {
 
   taskControls?: TaskControl[];
   taskChain: TaskBlock[];
+  taskResult: TaskBlock[];
 
   paginationInstance: PaginationModel;
 
@@ -31,13 +32,20 @@ export interface ContextState {
 }
 
 export interface ContextApi {
+  // filter
   applyFilterInstance: (filterInstance: FilterCriteria[]) => void;
+  // Task 
   createTaskChain: (taskChain: TaskBlock[]) => void;
+  applyTaskBatch: (tasks: TaskBlock[]) => void;
+  clearTaskResult: () => void;
+  completeTask: (task: TaskBlock) => void;
+  // pagiantion
   applyPaginationInstance: (paginationModel: PaginationModel) => void;
+  // data
   applyProcessingData: (data: any | null) => void;
   applyContainerData: (data: any[]) => void;
+  // common
   applyContainerLoadingStatus: (isLoading: boolean) => void;
-  applyTaskBatch: (tasks: TaskBlock[]) => void;
 }
 
 /**

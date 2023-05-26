@@ -79,6 +79,29 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
 
         return updatedContext;
       });
+    },
+    clearTaskResult: (): void => {
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          taskResult: [],
+        };
+
+        return updatedContext;
+      });
+    },
+    completeTask: (task: TaskBlock): void => {
+      setContext((prevContext: ContextState) => {
+        let _taskResult: TaskBlock[] = prevContext.taskResult;
+        _taskResult.push(task);
+
+        const updatedContext: ContextState = {
+          ...prevContext,
+          taskResult: _taskResult,
+        };
+
+        return updatedContext;
+      });
     }
   }
 }

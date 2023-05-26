@@ -4,3 +4,9 @@ export enum DefaultTaskName {
   FILTER_MODIFIED = "FILTER_MODIFIED",
   PAGINATION_MODIFIED = "PAGINATION_MODIFIED",
 }
+
+export enum TASK_STATUS {
+  PENDING = "P",
+  SUCCESS = "S",
+  ERROR = "E"
+}

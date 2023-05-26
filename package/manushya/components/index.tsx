@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ContainerProvider, DefaultTaskName } from '@/package/naraka/searchable-container2';
+import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container2';
 import { ContainerProviderProps, ContextApi, ContextState, TaskBlock } from '@/package/naraka/searchable-container2/types';
 
 import FilterBlock from './FilterBlock';
@@ -23,6 +23,7 @@ export default function ComponentPage() {
         id: 'add',
         onProcessTask(payload: TaskBlock) {
           console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
+          return TASK_STATUS.SUCCESS;
         },
       },
       {
@@ -35,6 +36,8 @@ export default function ComponentPage() {
           await sleep(2000);
 
           contextApi?.applyProcessingData(null);
+
+          return TASK_STATUS.SUCCESS;
         },
       }
 

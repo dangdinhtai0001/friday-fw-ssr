@@ -2,6 +2,7 @@ import * as React from 'react';
 import { TaskRequest, ContextHookValue, TaskBlock, TaskHook, ContextState } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import { v4 as uuidv4 } from 'uuid';
+import { TASK_STATUS } from '../Constant';
 
 const useTask = (): TaskHook => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
@@ -17,7 +18,7 @@ const useTask = (): TaskHook => {
     return {
       ...request,
       id: uuidv4(),
-      status: "PENDING",
+      status: TASK_STATUS.PENDING,
       isLast: true
     };
   };
@@ -30,7 +31,7 @@ const useTask = (): TaskHook => {
       return {
         ...request,
         id: uuidv4(),
-        status: "PENDING",
+        status: TASK_STATUS.PENDING,
         isLast: lastIndex === index
       }
     });
@@ -41,20 +42,38 @@ const useTask = (): TaskHook => {
       return;
     }
 
+    // đánh dấu trạng thái loading
     contextApi.applyContainerLoadingStatus(true);
 
-    for (const task of tasks) {
+    // clear két quả chạy cũ 
+    contextApi.clearTaskResult();
+
+    let taskResults: TASK_STATUS[] = [];
+
+    for (let i = 0; i < tasks.length; i++) {
+      const task = tasks[i];
       let taskControl = context.taskControls?.find((control) => task && control.id === task.name);
 
+      console.log(taskResults);
+
+      if (taskResults[i - 1] === TASK_STATUS.ERROR) {
+        console.error('Task trước đó đã fail, không thể chạy tiếp');
+        break;
+      }
+
       if (taskControl) {
-        await taskControl.onProcessTask?.(task, context, contextApi);
+        let status: TASK_STATUS = await taskControl.onProcessTask?.(task, context, contextApi);
+        taskResults.push(status);
       } else {
         console.error(`Không tìm thấy task control nào có id là ${task.name}`);
+        taskResults.push(TASK_STATUS.ERROR);
       }
     }
 
     // sau khi chạy xong thì xóa task 
     contextApi.applyTaskBatch([]);
+
+    // đánh dấu trạng thái không còn loading
     contextApi.applyContainerLoadingStatus(false);
   }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Queue from 'queue-fifo';
 import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
 import { ContextState, ContainerProviderProps, TaskBlock, TaskControl } from './types';
@@ -7,8 +6,6 @@ import { createDefaultTaskControls } from './task/DefaultTaskControl'
 
 // hàm định nghĩa giá trị default của context state
 const createDefaultContextStateValue = (props: ContainerProviderProps): ContextState => {
-  const queue = new Queue();
-
   return {
     containerReady: true,
     containerLoading: false,
@@ -28,7 +25,8 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
     toolbarBlockParams: props.toolbarBlockParams,
     // ---------------------------
     taskControls: createDefaultTaskControls().concat(props.taskControls!),
-    taskQueue: queue,
+    taskChain: [],
+    taskResult: [],
     // ---------------------------
     paginationBlockComponent: props.paginationBlockComponent,
     paginationBlockParams: props.paginationBlockParams,

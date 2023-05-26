@@ -1,6 +1,6 @@
 import { ToolbarPanelProps } from './Panel.d';
 import { ContextState, ContextApi } from './Context.d';
-import { DefaultTaskName } from '../Constant';
+import { DefaultTaskName, TASK_STATUS } from '../Constant';
 
 export interface TaskRequest {
   name: string | DefaultTaskName;
@@ -9,13 +9,14 @@ export interface TaskRequest {
 
 export interface TaskBlock extends TaskRequest {
   id: string;
-  status: "PENDING" | "DONE" | "PROCESSING";
+  status: TASK_STATUS;
   isLast?: boolean
 };
 
 export type TaskControl = {
   id: DefaultTaskName | string;
-  onProcessTask: (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => void | Promise<void>;
+  onProcessTask: (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi)
+    => TASK_STATUS | Promise<TASK_STATUS>;
 };
 
 export interface TaskHook {
