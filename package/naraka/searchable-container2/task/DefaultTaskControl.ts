@@ -2,20 +2,20 @@ import { TaskControl, TaskBlock, ContextState, ContextApi } from '../types';
 import { DefaultTaskName } from '../Constant';
 
 const onProcessTask_FilterModified = async (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => {
-  console.log(`Process Task ${payload.name}-${payload.id}`);
+  console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
   // mặc định thì payload.data sẽ là filterInstance trong context
   contextApi?.applyFilterInstance(payload.data);
 };
 
 const onProcessTask_PaginationModified = async (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => {
-  console.log(`Process Task ${payload.name}-${payload.id}`);
+  console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
 
   // mặc định thì payload.data sẽ là paginationInstance trong context
   contextApi?.applyPaginationInstance(payload.data);
 };
 
 const onProcessTask_FetchData = async (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => {
-  console.log(`Process Task ${payload.name}-${payload.id}`);
+  console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
   let containerData = [];
 
   if (context?.onFetchData) {

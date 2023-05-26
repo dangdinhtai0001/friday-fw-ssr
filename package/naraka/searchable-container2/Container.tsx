@@ -1,7 +1,8 @@
 import React from 'react';
 import { ContextHookValue, ContainerProps } from './types';
 import { useContainerContext } from './context/useContainerContext';
-import { FilterPanel, ToolbarPanel, TaskWorkerPanel, PaginationPanel, DataPanel } from './panels'
+import { FilterPanel, ToolbarPanel, PaginationPanel, DataPanel, TaskWorkerPanel } from './panels'
+import useTask from './task/useTask';
 
 const Container: React.FC<ContainerProps> = (props: ContainerProps) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();

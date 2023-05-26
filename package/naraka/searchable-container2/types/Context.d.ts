@@ -2,6 +2,7 @@ import React from 'react';
 import { FilterModifiedEvent } from './Event.d';
 import { FilterCriteria, PaginationModel } from './Common.d';
 import { TaskControl, TaskBlock } from './Task.d';
+import { FilterBlockProps, ToolbarBlockProps, PaginationBlockProps } from './Panel'
 
 export interface ContextState {
   containerReady: boolean;
@@ -11,6 +12,9 @@ export interface ContextState {
 
   filterBlockParams?: any;
   filterBlockComponent?: React.ComponentType<FilterBlockProps>;
+
+  toolbarBlockParams?: any;
+  toolbarBlockComponent?: React.ComponentType<ToolbarBlockProps>;
 
   taskControls?: TaskControl[];
   taskQueue: any;
@@ -31,6 +35,7 @@ export interface ContextApi {
   createTaskChain: (taskChain: TaskBlock[]) => void;
   dequeueTaskChain: () => TaskBlock;
   applyPaginationInstance: (paginationModel: PaginationModel) => void;
+  applyProcessingData: (data: any | null) => void;
   applyContainerData: (data: any[]) => void;
   applyContainerLoadingStatus: (isLoading: boolean) => void;
 }

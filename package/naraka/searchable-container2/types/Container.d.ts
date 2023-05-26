@@ -6,6 +6,9 @@ export interface ContainerProviderProps {
   filterBlockParams?: any;
   filterBlockComponent?: React.ComponentType<FilterBlockProps>;
   // ==================================================
+  toolbarBlockParams?: any;
+  toolbarBlockComponent?: React.ComponentType<ToolbarBlockProps>;
+  // ==================================================
   taskControls?: TaskControl[]
   // ==================================================
   paginationBlockParams?: any;

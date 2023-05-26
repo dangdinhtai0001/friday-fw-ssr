@@ -49,7 +49,7 @@ export function mutations(context: ContextState, setContext: Dispatch<ContextSta
     applyPaginationInstance: (paginationModel: PaginationModel): void => {
       const updatedContext: ContextState = {
         ...context, // Giữ lại tất cả các thuộc tính khác
-        paginationInstance: paginationModel,
+        paginationInstance: { ...paginationModel },
       };
 
       setContext(updatedContext);
@@ -58,6 +58,14 @@ export function mutations(context: ContextState, setContext: Dispatch<ContextSta
       const updatedContext: ContextState = {
         ...context, // Giữ lại tất cả các thuộc tính khác
         containerData: [...data],
+      };
+
+      setContext(updatedContext);
+    },
+    applyProcessingData: (data: any | null): void => {
+      const updatedContext: ContextState = {
+        ...context, // Giữ lại tất cả các thuộc tính khác
+        processingData: data === null ? null : { ...data },
       };
 
       setContext(updatedContext);

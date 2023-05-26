@@ -9,7 +9,7 @@ const PaginationPanel: React.FC<PaginationPanelProps> = (props: PaginationPanelP
   const { context, contextApi }: ContextHookValue = useContainerContext();
   const { onCreateTaskChain } = useTask();
 
-  const handleOnCreateTask = (data: any) => {
+  const handleOnCreateTask = (data: PaginationModel) => {
     let name = DefaultTaskName.PAGINATION_MODIFIED;
     onCreateTaskChain([{ name, data: data }]);
   }
@@ -76,6 +76,7 @@ const PaginationPanel: React.FC<PaginationPanelProps> = (props: PaginationPanelP
       Pagination panel
       {createPaginationBlock()}
       <JSONPretty json={context.paginationInstance} />
+      {JSON.stringify(context.paginationInstance)}
     </div>
   );
 };

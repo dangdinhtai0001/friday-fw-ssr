@@ -15,8 +15,6 @@ export interface TaskBlock extends TaskRequest {
 
 export type TaskControl = {
   id: DefaultTaskName | string;
-  taskControlComponent?: React.ComponentType<ToolbarPanelProps>;
-  taskControlParams?: any;
   onProcessTask: (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => void | Promise<void>;
 };
 

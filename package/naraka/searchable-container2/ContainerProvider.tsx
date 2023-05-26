@@ -23,6 +23,9 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
     // ---------------------------
     filterBlockComponent: props.filterBlockComponent,
     filterBlockParams: props.filterBlockParams,
+    // ---------------------------    
+    toolbarBlockComponent: props.toolbarBlockComponent,
+    toolbarBlockParams: props.toolbarBlockParams,
     // ---------------------------
     taskControls: createDefaultTaskControls().concat(props.taskControls!),
     taskQueue: queue,

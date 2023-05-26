@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { TaskRequest, ContextHookValue, TaskBlock, TaskHook } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import { v4 as uuidv4 } from 'uuid';
@@ -37,18 +38,18 @@ const useTask = (): TaskHook => {
 
   // Hàm xử lý một task
   const processTask = async (task: TaskBlock): Promise<void> => {
-    // contextApi.applyContainerLoadingStatus(true);
-
-    console.log('process task -----------', task);
-
-
     const taskControl = context.taskControls?.find((control) => task && control.id === task.name);
-
+    
     if (taskControl) {
-      await taskControl.onProcessTask?.(task, context, contextApi);
-    }
+      contextApi.applyContainerLoadingStatus(true);
 
-    // contextApi.applyContainerLoadingStatus(false);
+      await taskControl.onProcessTask?.(task, context, contextApi);
+
+      // --------------------------------------------------------------------------------------------------------------
+      // chưa biết vì sao nhưng nếu thêm đoạn change status về false thì lỗi, mà ko thêm nó cũng tự về false đc nên là đừng có sửa
+      // contextApi.applyContainerLoadingStatus(false);
+    }
+    
   }
 
 

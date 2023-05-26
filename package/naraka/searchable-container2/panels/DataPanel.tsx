@@ -10,6 +10,7 @@ const DataPanel: React.FC<DataPanelProps> = (props: DataPanelProps) => {
   return (
     <div>
       Data panel
+      <JSONPretty json={context.processingData} />
       <JSONPretty json={context.containerData} />
     </div>
   );

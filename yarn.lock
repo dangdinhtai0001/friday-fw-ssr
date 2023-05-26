@@ -474,6 +474,11 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
+"@n1ru4l/use-async-effect@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@n1ru4l/use-async-effect/-/use-async-effect-1.4.0.tgz#662824fd1a35fbe9bec70a350b26599039fc1a9b"
+  integrity sha512-gQcaM5n+Gb5ZibEWN4m8P3Tv+JCh5Llb2SNLMf0oY/1Gog40QcNYt4oEivMst1O1NXURY8OXIWHTosGzrGsP4Q==
+
 "@next/env@13.2.3":
   version "13.2.3"
   resolved "https://registry.npmjs.org/@next/env/-/env-13.2.3.tgz"
@@ -3756,6 +3761,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-async-effect@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/use-async-effect/-/use-async-effect-2.2.7.tgz#5812f875a8d7996c396fb49798d0377e90575989"
+  integrity sha512-Vq94tKPyo/9Nok4LOapV0GoGgZPhbeDW/bP6bulLPV4+lIoftaBRBBbGjTbM+j5W1Bm2EkUHJgapeu5YnQvKEA==
 
 use-sync-external-store@^1.0.0:
   version "1.2.0"

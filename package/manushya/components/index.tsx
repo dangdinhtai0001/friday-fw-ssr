@@ -1,45 +1,42 @@
 import * as React from 'react';
 import { ContainerProvider, DefaultTaskName } from '@/package/naraka/searchable-container2';
-import { ContainerProviderProps, TaskBlock } from '@/package/naraka/searchable-container2/types';
+import { ContainerProviderProps, ContextApi, ContextState, TaskBlock } from '@/package/naraka/searchable-container2/types';
 
 import FilterBlock from './FilterBlock';
-import TaskControlBlock from './TaskControlBlock';
 import PaginationBlock from './PaginationBlock';
+import ToolbarBlock from './ToolbarBlock';
 
 const sleep = (ms: number) => new Promise(
   resolve => setTimeout(resolve, ms));
 
 export default function ComponentPage() {
-  const searchableContainerProps: ContainerProviderProps =
-  {
+  const searchableContainerProps: ContainerProviderProps = {
     // ------------
     filterBlockParams: {},
     filterBlockComponent: FilterBlock,
     // ------------
+    toolbarBlockComponent: ToolbarBlock,
+    toolbarBlockParams: {},
+    // ------------
     taskControls: [
       {
         id: 'add',
-        taskControlComponent: TaskControlBlock,
-        taskControlParams: {},
         onProcessTask(payload: TaskBlock) {
-          console.log("onProcessTask add", payload);
+          console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
         },
       },
       {
         id: 'delete',
-        taskControlComponent: TaskControlBlock,
-        taskControlParams: {},
-        onProcessTask(payload: TaskBlock) {
-          console.log("onProcessTask delete", payload);
+        async onProcessTask(payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) {
+          console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
+
+          contextApi?.applyProcessingData(context?.containerData[0]);
+
+          await sleep(2000);
+
+          // contextApi?.applyProcessingData(null);
         },
-      },
-      {
-        id: DefaultTaskName.SEARCH,
-        onProcessTask(payload: TaskBlock, context) {
-          console.log(`Process Task ${payload.name}-${payload.id}`);
-          console.log(context?.filterInstance, context?.paginationInstance)
-        },
-      },
+      }
 
     ],
     // ------------

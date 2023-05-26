@@ -38,6 +38,7 @@
     "@emotion/styled": "^11.10.6",
     "@mui/base": "^5.0.0-beta.0",
     "@mui/system": "^5.11.14",
+    "@n1ru4l/use-async-effect": "^1.4.0",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/node": "18.14.4",
     "@types/react": "18.0.28",
