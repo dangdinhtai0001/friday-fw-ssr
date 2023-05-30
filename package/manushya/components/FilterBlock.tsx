@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/base/Button';
-import { useContainerContext } from '@/package/naraka/searchable-container2';
-import { ContextHookValue } from '@/package/naraka/searchable-container2/types';
+import { useContainerContext } from '@/package/naraka/searchable-container';
+import { ContextHookValue } from '@/package/naraka/searchable-container/types';
 import JSONPretty from 'react-json-prettify';
 
 const FilterBlock: React.FC = (props: any) => {

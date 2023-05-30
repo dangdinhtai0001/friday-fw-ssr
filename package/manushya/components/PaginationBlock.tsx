@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Button from '@mui/base/Button';
 import Input from '@mui/base/Input';
-import { useContainerContext } from '@/package/naraka/searchable-container2';
-import { ContextHookValue } from '@/package/naraka/searchable-container2/types';
+import { useContainerContext } from '@/package/naraka/searchable-container';
+import { ContextHookValue } from '@/package/naraka/searchable-container/types';
 
 const PaginationBlock: React.FC = (props: any) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();

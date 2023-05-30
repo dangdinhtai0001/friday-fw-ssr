@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container2';
-import { ContainerProviderProps, ContextApi, ContextState, TaskBlock } from '@/package/naraka/searchable-container2/types';
+import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container';
+import { ContainerProviderProps, ContextApi, ContextState, TaskBlock } from '@/package/naraka/searchable-container/types';
 
 import FilterBlock from './FilterBlock';
 import PaginationBlock from './PaginationBlock';
