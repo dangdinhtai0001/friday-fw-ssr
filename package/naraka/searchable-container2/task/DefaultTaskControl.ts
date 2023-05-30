@@ -7,7 +7,7 @@ const onProcessTask_FilterModified = async (payload: TaskBlock, context?: Contex
   contextApi?.applyFilterInstance(payload.data);
 
   // đánh dấu là hoàn thành task 
-  return TASK_STATUS.SUCCESS;
+  return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
 const onProcessTask_PaginationModified = async (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => {
@@ -17,11 +17,11 @@ const onProcessTask_PaginationModified = async (payload: TaskBlock, context?: Co
   contextApi?.applyPaginationInstance(payload.data);
 
   // đánh dấu là hoàn thành task 
-  return TASK_STATUS.SUCCESS;
+  return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
 const onProcessTask_FetchData = async (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => {
-  console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
+  console.log(`Process Task ${payload.name}-${payload.id}: `, payload);
   let containerData = [];
 
   if (context?.onFetchData) {
@@ -32,7 +32,7 @@ const onProcessTask_FetchData = async (payload: TaskBlock, context?: ContextStat
   contextApi?.applyContainerData(containerData);
 
   // đánh dấu là hoàn thành task 
-  return TASK_STATUS.SUCCESS;
+  return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
 export const createDefaultTaskControls = (): TaskControl[] => {

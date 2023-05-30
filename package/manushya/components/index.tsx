@@ -21,14 +21,14 @@ export default function ComponentPage() {
     taskControls: [
       {
         id: 'add',
-        onProcessTask(payload: TaskBlock) {
+        onProcessTask(payload: TaskBlock): TaskBlock {
           console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
-          return TASK_STATUS.SUCCESS;
+          return { ...payload, data: { foo: 'bar' }, status: TASK_STATUS.SUCCESS };
         },
       },
       {
         id: 'delete',
-        async onProcessTask(payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) {
+        async onProcessTask(payload: TaskBlock, context?: ContextState, contextApi?: ContextApi): Promise<TaskBlock> {
           console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
 
           contextApi?.applyProcessingData(context?.containerData[0]);
@@ -37,7 +37,7 @@ export default function ComponentPage() {
 
           contextApi?.applyProcessingData(null);
 
-          return TASK_STATUS.SUCCESS;
+          return { ...payload, status: TASK_STATUS.SUCCESS };
         },
       }
 

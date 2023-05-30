@@ -10,13 +10,14 @@ export interface TaskRequest {
 export interface TaskBlock extends TaskRequest {
   id: string;
   status: TASK_STATUS;
-  isLast?: boolean
+  isLast?: boolean;
+  previousBlock?: any;
 };
 
 export type TaskControl = {
   id: DefaultTaskName | string;
   onProcessTask: (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi)
-    => TASK_STATUS | Promise<TASK_STATUS>;
+    => TaskBlock | Promise<TaskBlock>;
 };
 
 export interface TaskHook {

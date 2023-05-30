@@ -48,25 +48,25 @@ const useTask = (): TaskHook => {
     // clear két quả chạy cũ 
     contextApi.clearTaskResult();
 
-    let taskResults: TASK_STATUS[] = [];
+    let taskResults: TaskBlock[] = [];
 
     for (let i = 0; i < tasks.length; i++) {
       const task = tasks[i];
       let taskControl = context.taskControls?.find((control) => task && control.id === task.name);
 
-      console.log(taskResults);
+      let previousTask = taskResults[i - 1];
 
-      if (taskResults[i - 1] === TASK_STATUS.ERROR) {
+      if (previousTask?.status === TASK_STATUS.ERROR) {
         console.error('Task trước đó đã fail, không thể chạy tiếp');
         break;
       }
 
       if (taskControl) {
-        let status: TASK_STATUS = await taskControl.onProcessTask?.(task, context, contextApi);
-        taskResults.push(status);
+        let block: TaskBlock = await taskControl.onProcessTask?.({ ...task, previousBlock: previousTask }, context, contextApi);
+        taskResults.push(block);
       } else {
         console.error(`Không tìm thấy task control nào có id là ${task.name}`);
-        taskResults.push(TASK_STATUS.ERROR);
+        taskResults.push({ ...task, status: TASK_STATUS.ERROR });
       }
     }
 
@@ -91,7 +91,6 @@ const useTask = (): TaskHook => {
     onCreateTask,
     onCreateTaskChain,
     onProcessTaskChain: processTaskChain
-
   };
 };
 
