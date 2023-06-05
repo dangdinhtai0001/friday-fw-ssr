@@ -6,7 +6,9 @@ export default function Home() {
       <div>this is next app</div>
       <Link href="/theme"> Theme Page </Link>
       <br />
-      <Link href="/components"> Components Page </Link>
+      <Link href="/search"> Search Page </Link>
+      <br />
+      <Link href="/manipulation"> Manipulation Page </Link>
     </>
   );
 }

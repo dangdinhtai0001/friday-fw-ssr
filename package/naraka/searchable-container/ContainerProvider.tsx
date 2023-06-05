@@ -1,7 +1,7 @@
 import React from 'react';
 import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
-import { ContextState, ContainerProviderProps, TaskBlock, TaskControl } from './types';
+import { ContextState, ContainerProviderProps } from './types';
 import { createDefaultTaskControls } from './task/DefaultTaskControl'
 
 // hàm định nghĩa giá trị default của context state
@@ -43,11 +43,11 @@ const ContainerProvider: React.FC<ContainerProviderProps> = (props: ContainerPro
   let initialState: ContextState = createDefaultContextStateValue(props);
 
   return (
-    <div>
+    <>
       <ContainerContextProvider initialState={initialState}>
         <Container {...initialState}></Container>
       </ContainerContextProvider>
-    </div>
+    </>
   );
 }
 
