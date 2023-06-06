@@ -1,4 +1,7 @@
+import { FormFieldDef } from './Common.d';
+
 export interface ContextState {
+  formFieldDefs: FormFieldDef[]
 }
 
 export interface ContextApi {

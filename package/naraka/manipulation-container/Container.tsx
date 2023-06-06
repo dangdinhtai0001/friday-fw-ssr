@@ -1,16 +1,29 @@
 import React from 'react';
 import { ContainerProps } from './types';
-import { WatcherPanel } from './panels'
-import { useForm, useWatch, useFormContext } from 'react-hook-form';
+import { WatcherPanel, DataPanel } from './panels'
+import { FieldValues, SubmitHandler, useFormContext, Controller, useFormState } from 'react-hook-form';
 
 export default function Container(props: ContainerProps) {
   const { register, handleSubmit, formState: { errors } } = useFormContext();
-  const onSubmit = data => console.log(data);
-  console.log(errors);
+
+  const onValid = async (data: unknown): Promise<void> => {
+    console.log("onValid submit", data);
+  }
+
+  const onInvalid = async (errors: unknown): Promise<void> => {
+    console.log("onInValid submit", errors);
+  }
+
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onValid, onInvalid)}>
+        <Controller
+          name="foo"
+          render={({ field }) => (
+            <input type="text" placeholder="foo" {...field} />
+          )}
+        />
         <input type="text" placeholder="First name" {...register("First name", { required: true, maxLength: 80 })} />
         <input type="text" placeholder="Last name" {...register("Last name", { required: true, maxLength: 100 })} />
         <input type="text" placeholder="Email" {...register("Email", { required: true, pattern: /^\S+@\S+$/i })} />
@@ -27,7 +40,11 @@ export default function Container(props: ContainerProps) {
 
         <input type="submit" />
       </form>
+      <DataPanel></DataPanel>
       <WatcherPanel></WatcherPanel>
+      <div>
+        <div>errors: {JSON.stringify(errors)}</div>
+      </div>
     </>
   );
 }
