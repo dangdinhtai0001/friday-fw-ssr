@@ -1,7 +1,7 @@
 import React from 'react';
 import { ContainerProps } from './types';
 import { WatcherPanel, DataPanel } from './panels'
-import { FieldValues, SubmitHandler, useFormContext, Controller, useFormState } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 
 export default function Container(props: ContainerProps) {
   const { register, handleSubmit, formState: { errors } } = useFormContext();
@@ -18,12 +18,6 @@ export default function Container(props: ContainerProps) {
   return (
     <>
       <form onSubmit={handleSubmit(onValid, onInvalid)}>
-        <Controller
-          name="foo"
-          render={({ field }) => (
-            <input type="text" placeholder="foo" {...field} />
-          )}
-        />
         <input type="text" placeholder="First name" {...register("First name", { required: true, maxLength: 80 })} />
         <input type="text" placeholder="Last name" {...register("Last name", { required: true, maxLength: 100 })} />
         <input type="text" placeholder="Email" {...register("Email", { required: true, pattern: /^\S+@\S+$/i })} />

@@ -2,14 +2,15 @@ import * as React from 'react';
 import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
 import { ContainerProviderProps, ContextState } from './types';
-import { useForm, FormProvider, FieldValues, UseFormProps } from "react-hook-form";
+import { useForm, FormProvider, UseFormProps } from "react-hook-form";
 
 // 'DeepPartial<T> | AsyncDefaultValues<T> | undefined'
 
 // hàm định nghĩa giá trị default của context state
 const createDefaultContextStateValue = (props: ContainerProviderProps): ContextState => {
   return {
-    formFieldDefs: props.formFieldDefs
+    fieldDefs: props.fieldDefs,
+    onValueChange: props.onValueChange
   };
 }
 

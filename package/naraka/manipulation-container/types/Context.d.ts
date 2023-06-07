@@ -1,7 +1,16 @@
-import { FormFieldDef } from './Common.d';
+import { FieldDef } from './Common.d';
+
+export interface OnValueChangeProps {
+  changedValue: any;
+  allValues: any;
+  fieldName: string;
+  context: ContextState;
+  contextApi: ContextApi;
+}
 
 export interface ContextState {
-  formFieldDefs: FormFieldDef[]
+  fieldDefs: FieldDef[],
+  onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
 }
 
 export interface ContextApi {

@@ -1,4 +1,4 @@
-export interface FormFieldDef {
+export interface FieldDef {
   name: string,
   label?: string,
   required?: boolean,
