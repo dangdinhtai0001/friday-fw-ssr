@@ -14,7 +14,25 @@ const containerProps: ContainerProviderProps = {
       initialValue: '',
       component: Input,
       componentParams: { type: 'text', placeholder: 'foo' }
-    }
+    },
+    {
+      name: 'first_name',
+      initialValue: '',
+      component: Input,
+      componentParams: { type: 'text', placeholder: 'first_name' }
+    },
+    {
+      name: 'last_name',
+      initialValue: '',
+      component: Input,
+      componentParams: { type: 'text', placeholder: 'last_name' }
+    },
+    {
+      name: 'age',
+      initialValue: '',
+      component: Input,
+      componentParams: { type: 'number', placeholder: '1' }
+    },
   ],
   onValueChange(props) {
     console.log("Trigger on change", props.fieldName, props.changedValue);

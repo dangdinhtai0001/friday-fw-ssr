@@ -24,7 +24,6 @@ export default function DataPanel(props: IDataPanelProps) {
   return (
     <div>
       <div>DataPanel</div>
-      {JSON.stringify(context)}
       {creatFieldItems()}
     </div>
   );

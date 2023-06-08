@@ -9,7 +9,8 @@ export interface OnValueChangeProps {
 }
 
 export interface ContextState {
-  fieldDefs: FieldDef[],
+  formId: any;
+  fieldDefs: FieldDef[];
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
 }
 

@@ -20,6 +20,8 @@ export default function FieldItem(props: IFieldItemProps) {
       tValue = value.target.value;
     }
 
+    // TODO: xem xét xem có nên đặt hàm transform ở đây hay không 
+
     // Sự kiện onChange của RHF
     field.onChange(tValue);
 

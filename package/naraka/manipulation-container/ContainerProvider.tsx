@@ -3,12 +3,14 @@ import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
 import { ContainerProviderProps, ContextState } from './types';
 import { useForm, FormProvider, UseFormProps } from "react-hook-form";
+import { v4 as uuidv4 } from 'uuid';
 
 // 'DeepPartial<T> | AsyncDefaultValues<T> | undefined'
 
 // hàm định nghĩa giá trị default của context state
 const createDefaultContextStateValue = (props: ContainerProviderProps): ContextState => {
   return {
+    formId: uuidv4(),
     fieldDefs: props.fieldDefs,
     onValueChange: props.onValueChange
   };
