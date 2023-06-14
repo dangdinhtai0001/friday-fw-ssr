@@ -6,7 +6,7 @@ import { useController, useFormContext } from 'react-hook-form';
 
 export default function FieldItem(props: IFieldItemProps) {
   const { fieldDef } = props;
-  const { field, fieldState } = useController(props);
+  const { field } = useController(props);
   const { getValues } = useFormContext();
   const { context, contextApi } = useContainerContext();
 

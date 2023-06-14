@@ -11,18 +11,21 @@ const containerProps: ContainerProviderProps = {
   fieldDefs: [
     {
       name: 'foo',
+      label: 'foo lbl',
       initialValue: '',
       component: Input,
       componentParams: { type: 'text', placeholder: 'foo' }
     },
     {
       name: 'first_name',
+      label: 'first_name lbl',
       initialValue: '',
       component: Input,
       componentParams: { type: 'text', placeholder: 'first_name' }
     },
     {
       name: 'last_name',
+      label: 'last_name lbl',
       initialValue: '',
       component: Input,
       componentParams: { type: 'text', placeholder: 'last_name' }

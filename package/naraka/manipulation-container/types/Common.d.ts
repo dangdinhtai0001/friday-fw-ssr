@@ -5,4 +5,5 @@ export interface FieldDef {
   initialValue: unknown,
   componentParams?: unknown;
   component: React.ComponentType<IDataBlockProps>;
+  // 
 }
