@@ -19,9 +19,9 @@ export default function Container(props: ContainerProps) {
     <>
       <form onSubmit={handleSubmit(onValid, onInvalid)}>
         <input type="submit" />
+        <DataPanel></DataPanel>
+        <WatcherPanel></WatcherPanel>
       </form>
-      <DataPanel></DataPanel>
-      <WatcherPanel></WatcherPanel>
       <div>
         <div>errors: {JSON.stringify(errors)}</div>
       </div>
