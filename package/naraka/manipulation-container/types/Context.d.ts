@@ -1,4 +1,5 @@
 import { FieldDef } from './Common.d';
+import React from 'react';
 
 export interface OnValueChangeProps {
   changedValue: any;
@@ -12,6 +13,7 @@ export interface ContextState {
   formId: any;
   fieldDefs: FieldDef[];
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
+  fieldRefs: React.MutableRefObject<{ [key: string]: any; }>
 }
 
 export interface ContextApi {

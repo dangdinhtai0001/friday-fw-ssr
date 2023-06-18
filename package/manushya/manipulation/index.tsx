@@ -12,7 +12,7 @@ const containerProps: ContainerProviderProps = {
     {
       name: 'foo',
       label: 'foo lbl',
-      initialValue: '',
+      initialValue: 'foo',
       component: Input,
       componentParams: { type: 'text', placeholder: 'foo' }
     },
