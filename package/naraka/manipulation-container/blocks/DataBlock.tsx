@@ -3,7 +3,7 @@ import { IDataFieldBlockProps, IFieldItemProps, IDataFieldLabelProps, DataFieldL
 import { useContainerContext } from '../context/useContainerContext';
 import FieldItem from '../items/DataFieldItem';
 import Box from '@mui/system/Box';
-import { styled } from '@mui/system';
+import { fontSize, styled } from '@mui/system';
 import { useController, useFormContext } from 'react-hook-form';
 import { useAnimate, motion, useAnimation } from "framer-motion";
 import useAsyncEffect from "@n1ru4l/use-async-effect";
@@ -79,13 +79,16 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
   }, [errors]);
 
   const renderDataFieldBlock = () => {
-    let { fieldDef: { label } } = fieldItemProps;
+    let { fieldDef: { label, required } } = fieldItemProps;
 
     if (label) {
       return (
         <Box sx={{ display: 'grid', gridTemplateColumns: '30% 70%', columnGap: 1 }}>
           <Box sx={{ gridRow: '1' }}>
-            <DataFieldLabel status={fieldStatus} textAlign={'left'}>{label}</DataFieldLabel>
+            <DataFieldLabel status={fieldStatus} textAlign={'left'}>
+              {label}
+              {required ? <RequiredIcon>*</RequiredIcon> : null}
+            </DataFieldLabel>
           </Box>
           <Box sx={{ gridRow: '1', display: 'grid', gap: 0.3 }}>
             {renderControlContainer()}
@@ -133,4 +136,10 @@ const DataFieldMessage = styled('div', {
 })<IDataFieldMessageProps>(({ theme, status }) => ({
   color: status === 'error' ? theme.palette.error.main :
     status === 'warning' ? theme.palette.warning.main : 'inherit',
+}));
+
+const RequiredIcon = styled('span', {})(({ theme }) => ({
+  color: theme.palette.error.main,
+  fontSize: '1rem',
+  marginLeft: '0.1rem'
 }));

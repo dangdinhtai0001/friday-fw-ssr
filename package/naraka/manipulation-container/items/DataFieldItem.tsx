@@ -45,6 +45,7 @@ export default function FieldItem(props: IFieldItemProps) {
     let _params = {
       ...field,
       onChange: handleOnFieldChange,
+      ref: (ref: any) => (context.fieldRefs.current[field.name] = ref),
       ...componentParams!
     }
     return React.createElement(component, _params);

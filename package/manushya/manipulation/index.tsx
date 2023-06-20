@@ -12,7 +12,8 @@ const containerProps: ContainerProviderProps = {
     {
       name: 'foo',
       label: 'foo lbl',
-      initialValue: '',
+      initialValue: 'foo',
+      required: true,
       component: Input,
       componentParams: { type: 'text', placeholder: 'foo' }
     },
