@@ -1,20 +1,29 @@
 import * as React from 'react';
 import { IWatcherPanelProps } from '../types';
+import { useContainerContext } from '../context/useContainerContext';
 import { useWatch, FieldValues } from "react-hook-form";
 import useAsyncEffect from "@n1ru4l/use-async-effect";
 
 
-export default function WatcherPanel<T extends FieldValues>(props: IWatcherPanelProps) {
-  const watcher = useWatch<T>(); // when pass nothing as argument, you are watching everything
+let mounted = false;
+export default function WatcherPanel(props: IWatcherPanelProps) {
+  const watcher = useWatch(); // when pass nothing as argument, you are watching everything
+  const { context, contextApi } = useContainerContext();
 
   useAsyncEffect(function* (onCancel, cast) {
     try {
-      // Hành động được thực hiện mỗi khi WatcherPanel re-render
-      console.log(watcher)
+      if (mounted) {
+        // Hành động được thực hiện mỗi khi WatcherPanel re-render
+        console.log(watcher);
+
+        // yield context.onValueChange()
+      } else {
+        mounted = true;
+      }
     } catch (error) {
       console.error('Error occurred:', error);
     }
-  });
+  }, [watcher]);
 
   return (
     <></>

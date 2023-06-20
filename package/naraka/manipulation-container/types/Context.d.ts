@@ -7,6 +7,7 @@ export interface OnValueChangeProps {
   fieldName: string;
   context: ContextState;
   contextApi: ContextApi;
+  refs: React.MutableRefObject<{ [key: string]: any; }>;
 }
 
 export interface ContextState {

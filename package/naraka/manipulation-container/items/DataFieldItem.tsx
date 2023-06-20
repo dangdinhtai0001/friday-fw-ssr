@@ -22,17 +22,18 @@ export default function FieldItem(props: IFieldItemProps) {
 
     // TODO: xem xét xem có nên đặt hàm transform ở đây hay không 
 
-    // Sự kiện onChange của RHF
-    field.onChange(tValue);
-
     // Gọi sự kiện thay đổi
     await context.onValueChange({
       changedValue: tValue,
       allValues,
       fieldName: fieldDef.name,
       context,
-      contextApi
+      contextApi,
+      refs: context.fieldRefs
     });
+
+    // Sự kiện onChange của RHF
+    field.onChange(tValue);
   }
 
   const renderFieldItem = () => {
