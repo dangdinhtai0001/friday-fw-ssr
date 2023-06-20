@@ -5,14 +5,49 @@ import FieldItem from '../items/DataFieldItem';
 import Box from '@mui/system/Box';
 import { styled } from '@mui/system';
 import { useController, useFormContext } from 'react-hook-form';
-import { useAnimate } from "framer-motion";
+import { useAnimate, motion, useAnimation } from "framer-motion";
 import useAsyncEffect from "@n1ru4l/use-async-effect";
+
+const shakeAnimation = {
+  opacity: [0, 1],
+  y: [-50, 0],
+  transition: {
+    duration: 0.2,
+    type: "spring",
+    bounce: 0.2,
+  },
+};
+
+const fieldMessageVariants = {
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.2,
+      type: "spring",
+      bounce: 0.2,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -50,
+    transition: {
+      duration: 0.2,
+      type: "spring",
+      bounce: 0.2,
+    },
+  },
+  initial: {
+    opacity: 0,
+    y: -50
+  }
+};
 
 export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const { fieldItemProps } = props;
   const { context } = useContainerContext();
   const { formState: { errors } } = useController(fieldItemProps);
-  const [scope, animate] = useAnimate();
+  const controls = useAnimation();
 
   const [fieldStatus, setFieldStatus] = React.useState<DataFieldLabel_Status | undefined>();
   const [fieldMesage, setFieldMesage] = React.useState<string | undefined>();
@@ -28,13 +63,12 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
         setFieldStatus('error');
         setFieldMesage(errors[fieldItemProps.name]?.message as string);
 
-        animate(scope.current, { opacity: [0, 1], x: [-50, 0] }, { duration: 0.2 });
+        controls.start('animate'); // Kích hoạt animation
       }
 
       else {
-        if (scope.current !== null) {
-          yield animate(scope.current, { opacity: [1, 0], x: [0, 50] }, { duration: 0.2 })
-        }
+        yield controls.start('exit');
+
         setFieldStatus(undefined);
         setFieldMesage(undefined);
       }
@@ -55,7 +89,15 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
           </Box>
           <Box sx={{ gridRow: '1', display: 'grid', gap: 0.3 }}>
             {renderControlContainer()}
-            <DataFieldMessage ref={scope} status={fieldStatus}>{fieldMesage}</DataFieldMessage>
+            <motion.div
+              animate={controls}
+              initial="initial"
+              variants={fieldMessageVariants}
+            >
+              <DataFieldMessage status={fieldStatus}>
+                {fieldMesage}
+              </DataFieldMessage>
+            </motion.div>
           </Box>
         </Box>
       );
