@@ -1,0 +1,77 @@
+{
+  "name": "friday-v3.0.2",
+  "version": "3.0.2",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "format": "prettier --write .",
+    "eslint:clear-cache": "eslint --clear-cache",
+    "postinstall": "husky install",
+    "precommit": "lint-staged",
+    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
+    "lint": "next lint",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --cache --fix",
+      "prettier --write ."
+    ],
+    "*.ts": [
+      "eslint --cache --fix --ext .ts",
+      "prettier --write ."
+    ],
+    "*.tsx": [
+      "eslint --cache --fix --ext .tsx",
+      "prettier --write ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "yarn commitmsg"
+    }
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@hookform/resolvers": "^3.1.0",
+    "@mui/base": "^5.0.0-beta.0",
+    "@mui/system": "^5.11.14",
+    "@n1ru4l/use-async-effect": "^1.4.0",
+    "@reduxjs/toolkit": "^1.9.3",
+    "@types/node": "18.14.4",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "eslint": "^8.35.0",
+    "eslint-config-next": "13.2.3",
+    "framer-motion": "^10.12.16",
+    "next": "13.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.44.3",
+    "react-json-prettify": "^0.2.0",
+    "react-redux": "^8.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.2",
+    "typescript": "4.9.5",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@types/uuid": "^9.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4"
+  }
+}
