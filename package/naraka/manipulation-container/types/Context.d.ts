@@ -12,11 +12,16 @@ export interface OnValueChangeProps {
 export interface ContextState {
   formId: any;
   fieldDefs: FieldDef[];
+  fieldRefs: React.MutableRefObject<{ [key: string]: any; }>;
+  submitCounter: number;
+  // ---------------------------------------------------------------------------
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
-  fieldRefs: React.MutableRefObject<{ [key: string]: any; }>
+  onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
+  onSubmitError: (errors: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
 }
 
 export interface ContextApi {
+  increaseSubmitCounter: () => void;
 }
 
 /**

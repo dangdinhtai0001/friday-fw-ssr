@@ -7,5 +7,16 @@ import { ContextState, ContextApi } from '../types'
 // - apply... ==> Thay đổi 1 phần giá trị của thuộc tính đó
 // --------------------------------------------------------------------------------
 export function mutations(context: ContextState, setContext: Dispatch<React.SetStateAction<ContextState>>): ContextApi {
-  return {};
+  return {
+    increaseSubmitCounter(): void {
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          submitCounter: prevContext.submitCounter++
+        };
+
+        return updatedContext;
+      });
+    }
+  };
 }

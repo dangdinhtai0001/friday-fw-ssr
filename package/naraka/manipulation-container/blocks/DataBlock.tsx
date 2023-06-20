@@ -1,22 +1,12 @@
 import * as React from 'react';
-import { IDataFieldBlockProps, IFieldItemProps, IDataFieldLabelProps, DataFieldLabel_Status, DataFieldLabel_TextAlign, IDataFieldMessageProps } from '../types';
+import { IDataFieldBlockProps, IDataFieldLabelProps, DataFieldLabel_Status, IDataFieldMessageProps } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import FieldItem from '../items/DataFieldItem';
 import Box from '@mui/system/Box';
-import { fontSize, styled } from '@mui/system';
-import { useController, useFormContext } from 'react-hook-form';
-import { useAnimate, motion, useAnimation } from "framer-motion";
+import { styled } from '@mui/system';
+import { useController } from 'react-hook-form';
+import { motion, useAnimation } from "framer-motion";
 import useAsyncEffect from "@n1ru4l/use-async-effect";
-
-const shakeAnimation = {
-  opacity: [0, 1],
-  y: [-50, 0],
-  transition: {
-    duration: 0.2,
-    type: "spring",
-    bounce: 0.2,
-  },
-};
 
 const fieldMessageVariants = {
   animate: {

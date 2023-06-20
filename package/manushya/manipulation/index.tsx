@@ -41,6 +41,12 @@ const containerProps: ContainerProviderProps = {
   onValueChange(props) {
     console.log("Trigger on change", props.fieldName, props.changedValue);
   },
+  onSubmitSuccess(data) {
+    console.log("onValid submit", data);
+  },
+  onSubmitError(errors) {
+    console.log("onInvalid submit", errors);
+  }
 }
 
 export default function Manipulation(props: IManipulationProps) {
