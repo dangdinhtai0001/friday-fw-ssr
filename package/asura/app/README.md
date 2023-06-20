@@ -1,0 +1,3 @@
+Đúng là khi sử dụng Provider toolkit để quản lý state trong ứng dụng, chúng ta cần bọc toàn bộ ứng dụng bằng Provider để có thể truy cập vào Redux store từ bất kỳ component nào trong ứng dụng. Vì vậy, `_app.tsx` không thể trực tiếp gọi đến Redux context mà sẽ gọi đến `App.tsx`.
+
+Tuy nhiên, không thể đặt `App.tsx` trong cùng thư mục với `_app.tsx` bởi vì Next.js sử dụng cấu trúc folder `pages` để tạo ra các route trong ứng dụng. Nếu đặt `App.tsx` trong cùng thư mục với `_app.tsx`, sẽ tạo ra một route là `/app`, gây nhầm lẫn và khó hiểu cho người dùng. Do đó, `App.tsx` sẽ được đặt trong một thư mục riêng và được import vào `_app.tsx` để sử dụng trong ứng dụng.
