@@ -57,6 +57,7 @@ const createReactHookFormProps = (props: ContainerProviderProps): UseFormProps =
 
 
   return {
+    // TODO: nhớ chuyển đống này thành đọc từ props
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     criteriaMode: 'all',

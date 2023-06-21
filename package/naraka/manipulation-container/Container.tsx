@@ -8,16 +8,44 @@ const Container = forwardRef<ContainerRef, ContainerProps>((props, ref: Ref<Cont
   const formRef = useRef<HTMLFormElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const { handleSubmit, getValues } = useFormContext();
+  const { handleSubmit, getValues, setValue, trigger, reset } = useFormContext();
   const { context, contextApi } = useContainerContext();
 
   useImperativeHandle(ref, () => ({
+    /**
+     * Submit the form by programmatically clicking the button.
+     */
     submitForm: () => {
       buttonRef.current?.click();
     },
-    getFormValues() {
+    /**
+     * Retrieve the current values of the form.
+     * @returns {any} The current form values.
+     */
+    getFormValues(): any {
       return getValues();
     },
+    /**
+     * Update the value of a field and validate the form.
+     * @param {string} name - The name of the field.
+     * @param {unknown} value - The new value for the field.
+     * @param {boolean} shouldValidate - (Optional) Specifies whether to perform validation. Default is true.
+     */
+    setFieldValues(name: string, value: unknown, shouldValidate?: boolean) {
+      setValue(name, value, { shouldValidate: shouldValidate === undefined ? true : shouldValidate });
+
+      // After setting the value, trigger validation for the form.
+      if (shouldValidate) {
+        trigger();
+      }
+    },
+    /**
+     * Reset the form values to their initial state.
+     */
+    resetFormValues() {
+      reset();
+    }
+
   }));
 
   const { onSubmitSuccess, onSubmitError } = context;

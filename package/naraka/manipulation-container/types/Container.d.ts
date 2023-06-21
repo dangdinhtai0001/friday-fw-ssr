@@ -22,4 +22,6 @@ export interface ContainerProps extends ContainerProviderProps {
 export interface ContainerRef {
   submitForm: () => void;
   getFormValues: () => any;
+  setFieldValues: (name: string, value: unknown, shouldValidate?: boolean) => void;
+  resetFormValues: () => void;
 }

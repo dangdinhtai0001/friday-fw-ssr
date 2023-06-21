@@ -95,6 +95,8 @@ export default function Manipulation(props: IManipulationProps) {
       <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
       <button onClick={() => { formRef.current?.submitForm() }}>Submit</button>
       <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
+      <button onClick={() => { formRef.current?.setFieldValues('foo', 'bar', true); }}>Set foo value</button>
+      <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
     </div>
   );
 }
