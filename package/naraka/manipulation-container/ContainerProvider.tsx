@@ -33,6 +33,7 @@ const createDefaultContextStateValue = (props: ContainerProviderProps, fieldRefs
     afterValueChange: props.afterValueChange,
     onSubmitSuccess: props.onSubmitSuccess,
     onSubmitError: props.onSubmitError,
+    onMounted: props.onMounted,
   };
 }
 

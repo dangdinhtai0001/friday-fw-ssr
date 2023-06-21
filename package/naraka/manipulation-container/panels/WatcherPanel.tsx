@@ -20,9 +20,12 @@ export default function WatcherPanel(props: IWatcherPanelProps) {
         }
 
 
-        // yield context.onValueChange()
       } else {
         mounted = true;
+        // chạy sự kiện on mounted form ở đây
+        if (context.onMounted && typeof context.onMounted === 'function') {
+          context.onMounted(context, contextApi);
+        }
       }
     } catch (error) {
       console.error('Error occurred:', error);

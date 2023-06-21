@@ -27,6 +27,7 @@ export interface ContextState {
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
   onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
   onSubmitError: (errors: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
+  onMounted?: (context: ContextState, contextApi: ContextApi) => void | Promise<void>;
 }
 
 export interface ContextApi {
