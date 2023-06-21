@@ -64,7 +64,7 @@ const containerProps: ContainerProviderProps = {
     console.log("onInvalid submit", errors);
   },
   onMounted(context) {
-    console.log("on mounted event: ");
+    console.log("on mounted event: ", context.formId);
 
     // context.fieldRefs.current["custom"].doSomething();
   }

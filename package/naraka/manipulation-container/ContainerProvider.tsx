@@ -21,7 +21,7 @@ const createDefaultContextStateValue = (props: ContainerProviderProps, fieldRefs
   });
 
   return {
-    formId: uuidv4(),
+    formId: props.formId ? props.formId : uuidv4(),
     fieldDefs: props.fieldDefs,
     fieldRefs: fieldRefs,
     submitCounter: 0,
