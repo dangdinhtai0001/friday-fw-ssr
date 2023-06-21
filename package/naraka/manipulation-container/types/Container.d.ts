@@ -1,11 +1,12 @@
 import { IDataBlockProps } from './Panel.d';
 import { FieldDef } from './Common.d';
 import { OnValueChangeProps, ContextState, ContextApi } from './Context.d';
-import { FieldValues } from 'react-hook-form';
+import { FieldValues, Resolver } from 'react-hook-form';
 
 export interface ContainerProviderProps {
   fieldDefs: FieldDef[];
   formId?: any;
+  resolver?: Resolver;
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
   getDefaultValues?: Promise<FieldValues>;

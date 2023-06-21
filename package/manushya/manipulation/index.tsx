@@ -67,6 +67,21 @@ const containerProps: ContainerProviderProps = {
     console.log("on mounted event: ", context.formId);
 
     // context.fieldRefs.current["custom"].doSomething();
+  },
+  resolver: async (values, context, options) => {
+    console.log("validate ", values, options);
+    let errors: any = {};
+
+    if (values.foo === 'bar') {
+      errors.foo = {
+        type: "custom",
+        message: "This is custom error message."
+      }
+    }
+    return {
+      values: values,
+      errors: errors
+    }
   }
 }
 

@@ -65,22 +65,7 @@ const createReactHookFormProps = (props: ContainerProviderProps): UseFormProps =
     shouldUnregister: false,
     shouldUseNativeValidation: false,
     defaultValues: defaultValues,
-    // TODO: Chuyển thành đọc từ props
-    resolver: async (values, context, options) => {
-      console.log("validate ", values, options);
-      let errors: any = {};
-
-      if (values.foo === 'bar') {
-        errors.foo = {
-          type: "custom",
-          message: "This is custom error message."
-        }
-      }
-      return {
-        values: values,
-        errors: errors
-      }
-    }
+    resolver: props.resolver
   };
 }
 
