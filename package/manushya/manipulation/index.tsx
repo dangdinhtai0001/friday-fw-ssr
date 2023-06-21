@@ -97,6 +97,13 @@ export default function Manipulation(props: IManipulationProps) {
       <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
       <button onClick={() => { formRef.current?.setFieldValues('foo', 'bar', true); }}>Set foo value</button>
       <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
+      <button onClick={() => { formRef.current?.applyFieldWarning({ foo: { type: 'custom', message: "This is custom warning message" } }); }}>warning msg</button>
+      <button onClick={() => { formRef.current?.applyFieldInfo({ foo: { type: 'custom', message: "This is custom info message" } }); }}>info msg</button>
+      <button onClick={() => {
+        formRef.current?.applyFieldWarning(null);
+        formRef.current?.applyFieldInfo(null);
+      }}
+      >clear msg</button>
     </div>
   );
 }
