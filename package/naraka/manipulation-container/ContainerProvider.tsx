@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, Ref } from 'react';
 import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
-import { ContainerProviderProps, ContextState } from './types';
+import { ContainerProviderProps, ContextState, ContainerRef } from './types';
 import { useForm, FormProvider, UseFormProps, FieldValues } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -69,7 +69,7 @@ const createReactHookFormProps = (props: ContainerProviderProps): UseFormProps =
   };
 }
 
-export default function ContainerProvider(props: ContainerProviderProps) {
+const ContainerProvider = forwardRef<ContainerRef, ContainerProviderProps>((props, ref: Ref<ContainerRef>) => {
   const fieldRefs = React.useRef<{ [key: string]: any }>({});
 
   let initialState: ContextState = createDefaultContextStateValue(props, fieldRefs);
@@ -78,12 +78,13 @@ export default function ContainerProvider(props: ContainerProviderProps) {
   const methods = useForm(rhfProps);
 
   return (
-    <>
-      <ContainerContextProvider initialState={initialState}>
-        <FormProvider {...methods} >
-          <Container {...initialState}></Container>
-        </FormProvider>
-      </ContainerContextProvider>
-    </>
+    <ContainerContextProvider initialState={initialState}>
+      <FormProvider {...methods} >
+        <Container {...initialState} ref={ref}></Container>
+      </FormProvider>
+    </ContainerContextProvider>
   );
-}
+});
+
+export default ContainerProvider;
+

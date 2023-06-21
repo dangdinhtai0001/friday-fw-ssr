@@ -18,3 +18,8 @@ export interface ContainerProviderProps {
 export interface ContainerProps extends ContainerProviderProps {
 
 };
+
+export interface ContainerRef {
+  submitForm: () => void;
+  getFormValues: () => any;
+}

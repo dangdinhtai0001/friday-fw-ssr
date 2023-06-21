@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ContainerProvider } from '@/package/naraka/manipulation-container';
-import { ContainerProviderProps } from '@/package/naraka/manipulation-container/types';
+import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulation-container/types';
 import Input from '@mui/base/Input';
 import CustomField from './CustomField';
 
@@ -87,10 +87,14 @@ const containerProps: ContainerProviderProps = {
 
 export default function Manipulation(props: IManipulationProps) {
 
+  const formRef = React.useRef<ContainerRef>(null);
+
   return (
     <div>
       Manipulation page
-      <ContainerProvider {...containerProps}></ContainerProvider>
+      <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
+      <button onClick={() => { formRef.current?.submitForm() }}>Submit</button>
+      <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
     </div>
   );
 }
