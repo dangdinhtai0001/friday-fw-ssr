@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IFieldItemProps } from '../types';
+import { IFieldItemProps, IFieldItemComponentProps } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import { useController, useFormContext } from 'react-hook-form';
 
@@ -38,18 +38,21 @@ export default function FieldItem(props: IFieldItemProps) {
 
   const renderFieldItem = () => {
     if (!fieldDef) {
-      return <></>;
+      return null;
     }
 
-    let { component, componentParams } = fieldDef;
+    let { component, componentParams, name } = fieldDef;
 
-    let _params = {
+    let _params: IFieldItemComponentProps = {
       ...field,
       onChange: handleOnFieldChange,
-      ref: (ref: any) => (context.fieldRefs.current[field.name] = ref),
+      disabled: context.fieldDisabled[name],
+      readOnly: context.fieldReadOnly[name],
+      hidden: context.fieldHidden[name],
+      ref: (ref: any) => (context.fieldRefs.current[name] = ref),
       ...componentParams!
     }
-    return React.createElement(component, _params);
+    return React.createElement<IFieldItemComponentProps>(component, _params);
   };
 
   return (

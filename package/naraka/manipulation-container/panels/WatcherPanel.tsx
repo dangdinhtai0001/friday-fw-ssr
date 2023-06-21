@@ -14,7 +14,11 @@ export default function WatcherPanel(props: IWatcherPanelProps) {
     try {
       if (mounted) {
         // Hành động được thực hiện mỗi khi WatcherPanel re-render
-        console.log(watcher);
+        // Kiểm tra và gọi hàm afterValueChange nếu nó tồn tại trong context
+        if (context.afterValueChange && typeof context.afterValueChange === 'function') {
+          context.afterValueChange(watcher, context, contextApi);
+        }
+
 
         // yield context.onValueChange()
       } else {

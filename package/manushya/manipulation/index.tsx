@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ContainerProvider } from '@/package/naraka/manipulation-container';
 import { ContainerProviderProps } from '@/package/naraka/manipulation-container/types';
 import Input from '@mui/base/Input';
+import CustomField from './CustomField';
 
 
 export interface IManipulationProps {
@@ -16,6 +17,14 @@ const containerProps: ContainerProviderProps = {
       required: true,
       component: Input,
       componentParams: { type: 'text', placeholder: 'foo' }
+    },
+    {
+      name: 'custom',
+      label: 'custom lbl',
+      initialValue: 'custom',
+      required: false,
+      component: CustomField,
+      componentParams: {}
     },
     {
       name: 'first_name',
@@ -40,6 +49,13 @@ const containerProps: ContainerProviderProps = {
   ],
   onValueChange(props) {
     console.log("Trigger on change", props.fieldName, props.changedValue);
+
+    // props.refs.current["custom"].doSomething();
+  },
+  afterValueChange(values, context, contextApi) {
+    console.log(values);
+
+    contextApi.applyFieldDisabled({ custom: values.foo === 'bar' });
   },
   onSubmitSuccess(data) {
     console.log("onValid submit", data);
@@ -50,8 +66,6 @@ const containerProps: ContainerProviderProps = {
 }
 
 export default function Manipulation(props: IManipulationProps) {
-
-
 
   return (
     <div>

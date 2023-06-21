@@ -9,12 +9,28 @@ import { v4 as uuidv4 } from 'uuid';
 
 // hàm định nghĩa giá trị default của context state
 const createDefaultContextStateValue = (props: ContainerProviderProps, fieldRefs: React.MutableRefObject<{ [key: string]: any; }>): ContextState => {
+
+  let fieldDisabled: { [key: string]: boolean } = {};
+  let fieldReadOnly: { [key: string]: boolean } = {};
+  let fieldHidden: { [key: string]: boolean } = {};
+
+  props.fieldDefs.forEach(e => {
+    fieldDisabled[e.name] = (e.disabled !== undefined) ? e.disabled : false;
+    fieldReadOnly[e.name] = (e.readOnly !== undefined) ? e.readOnly : false;
+    fieldHidden[e.name] = (e.isHidden !== undefined) ? e.isHidden : false;
+  });
+
   return {
     formId: uuidv4(),
     fieldDefs: props.fieldDefs,
     fieldRefs: fieldRefs,
     submitCounter: 0,
+    fieldDisabled: fieldDisabled,
+    fieldReadOnly: fieldReadOnly,
+    fieldHidden: fieldHidden,
+    // ------------------------------------
     onValueChange: props.onValueChange,
+    afterValueChange: props.afterValueChange,
     onSubmitSuccess: props.onSubmitSuccess,
     onSubmitError: props.onSubmitError,
   };
@@ -78,7 +94,7 @@ export default function ContainerProvider(props: ContainerProviderProps) {
   return (
     <>
       <ContainerContextProvider initialState={initialState}>
-        <FormProvider {...methods} > // pass all methods into the context
+        <FormProvider {...methods} >
           <Container {...initialState}></Container>
         </FormProvider>
       </ContainerContextProvider>

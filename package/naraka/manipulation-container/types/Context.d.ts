@@ -10,19 +10,30 @@ export interface OnValueChangeProps {
   refs: React.MutableRefObject<{ [key: string]: any; }>;
 }
 
+export interface FieldStatus {
+  [key: string]: boolean
+}
+
 export interface ContextState {
   formId: any;
   fieldDefs: FieldDef[];
   fieldRefs: React.MutableRefObject<{ [key: string]: any; }>;
   submitCounter: number;
+  fieldDisabled: { [key: string]: boolean };
+  fieldReadOnly: { [key: string]: boolean };
+  fieldHidden: { [key: string]: boolean };
   // ---------------------------------------------------------------------------
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
+  afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
   onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
   onSubmitError: (errors: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
 }
 
 export interface ContextApi {
   increaseSubmitCounter: () => void;
+  applyFieldDisabled: (fields: FieldStatus) => void;
+  applyFieldReadOnly: (fields: FieldStatus) => void;
+  applyFieldHidden: (fields: FieldStatus) => void;
 }
 
 /**

@@ -6,6 +6,7 @@ import { FieldValues } from 'react-hook-form';
 export interface ContainerProviderProps {
   fieldDefs: FieldDef[];
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
+  afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
   getDefaultValues?: Promise<FieldValues>;
   onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
   onSubmitError: (errors: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
