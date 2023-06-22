@@ -42,6 +42,7 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const renderDataFieldBlock = () => {
     let { fieldDef: { label, required, fieldRaito, labelAlign } } = fieldItemProps;
 
+    // TODO: Check lại xem vì sao không có label thì nó không render cả control luôn 
     if (label) {
       return (
         <Box sx={{ display: 'grid', gridTemplateColumns: fieldRaito ? fieldRaito : defaultFieldRaito, columnGap: 1 }}>

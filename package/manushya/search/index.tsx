@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container';
 import { ContainerProviderProps, ContextApi, ContextState, TaskBlock } from '@/package/naraka/searchable-container/types';
+import { ContextState as ManipulationContextState } from '@/package/naraka/manipulation-container/types';
 
 import FilterBlock from './FilterBlock';
 import PaginationBlock from './PaginationBlock';
 import ToolbarBlock from './ToolbarBlock';
+import { DefaultFilterBlock } from '@/package/naraka/searchable-container-ext';
+
+import Input from '@mui/base/Input';
 
 const sleep = (ms: number) => new Promise(
   resolve => setTimeout(resolve, ms));
@@ -12,8 +16,19 @@ const sleep = (ms: number) => new Promise(
 export default function ComponentPage() {
   const searchableContainerProps: ContainerProviderProps = {
     // ------------
-    filterBlockParams: {},
-    filterBlockComponent: FilterBlock,
+    filterDefs: [{
+      name: 'fromDate',
+      label: "Từ ngày",
+      initialValue: '',
+      component: Input
+    }],
+    filterBlockParams: {
+      onMounted(context: ManipulationContextState) {
+        console.log("on mounted event: ", context.formId);
+      },
+    },
+    // filterBlockComponent: FilterBlock,
+    filterBlockComponent: DefaultFilterBlock,
     // ------------
     toolbarBlockComponent: ToolbarBlock,
     toolbarBlockParams: {},

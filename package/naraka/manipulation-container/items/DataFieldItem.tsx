@@ -23,7 +23,7 @@ export default function FieldItem(props: IFieldItemProps) {
     // TODO: xem xét xem có nên đặt hàm transform ở đây hay không 
 
     // Gọi sự kiện thay đổi
-    await context.onValueChange({
+    await context.onValueChange?.({
       changedValue: tValue,
       allValues,
       fieldName: fieldDef.name,

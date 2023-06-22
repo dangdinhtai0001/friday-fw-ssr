@@ -1,10 +1,6 @@
 import { IFieldItemProps } from './Item.d';
 import { DataFieldLabel_Status, DataFieldLabel_TextAlign, FieldDef } from './Common.d'
 
-export interface IDataFieldBlockProps {
-  fieldItemProps: IFieldItemProps;
-}
-
 // ------------------------------------------------------------------------------
 
 export interface IDataFieldLabelProps {

@@ -29,7 +29,7 @@ export interface ContextState {
   dataBlockComponent?: React.ComponentType<IDataFieldBlockProps>;
   defaultCols: number;
   // ---------------------------------------------------------------------------
-  onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
+  onValueChange?: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
   onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
   onSubmitError: (errors: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;

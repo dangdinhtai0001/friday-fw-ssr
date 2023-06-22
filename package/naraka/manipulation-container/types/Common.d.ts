@@ -15,3 +15,6 @@ export interface FieldDef {
 
 export type DataFieldLabel_Status = 'error' | 'warning';
 export type DataFieldLabel_TextAlign = 'left' | 'center' | 'right';
+export interface IDataFieldBlockProps {
+  fieldItemProps: IFieldItemProps;
+}

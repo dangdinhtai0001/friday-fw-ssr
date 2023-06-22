@@ -1,6 +1,6 @@
 import React from 'react';
 import { FilterModifiedEvent } from './Event.d';
-import { FilterCriteria, PaginationModel } from './Common.d';
+import { FilterCriteria, PaginationModel, FilterDef } from './Common.d';
 import { TaskControl, TaskBlock } from './Task.d';
 import { FilterBlockProps, ToolbarBlockProps, PaginationBlockProps } from './Panel'
 
@@ -10,6 +10,7 @@ export interface ContextState {
 
   filterInstance: FilterCriteria[];
 
+  filterDefs?: FieldDef[];
   filterBlockParams?: any;
   filterBlockComponent?: React.ComponentType<FilterBlockProps>;
 

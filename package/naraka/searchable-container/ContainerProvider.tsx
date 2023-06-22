@@ -18,6 +18,7 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
       totalPages: 10
     },
     // ---------------------------
+    filterDefs: props.filterDefs,
     filterBlockComponent: props.filterBlockComponent,
     filterBlockParams: props.filterBlockParams,
     // ---------------------------    
