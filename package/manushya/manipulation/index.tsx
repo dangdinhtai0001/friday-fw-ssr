@@ -3,7 +3,7 @@ import { ContainerProvider } from '@/package/naraka/manipulation-container';
 import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulation-container/types';
 import Input from '@mui/base/Input';
 import CustomField from './CustomField';
-
+import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
 
 export interface IManipulationProps {
 }
@@ -47,6 +47,7 @@ const containerProps: ContainerProviderProps = {
       componentParams: { type: 'number', placeholder: '1' }
     },
   ],
+  dataBlockComponent: DefaultDataBlock,
   onValueChange(props) {
     console.log("Trigger on change", props.fieldName, props.changedValue);
 

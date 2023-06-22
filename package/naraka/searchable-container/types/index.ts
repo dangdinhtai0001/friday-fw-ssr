@@ -4,3 +4,4 @@ export * from './Event.d';
 export * from './Common.d';
 export * from './Container.d';
 export * from './Task.d';
+export * from './Block.d';

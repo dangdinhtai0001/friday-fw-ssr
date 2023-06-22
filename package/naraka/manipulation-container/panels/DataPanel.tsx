@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { IDataPanelProps, IFieldItemProps } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
-import FieldItem from '../items/DataFieldItem';
-import DataFieldBlock from '../blocks/DataBlock';
 import Box from '@mui/system/Box';
 
 export default function DataPanel(props: IDataPanelProps) {
   const { context } = useContainerContext();
 
-  
   const creatFieldItems = () => {
     if (!context.fieldDefs) {
       return <></>
@@ -20,13 +17,13 @@ export default function DataPanel(props: IDataPanelProps) {
         name: item.name,
       };
 
-      return <DataFieldBlock key={index} fieldItemProps={_props}></DataFieldBlock>;
+      return context.dataBlockComponent ? React.createElement(context.dataBlockComponent, { key: index, fieldItemProps: _props }) : null;
     })
   };
 
   return (
     <div>
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', rowGap: 0.7, columnGap: 1 }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: `repeat(${context.defaultCols}, 1fr)`, rowGap: 0.7, columnGap: 1 }}>
         {creatFieldItems()}
       </Box>
     </div>

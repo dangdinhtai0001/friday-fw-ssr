@@ -1,6 +1,7 @@
 import { IDataBlockProps } from './Panel.d';
 import { FieldDef, DataFieldLabel_TextAlign } from './Common.d';
 import { OnValueChangeProps, ContextState, ContextApi } from './Context.d';
+import { IDataFieldLabelProps } from './Block.d';
 import { FieldValues, Resolver, Mode, CriteriaMode, ValidationMode } from 'react-hook-form';
 
 export interface ContainerProviderProps {
@@ -12,6 +13,8 @@ export interface ContainerProviderProps {
   criteriaMode?: CriteriaMode;
   defaultFieldRaito?: string;
   defaultFieldLabelAlign?: DataFieldLabel_TextAlign;
+  dataBlockComponent?: React.ComponentType<IDataFieldBlockProps>;
+  defaultCols?: number;
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
   getDefaultValues?: Promise<FieldValues>;

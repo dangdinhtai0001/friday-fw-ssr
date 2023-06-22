@@ -1,4 +1,5 @@
 import { FieldDef, DataFieldLabel_TextAlign } from './Common.d';
+import { IDataFieldLabelProps } from './Block.d';
 import React from 'react';
 
 export interface OnValueChangeProps {
@@ -25,6 +26,8 @@ export interface ContextState {
   fieldMessage: Record<string, { type: string, message: string }>;
   defaultFieldRaito: string;
   defaultFieldLabelAlign: DataFieldLabel_TextAlign;
+  dataBlockComponent?: React.ComponentType<IDataFieldBlockProps>;
+  defaultCols: number;
   // ---------------------------------------------------------------------------
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;

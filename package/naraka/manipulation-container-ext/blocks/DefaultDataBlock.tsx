@@ -1,64 +1,12 @@
 import * as React from 'react';
-import { IDataFieldBlockProps, IDataFieldLabelProps, DataFieldLabel_Status, IDataFieldMessageProps } from '../types';
-import { useContainerContext } from '../context/useContainerContext';
-import FieldItem from '../items/DataFieldItem';
+import { IDataFieldBlockProps, IDataFieldLabelProps, IDataFieldMessageProps } from '@/package/naraka/manipulation-container/types';
+import { useContainerContext } from '@/package/naraka/manipulation-container/context/useContainerContext';
+import FieldItem from '@/package/naraka/manipulation-container/items/DataFieldItem';
 import Box from '@mui/system/Box';
 import { styled } from '@mui/system';
 import { useController } from 'react-hook-form';
 import { motion, useAnimation, AnimationControls } from "framer-motion";
 import useAsyncEffect from "@n1ru4l/use-async-effect";
-
-const fieldMessageVariants = {
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.2,
-      type: "spring",
-      bounce: 0.2,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -50,
-    transition: {
-      duration: 0.2,
-      type: "spring",
-      bounce: 0.2,
-    },
-  },
-  initial: {
-    opacity: 0,
-    y: -50
-  }
-};
-
-/**
- * Handle the message based on the provided conditions and update the corresponding state.
- * @param {Function} setMessage - The state setter function for the message.
- * @param {Object} messageObj - The object containing the messages.
- * @param {string} fieldName - The name of the field.
- * @param {AnimationControls} controls - The controls for animation.
- */
-const useMessageHandling = async (
-  setMessage: React.Dispatch<React.SetStateAction<string | undefined>>,
-  messageObj: Record<string, any>,
-  fieldName: string,
-  controls: AnimationControls
-) => {
-  try {
-    if (messageObj && messageObj.hasOwnProperty(fieldName)) {
-      setMessage(messageObj[fieldName]?.message as string);
-      controls.start('animate');
-    } else {
-      await controls.start('exit');
-      setMessage(undefined);
-    }
-  } catch (error) {
-    console.error('Error occurred:', error);
-  }
-};
-
 
 export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const { fieldItemProps } = props;
@@ -125,11 +73,8 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
     }
   }
 
-  return (
-    <>
-      {renderDataFieldBlock()}
-    </>
-  );
+  return renderDataFieldBlock();
+
 };
 
 
@@ -155,3 +100,54 @@ const RequiredIcon = styled('span', {})(({ theme }) => ({
   fontSize: '1rem',
   marginLeft: '0.1rem'
 }));
+
+const fieldMessageVariants = {
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.2,
+      type: "spring",
+      bounce: 0.2,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -50,
+    transition: {
+      duration: 0.2,
+      type: "spring",
+      bounce: 0.2,
+    },
+  },
+  initial: {
+    opacity: 0,
+    y: -50
+  }
+};
+
+/**
+ * Handle the message based on the provided conditions and update the corresponding state.
+ * @param {Function} setMessage - The state setter function for the message.
+ * @param {Object} messageObj - The object containing the messages.
+ * @param {string} fieldName - The name of the field.
+ * @param {AnimationControls} controls - The controls for animation.
+ */
+const useMessageHandling = async (
+  setMessage: React.Dispatch<React.SetStateAction<string | undefined>>,
+  messageObj: Record<string, any>,
+  fieldName: string,
+  controls: AnimationControls
+) => {
+  try {
+    if (messageObj && messageObj.hasOwnProperty(fieldName)) {
+      setMessage(messageObj[fieldName]?.message as string);
+      controls.start('animate');
+    } else {
+      await controls.start('exit');
+      setMessage(undefined);
+    }
+  } catch (error) {
+    console.error('Error occurred:', error);
+  }
+};
