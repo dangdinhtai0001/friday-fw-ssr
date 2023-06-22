@@ -35,12 +35,7 @@ const FilterPanel: React.FC<FilterPanelProps> = (props: FilterPanelProps) => {
     }
   };
 
-  return (
-    <div>
-      Filter panel
-      {createFilterBlock()}
-    </div>
-  );
+  return createFilterBlock();
 };
 
 export default FilterPanel;

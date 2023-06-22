@@ -16,16 +16,25 @@ const sleep = (ms: number) => new Promise(
 export default function ComponentPage() {
   const searchableContainerProps: ContainerProviderProps = {
     // ------------
-    filterDefs: [{
-      name: 'fromDate',
-      label: "Từ ngày",
-      initialValue: '',
-      component: Input
-    }],
+    filterDefs: [
+      {
+        name: 'fromDate',
+        label: "Từ ngày",
+        initialValue: '',
+        component: Input
+      },
+      {
+        name: 'toDate',
+        label: "Đến ngày",
+        initialValue: '',
+        component: Input
+      }
+    ],
     filterBlockParams: {
       onMounted(context: ManipulationContextState) {
         console.log("on mounted event: ", context.formId);
       },
+      defaultCols: 2
     },
     // filterBlockComponent: FilterBlock,
     filterBlockComponent: DefaultFilterBlock,

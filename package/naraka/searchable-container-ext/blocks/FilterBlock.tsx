@@ -6,6 +6,8 @@ import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulat
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import { ContextHookValue } from '@/package/naraka/searchable-container/types';
 import Button from '@mui/base/Button';
+import Box from '@mui/system/Box';
+import styled from '@mui/system/styled';
 
 export interface FilterBlock extends IFilterBlockProps, ContainerProviderProps {
 }
@@ -41,8 +43,7 @@ export default function FilterBlock(props: FilterBlock) {
   }
 
   return (
-    <div>
-      Filter block
+    <BoxStyled sx={{ display: 'grid', gap: 1 }}>
       <FormContainerProvider
         {...props}
         fieldDefs={context.filterDefs ? context.filterDefs : []}
@@ -50,8 +51,15 @@ export default function FilterBlock(props: FilterBlock) {
         onSubmitSuccess={handleOnSubmitSucces}
         onSubmitError={handleOnSubmitErrors}
         ref={formRef}
-      ></FormContainerProvider>
-      <Button onClick={handleOnclick}>apply filter</Button>
-    </div>
+      />
+      <Box sx={{ textAlign: 'right' }}>
+        <Button onClick={handleOnclick}>apply filter</Button>
+      </Box>
+    </BoxStyled>
   );
 }
+
+const BoxStyled = styled(Box, {})(({ theme }) => ({
+  // border: `0.1rem solid ${theme.palette.primary.main}`,
+  padding: `0.5rem 0.5rem 0.5rem 0.5rem`
+}));
