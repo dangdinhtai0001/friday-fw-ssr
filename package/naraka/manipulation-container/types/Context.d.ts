@@ -1,4 +1,4 @@
-import { FieldDef } from './Common.d';
+import { FieldDef, DataFieldLabel_TextAlign } from './Common.d';
 import React from 'react';
 
 export interface OnValueChangeProps {
@@ -23,6 +23,8 @@ export interface ContextState {
   fieldReadOnly: { [key: string]: boolean };
   fieldHidden: { [key: string]: boolean };
   fieldMessage: Record<string, { type: string, message: string }>;
+  defaultFieldRaito: string;
+  defaultFieldLabelAlign: DataFieldLabel_TextAlign;
   // ---------------------------------------------------------------------------
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;

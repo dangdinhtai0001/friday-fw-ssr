@@ -29,6 +29,8 @@ const createDefaultContextStateValue = (props: ContainerProviderProps, fieldRefs
     fieldReadOnly: fieldReadOnly,
     fieldHidden: fieldHidden,
     fieldMessage: {},
+    defaultFieldRaito: "20% 80%",
+    defaultFieldLabelAlign: "left",
     // ------------------------------------
     onValueChange: props.onValueChange,
     afterValueChange: props.afterValueChange,
@@ -58,10 +60,9 @@ const createReactHookFormProps = (props: ContainerProviderProps): UseFormProps =
 
 
   return {
-    // TODO: nhớ chuyển đống này thành đọc từ props
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    criteriaMode: 'all',
+    mode: props.rhfMode ? props.rhfMode : 'onSubmit',
+    reValidateMode: props.reValidateMode ? props.reValidateMode : 'onChange',
+    criteriaMode: props.criteriaMode ? props.criteriaMode : 'all',
     shouldFocusError: true,
     delayError: 1,
     shouldUnregister: false,

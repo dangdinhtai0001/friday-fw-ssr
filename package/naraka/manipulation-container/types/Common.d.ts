@@ -9,4 +9,9 @@ export interface FieldDef {
   componentParams?: unknown;
   component: React.ComponentType<IDataBlockProps>;
   // 
+  fieldRaito?: string;
+  labelAlign?: DataFieldLabel_TextAlign
 }
+
+export type DataFieldLabel_Status = 'error' | 'warning';
+export type DataFieldLabel_TextAlign = 'left' | 'center' | 'right';

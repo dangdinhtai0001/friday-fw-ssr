@@ -62,14 +62,12 @@ const useMessageHandling = async (
 
 export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const { fieldItemProps } = props;
-  const { context: { fieldMessage } } = useContainerContext();
+  const { context: { fieldMessage, defaultFieldLabelAlign, defaultFieldRaito } } = useContainerContext();
   const { formState: { errors } } = useController(fieldItemProps);
   const errorMsgControls = useAnimation();
   const customMsgControls = useAnimation();
 
   const [errorMessage, setErrorMessage] = React.useState<string | undefined>();
-  const [infoMessage, setInfoMessage] = React.useState<string | undefined>();
-  const [warningMessage, setWarningMessage] = React.useState<string | undefined>();
   const [message, setMessage] = React.useState<string | undefined>();
 
   const renderControlContainer = () => {
@@ -94,13 +92,13 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
 
 
   const renderDataFieldBlock = () => {
-    let { fieldDef: { label, required } } = fieldItemProps;
+    let { fieldDef: { label, required, fieldRaito, labelAlign } } = fieldItemProps;
 
     if (label) {
       return (
-        <Box sx={{ display: 'grid', gridTemplateColumns: '30% 70%', columnGap: 1 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: fieldRaito ? fieldRaito : defaultFieldRaito, columnGap: 1 }}>
           <Box sx={{ gridRow: '1' }}>
-            <DataFieldLabel status={errorMessage ? 'error' : undefined} textAlign={'left'}>
+            <DataFieldLabel status={errorMessage ? 'error' : undefined} textAlign={labelAlign ? labelAlign : defaultFieldLabelAlign}>
               {label}
               {required ? <RequiredIcon>*</RequiredIcon> : null}
             </DataFieldLabel>

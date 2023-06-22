@@ -1,12 +1,17 @@
 import { IDataBlockProps } from './Panel.d';
-import { FieldDef } from './Common.d';
+import { FieldDef, DataFieldLabel_TextAlign } from './Common.d';
 import { OnValueChangeProps, ContextState, ContextApi } from './Context.d';
-import { FieldValues, Resolver } from 'react-hook-form';
+import { FieldValues, Resolver, Mode, CriteriaMode, ValidationMode } from 'react-hook-form';
 
 export interface ContainerProviderProps {
   fieldDefs: FieldDef[];
   formId?: any;
   resolver?: Resolver;
+  rhfMode?: Mode;
+  reValidateMode?: "onBlur" | "onChange" | "onSubmit";
+  criteriaMode?: CriteriaMode;
+  defaultFieldRaito?: string;
+  defaultFieldLabelAlign?: DataFieldLabel_TextAlign;
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
   getDefaultValues?: Promise<FieldValues>;
