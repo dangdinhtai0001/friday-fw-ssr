@@ -45,13 +45,9 @@ const Container = forwardRef<ContainerRef, ContainerProps>((props, ref: Ref<Cont
     resetFormValues() {
       reset();
     },
-    applyFieldWarning(fields: Record<string, { type: string, message: string }> | null) {
-      contextApi.applyFieldWarning(fields);
-    }, 
-    applyFieldInfo(fields: Record<string, { type: string, message: string }> | null) {
-      contextApi.applyFieldInfo(fields);
+    applyFieldMessage(fields?: Record<string, { type: string, message: string }>) {
+      contextApi.applyFieldMessage(fields);
     },
-
   }));
 
   const { onSubmitSuccess, onSubmitError } = context;

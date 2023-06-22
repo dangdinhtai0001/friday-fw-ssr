@@ -22,8 +22,7 @@ export interface ContextState {
   fieldDisabled: { [key: string]: boolean };
   fieldReadOnly: { [key: string]: boolean };
   fieldHidden: { [key: string]: boolean };
-  fieldWarning: Record<string, { type: string, message: string }>;
-  fieldInfo: Record<string, { type: string, message: string }>;
+  fieldMessage: Record<string, { type: string, message: string }>;
   // ---------------------------------------------------------------------------
   onValueChange: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
@@ -37,8 +36,7 @@ export interface ContextApi {
   applyFieldDisabled: (fields: FieldStatus) => void;
   applyFieldReadOnly: (fields: FieldStatus) => void;
   applyFieldHidden: (fields: FieldStatus) => void;
-  applyFieldWarning: (fields: Record<string, { type: string, message: string }> | null) => void;
-  applyFieldInfo: (fields: Record<string, { type: string, message: string }> | null) => void;
+  applyFieldMessage: (fields?: Record<string, { type: string, message: string }>) => void;
 }
 
 /**

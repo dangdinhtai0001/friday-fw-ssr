@@ -24,6 +24,5 @@ export interface ContainerRef {
   getFormValues: () => any;
   setFieldValues: (name: string, value: unknown, shouldValidate?: boolean) => void;
   resetFormValues: () => void;
-  applyFieldWarning: (fields: Record<string, { type: string, message: string }> | null) => void;
-  applyFieldInfo: (fields: Record<string, { type: string, message: string }> | null) => void;
+  applyFieldMessage: (fields?: Record<string, { type: string, message: string }>) => void;
 }

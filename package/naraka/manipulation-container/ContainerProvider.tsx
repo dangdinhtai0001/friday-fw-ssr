@@ -28,8 +28,7 @@ const createDefaultContextStateValue = (props: ContainerProviderProps, fieldRefs
     fieldDisabled: fieldDisabled,
     fieldReadOnly: fieldReadOnly,
     fieldHidden: fieldHidden,
-    fieldInfo: {},
-    fieldWarning: {},
+    fieldMessage: {},
     // ------------------------------------
     onValueChange: props.onValueChange,
     afterValueChange: props.afterValueChange,

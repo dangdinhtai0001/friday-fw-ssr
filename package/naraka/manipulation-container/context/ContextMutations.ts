@@ -72,20 +72,11 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
-    applyFieldWarning(fields: Record<string, { type: string, message: string }> | null): void {
+    applyFieldMessage(fields?: Record<string, { type: string, message: string }>): void {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
           ...prevContext,
-          fieldWarning: fields === null ? {} : Object.assign({}, prevContext.fieldWarning, fields)
-        };
-        return updatedContext;
-      });
-    },
-    applyFieldInfo(fields: Record<string, { type: string, message: string }> | null): void {
-      setContext((prevContext: ContextState) => {
-        const updatedContext: ContextState = {
-          ...prevContext,
-          fieldInfo: fields === null ? {} : Object.assign({}, prevContext.fieldInfo, fields)
+          fieldMessage: fields ? Object.assign({}, prevContext.fieldMessage, fields) : {}
         };
         return updatedContext;
       });

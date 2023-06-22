@@ -48,7 +48,6 @@ const useMessageHandling = async (
 ) => {
   try {
     if (messageObj && messageObj.hasOwnProperty(fieldName)) {
-      console.log("hehehehe", messageObj[fieldName]?.message as string)
       setMessage(messageObj[fieldName]?.message as string);
       controls.start('animate');
     } else {
@@ -63,13 +62,15 @@ const useMessageHandling = async (
 
 export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const { fieldItemProps } = props;
-  const { context: { fieldWarning, fieldInfo } } = useContainerContext();
+  const { context: { fieldMessage } } = useContainerContext();
   const { formState: { errors } } = useController(fieldItemProps);
-  const controls = useAnimation();
+  const errorMsgControls = useAnimation();
+  const customMsgControls = useAnimation();
 
   const [errorMessage, setErrorMessage] = React.useState<string | undefined>();
   const [infoMessage, setInfoMessage] = React.useState<string | undefined>();
   const [warningMessage, setWarningMessage] = React.useState<string | undefined>();
+  const [message, setMessage] = React.useState<string | undefined>();
 
   const renderControlContainer = () => {
     return <FieldItem {...fieldItemProps}></FieldItem>
@@ -84,34 +85,12 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
    * @param {Object} controls - The controls for animation.
    */
   useAsyncEffect(function* (onCancel, cast) {
-    useMessageHandling(setErrorMessage, errors, fieldItemProps.name, controls);
+    useMessageHandling(setErrorMessage, errors, fieldItemProps.name, errorMsgControls);
   }, [errors]);
 
-
-  /**
-   * Trigger the change event for fieldWarning, which will activate animation and update warning message.
-   * @param {Function} onCancel - The cancel function for the effect.
-   * @param {Function} cast - The generator function for the effect.
-   * @param {Object} fieldWarning - The object containing warning messages.
-   * @param {string} fieldName - The name of the field.
-   * @param {Object} controls - The controls for animation.
-   */
   useAsyncEffect(function* (onCancel, cast) {
-    useMessageHandling(setWarningMessage, fieldWarning, fieldItemProps.name, controls);
-  }, [fieldWarning]);
-
-
-  /**
-   * Trigger the change event for fieldInfo, which will activate animation and update info message.
-   * @param {Function} onCancel - The cancel function for the effect.
-   * @param {Function} cast - The generator function for the effect.
-   * @param {Object} fieldInfo - The object containing info messages.
-   * @param {string} fieldName - The name of the field.
-   * @param {Object} controls - The controls for animation.
-   */
-  useAsyncEffect(function* (onCancel, cast) {
-    useMessageHandling(setInfoMessage, fieldInfo, fieldItemProps.name, controls);
-  }, [fieldInfo]);
+    useMessageHandling(setMessage, fieldMessage, fieldItemProps.name, customMsgControls);
+  }, [fieldMessage]);
 
 
   const renderDataFieldBlock = () => {
@@ -121,7 +100,7 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
       return (
         <Box sx={{ display: 'grid', gridTemplateColumns: '30% 70%', columnGap: 1 }}>
           <Box sx={{ gridRow: '1' }}>
-            <DataFieldLabel status={errorMessage ? 'error' : warningMessage ? 'warning' : undefined} textAlign={'left'}>
+            <DataFieldLabel status={errorMessage ? 'error' : undefined} textAlign={'left'}>
               {label}
               {required ? <RequiredIcon>*</RequiredIcon> : null}
             </DataFieldLabel>
@@ -129,17 +108,13 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
           <Box sx={{ gridRow: '1', display: 'grid', gap: 0.3 }}>
             {renderControlContainer()}
             <motion.div
-              animate={controls}
+              animate={errorMsgControls}
               initial="initial"
               variants={fieldMessageVariants}
             >
-              {/* {errorMessage && <DataFieldMessage status='error'>{errorMessage}</DataFieldMessage>}
-              {warningMessage && <DataFieldMessage status='warning'>{warningMessage}</DataFieldMessage>}
-              {infoMessage && <DataFieldMessage>{infoMessage}</DataFieldMessage>} */}
               <DataFieldMessage status='error'>{errorMessage}</DataFieldMessage>
-              <DataFieldMessage status='warning'>{warningMessage}</DataFieldMessage>
-              <DataFieldMessage>{infoMessage}</DataFieldMessage>
             </motion.div>
+            <DataFieldMessage status='warning'>{message}</DataFieldMessage>
           </Box>
         </Box>
       );
