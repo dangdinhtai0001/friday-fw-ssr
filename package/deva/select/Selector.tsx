@@ -1,13 +1,12 @@
-import { useState, forwardRef, Ref } from 'react';
+import { useState, forwardRef, Ref, MouseEvent, KeyboardEvent, FocusEvent } from 'react';
 import Select from '@mui/base/Select';
 import Option from '@mui/base/Option';
-import { MouseEvent, KeyboardEvent, FocusEvent } from 'react';
 import { ISelectorProps } from './Selector.d';
 
 export default forwardRef(function Selector(props: ISelectorProps, ref: Ref<HTMLButtonElement>) {
-  const handleOnChange = (event: any, value: any): void => {
-    // Code logic inside the function
-    console.log(event, value)
+
+  const handleOnChange = (event: MouseEvent | KeyboardEvent | FocusEvent | null, value: any): void => {
+    props?.onChange(value);
   };
 
   return (
@@ -16,8 +15,7 @@ export default forwardRef(function Selector(props: ISelectorProps, ref: Ref<HTML
         <Option value="option1">Option 1</Option>
         <Option value="option2">Option 2</Option>
       </Select>
-      <div>Selected value: {props.value}</div>
+      <div>Selected value: {JSON.stringify(props.value)}</div>
     </>
   );
 });
-

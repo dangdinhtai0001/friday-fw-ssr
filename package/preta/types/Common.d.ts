@@ -1,4 +1,5 @@
 export interface IControllerComponentProps {
+  value: unknown;
   disabled: boolean;
   readOnly: boolean;
   hidden: boolean;
