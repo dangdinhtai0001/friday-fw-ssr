@@ -4,8 +4,28 @@ import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulat
 import Input from '@mui/base/Input';
 import CustomField from './CustomField';
 import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
-
+import { Selector } from '@/package/deva/select';
 export interface IManipulationProps {
+}
+
+
+
+export default function Manipulation(props: IManipulationProps) {
+
+  const formRef = React.useRef<ContainerRef>(null);
+
+  return (
+    <div>
+      Manipulation page
+      <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
+      <button onClick={() => { formRef.current?.submitForm() }}>Submit</button>
+      <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
+      <button onClick={() => { formRef.current?.setFieldValues('foo', 'bar', true); }}>Set foo value</button>
+      <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
+      <button onClick={() => { formRef.current?.applyFieldMessage({ foo: { type: 'warning', message: "This is custom warning message" } }); }}>push msg</button>
+      <button onClick={() => { formRef.current?.applyFieldMessage(); }}>clear msg</button>
+    </div>
+  );
 }
 
 const containerProps: ContainerProviderProps = {
@@ -24,6 +44,14 @@ const containerProps: ContainerProviderProps = {
       initialValue: 'custom',
       required: false,
       component: CustomField,
+      componentParams: {}
+    },
+    {
+      name: 'selector',
+      label: 'Selector lbl',
+      initialValue: 'option1',
+      required: false,
+      component: Selector,
       componentParams: {}
     },
     {
@@ -84,22 +112,4 @@ const containerProps: ContainerProviderProps = {
       errors: errors
     }
   }
-}
-
-export default function Manipulation(props: IManipulationProps) {
-
-  const formRef = React.useRef<ContainerRef>(null);
-
-  return (
-    <div>
-      Manipulation page
-      <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
-      <button onClick={() => { formRef.current?.submitForm() }}>Submit</button>
-      <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
-      <button onClick={() => { formRef.current?.setFieldValues('foo', 'bar', true); }}>Set foo value</button>
-      <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
-      <button onClick={() => { formRef.current?.applyFieldMessage({ foo: { type: 'warning', message: "This is custom warning message" } }); }}>push msg</button>
-      <button onClick={() => { formRef.current?.applyFieldMessage(); }}>clear msg</button>
-    </div>
-  );
 }

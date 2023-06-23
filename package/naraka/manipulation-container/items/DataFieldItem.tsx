@@ -16,7 +16,7 @@ export default function FieldItem(props: IFieldItemProps) {
     let allValues = getValues();
 
     // Kiểm tra xem value này có phải lấy từ đối tượng input hay ko , nếu đúng thì set giá trị của transformedValue
-    if (value.nativeEvent instanceof Event) {
+    if (value?.nativeEvent instanceof Event) {
       tValue = value.target.value;
     }
 
@@ -31,6 +31,8 @@ export default function FieldItem(props: IFieldItemProps) {
       contextApi,
       refs: context.fieldRefs
     });
+
+    console.log(tValue, value);
 
     // Sự kiện onChange của RHF
     field.onChange(tValue);
@@ -55,7 +57,5 @@ export default function FieldItem(props: IFieldItemProps) {
     return React.createElement<IFieldItemComponentProps>(component, _params);
   };
 
-  return (
-    <>{renderFieldItem()}</>
-  );
+  return renderFieldItem();
 }

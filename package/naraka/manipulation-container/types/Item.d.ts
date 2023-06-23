@@ -1,14 +1,11 @@
 import { UseControllerProps } from 'react-hook-form';
-import { FieldDef } from './Common.d'
+import { FieldDef } from './Common.d';
+import { IControllerComponentProps } from '@/package/preta/types'
 
 export interface IFieldItemProps extends UseControllerProps {
   fieldDef: FieldDef
 }
 
-export interface IFieldItemComponentProps {
-  disabled: boolean;
-  readOnly: boolean;
-  hidden: boolean;
-  onChange: (value: any) => void | Promise<void>;
-  ref: any;
+export interface IFieldItemComponentProps extends IControllerComponentProps {
+
 }

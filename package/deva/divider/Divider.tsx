@@ -1,24 +1,16 @@
 import * as React from 'react';
 import { styled } from '@mui/system';
+import { IDividerProps, IDividerContainerProps, IDividerLineProps, IDividerTextProps } from './Divider.d';
 
-export interface IDividerProps {
-  color?: string;
-  height?: number;
-  type?: 'solid' | 'dashed' | 'dotted';
-  text?: string;
-}
+export default function Divider(props: IDividerProps) {
+  const { color = '#000', height = 1, type = 'solid', text } = props;
 
-export interface IDividerContainerProps {
-  height: number;
-}
-
-export interface IDividerLineProps {
-  color: string;
-  type: string;
-}
-
-export interface IDividerTextProps {
-  color?: string;
+  return (
+    <DividerContainer height={height}>
+      <DividerLine color={color} type={type} />
+      {text && <DividerText>{text}</DividerText>}
+    </DividerContainer>
+  );
 }
 
 const DividerContainer = styled(
@@ -54,14 +46,3 @@ const DividerText = styled(
   top: '50%',
   transform: 'translateY(-50%)',
 }));
-
-export default function Divider(props: IDividerProps) {
-  const { color = '#000', height = 1, type = 'solid', text } = props;
-
-  return (
-    <DividerContainer height={height}>
-      <DividerLine color={color} type={type} />
-      {text && <DividerText>{text}</DividerText>}
-    </DividerContainer>
-  );
-}
