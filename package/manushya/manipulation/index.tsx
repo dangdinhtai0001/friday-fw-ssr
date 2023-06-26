@@ -49,10 +49,56 @@ const containerProps: ContainerProviderProps = {
     {
       name: 'selector',
       label: 'Selector lbl',
-      initialValue: 'option1',
+      initialValue: 'Legolas',
       required: false,
       component: Selector,
-      componentParams: {}
+      componentParams: {
+        itemDefs: [
+          {
+            label: 'Hobbits',
+            itemDefs: [
+              {
+                label: 'Frodo',
+                value: 'Frodo'
+              },
+              {
+                label: 'Sam',
+                value: 'Sam'
+              },
+              {
+                label: 'Merry',
+                value: 'Merry'
+              }
+            ]
+          },
+          {
+            label: 'Elves',
+            itemDefs: [
+              {
+                label: 'Elves',
+                itemDefs: [
+                  {
+                    label: 'Legolas',
+                    value: 'Legolas'
+                  },
+                  {
+                    label: 'Arwen',
+                    value: 'Arwen'
+                  }
+                ]
+              },
+              {
+                label: 'Legolas',
+                value: 'Legolas'
+              },
+              {
+                label: 'Arwen',
+                value: 'Arwen'
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       name: 'first_name',

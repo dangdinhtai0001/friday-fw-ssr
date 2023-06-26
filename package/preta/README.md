@@ -1,3 +1,3 @@
 the world of the starving (preta)
 
-Các hàm common dùng cho toàn ứng dụng 
+Các đối tượng common dùng cho toàn ứng dụng 
