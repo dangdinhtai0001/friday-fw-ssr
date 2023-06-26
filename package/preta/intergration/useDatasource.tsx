@@ -1,11 +1,11 @@
+import { useMemo } from 'react';
 import useSWR from 'swr';
-import axios, { AxiosResponse } from 'axios';
-import { IDatasourceProps, IDatasourceReturn } from './types/Datasource.d'
+import axios from 'axios';
+import { IDatasourceProps, IDatasourceReturn } from '../types/Datasource.d'
 
 
 export default function useDatasource(props: IDatasourceProps): IDatasourceReturn {
-  const { url, fetcherOptions, swrOptions, transformData, dataExtractor, onError } = props;
-  const { headers } = fetcherOptions || {};
+  const { url, fetcherOptions, swrOptions, transformData } = props;
 
   /**
    * Fetches data from the specified URL using Axios.
@@ -14,42 +14,19 @@ export default function useDatasource(props: IDatasourceProps): IDatasourceRetur
    * @throws If an error occurs during the fetch.
    */
   const fetcher = async (url: string) => {
-    try {
-      const response: AxiosResponse = await axios.get(url, { headers });
-      console.log(response);
+    const headers = fetcherOptions?.headers || {};
+    const method = fetcherOptions?.method || 'GET';
+    const response = await axios.request({ url, headers, method, ...fetcherOptions });
+    let data = response.data;
 
-      let data;
-
-      // Extract data from the response using the dataExtractor function if provided
-      if (dataExtractor) {
-        data = dataExtractor(response);
-      } else {
-        data = response.data;
-      }
-
-      // Transform the data using the transformData function if provided
-      if (transformData) {
-        return transformData(data);
-      }
-
-      return data;
-    } catch (error) {
-      // Call the onError callback function if provided
-      if (onError) {
-        onError(error);
-      }
-      throw error;
-    }
+    // Extract and transform data using the combined function if provided
+    return transformData ? transformData(data) : data;
   };
 
-  const { data, error, isLoading, isValidating, mutate } = useSWR(url, fetcher, swrOptions);
-
-  return {
-    data,
-    isLoading,
-    error,
-    isValidating,
-    mutate
-  }
+  // Sử dụng useMemo để tối ưu hiệu năng bằng cách tránh gọi lại hook useSWR khi swrOptions
+  // không thay đổi. Điều này có thể cải thiện hiệu suất của ứng dụng trong trường hợp swrOptions 
+  // có thể thay đổi một cách thường xuyên.
+  const memoizedSwrOptions = useMemo(() => swrOptions, [swrOptions]);
+  return useSWR(url, fetcher, memoizedSwrOptions);
 };
 
