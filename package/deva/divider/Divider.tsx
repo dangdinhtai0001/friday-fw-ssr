@@ -30,7 +30,7 @@ const DividerLine = styled(
   {}
 )<IDividerLineProps>(props => ({
   width: '100%',
-  borderBottom: `${props.type} ${props.color} 1px`,
+  borderBottom: `${props.type} ${props.theme.palette.divider} 1px`,
 }));
 
 const DividerText = styled(
@@ -39,9 +39,9 @@ const DividerText = styled(
 )<IDividerTextProps>(props => ({
   fontSize: '14px',
   fontWeight: 500,
-  backgroundColor: props.theme.palette.background.default || '#fff',
+  backgroundColor: props.theme.palette.background.paper || '#fff',
   padding: '0 12px',
-  color: props.color || props.theme.palette.text.primary,
+  color: props.color? props.color : props.theme.palette.text.primary,
   position: 'absolute',
   top: '50%',
   transform: 'translateY(-50%)',
