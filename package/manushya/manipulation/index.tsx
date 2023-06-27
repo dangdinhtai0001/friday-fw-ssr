@@ -4,7 +4,8 @@ import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulat
 import Input from '@mui/base/Input';
 import CustomField from './CustomField';
 import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
-import { SelectWrapper } from '@/package/deva/select';
+import { SelectWrapper, ISelectWrapperProps } from '@/package/deva/select';
+
 export interface IManipulationProps {
 }
 
@@ -59,52 +60,7 @@ const containerProps: ContainerProviderProps = {
             refreshInterval: 0,
           }
         },
-        // itemDefs: [
-        //   {
-        //     label: 'Hobbits',
-        //     itemDefs: [
-        //       {
-        //         label: 'Frodo',
-        //         value: 'Frodo'
-        //       },
-        //       {
-        //         label: 'Sam',
-        //         value: 'Sam'
-        //       },
-        //       {
-        //         label: 'Merry',
-        //         value: 'Merry'
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     label: 'Elves',
-        //     itemDefs: [
-        //       {
-        //         label: 'Elves',
-        //         itemDefs: [
-        //           {
-        //             label: 'Legolas',
-        //             value: 'Legolas'
-        //           },
-        //           {
-        //             label: 'Arwen',
-        //             value: 'Arwen'
-        //           }
-        //         ]
-        //       },
-        //       {
-        //         label: 'Legolas',
-        //         value: 'Legolas'
-        //       },
-        //       {
-        //         label: 'Arwen',
-        //         value: 'Arwen'
-        //       }
-        //     ]
-        //   }
-        // ]
-      }
+      } as ISelectWrapperProps<any, false>,
     },
     {
       name: 'first_name',

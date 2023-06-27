@@ -1,11 +1,11 @@
 import { forwardRef, Ref, MouseEvent, KeyboardEvent, FocusEvent } from 'react';
-import { ISelectorProps, ItemProps } from './SelectWrapper.d';
+import { ISelectWrapperProps, ItemProps } from './SelectWrapper.d';
 import { StyledSelect, StyledOptionGroup, StyledOption, StyledButton, StyledListbox, StyledPopper } from './StyledSelector';
 import { useDatasource } from '@/package/preta/intergration';
 import { IDatasourceReturn } from '@/package/preta/types';
 import Select, { SelectProps } from '@mui/base/Select'
 
-const SelectWrapper = <TValue extends {}, Multiple extends boolean>(props: ISelectorProps<TValue, Multiple>, ref: Ref<HTMLButtonElement>) => {
+const SelectWrapper = <TValue extends {}, Multiple extends boolean>(props: ISelectWrapperProps<TValue, Multiple>, ref: Ref<HTMLButtonElement>) => {
 
   let datasource: IDatasourceReturn;
   if (props.datasourceConfig) {

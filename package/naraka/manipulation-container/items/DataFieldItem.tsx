@@ -32,8 +32,6 @@ export default function FieldItem(props: IFieldItemProps) {
       refs: context.fieldRefs
     });
 
-    console.log(tValue, value);
-
     // Sự kiện onChange của RHF
     field.onChange(tValue);
   }

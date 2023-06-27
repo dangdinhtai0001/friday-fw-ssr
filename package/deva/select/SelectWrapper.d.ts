@@ -9,7 +9,7 @@ export interface ItemProps extends OptionType {
   itemDefs: ItemProps[];
 }
 
-export interface ISelectorProps<TValue extends {}, Multiple extends boolean>
+export interface ISelectWrapperProps<TValue extends {}, Multiple extends boolean>
   extends SelectProps<TValue, Multiple>, IControllerComponentProps {
   datasourceConfig?: IDatasourceProps,
   itemDefs?: ItemProps[];

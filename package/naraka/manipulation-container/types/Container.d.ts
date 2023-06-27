@@ -1,4 +1,3 @@
-import { IDataBlockProps } from './Panel.d';
 import { FieldDef, DataFieldLabel_TextAlign } from './Common.d';
 import { OnValueChangeProps, ContextState, ContextApi } from './Context.d';
 import { IDataFieldLabelProps } from './Block.d';
