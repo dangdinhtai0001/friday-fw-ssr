@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
-import { persistor, store, } from '../store/configureStore';
+import { persistor, store } from '../store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 

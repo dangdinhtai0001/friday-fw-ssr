@@ -6,12 +6,12 @@ import { typography } from './typography/default';
 
 const lightTheme: Theme = createTheme({
   palette: lightPalette,
-  typography: typography
+  typography: typography,
 });
 
 const darkTheme: Theme = createTheme({
   palette: darkPalette,
-  typography: typography
+  typography: typography,
 });
 
 /**

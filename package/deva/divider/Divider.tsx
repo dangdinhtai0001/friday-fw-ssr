@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { styled } from '@mui/system';
-import { IDividerProps, IDividerContainerProps, IDividerLineProps, IDividerTextProps } from './Divider.d';
+import {
+  IDividerProps,
+  IDividerContainerProps,
+  IDividerLineProps,
+  IDividerTextProps,
+} from './Divider.d';
 
 export default function Divider(props: IDividerProps) {
   const { color = '#000', height = 1, type = 'solid', text } = props;
@@ -41,7 +46,9 @@ const DividerText = styled(
   fontWeight: 500,
   backgroundColor: props.theme.palette.background.paper || '#fff',
   padding: '0 12px',
-  color: props.color? props.color : props.theme.palette.text.primary,
+  color: props.color
+    ? props.color
+    : props.theme.palette.text.primary,
   position: 'absolute',
   top: '50%',
   transform: 'translateY(-50%)',

@@ -1,7 +1,6 @@
 import { ThemeOptions } from '@mui/system';
 
 export const palette: ThemeOptions['palette'] = {
-
   type: 'dark',
   primary: {
     main: '#9c27b0',
@@ -50,8 +49,4 @@ export const palette: ThemeOptions['palette'] = {
     contrastText: '#fff',
   },
   divider: 'rgba(255, 255, 255, 0.12)',
-}
-
-
-
-
+};
