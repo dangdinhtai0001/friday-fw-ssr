@@ -5,6 +5,7 @@ import Input from '@mui/base/Input';
 import CustomField from './CustomField';
 import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
 import { SelectWrapper, ISelectWrapperProps } from '@/package/deva/select';
+import { InputWrapper, IInputWrapperProps } from '@/package/deva/input';
 
 export interface IManipulationProps {
 }
@@ -66,8 +67,8 @@ const containerProps: ContainerProviderProps = {
       name: 'first_name',
       label: 'first_name lbl',
       initialValue: '',
-      component: Input,
-      componentParams: { type: 'text', placeholder: 'first_name' }
+      component: InputWrapper,
+      componentParams: { placeholder: "first name" } as IInputWrapperProps
     },
     {
       name: 'last_name',
