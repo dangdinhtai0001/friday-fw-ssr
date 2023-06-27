@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '@/package/asura/store/configureStore';
 import { findThemeByMode } from '@/package/asura/theme';
 
-interface DevaThemeProviderProps {
+interface ThemeProviderProps {
   children: ReactNode;
 }
 
-const DevaThemeProvider = ({ children }: DevaThemeProviderProps) => {
+const AsuraThemeProvider = ({ children }: ThemeProviderProps) => {
   const palette = useSelector(
     (state: RootState) => state.theme.palette
   );
@@ -22,4 +22,4 @@ const DevaThemeProvider = ({ children }: DevaThemeProviderProps) => {
     </ThemeProvider>
   );
 };
-export default DevaThemeProvider;
+export default AsuraThemeProvider;
