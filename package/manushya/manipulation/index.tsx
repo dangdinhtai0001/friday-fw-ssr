@@ -4,7 +4,7 @@ import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulat
 import Input from '@mui/base/Input';
 import CustomField from './CustomField';
 import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
-import { Selector } from '@/package/deva/select';
+import { SelectWrapper } from '@/package/deva/select';
 export interface IManipulationProps {
 }
 
@@ -51,53 +51,59 @@ const containerProps: ContainerProviderProps = {
       label: 'Selector lbl',
       initialValue: 'Legolas',
       required: false,
-      component: Selector,
+      component: SelectWrapper,
       componentParams: {
-        itemDefs: [
-          {
-            label: 'Hobbits',
-            itemDefs: [
-              {
-                label: 'Frodo',
-                value: 'Frodo'
-              },
-              {
-                label: 'Sam',
-                value: 'Sam'
-              },
-              {
-                label: 'Merry',
-                value: 'Merry'
-              }
-            ]
-          },
-          {
-            label: 'Elves',
-            itemDefs: [
-              {
-                label: 'Elves',
-                itemDefs: [
-                  {
-                    label: 'Legolas',
-                    value: 'Legolas'
-                  },
-                  {
-                    label: 'Arwen',
-                    value: 'Arwen'
-                  }
-                ]
-              },
-              {
-                label: 'Legolas',
-                value: 'Legolas'
-              },
-              {
-                label: 'Arwen',
-                value: 'Arwen'
-              }
-            ]
+        datasourceConfig: {
+          url: "http://127.0.0.1:3658/m1/370198-0-default/fr/component/select/options",
+          swrOptions: {
+            refreshInterval: 0,
           }
-        ]
+        },
+        // itemDefs: [
+        //   {
+        //     label: 'Hobbits',
+        //     itemDefs: [
+        //       {
+        //         label: 'Frodo',
+        //         value: 'Frodo'
+        //       },
+        //       {
+        //         label: 'Sam',
+        //         value: 'Sam'
+        //       },
+        //       {
+        //         label: 'Merry',
+        //         value: 'Merry'
+        //       }
+        //     ]
+        //   },
+        //   {
+        //     label: 'Elves',
+        //     itemDefs: [
+        //       {
+        //         label: 'Elves',
+        //         itemDefs: [
+        //           {
+        //             label: 'Legolas',
+        //             value: 'Legolas'
+        //           },
+        //           {
+        //             label: 'Arwen',
+        //             value: 'Arwen'
+        //           }
+        //         ]
+        //       },
+        //       {
+        //         label: 'Legolas',
+        //         value: 'Legolas'
+        //       },
+        //       {
+        //         label: 'Arwen',
+        //         value: 'Arwen'
+        //       }
+        //     ]
+        //   }
+        // ]
       }
     },
     {
