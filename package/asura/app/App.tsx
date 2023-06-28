@@ -33,83 +33,114 @@ const GlobalStyled = () => {
       styles={{
         body: {
           fontFamily: theme.typography.fontFamily,
-          fontSize: `${theme.typography.fontSize}`,
+          fontSize: theme.typography.fontSize,
+          fontWeight: theme.typography.fontWeight,
+          lineHeight: theme.typography.lineHeight,
           backgroundColor: theme.palette.background.default,
           color: theme.palette.text.primary,
         },
-        '.display': {
-          fontSize: `${theme.typography.display.fontSize}`,
-          fontWeight: theme.typography.display.fontWeight,
-          lineHeight: theme.typography.display.lineHeight,
-          letterSpacing: `${theme.typography.display.letterSpacing}`,
+        '.caption-2': {
+          fontSize: theme.typography.caption2.fontSize,
+          fontWeight: theme.typography.caption2.fontWeight,
+          lineHeight: theme.typography.caption2.lineHeight,
+          letterSpacing: theme.typography.caption2.letterSpacing,
         },
-        '.title-large': {
-          fontSize: `${theme.typography.titleLarge.fontSize}`,
-          fontWeight: theme.typography.titleLarge.fontWeight,
-          lineHeight: theme.typography.titleLarge.lineHeight,
-          letterSpacing: `${theme.typography.titleLarge.letterSpacing}`,
+        '.caption-2-strong': {
+          fontSize: theme.typography.caption2Strong.fontSize,
+          fontWeight: theme.typography.caption2Strong.fontWeight,
+          lineHeight: theme.typography.caption2Strong.lineHeight,
+          letterSpacing: theme.typography.caption2Strong.letterSpacing,
         },
-        '.title-0': {
-          fontSize: `${theme.typography.title0.fontSize}`,
-          fontWeight: theme.typography.title0.fontWeight,
-          lineHeight: theme.typography.title0.lineHeight,
-          letterSpacing: `${theme.typography.title0.letterSpacing}`,
+        '.caption-1': {
+          fontSize: theme.typography.caption1.fontSize,
+          fontWeight: theme.typography.caption1.fontWeight,
+          lineHeight: theme.typography.caption1.lineHeight,
+          letterSpacing: theme.typography.caption1.letterSpacing,
         },
-        '.title-1': {
-          fontSize: `${theme.typography.title1.fontSize}`,
-          fontWeight: theme.typography.title1.fontWeight,
-          lineHeight: theme.typography.title1.lineHeight,
-          letterSpacing: `${theme.typography.title1.letterSpacing}`,
+        '.caption-1-strong': {
+          fontSize: theme.typography.caption1Strong.fontSize,
+          fontWeight: theme.typography.caption1Strong.fontWeight,
+          lineHeight: theme.typography.caption1Strong.lineHeight,
+          letterSpacing: theme.typography.caption1Strong.letterSpacing,
         },
-        '.title-2': {
-          fontSize: `${theme.typography.title2.fontSize}`,
-          fontWeight: theme.typography.title2.fontWeight,
-          lineHeight: theme.typography.title2.lineHeight,
-          letterSpacing: `${theme.typography.title2.letterSpacing}`,
-        },
-        '.subtitle-0': {
-          fontSize: `${theme.typography.subtitle0.fontSize}`,
-          fontWeight: theme.typography.subtitle0.fontWeight,
-          lineHeight: theme.typography.subtitle0.lineHeight,
-          letterSpacing: `${theme.typography.subtitle0.letterSpacing}`,
-        },
-        '.subtitle-1': {
-          fontSize: `${theme.typography.subtitle1.fontSize}`,
-          fontWeight: theme.typography.subtitle1.fontWeight,
-          lineHeight: theme.typography.subtitle1.lineHeight,
-          letterSpacing: `${theme.typography.subtitle1.letterSpacing}`,
-        },
-        '.body-0': {
-          fontSize: `${theme.typography.body0.fontSize}`,
-          fontWeight: theme.typography.body0.fontWeight,
-          lineHeight: theme.typography.body0.lineHeight,
-          letterSpacing: `${theme.typography.body0.letterSpacing}`,
+        '.caption-1-stronger': {
+          fontSize: theme.typography.caption1Stronger.fontSize,
+          fontWeight: theme.typography.caption1Stronger.fontWeight,
+          lineHeight: theme.typography.caption1Stronger.lineHeight,
+          letterSpacing: theme.typography.caption1Stronger.letterSpacing,
         },
         '.body-1': {
-          fontSize: `${theme.typography.body1.fontSize}`,
+          fontSize: theme.typography.body1.fontSize,
           fontWeight: theme.typography.body1.fontWeight,
           lineHeight: theme.typography.body1.lineHeight,
-          letterSpacing: `${theme.typography.body1.letterSpacing}`,
+          letterSpacing: theme.typography.body1.letterSpacing,
         },
-        '.button': {
-          fontSize: `${theme.typography.button.fontSize}`,
-          fontWeight: theme.typography.button.fontWeight,
-          lineHeight: theme.typography.button.lineHeight,
-          letterSpacing: `${theme.typography.button.letterSpacing}`,
-          textTransform: theme.typography.button.textTransform,
+        '.body-1-strong': {
+          fontSize: theme.typography.body1Strong.fontSize,
+          fontWeight: theme.typography.body1Strong.fontWeight,
+          lineHeight: theme.typography.body1Strong.lineHeight,
+          letterSpacing: theme.typography.body1Strong.letterSpacing,
         },
-        '.caption': {
-          fontSize: `${theme.typography.caption.fontSize}`,
-          fontWeight: theme.typography.caption.fontWeight,
-          lineHeight: theme.typography.caption.lineHeight,
-          letterSpacing: `${theme.typography.caption.letterSpacing}`,
+        '.body-1-stronger': {
+          fontSize: theme.typography.body1Stronger.fontSize,
+          fontWeight: theme.typography.body1Stronger.fontWeight,
+          lineHeight: theme.typography.body1Stronger.lineHeight,
+          letterSpacing: theme.typography.body1Stronger.letterSpacing,
         },
-        '.corner-radius-none': {
-          borderRadius: `${theme.components.cornerRadius.none}`,
+        '.body-2': {
+          fontSize: theme.typography.body2.fontSize,
+          fontWeight: theme.typography.body2.fontWeight,
+          lineHeight: theme.typography.body2.lineHeight,
+          letterSpacing: theme.typography.body2.letterSpacing,
         },
-        '.corner-radius-circle': {
-          borderRadius: `${theme.components.cornerRadius.circle}`,
-        }
+        '.subtitle-2': {
+          fontSize: theme.typography.subtitle2.fontSize,
+          fontWeight: theme.typography.subtitle2.fontWeight,
+          lineHeight: theme.typography.subtitle2.lineHeight,
+          letterSpacing: theme.typography.subtitle2.letterSpacing,
+        },
+        '.subtitle-2-stronger': {
+          fontSize: theme.typography.subtitle2Stronger.fontSize,
+          fontWeight: theme.typography.subtitle2Stronger.fontWeight,
+          lineHeight: theme.typography.subtitle2Stronger.lineHeight,
+          letterSpacing: theme.typography.subtitle2Stronger.letterSpacing,
+        },
+        '.subtitle-1': {
+          fontSize: theme.typography.subtitle1.fontSize,
+          fontWeight: theme.typography.subtitle1.fontWeight,
+          lineHeight: theme.typography.subtitle1.lineHeight,
+          letterSpacing: theme.typography.subtitle1.letterSpacing,
+        },
+        '.title-3': {
+          fontSize: theme.typography.title3.fontSize,
+          fontWeight: theme.typography.title3.fontWeight,
+          lineHeight: theme.typography.title3.lineHeight,
+          letterSpacing: theme.typography.title3.letterSpacing,
+        },
+        '.title-2': {
+          fontSize: theme.typography.title2.fontSize,
+          fontWeight: theme.typography.title2.fontWeight,
+          lineHeight: theme.typography.title2.lineHeight,
+          letterSpacing: theme.typography.title2.letterSpacing,
+        },
+        '.title-1': {
+          fontSize: theme.typography.title1.fontSize,
+          fontWeight: theme.typography.title1.fontWeight,
+          lineHeight: theme.typography.title1.lineHeight,
+          letterSpacing: theme.typography.title1.letterSpacing,
+        },
+        '.large-title': {
+          fontSize: theme.typography.largeTitle.fontSize,
+          fontWeight: theme.typography.largeTitle.fontWeight,
+          lineHeight: theme.typography.largeTitle.lineHeight,
+          letterSpacing: theme.typography.largeTitle.letterSpacing,
+        },
+        '.display': {
+          fontSize: theme.typography.display.fontSize,
+          fontWeight: theme.typography.display.fontWeight,
+          lineHeight: theme.typography.display.lineHeight,
+          letterSpacing: theme.typography.display.letterSpacing,
+        },
       }}
     />
   );
