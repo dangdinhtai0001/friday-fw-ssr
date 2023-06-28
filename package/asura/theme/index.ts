@@ -3,18 +3,18 @@ import { ThemeOptions } from '@mui/system';
 import { palette as lightPalette } from './palette/light';
 import { palette as darkPalette } from './palette/dark';
 import { typography } from './typography/default';
-import { snippets } from './snippets/default'
+import { components } from './components/default'
 
 const lightTheme: Theme = createTheme({
   palette: lightPalette,
   typography: typography,
-  ...snippets
+  components: components
 });
 
 const darkTheme: Theme = createTheme({
   palette: darkPalette,
   typography: typography,
-  ...snippets
+  components: components
 });
 
 /**

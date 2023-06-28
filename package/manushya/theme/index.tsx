@@ -71,8 +71,8 @@ const ThemePage = () => {
         width: '100%',
       }}
     >
-      <h2>{trans.common.language_name}</h2>
-      <h2>{`palette (mode='${palette.mode}')`}</h2>
+      <h2>H2: {trans.common.language_name}</h2>
+      <h3>H3:{`palette (mode='${palette.mode}')`}</h3>
       <div>
         <label htmlFor="theme-selector">Select Palette mode:</label>
         <select

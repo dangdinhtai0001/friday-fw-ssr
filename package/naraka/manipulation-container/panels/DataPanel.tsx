@@ -23,7 +23,7 @@ export default function DataPanel(props: IDataPanelProps) {
 
   return (
     <div>
-      <Box sx={{ display: 'grid', gridTemplateColumns: `repeat(${context.defaultCols}, 1fr)`, rowGap: 0.7, columnGap: 1 }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: `repeat(${context.defaultCols}, 1fr)`, rowGap: 1, columnGap: 4 }}>
         {creatFieldItems()}
       </Box>
     </div>

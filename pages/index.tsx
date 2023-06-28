@@ -9,6 +9,8 @@ export default function Home() {
       <Link href="/search"> Search Page </Link>
       <br />
       <Link href="/manipulation"> Manipulation Page </Link>
+      <br />
+      <Link href="/typography"> Typography Page </Link>
     </>
   );
 }

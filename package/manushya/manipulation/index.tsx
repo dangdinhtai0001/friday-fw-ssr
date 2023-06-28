@@ -6,7 +6,7 @@ import CustomField from './CustomField';
 import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
 import { SelectWrapper, ISelectWrapperProps } from '@/package/deva/select';
 import { InputWrapper, IInputWrapperProps } from '@/package/deva/input';
-
+import { Box } from '@mui/system';
 export interface IManipulationProps {
 }
 
@@ -19,13 +19,19 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
-      <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
-      <button onClick={() => { formRef.current?.submitForm() }}>Submit</button>
-      <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
-      <button onClick={() => { formRef.current?.setFieldValues('foo', 'bar', true); }}>Set foo value</button>
-      <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
-      <button onClick={() => { formRef.current?.applyFieldMessage({ foo: { type: 'warning', message: "This is custom warning message" } }); }}>push msg</button>
-      <button onClick={() => { formRef.current?.applyFieldMessage(); }}>clear msg</button>
+      <Box sx={{
+        backgroundColor: 'background.paper',
+        border: '1px solid',
+        padding: '0.5rem 0.5rem 0.5rem 0.5rem',
+      }}>
+        <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
+        <button onClick={() => { formRef.current?.submitForm() }}>Submit</button>
+        <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
+        <button onClick={() => { formRef.current?.setFieldValues('foo', 'bar', true); }}>Set foo value</button>
+        <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
+        <button onClick={() => { formRef.current?.applyFieldMessage({ foo: { type: 'warning', message: "This is custom warning message" } }); }}>push msg</button>
+        <button onClick={() => { formRef.current?.applyFieldMessage(); }}>clear msg</button>
+      </Box>
     </div>
   );
 }

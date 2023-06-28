@@ -3,20 +3,20 @@ import { ThemeOptions } from '@mui/system';
 export const palette: ThemeOptions['palette'] = {
   type: 'dark',
   primary: {
-    main: '#9c27b0',
-    light: 'rgb(170, 131, 195)',
-    dark: 'rgb(74, 20, 86)',
+    main: '#8e24aa',
+    light: 'rgb(150, 81, 171)',
+    dark: 'rgb(57, 11, 87)',
     contrastText: '#fff',
   },
   secondary: {
-    main: '#00bcd4',
-    light: 'rgb(51, 181, 217)',
-    dark: 'rgb(0, 91, 108)',
-    contrastText: '#fff',
+    main: '#f48fb1',
+    light: 'rgb(246, 165, 192)',
+    dark: 'rgb(130, 60, 83)',
+    contrastText: 'rgba(0, 0, 0, 0.87)',
   },
   background: {
-    paper: '#303030',
-    default: '#212121',
+    paper: '#424242',
+    default: '#303030',
   },
   text: {
     primary: '#fff',
@@ -26,15 +26,15 @@ export const palette: ThemeOptions['palette'] = {
   },
   error: {
     main: '#f44336',
-    light: 'rgb(255, 138, 128)',
-    dark: 'rgb(178, 43, 39)',
+    light: 'rgb(246, 99, 89)',
+    dark: 'rgb(155, 44, 34)',
     contrastText: '#fff',
   },
   warning: {
-    main: '#ff5722',
-    light: 'rgb(255, 147, 89)',
-    dark: 'rgb(178, 85, 0)',
-    contrastText: '#fff',
+    main: '#ff9800',
+    light: 'rgb(255, 169, 68)',
+    dark: 'rgb(178, 106, 0)',
+    contrastText: 'rgba(0, 0, 0, 0.87)',
   },
   info: {
     main: '#2196f3',
@@ -43,10 +43,10 @@ export const palette: ThemeOptions['palette'] = {
     contrastText: '#fff',
   },
   success: {
-    main: '#8bc34a',
-    light: 'rgb(139, 195, 74)',
-    dark: 'rgb(56, 102, 32)',
-    contrastText: '#fff',
+    main: '#4caf50',
+    light: 'rgb(111, 191, 115)',
+    dark: 'rgb(53, 122, 56)',
+    contrastText: 'rgba(0, 0, 0, 0.87)',
   },
   divider: 'rgba(255, 255, 255, 0.12)',
 };
