@@ -12,10 +12,7 @@ export default function OptionWrapper(props: IOptionWrapperProps) {
   });
 
   return (
-    <StyledOption
-      {...getRootProps()}
-      className={className}
-    >
+    <StyledOption {...getRootProps()} className={className}>
       {children}
     </StyledOption>
   );

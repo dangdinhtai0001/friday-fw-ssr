@@ -1,6 +1,9 @@
 import { useRef, useState, useEffect, forwardRef } from 'react';
 import { ISelectWrapperProps, ItemProps } from './types';
-import useSelect, { UseSelectReturnValue, SelectProvider } from '@mui/base/useSelect';
+import useSelect, {
+  UseSelectReturnValue,
+  SelectProvider,
+} from '@mui/base/useSelect';
 import { InputWrapper } from '../input';
 import { StyledListbox } from './StyledSelectWrapper';
 import OptionWrapper from './OptionWrapper';
@@ -8,12 +11,10 @@ import OptionGroupWrapper from './OptionGroupWrapper';
 import { IDatasourceReturn } from '@/package/preta/types';
 import { useDatasource } from '@/package/preta/intergration';
 
-
 function SelectWrapper<TValue, Multiple extends boolean>(
   props: ISelectWrapperProps<TValue, Multiple>,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-
   const { useSelectParams } = props;
 
   const listboxRef = useRef<HTMLUListElement>(null);
@@ -23,16 +24,19 @@ function SelectWrapper<TValue, Multiple extends boolean>(
 
   const handleOnOpenChange = (open: boolean) => {
     setListboxVisible(open);
-  }
+  };
 
   const handleOnInputChange = (event: any) => {
     setInputValue(event.target.value);
-  }
+  };
 
-  const { getButtonProps, getListboxProps, contextValue, value, disabled } = useSelect<
-    TValue,
-    Multiple
-  >({
+  const {
+    getButtonProps,
+    getListboxProps,
+    contextValue,
+    value,
+    disabled,
+  } = useSelect<TValue, Multiple>({
     ...useSelectParams,
     listboxRef,
     onOpenChange: handleOnOpenChange,
@@ -51,8 +55,12 @@ function SelectWrapper<TValue, Multiple extends boolean>(
   }
 
   const renderOptionItems = () => {
-    return props.itemDefs ? renderOption(props.itemDefs) : datasource.data ? renderOption(datasource.data) : null;
-  }
+    return props.itemDefs
+      ? renderOption(props.itemDefs)
+      : datasource.data
+      ? renderOption(datasource.data)
+      : null;
+  };
 
   return (
     <div>
@@ -75,19 +83,25 @@ function SelectWrapper<TValue, Multiple extends boolean>(
       </StyledListbox>
     </div>
   );
-};
+}
 
 const renderOption = (items: ItemProps[]) => {
   if (items?.length) {
     return items.map((item: ItemProps, index: number) => {
       if (item.itemDefs && item.itemDefs.length) {
-        return (<OptionGroupWrapper {...item} key={index}>
-          {renderOption(item.itemDefs)}
-        </OptionGroupWrapper>);
+        return (
+          <OptionGroupWrapper {...item} key={index}>
+            {renderOption(item.itemDefs)}
+          </OptionGroupWrapper>
+        );
       } else {
-        return <OptionWrapper {...item} key={index}>{item.label}</OptionWrapper>
+        return (
+          <OptionWrapper {...item} key={index}>
+            {item.label}
+          </OptionWrapper>
+        );
       }
-    })
+    });
   }
 
   return null;
