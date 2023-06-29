@@ -1,0 +1,6 @@
+- deva
+- asura
+- manushya
+- tiryagyoni
+- preta
+- naraka
