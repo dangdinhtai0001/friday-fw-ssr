@@ -126,5 +126,6 @@ const containerProps: ContainerProviderProps = {
       values: values,
       errors: errors
     }
-  }
+  },
+  defaultFieldRaito: '20% 80%'
 }

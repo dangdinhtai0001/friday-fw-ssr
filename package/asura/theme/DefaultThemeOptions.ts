@@ -1,5 +1,5 @@
 import { ThemeOptions } from '@mui/system';
-import { IFontWeight, ISpacing, IStrokeWidth, ICornerRadius } from '@/package/preta/types';
+import { IFontWeight, ISpacing, IStrokeWidth, ICornerRadius, IThemeTypography } from '@/package/preta/types';
 
 const fontWeight: IFontWeight = {
   regular: 400,
@@ -45,7 +45,8 @@ const cornerRadius: ICornerRadius = {
   circle: '50%'
 }
 
-export const typography: ThemeOptions['typography'] = {
+// export const typography: ThemeOptions['typography'] = {
+export const typography: IThemeTypography = {
   ...baseTypography,
   caption2: {
     fontSize: '0.7143rem', // 10px / 14px

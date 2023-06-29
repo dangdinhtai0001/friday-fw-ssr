@@ -49,8 +49,13 @@ export interface IThemeTypographyOption {
   letterSpacing: any;
   fontWeight: any;
 }
+export type IThemeTypographyKey = "caption2" | "caption2Strong" | "caption1" | "caption1Strong" | "caption1Stronger" | "body1" | "body1Strong" | "body1Stronger" | "body2" | "subtitle2" | "subtitle2Stronger" | "subtitle1" | "title3" | "title2" | "title1" | "largeTitle" | "display"
+
+export interface IThemeTypography extends Record<IThemeTypographyKey, IThemeTypographyOption> {
+
+}
 
 export interface IDefaultTheme extends Theme {
   components: IThemeComponents,
-  typography: Record<any, IThemeTypographyOption>
+  typography: IThemeTypography
 }

@@ -29,7 +29,7 @@ const createDefaultContextStateValue = (props: ContainerProviderProps, fieldRefs
     fieldReadOnly: fieldReadOnly,
     fieldHidden: fieldHidden,
     fieldMessage: {},
-    defaultFieldRaito: "30% 70%",
+    defaultFieldRaito: props.defaultFieldRaito ? props.defaultFieldRaito : "30% 70%",
     defaultFieldLabelAlign: "left",
     dataBlockComponent: props.dataBlockComponent,
     defaultCols: props.defaultCols ? props.defaultCols : 3,

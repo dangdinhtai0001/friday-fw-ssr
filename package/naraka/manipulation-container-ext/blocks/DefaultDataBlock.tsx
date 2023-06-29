@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { IDataFieldBlockProps, IDataFieldLabelProps, IDataFieldMessageProps } from '@/package/naraka/manipulation-container/types';
-import { useContainerContext } from '@/package/naraka/manipulation-container/context/useContainerContext';
-import FieldItem from '@/package/naraka/manipulation-container/items/DataFieldItem';
 import Box from '@mui/system/Box';
-import { styled } from '@mui/system';
 import { useController } from 'react-hook-form';
 import { motion, useAnimation, AnimationControls } from "framer-motion";
 import useAsyncEffect from "@n1ru4l/use-async-effect";
+import { IDataFieldBlockProps } from '@/package/naraka/manipulation-container/types';
+import { useContainerContext } from '@/package/naraka/manipulation-container/context/useContainerContext';
+import FieldItem from '@/package/naraka/manipulation-container/items/DataFieldItem';
+import { DataFieldLabel, DataFieldMessage, RequiredIcon } from './StyledComponents';
 
 export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const { fieldItemProps } = props;
@@ -77,30 +77,6 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
   return renderDataFieldBlock();
 
 };
-
-
-const DataFieldLabel = styled('div', {
-  // Configure which props should be forwarded on DOM
-  shouldForwardProp: (prop) => prop !== 'status' && prop !== 'textAlign'
-})<IDataFieldLabelProps>(({ theme, status, textAlign }) => ({
-  color: status === 'error' ? theme.palette.error.main :
-    status === 'warning' ? theme.palette.warning.main : 'inherit',
-  textAlign: textAlign
-}));
-
-const DataFieldMessage = styled('div', {
-  // Configure which props should be forwarded on DOM
-  shouldForwardProp: (prop) => prop !== 'status'
-})<IDataFieldMessageProps>(({ theme, status }) => ({
-  color: status === 'error' ? theme.palette.error.main :
-    status === 'warning' ? theme.palette.warning.main : 'inherit',
-}));
-
-const RequiredIcon = styled('span', {})(({ theme }) => ({
-  color: theme.palette.error.main,
-  fontSize: '1rem',
-  marginLeft: '0.1rem'
-}));
 
 const fieldMessageVariants = {
   animate: {

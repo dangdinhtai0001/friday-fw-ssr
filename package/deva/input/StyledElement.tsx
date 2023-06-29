@@ -3,6 +3,7 @@ import { IDefaultTheme } from '@/package/preta/types';
 
 export const StyledInputElement = styled('input')(({ theme }: { theme: IDefaultTheme }) => ({
   width: '100%',
+  height: '1rem',
   padding: '0.2rem',
   backgroundColor: theme.palette.background.default,
 
