@@ -1,6 +1,6 @@
 import * as React from 'react';
-import useOption from '@mui/base/useOption';
 import { IOptionWrapperProps } from './types';
+import useOption from '@mui/base/useOption';
 import { StyledOption } from './StyledSelectWrapper';
 
 export default function OptionWrapper(props: IOptionWrapperProps) {

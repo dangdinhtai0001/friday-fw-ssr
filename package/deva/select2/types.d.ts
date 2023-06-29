@@ -23,5 +23,7 @@ export interface IOptionWrapperProps {
   disabled?: boolean;
 }
 
-export interface IOptionGroupProps {
+export interface IOptionGroupWrapperProps {
+  children?: React.ReactNode;
+  label: string | ReactNode;
 }

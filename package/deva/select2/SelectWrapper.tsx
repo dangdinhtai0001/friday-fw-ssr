@@ -3,8 +3,10 @@ import { ISelectWrapperProps, ItemProps } from './types';
 import useSelect, { UseSelectReturnValue, SelectProvider } from '@mui/base/useSelect';
 import { InputWrapper } from '../input';
 import { StyledListbox } from './StyledSelectWrapper';
-
-
+import OptionWrapper from './OptionWrapper';
+import OptionGroupWrapper from './OptionGroupWrapper';
+import { IDatasourceReturn } from '@/package/preta/types';
+import { useDatasource } from '@/package/preta/intergration';
 
 
 function SelectWrapper<TValue, Multiple extends boolean>(
@@ -43,6 +45,15 @@ function SelectWrapper<TValue, Multiple extends boolean>(
     }
   }, [listboxVisible]);
 
+  let datasource: IDatasourceReturn;
+  if (props.datasourceConfig) {
+    datasource = useDatasource(props.datasourceConfig);
+  }
+
+  const renderOptionItems = () => {
+    return props.itemDefs ? renderOption(props.itemDefs) : datasource.data ? renderOption(datasource.data) : null;
+  }
+
   return (
     <div>
       <InputWrapper
@@ -59,7 +70,7 @@ function SelectWrapper<TValue, Multiple extends boolean>(
         className={listboxVisible ? '' : 'hidden'}
       >
         <SelectProvider value={contextValue}>
-
+          {renderOptionItems()}
         </SelectProvider>
       </StyledListbox>
     </div>
@@ -70,11 +81,11 @@ const renderOption = (items: ItemProps[]) => {
   if (items?.length) {
     return items.map((item: ItemProps, index: number) => {
       if (item.itemDefs && item.itemDefs.length) {
-        return (<StyledOptionGroup {...item} key={index}>
+        return (<OptionGroupWrapper {...item} key={index}>
           {renderOption(item.itemDefs)}
-        </StyledOptionGroup>);
+        </OptionGroupWrapper>);
       } else {
-        return <StyledOption {...item} key={index}>{item.label}</StyledOption>
+        return <OptionWrapper {...item} key={index}>{item.label}</OptionWrapper>
       }
     })
   }
