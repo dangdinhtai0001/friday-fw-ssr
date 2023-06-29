@@ -1,10 +1,11 @@
 import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
 
-export const StyledInputElement = styled('input')(({ theme }: { theme: IDefaultTheme }) => ({
+export const StyledInputSlot = styled('input')(({ theme }: { theme: IDefaultTheme }) => ({
   width: '100%',
+  boxSizing: 'border-box',
   height: '1rem',
-  padding: '0.2rem',
+  padding: '0.8rem 0.5rem',
   backgroundColor: theme.palette.background.default,
 
   borderRadius: theme.components?.cornerRadius.medium,
@@ -25,6 +26,9 @@ export const StyledInputElement = styled('input')(({ theme }: { theme: IDefaultT
   ':hover': {
     borderColor: theme.palette.primary.main,
   }
+}));
+
+export const StyledRootSlot = styled('div')(({ theme }: { theme: IDefaultTheme }) => ({
 }));
 
 

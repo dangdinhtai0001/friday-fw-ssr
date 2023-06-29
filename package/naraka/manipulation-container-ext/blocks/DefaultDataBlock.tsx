@@ -45,14 +45,27 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
     // TODO: Check lại xem vì sao không có label thì nó không render cả control luôn 
     if (label) {
       return (
-        <Box sx={{ display: 'grid', gridTemplateColumns: fieldRaito ? fieldRaito : defaultFieldRaito, columnGap: 1 }}>
-          <Box sx={{ gridRow: '1' }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: fieldRaito ? fieldRaito : defaultFieldRaito,
+          }}
+          className='data-field-block'
+        >
+          <Box sx={{ gridRow: '1' }} className='data-filed-block--label'>
             <DataFieldLabel status={errorMessage ? 'error' : undefined} textAlign={labelAlign ? labelAlign : defaultFieldLabelAlign}>
               {label}
               {required ? <RequiredIcon>*</RequiredIcon> : null}
             </DataFieldLabel>
           </Box>
-          <Box sx={{ gridRow: '1', display: 'grid', gap: 0.3 }}>
+          <Box
+            sx={{
+              gridRow: '1',
+              display: 'grid',
+              width: '100%',
+            }}
+            className='data-filed-block--control'
+          >
             {renderControlContainer()}
             <motion.div
               animate={errorMsgControls}

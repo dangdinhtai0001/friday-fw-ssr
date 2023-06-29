@@ -4,6 +4,29 @@ import styled from '@mui/system/styled';
 import OptionGroup from '@mui/base/OptionGroup';
 import Option from '@mui/base/Option';
 import Popper from '@mui/base/Popper';
+import { InputWrapper } from '../input';
+import Input from '@mui/base/Input';
+import { IControllerComponentProps } from '@/package/preta/types'
+
+export interface IInputAsSelectRootSlotProps<Tvalue extends {}, Multiple extends boolean>
+  extends SelectRootSlotProps<Tvalue, Multiple>, IControllerComponentProps {
+  ref: ((instance: Element | null) => void) | null;
+}
+
+export const InputAsSelectRootSlot = forwardRef(function InputAsSelectRootSlot<Tvalue extends {}, Multiple extends boolean>(
+  props: IInputAsSelectRootSlotProps<Tvalue, Multiple>,
+  ref: React.ForwardedRef<HTMLDivElement>,
+) {
+  const { ownerState, ...other } = props;
+
+  return (
+    <InputWrapper {...other} ref={ref}>
+      {/* {other.children} */}
+    </InputWrapper>
+  )
+})
+
+// ============================================================================================
 
 export const StyledSelect = styled(Select, {
   shouldForwardProp: prop => prop !== 'itemDefs',

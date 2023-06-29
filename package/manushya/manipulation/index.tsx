@@ -19,11 +19,13 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
-      <Box sx={{
-        backgroundColor: 'background.paper',
-        border: '1px solid',
-        padding: '0.5rem 0.5rem 0.5rem 0.5rem',
-      }}>
+      <Box
+        sx={{
+          backgroundColor: 'background.paper',
+          border: '1px solid',
+          padding: '3px',
+        }}
+      >
         <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
         <button onClick={() => { formRef.current?.submitForm() }}>Submit</button>
         <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
@@ -127,5 +129,5 @@ const containerProps: ContainerProviderProps = {
       errors: errors
     }
   },
-  defaultFieldRaito: '20% 80%'
+  defaultFieldRaito: '30% 70%'
 }

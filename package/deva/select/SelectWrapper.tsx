@@ -1,6 +1,6 @@
 import { forwardRef, Ref, MouseEvent, KeyboardEvent, FocusEvent } from 'react';
 import { ISelectWrapperProps, ItemProps } from './SelectWrapper.d';
-import { StyledSelect, StyledOptionGroup, StyledOption, StyledButton, StyledListbox, StyledPopper } from './StyledSelector';
+import { StyledSelect, StyledOptionGroup, StyledOption, StyledButton, StyledListbox, StyledPopper, InputAsSelectRootSlot } from './StyledSelector';
 import { useDatasource } from '@/package/preta/intergration';
 import { IDatasourceReturn } from '@/package/preta/types';
 import Select, { SelectProps } from '@mui/base/Select'
@@ -15,7 +15,8 @@ const SelectWrapper = <TValue extends {}, Multiple extends boolean>(props: ISele
   const { itemDefs, datasourceConfig, ...selectProps } = props;
 
   const slots: SelectProps<TValue, Multiple>['slots'] = {
-    root: StyledButton,
+    // root: StyledButton,
+    root: InputAsSelectRootSlot,
     listbox: StyledListbox,
     popper: StyledPopper,
     ...props.slots,
