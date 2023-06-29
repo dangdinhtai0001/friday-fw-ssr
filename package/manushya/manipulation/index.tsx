@@ -6,7 +6,9 @@ import CustomField from './CustomField';
 import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
 import { SelectWrapper, ISelectWrapperProps } from '@/package/deva/select';
 import { InputWrapper, IInputWrapperProps } from '@/package/deva/input';
+import { SelectWrapper as SelectWrapper2, ISelectWrapperProps as ISelectWrapperProps2 } from '@/package/deva/select2';
 import { Box } from '@mui/system';
+
 export interface IManipulationProps {
 }
 
@@ -72,6 +74,21 @@ const containerProps: ContainerProviderProps = {
       } as ISelectWrapperProps<any, false>,
     },
     {
+      name: 'selector2',
+      label: 'Selector2 lbl',
+      initialValue: 'Legolas',
+      required: false,
+      component: SelectWrapper2,
+      componentParams: {
+        datasourceConfig: {
+          url: "http://127.0.0.1:3658/m1/370198-0-default/fr/component/select/options",
+          swrOptions: {
+            refreshInterval: 0,
+          }
+        },
+      } as ISelectWrapperProps2<any, false>,
+    },
+    {
       name: 'first_name',
       label: 'first_name lbl',
       initialValue: '',
@@ -87,6 +104,7 @@ const containerProps: ContainerProviderProps = {
     },
     {
       name: 'age',
+      label: 'Age lbl',
       initialValue: '',
       component: Input,
       componentParams: { type: 'number', placeholder: '1' }
