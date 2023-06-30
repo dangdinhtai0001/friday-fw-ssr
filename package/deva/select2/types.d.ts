@@ -3,7 +3,9 @@ import { OptionProps, OptionType } from '@mui/base/Option';
 import {
   IControllerComponentProps,
   IDatasourceProps,
+  IDefaultTheme
 } from '@/package/preta/types';
+import { UseSelectReturnValue, } from '@mui/base/useSelect';
 
 export interface ISelectWrapperProps<
   TValue,
@@ -31,4 +33,14 @@ export interface IOptionWrapperProps {
 export interface IOptionGroupWrapperProps {
   children?: React.ReactNode;
   label: string | ReactNode;
+}
+
+export interface IStyledOptionProps {
+  theme?: IDefaultTheme;
+  disabled?: boolean;
+}
+
+export interface IStyledListboxProps {
+  theme?: IDefaultTheme;
+  hidden?: boolean;
 }

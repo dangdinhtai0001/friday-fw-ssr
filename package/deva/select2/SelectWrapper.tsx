@@ -1,8 +1,9 @@
-import { useRef, useState, useEffect, forwardRef } from 'react';
+import { useRef, useState, useEffect, forwardRef, useMemo } from 'react';
 import { ISelectWrapperProps, ItemProps } from './types';
 import useSelect, {
   UseSelectReturnValue,
   SelectProvider,
+  SelectValue,
 } from '@mui/base/useSelect';
 import { InputWrapper } from '../input';
 import { StyledListbox } from './StyledSelectWrapper';
@@ -10,12 +11,13 @@ import OptionWrapper from './OptionWrapper';
 import OptionGroupWrapper from './OptionGroupWrapper';
 import { IDatasourceReturn } from '@/package/preta/types';
 import { useDatasource } from '@/package/preta/intergration';
+import { motion } from 'framer-motion';
 
 function SelectWrapper<TValue, Multiple extends boolean>(
   props: ISelectWrapperProps<TValue, Multiple>,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const { useSelectParams } = props;
+  const { useSelectParams, datasourceConfig, onChange } = props;
 
   const listboxRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -30,6 +32,12 @@ function SelectWrapper<TValue, Multiple extends boolean>(
     setInputValue(event.target.value);
   };
 
+  const handleOnOptionChange = (event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null,
+    value: SelectValue<TValue, Multiple>) => {
+    // gọi sự kiện onchange từ bên ngoài
+    onChange?.(value);
+  }
+
   const {
     getButtonProps,
     getListboxProps,
@@ -40,6 +48,7 @@ function SelectWrapper<TValue, Multiple extends boolean>(
     ...useSelectParams,
     listboxRef,
     onOpenChange: handleOnOpenChange,
+    onChange: handleOnOptionChange,
     open: listboxVisible,
   });
 
@@ -49,38 +58,45 @@ function SelectWrapper<TValue, Multiple extends boolean>(
     }
   }, [listboxVisible]);
 
-  let datasource: IDatasourceReturn;
-  if (props.datasourceConfig) {
-    datasource = useDatasource(props.datasourceConfig);
-  }
+  const datasource = useDatasource(datasourceConfig);
 
   const renderOptionItems = () => {
     return props.itemDefs
       ? renderOption(props.itemDefs)
-      : datasource.data
-      ? renderOption(datasource.data)
-      : null;
+      : datasource?.data
+        ? renderOption(datasource.data)
+        : null;
   };
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <InputWrapper
         onChange={handleOnInputChange}
         value={inputValue}
         disabled={disabled}
         readOnly={props.readOnly}
         hidden={props.hidden}
+        {...getButtonProps()}
         ref={inputRef}
       />
-      <StyledListbox
-        {...getListboxProps()}
-        aria-hidden={!listboxVisible}
-        className={listboxVisible ? '' : 'hidden'}
+      <motion.div
+        initial={listboxVisible ? 'open' : 'closed'}
+        animate={listboxVisible ? 'open' : 'closed'}
+        variants={listBoxVariants}
+        style={{
+          zIndex: !listboxVisible ? 100 : -1,
+          position: 'absolute',
+        }}
       >
-        <SelectProvider value={contextValue}>
-          {renderOptionItems()}
-        </SelectProvider>
-      </StyledListbox>
+        <StyledListbox
+          {...getListboxProps()}
+          hidden={!listboxVisible}
+        >
+          <SelectProvider value={contextValue}>
+            {renderOptionItems()}
+          </SelectProvider>
+        </StyledListbox>
+      </motion.div>
     </div>
   );
 }
@@ -105,6 +121,19 @@ const renderOption = (items: ItemProps[]) => {
   }
 
   return null;
+};
+
+const listBoxVariants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: 'easeInOut' },
+  },
+  closed: {
+    opacity: 0,
+    y: -10,
+    transition: { duration: 0.3, ease: 'easeInOut' },
+  },
 };
 
 export default forwardRef(SelectWrapper);

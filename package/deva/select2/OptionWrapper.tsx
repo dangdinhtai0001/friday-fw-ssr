@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { IOptionWrapperProps } from './types';
+import { IOptionWrapperProps, } from './types';
 import useOption from '@mui/base/useOption';
 import { StyledOption } from './StyledSelectWrapper';
+import { motion } from 'framer-motion';
 
 export default function OptionWrapper(props: IOptionWrapperProps) {
   const { children, value, className, disabled = false } = props;
@@ -11,9 +11,29 @@ export default function OptionWrapper(props: IOptionWrapperProps) {
     label: children,
   });
 
+  if (disabled) {
+    return (
+      <StyledOption
+        {...getRootProps()}
+        disabled={disabled}
+        onClick={() => { }} // thêm hàm trắng như này là để khi click vào option bị disable nó sẽ không đóng list 
+      >
+        {children}
+      </StyledOption>
+    )
+
+  }
+
   return (
-    <StyledOption {...getRootProps()} className={className}>
-      {children}
-    </StyledOption>
+    <motion.div
+      whileTap={{ scale: 0.95 }}
+    >
+      <StyledOption
+        {...getRootProps()}
+        disabled={disabled}
+      >
+        {children}
+      </StyledOption>
+    </motion.div>
   );
-}
+};

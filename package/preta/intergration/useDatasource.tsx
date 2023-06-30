@@ -4,7 +4,11 @@ import axios from 'axios';
 import { IDatasourceProps, IDatasourceReturn } from '../types/Datasource.d'
 
 
-export default function useDatasource(props: IDatasourceProps): IDatasourceReturn {
+export default function useDatasource(props?: IDatasourceProps): IDatasourceReturn | null {
+  if (!props) {
+    return null;
+  }
+
   const { url, fetcherOptions, swrOptions, transformData } = props;
 
   /**
