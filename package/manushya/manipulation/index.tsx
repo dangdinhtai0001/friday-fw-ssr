@@ -7,6 +7,7 @@ import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
 import { SelectWrapper, ISelectWrapperProps } from '@/package/deva/select';
 import { InputWrapper, IInputWrapperProps } from '@/package/deva/input';
 import { SelectWrapper as SelectWrapper2, ISelectWrapperProps as ISelectWrapperProps2 } from '@/package/deva/select2';
+import { SelectWrapper as SelectWrapper3, ISelectWrapperProps as ISelectWrapperProps3 } from '@/package/deva/select3';
 import { Box } from '@mui/system';
 
 export interface IManipulationProps {
@@ -74,11 +75,11 @@ const containerProps: ContainerProviderProps = {
       } as ISelectWrapperProps<any, false>,
     },
     {
-      name: 'selector2',
-      label: 'Selector2 lbl',
+      name: 'selector3',
+      label: 'Selector3 lbl',
       initialValue: 'Legolas',
       required: false,
-      component: SelectWrapper2,
+      component: SelectWrapper3,
       componentParams: {
         datasourceConfig: {
           url: "http://127.0.0.1:3658/m1/370198-0-default/fr/component/select/options",
@@ -86,7 +87,7 @@ const containerProps: ContainerProviderProps = {
             refreshInterval: 0,
           }
         },
-      } as ISelectWrapperProps2<any, false>,
+      } as ISelectWrapperProps3<any, false>,
     },
     {
       name: 'first_name',
