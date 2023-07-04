@@ -1,42 +1,98 @@
-import { forwardRef, Ref, MouseEvent, KeyboardEvent, FocusEvent } from 'react';
-import { ISelectWrapperProps, ItemProps } from './SelectWrapper.d';
-import { StyledSelect, StyledOptionGroup, StyledOption, StyledButton, StyledListbox, StyledPopper, InputAsSelectRootSlot } from './StyledSelector';
+import { useRef, useState, useEffect, forwardRef } from 'react';
+import useSelect, {
+  SelectProvider,
+  SelectValue,
+} from '@mui/base/useSelect';
+import { ISelectWrapperProps, ItemProps } from './types.d';
+import { StyledRoot, StyledToggle, StyledListBox } from './StyledElement';
 import { useDatasource } from '@/package/preta/intergration';
-import { IDatasourceReturn } from '@/package/preta/types';
-import Select, { SelectProps } from '@mui/base/Select'
+import { motion } from 'framer-motion';
+import OptionWrapper from './OptionWrapper';
+import OptionGroupWrapper from './OptionGroupWrapper';
+import { slideDownVariant } from '@/package/preta/constant';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+function SelectWrapper<TValue, Multiple extends boolean>(
+  props: ISelectWrapperProps<TValue, Multiple>,
+  ref: React.ForwardedRef<HTMLDivElement>
+) {
+  // TODO: Chuyển sang dùng i18n cho giá trị mặc dịnh của placeholder
+  const { datasourceConfig, maxListBoxHeight = 256, onChange, renderSelectedValue, placeholder = "Chọn giá trị...", multiple } = props;
 
-const SelectWrapper = <TValue extends {}, Multiple extends boolean>(props: ISelectWrapperProps<TValue, Multiple>, ref: Ref<HTMLButtonElement>) => {
+  const datasource = useDatasource(datasourceConfig);
 
-  let datasource: IDatasourceReturn;
-  if (props.datasourceConfig) {
-    datasource = useDatasource(props.datasourceConfig);
+  const listboxRef = useRef<HTMLUListElement>(null);
+  const [listboxVisible, setListboxVisible] = useState(false);
+
+  const handleOnOptionChange = (event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null,
+    value: SelectValue<TValue, Multiple>) => {
+    console.log(value)
+    // gọi sự kiện onchange đuwọc cấu hình
+    onChange?.(value);
   }
 
-  const { itemDefs, datasourceConfig, ...selectProps } = props;
+  const { getButtonProps, getListboxProps, contextValue, value, options } = useSelect<
+    TValue,
+    Multiple
+  >({
+    multiple,
+    listboxRef,
+    onOpenChange: setListboxVisible,
+    onChange: handleOnOptionChange,
+    open: listboxVisible,
+  });
 
-  const slots: SelectProps<TValue, Multiple>['slots'] = {
-    // root: StyledButton,
-    root: InputAsSelectRootSlot,
-    listbox: StyledListbox,
-    popper: StyledPopper,
-    ...props.slots,
-  };
-
-  const handleOnChange = (event: MouseEvent | KeyboardEvent | FocusEvent | null, value: any): void => {
-    props?.onChange?.(value);
-  };
+  useEffect(() => {
+    if (listboxVisible) {
+      listboxRef.current?.focus();
+    }
+  }, [listboxVisible]);
 
   const renderOptionItems = () => {
-    return props.itemDefs ? renderOption(props.itemDefs) : datasource.data ? renderOption(datasource.data) : null;
+    return props.itemDefs
+      ? renderOption(props.itemDefs)
+      : datasource?.data
+        ? renderOption(datasource.data)
+        : null;
+  };
+
+  const renderSelectedVal = (): any => {
+    if (renderSelectedValue) {
+      return renderSelectedValue?.(value, options);
+    }
+    return value ? value : placeholder;
   }
 
   return (
-    <>
-      <Select {...selectProps} onChange={handleOnChange} ref={ref} slots={slots}>
-        {renderOptionItems()}
-      </Select>
-      <div>Selected value: {JSON.stringify(props.value)}</div>
-    </>
+    <StyledRoot>
+      <StyledToggle {...getButtonProps()}>
+        {renderSelectedVal()}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+            animate={{ opacity: 1, scale: 1, rotate: listboxVisible ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FontAwesomeIcon icon={faChevronDown} />
+          </motion.div>
+        </motion.div>
+      </StyledToggle>
+      <motion.div
+        initial={listboxVisible ? 'open' : 'closed'}
+        animate={listboxVisible ? 'open' : 'closed'}
+        variants={slideDownVariant}
+      >
+        <StyledListBox  {...getListboxProps()} maxHeight={maxListBoxHeight}>
+          <SelectProvider value={contextValue}>
+            {renderOptionItems()}
+          </SelectProvider>
+        </StyledListBox>
+      </motion.div>
+    </StyledRoot>
   );
 };
 
@@ -44,13 +100,19 @@ const renderOption = (items: ItemProps[]) => {
   if (items?.length) {
     return items.map((item: ItemProps, index: number) => {
       if (item.itemDefs && item.itemDefs.length) {
-        return (<StyledOptionGroup {...item} key={index}>
-          {renderOption(item.itemDefs)}
-        </StyledOptionGroup>);
+        return (
+          <OptionGroupWrapper {...item} key={index}>
+            {renderOption(item.itemDefs)}
+          </OptionGroupWrapper>
+        );
       } else {
-        return <StyledOption {...item} key={index}>{item.label}</StyledOption>
+        return (
+          <OptionWrapper {...item} key={index}>
+            {item.label}
+          </OptionWrapper>
+        );
       }
-    })
+    });
   }
 
   return null;

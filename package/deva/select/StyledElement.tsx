@@ -33,6 +33,7 @@ export const StyledOption = styled('li', {})<IStyledOptionProps>(({ theme, disab
 
   padding: '3px 10px 3px 3px',
   cursor: "default",
+  marginTop: '1px',
 
   borderRadius: theme?.components.cornerRadius.medium,
 

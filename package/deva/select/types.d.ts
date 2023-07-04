@@ -11,10 +11,11 @@ export interface ISelectWrapperProps<
   TValue,
   Multiple extends boolean
 > extends IControllerComponentProps {
-  useSelectParams?: UseSelectParameters<TValue, Multiple>;
+  // useSelectParams?: UseSelectParameters<TValue, Multiple>;
   datasourceConfig?: IDatasourceProps;
   itemDefs?: ItemProps[];
   onChange: IControllerComponentProps['onChange'];
+  multiple: Multiple;
   // -------------------------------------------------------
   maxListBoxHeight?: number | string;
   renderSelectedValue?: (value: SelectValue<TValue, Multiple>, options: TValue[]) => JSX.Element[] | JSX.Element | null;
