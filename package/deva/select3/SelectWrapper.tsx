@@ -1,34 +1,42 @@
-import { useRef, useState, useEffect, forwardRef, useMemo } from 'react';
+import { useRef, useState, useEffect, forwardRef } from 'react';
 import useSelect, {
-  UseSelectReturnValue,
   SelectProvider,
   SelectValue,
 } from '@mui/base/useSelect';
 import { ISelectWrapperProps, ItemProps } from './types.d';
 import { StyledRoot, StyledToggle, StyledListBox } from './StyledElement';
-import { IDatasourceReturn } from '@/package/preta/types';
 import { useDatasource } from '@/package/preta/intergration';
 import { motion } from 'framer-motion';
 import OptionWrapper from './OptionWrapper';
 import OptionGroupWrapper from './OptionGroupWrapper';
-
+import { slideDownVariant } from '@/package/preta/constant';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 function SelectWrapper<TValue, Multiple extends boolean>(
   props: ISelectWrapperProps<TValue, Multiple>,
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
-  const { useSelectParams, datasourceConfig } = props;
+  // TODO: Chuyển sang dùng i18n cho giá trị mặc dịnh của placeholder
+  const { useSelectParams, datasourceConfig, maxListBoxHeight = 256, onChange, renderSelectedValue, placeholder = "Chọn giá trị..." } = props;
 
   const datasource = useDatasource(datasourceConfig);
 
   const listboxRef = useRef<HTMLUListElement>(null);
   const [listboxVisible, setListboxVisible] = useState(false);
 
-  const { getButtonProps, getListboxProps, contextValue, value } = useSelect<
-    string,
-    false
+  const handleOnOptionChange = (event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null,
+    value: SelectValue<TValue, Multiple>) => {
+    // gọi sự kiện onchange đuwọc cấu hình
+    onChange?.(value);
+  }
+
+  const { getButtonProps, getListboxProps, contextValue, value, options } = useSelect<
+    TValue,
+    Multiple
   >({
     listboxRef,
     onOpenChange: setListboxVisible,
+    onChange: handleOnOptionChange,
     open: listboxVisible,
   });
 
@@ -46,17 +54,42 @@ function SelectWrapper<TValue, Multiple extends boolean>(
         : null;
   };
 
+  const renderSelectedVal = (): any => {
+    if (renderSelectedValue) {
+      return renderSelectedValue?.(value, options);
+    }
+    return value ? value : placeholder;
+  }
+
   return (
     <StyledRoot>
       <StyledToggle {...getButtonProps()}>
-        {JSON.stringify(value)}
+        {renderSelectedVal()}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+            animate={{ opacity: 1, scale: 1, rotate: listboxVisible ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FontAwesomeIcon icon={faChevronDown} />
+          </motion.div>
+        </motion.div>
       </StyledToggle>
-
-      <StyledListBox  {...getListboxProps()}>
-        <SelectProvider value={contextValue}>
-          {renderOptionItems()}
-        </SelectProvider>
-      </StyledListBox>
+      <motion.div
+        initial={listboxVisible ? 'open' : 'closed'}
+        animate={listboxVisible ? 'open' : 'closed'}
+        variants={slideDownVariant}
+      >
+        <StyledListBox  {...getListboxProps()} maxHeight={maxListBoxHeight}>
+          <SelectProvider value={contextValue}>
+            {renderOptionItems()}
+          </SelectProvider>
+        </StyledListBox>
+      </motion.div>
     </StyledRoot>
   );
 };

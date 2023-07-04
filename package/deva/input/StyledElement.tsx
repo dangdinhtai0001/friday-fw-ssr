@@ -1,21 +1,11 @@
 import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
+import { defaultControllerContainer } from '../shared';
 
 export const StyledInputSlot = styled('input')(({ theme }: { theme: IDefaultTheme }) => ({
-  width: '100%',
+  ...defaultControllerContainer({ theme }),
+
   boxSizing: 'border-box',
-  height: '1rem',
-  padding: '0.8rem 0.5rem',
-  backgroundColor: theme.palette.background.default,
-
-  borderRadius: theme.components?.cornerRadius.medium,
-  border: `${theme.components?.strokeWidth.thin} solid ${theme.palette.secondary.main}`,
-
-
-  fontSize: theme.typography.caption1.fontSize,
-  fontWeight: theme.typography.caption1.fontWeight,
-  lineHeight: theme.typography.caption1.lineHeight,
-  letterSpacing: theme.typography.caption1.letterSpacing,
 
   ':focus-within': {
     outline: 'none',
@@ -30,5 +20,3 @@ export const StyledInputSlot = styled('input')(({ theme }: { theme: IDefaultThem
 
 export const StyledRootSlot = styled('div')(({ theme }: { theme: IDefaultTheme }) => ({
 }));
-
-

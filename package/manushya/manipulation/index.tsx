@@ -87,6 +87,7 @@ const containerProps: ContainerProviderProps = {
             refreshInterval: 0,
           }
         },
+        // maxListBoxHeight: '300px'
       } as ISelectWrapperProps3<any, false>,
     },
     {

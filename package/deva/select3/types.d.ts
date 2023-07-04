@@ -1,4 +1,4 @@
-import { UseSelectParameters } from '@mui/base/useSelect';
+import { UseSelectParameters, SelectValue } from '@mui/base/useSelect';
 import { OptionProps, OptionType } from '@mui/base/Option';
 import {
   IControllerComponentProps,
@@ -15,6 +15,10 @@ export interface ISelectWrapperProps<
   datasourceConfig?: IDatasourceProps;
   itemDefs?: ItemProps[];
   onChange: IControllerComponentProps['onChange'];
+  // -------------------------------------------------------
+  maxListBoxHeight?: number | string;
+  renderSelectedValue?: (value: SelectValue<TValue, Multiple>, options: TValue[]) => JSX.Element[] | JSX.Element | null;
+  placeholder?: string;
 }
 
 export interface ItemProps extends OptionType {
@@ -38,11 +42,12 @@ export interface IOptionGroupWrapperProps {
 export interface IStyledOptionProps {
   theme?: IDefaultTheme;
   disabled?: boolean;
+  selected?: boolean;
 }
 
 export interface IStyledListBoxProps {
   theme?: IDefaultTheme;
-  hidden?: boolean;
+  maxHeight?: number | string;
 }
 
 export interface IStyledToggleProps {

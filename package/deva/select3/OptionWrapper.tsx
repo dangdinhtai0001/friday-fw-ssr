@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function OptionWrapper(props: IOptionWrapperProps) {
   const { children, value, className, disabled = false } = props;
-  const { getRootProps, highlighted } = useOption({
+  const { getRootProps, highlighted, selected } = useOption({
     value,
     disabled,
     label: children,
@@ -31,6 +31,7 @@ export default function OptionWrapper(props: IOptionWrapperProps) {
       <StyledOption
         {...getRootProps()}
         disabled={disabled}
+        selected={selected}
       >
         {children}
       </StyledOption>
