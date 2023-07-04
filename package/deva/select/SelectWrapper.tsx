@@ -60,8 +60,12 @@ function SelectWrapper<TValue, Multiple extends boolean>(
     if (renderSelectedValue) {
       return renderSelectedValue?.(value, options);
     }
-    return value ? value : placeholder;
-  }
+    if (Array.isArray(value) && value.length === 0) {
+      return placeholder;
+    }
+    return value;
+  };
+  
 
   return (
     <StyledRoot>
