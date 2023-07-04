@@ -141,6 +141,19 @@ const GlobalStyled = () => {
           lineHeight: theme.typography.display.lineHeight,
           letterSpacing: theme.typography.display.letterSpacing,
         },
+
+        '::-webkit-scrollbar': {
+          width: '20px',
+        },
+        '::-webkit-scrollbar-track': {
+          backgroundColor: 'transparent',
+        },
+        '::-webkit-scrollbar-thumb': {
+          backgroundColor: theme?.palette.primary.main,
+          borderRadius: '20px',
+          border: '6px solid transparent',
+          backgroundClip: 'content-box',
+        },
       }}
     />
   );
