@@ -7,6 +7,7 @@ import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
 import { SelectWrapper, ISelectWrapperProps } from '@/package/deva/select';
 import { InputWrapper, IInputWrapperProps } from '@/package/deva/input';
 import { Box } from '@mui/system';
+import { Pagination } from '@/package/deva/pagination'
 
 export interface IManipulationProps {
 }
@@ -20,6 +21,7 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
+      <Pagination></Pagination>
       <Box
         sx={{
           backgroundColor: 'background.paper',
