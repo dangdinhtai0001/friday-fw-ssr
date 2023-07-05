@@ -21,7 +21,7 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
-      <Pagination></Pagination>
+      <Pagination currentPage={10} pageSize={10} totalCount={1000}></Pagination>
       <Box
         sx={{
           backgroundColor: 'background.paper',

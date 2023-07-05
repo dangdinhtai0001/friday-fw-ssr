@@ -1,7 +1,6 @@
 import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
 import { IStyledOptionProps, IStyledListBoxProps, IStyledToggleProps } from './types.d';
-import { CONTROLLER_INPUT_PADDING } from '@/package/preta/constant';
 import { defaultControllerContainer, typographyCaption1, typographyBody1Strong } from '../shared';
 
 
