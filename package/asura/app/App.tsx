@@ -149,10 +149,13 @@ const GlobalStyled = () => {
           backgroundColor: 'transparent',
         },
         '::-webkit-scrollbar-thumb': {
-          backgroundColor: theme?.palette.primary.main,
+          backgroundColor: theme?.palette.secondary.main,
           borderRadius: '20px',
           border: '6px solid transparent',
           backgroundClip: 'content-box',
+        },
+        '::-webkit-scrollbar-thumb:hover': {
+          backgroundColor: theme?.palette.primary.main,
         },
       }}
     />
