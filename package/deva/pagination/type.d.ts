@@ -18,6 +18,14 @@ export interface IUsePaginationProps {
   pageSize: number;
   totalCount: number;
   siblingCount: number;
+};
+
+export interface IUsePaginationReturns {
+  paginationRange?: (sdtring | number)[];
+  shouldDisplayPrevious: boolean;
+  shouldDisplayNext: boolean;
+  shouldDisplayJumpNext: boolean;
+  shouldDisplayJumpPrevious: boolean;
 }
 
 export interface IStyledPageNumber {

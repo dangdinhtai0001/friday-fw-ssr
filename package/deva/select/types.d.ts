@@ -25,7 +25,7 @@ export interface ISelectWrapperProps<
 export interface ItemProps extends OptionType {
   value: any;
   label: string | ReactNode;
-  itemDefs: ItemProps[];
+  itemDefs?: ItemProps[];
 }
 
 export interface IOptionWrapperProps {
