@@ -16,13 +16,15 @@ export interface ISelectWrapperProps<
   itemDefs?: ItemProps[];
   onChange: IControllerComponentProps['onChange'];
   multiple: Multiple;
+  value: SelectValue<TValue, Multiple>;
   // -------------------------------------------------------
   maxListBoxHeight?: number | string;
   renderSelectedValue?: (value: SelectValue<TValue, Multiple>, options: TValue[]) => JSX.Element[] | JSX.Element | null;
   placeholder?: string;
 }
 
-export interface ItemProps extends OptionType {
+// export interface ItemProps extends OptionType {
+export interface ItemProps {
   value: any;
   label: string | ReactNode;
   itemDefs?: ItemProps[];
@@ -31,7 +33,7 @@ export interface ItemProps extends OptionType {
 export interface IOptionWrapperProps {
   children?: React.ReactNode;
   className?: string;
-  value: string;
+  value: any;
   disabled?: boolean;
 }
 

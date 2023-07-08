@@ -17,7 +17,7 @@ function SelectWrapper<TValue, Multiple extends boolean>(
   ref: React.ForwardedRef<HTMLDivElement>
 ) {
   // TODO: Chuyển sang dùng i18n cho giá trị mặc dịnh của placeholder
-  const { datasourceConfig, maxListBoxHeight = 256, onChange, renderSelectedValue, placeholder = "Chọn giá trị...", multiple } = props;
+  const { datasourceConfig, maxListBoxHeight = 256, onChange, renderSelectedValue, placeholder = "Chọn giá trị...", multiple, value } = props;
 
   const datasource = useDatasource(datasourceConfig);
 
@@ -26,12 +26,11 @@ function SelectWrapper<TValue, Multiple extends boolean>(
 
   const handleOnOptionChange = (event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null,
     value: SelectValue<TValue, Multiple>) => {
-    console.log(value)
     // gọi sự kiện onchange đuwọc cấu hình
     onChange?.(value);
-  }
+  };
 
-  const { getButtonProps, getListboxProps, contextValue, value, options } = useSelect<
+  const { getButtonProps, getListboxProps, contextValue, value: selectedOption, options, dispatch } = useSelect<
     TValue,
     Multiple
   >({
@@ -41,6 +40,11 @@ function SelectWrapper<TValue, Multiple extends boolean>(
     onChange: handleOnOptionChange,
     open: listboxVisible,
   });
+
+  useEffect(() => {
+    console.log("Valued changed", value, selectedOption, contextValue);
+
+  }, [value]);
 
   useEffect(() => {
     if (listboxVisible) {
@@ -58,14 +62,14 @@ function SelectWrapper<TValue, Multiple extends boolean>(
 
   const renderSelectedVal = (): any => {
     if (renderSelectedValue) {
-      return renderSelectedValue?.(value, options);
+      return renderSelectedValue?.(selectedOption, options);
     }
-    if (Array.isArray(value) && value.length === 0) {
+    if (Array.isArray(selectedOption) && selectedOption.length === 0) {
       return placeholder;
     }
-    return value;
+    return selectedOption;
   };
-  
+
 
   return (
     <StyledRoot>

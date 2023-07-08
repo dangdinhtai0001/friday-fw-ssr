@@ -46,7 +46,7 @@ export default function Pagination(props: IPaginationProps) {
         {paginationRange?.map((page, index) => {
           if (page === DOTS) {
             return (
-              <>{page}</>
+              <div key={index}>{page}</div>
             );
           }
 
