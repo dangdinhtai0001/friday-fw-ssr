@@ -4,7 +4,7 @@ import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulat
 import Input from '@mui/base/Input';
 import CustomField from './CustomField';
 import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
-import { SelectWrapper, ISelectWrapperProps } from '@/package/deva/select';
+import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
 import { InputWrapper, IInputWrapperProps } from '@/package/deva/input';
 import { Box } from '@mui/system';
 import { Pagination } from '@/package/deva/pagination'
@@ -60,21 +60,40 @@ const containerProps: ContainerProviderProps = {
       componentParams: {}
     },
     {
-      name: 'selector',
-      label: 'Selector lbl',
-      initialValue: 'Legolas',
+      name: 'selector2',
+      label: 'Selector2 lbl',
+      initialValue: [],
       required: false,
       component: SelectWrapper,
       componentParams: {
+        itemDefs: [
+          { label: "1", value: 1, disabled: true },
+          { label: "2", value: 2 },
+          { label: "3", value: 3, disabled: true },
+          { label: "4", value: 4 },
+          { label: "5", value: 5 },
+          { label: "6", value: 6 },
+          { label: "6", value: 6 },
+          { label: "7", value: 7 },
+          { label: "8", value: 8 },
+          { label: "9", value: 9 },
+          { label: "10", value: 10 },
+          { label: "11", value: 11 },
+          { label: "12", value: 12 },
+          { label: "13", value: 13 },
+          { label: "13", value: 13 },
+          { label: "14", value: 14 },
+          { label: "15", value: 15 },
+          { label: "16", value: 16 }
+        ],
         datasourceConfig: {
           url: "http://127.0.0.1:3658/m1/370198-0-default/fr/component/select/options",
           swrOptions: {
             refreshInterval: 0,
           }
         },
-        // maxListBoxHeight: '300px'
         multiple: true,
-      } as ISelectWrapperProps<string, true>,
+      } as ISelectWrapperProps<any, true>,
     },
     {
       name: 'first_name',

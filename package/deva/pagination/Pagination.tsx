@@ -5,7 +5,7 @@ import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight } from '@fortawe
 import { IPaginationProps } from './type.d';
 import { StyledPageControlContainer, StyledPageNavigationContainer, StyledPageNumber, StyledPaginationRoot, StyledTotalItemCountContainer } from './StyledElement';
 import usePagination, { DOTS } from './usePagination';
-import { SelectWrapper, ISelectWrapperProps } from '@/package/deva/select'
+import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select'
 
 export default function Pagination(props: IPaginationProps) {
 
@@ -88,7 +88,10 @@ export default function Pagination(props: IPaginationProps) {
             { label: "2", value: 2 },
             { label: "10", value: 10 },
           ]}
-        ></SelectWrapper>
+        />
+        {/* TODO: Dùng i18n thay thế / page (item per pages)  */}
+        <span style={{ marginLeft: '0.1rem' }}> / </span>
+        <span> page</span>
       </StyledPageControlContainer>
     </StyledPaginationRoot>
   );

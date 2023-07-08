@@ -1,22 +1,13 @@
-import * as React from 'react';
-import { IOptionGroupWrapperProps } from './types';
-import {
-  StyledOptionGroupLabel,
-  StyledOptionGroupRoot,
-  StyledOptionGroupList
-} from './StyledElement';
+import OptionGroup from '@mui/base/OptionGroup';
+import { IOptionGroupWrapperProps } from './types.d';
+import { StyledOptionGroupLabel, StyledOptionGroupList, StyledOptionGroupRoot } from './StyledElements';
 
-export default function OptionGroupWrapper(
-  props: IOptionGroupWrapperProps
-) {
-  const { children, label } = props;
+export default function OptionGroupWrapper(props: IOptionGroupWrapperProps) {
+  const slots: IOptionGroupWrapperProps['slots'] = {
+    label: StyledOptionGroupLabel,
+    list: StyledOptionGroupList,
+    root: StyledOptionGroupRoot,
+  };
 
-  return (
-    <StyledOptionGroupRoot>
-      <StyledOptionGroupLabel>{label}</StyledOptionGroupLabel>
-      <StyledOptionGroupList>
-        {children}
-      </StyledOptionGroupList>
-    </StyledOptionGroupRoot>
-  );
+  return <OptionGroup {...props} slots={slots} />
 }

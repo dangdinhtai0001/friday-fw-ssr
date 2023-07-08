@@ -1,56 +1,60 @@
-import { useRef, useState, useEffect, forwardRef } from 'react';
-import useSelect, {
-  SelectProvider,
-  SelectValue,
-} from '@mui/base/useSelect';
-import { ISelectWrapperProps, ItemProps } from './types.d';
-import { StyledRoot, StyledToggle, StyledListBox } from './StyledElement';
+import { forwardRef, useState, useRef } from 'react';
+import Select, { SelectProps, SelectRootSlotPropsOverrides } from '@mui/base/Select';
+import { SelectValue } from '@mui/base/useSelect';
+import { ISelectWrapperProps, ItemProps, IListboxWrapperProps } from './types';
 import { useDatasource } from '@/package/preta/intergration';
-import { motion } from 'framer-motion';
-import OptionWrapper from './OptionWrapper';
+import { StyledOption, StyledPopper, StyledToggle } from './StyledElements';
+import ListboxWrapper from './ListboxWrapper';
 import OptionGroupWrapper from './OptionGroupWrapper';
-import { slideDownVariant } from '@/package/preta/constant';
+import { SelectOption } from '@mui/base/useOption';
+import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-function SelectWrapper<TValue, Multiple extends boolean>(
+
+function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   props: ISelectWrapperProps<TValue, Multiple>,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLButtonElement>
 ) {
+
   // TODO: Chuyển sang dùng i18n cho giá trị mặc dịnh của placeholder
-  const { datasourceConfig, maxListBoxHeight = 256, onChange, renderSelectedValue, placeholder = "Chọn giá trị...", multiple, value } = props;
+  const { datasourceConfig, maxListBoxHeight = 256,
+    onChange, renderSelectedValue, placeholder = "Select an option...",
+    multiple,
+    value
+  } = props;
+
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   const datasource = useDatasource(datasourceConfig);
 
-  const listboxRef = useRef<HTMLUListElement>(null);
-  const [listboxVisible, setListboxVisible] = useState(false);
+  const [listboxOpen, setListboxOpen] = useState(false);
 
-  const handleOnOptionChange = (event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null,
+  const handleOnListboxOpenChange = (isOpen: boolean) => {
+    setListboxOpen(isOpen);
+  }
+
+  const handleOnOptionChange = (
+    event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null,
     value: SelectValue<TValue, Multiple>) => {
-    // gọi sự kiện onchange đuwọc cấu hình
     onChange?.(value);
   };
 
-  const { getButtonProps, getListboxProps, contextValue, value: selectedOption, options, dispatch } = useSelect<
-    TValue,
-    Multiple
-  >({
-    multiple,
-    listboxRef,
-    onOpenChange: setListboxVisible,
-    onChange: handleOnOptionChange,
-    open: listboxVisible,
-  });
+  const slots: SelectProps<TValue, Multiple>['slots'] = {
+    root: StyledToggle,
+    // root: ToggleWrapper,
+    listbox: ListboxWrapper,
+    popper: StyledPopper,
+  };
 
-  useEffect(() => {
-    console.log("Valued changed", value, selectedOption, contextValue);
-
-  }, [value]);
-
-  useEffect(() => {
-    if (listboxVisible) {
-      listboxRef.current?.focus();
-    }
-  }, [listboxVisible]);
+  const slotProps: SelectProps<TValue, Multiple>['slotProps'] = {
+    listbox: {
+      maxHeight: maxListBoxHeight,
+      open: listboxOpen,
+      width: toggleRef.current?.offsetWidth,
+    } as IListboxWrapperProps,
+    root: { ref: toggleRef },
+    popper: { keepMounted: true },
+  };
 
   const renderOptionItems = () => {
     return props.itemDefs
@@ -60,47 +64,42 @@ function SelectWrapper<TValue, Multiple extends boolean>(
         : null;
   };
 
-  const renderSelectedVal = (): any => {
-    if (renderSelectedValue) {
-      return renderSelectedValue?.(selectedOption, options);
+  function renderValue(option: SelectValue<SelectOption<TValue>, Multiple> | null) {
+    if (option == null || (Array.isArray(option) && option.length === 0)) {
+      return <span>{placeholder}</span>;
     }
-    if (Array.isArray(selectedOption) && selectedOption.length === 0) {
-      return placeholder;
-    }
-    return selectedOption;
-  };
+
+    return (
+      <>
+        <div>
+          {Array.isArray(option) ? option.map((opt) => opt.label).join(', ') : option.label}
+        </div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+          animate={{ opacity: 1, scale: 1, rotate: listboxOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <FontAwesomeIcon icon={faChevronDown} />
+        </motion.div>
+      </>
+    );
+  }
 
 
   return (
-    <StyledRoot>
-      <StyledToggle {...getButtonProps()}>
-        {renderSelectedVal()}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
-            animate={{ opacity: 1, scale: 1, rotate: listboxVisible ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <FontAwesomeIcon icon={faChevronDown} />
-          </motion.div>
-        </motion.div>
-      </StyledToggle>
-      <motion.div
-        initial={listboxVisible ? 'open' : 'closed'}
-        animate={listboxVisible ? 'open' : 'closed'}
-        variants={slideDownVariant}
-      >
-        <StyledListBox  {...getListboxProps()} maxHeight={maxListBoxHeight}>
-          <SelectProvider value={contextValue}>
-            {renderOptionItems()}
-          </SelectProvider>
-        </StyledListBox>
-      </motion.div>
-    </StyledRoot>
+    <Select
+      value={value as SelectValue<TValue, Multiple>}
+      listboxOpen={listboxOpen}
+      onListboxOpenChange={handleOnListboxOpenChange}
+      onChange={handleOnOptionChange}
+      renderValue={renderValue}
+      multiple={multiple}
+      slots={slots}
+      slotProps={slotProps}
+      ref={ref}
+    >
+      {renderOptionItems()}
+    </Select>
   );
 };
 
@@ -115,9 +114,9 @@ const renderOption = (items: ItemProps[]) => {
         );
       } else {
         return (
-          <OptionWrapper {...item} key={index}>
+          <StyledOption {...item} key={index}>
             {item.label}
-          </OptionWrapper>
+          </StyledOption>
         );
       }
     });

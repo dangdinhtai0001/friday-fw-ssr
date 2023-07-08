@@ -1,2 +1,4 @@
-export { default as SelectWrapper } from './SelectWrapper';
+import SelectWrapper from './SelectWrapper';
+
+export default SelectWrapper;
 export * from './types.d';

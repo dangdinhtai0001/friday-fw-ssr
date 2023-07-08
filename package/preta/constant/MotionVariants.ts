@@ -16,3 +16,24 @@ export const slideDownVariant = {
     }
   }
 };
+
+export const popperSlideDownVariant = {
+  closed: {
+    opacity: 0,
+    y: '-50%',
+    scaleY: 0,
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  },
+  open: {
+    opacity: 1,
+    y: '0%',
+    scaleY: 1,
+    transition: {
+      duration: 0.5,
+      ease: 'easeInOut',
+    },
+  }
+};

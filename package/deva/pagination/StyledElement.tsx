@@ -2,6 +2,7 @@ import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
 import { typographyCaption1, typographyBody1 } from '../shared';
 import { IStyledPageNumber } from './type.d';
+import { maxWidth } from '@mui/system';
 
 export const StyledPaginationRoot = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
   display: 'flex',
@@ -47,5 +48,11 @@ export const StyledTotalItemCountContainer = styled('div', {})(({ theme }: { the
 
 // ====================================================
 export const StyledPageControlContainer = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+  minWidth: '100px',
+  maxWidth: '180px',
 
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'end',
 }));
