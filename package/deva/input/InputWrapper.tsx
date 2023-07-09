@@ -5,7 +5,19 @@ import { IInputWrapperProps } from './InputWrapper.d';
 import { StyledInputSlot, StyledRootSlot } from './StyledElement';
 
 function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLDivElement>,) {
-  return <Input slots={{ input: StyledInputSlot, root: StyledRootSlot }} {...props} ref={ref} />;
+  const { width } = props;
+
+  return <Input
+    slots={{
+      input: StyledInputSlot,
+      root: StyledRootSlot
+    }}
+    slotProps={{
+      input: { width },
+    }}
+    {...props}
+    ref={ref}
+  />;
 };
 
 export default forwardRef(InputWrapper);

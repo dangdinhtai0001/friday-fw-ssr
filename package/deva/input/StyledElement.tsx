@@ -2,8 +2,8 @@ import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
 import { defaultControllerContainer } from '../shared';
 
-export const StyledInputSlot = styled('input')(({ theme }: { theme: IDefaultTheme }) => ({
-  ...defaultControllerContainer({ theme }),
+export const StyledInputSlot = styled('input')(({ theme, width }: { theme: IDefaultTheme, width?: number | string }) => ({
+  ...defaultControllerContainer({ theme, width }),
 
   boxSizing: 'border-box',
 
@@ -19,4 +19,5 @@ export const StyledInputSlot = styled('input')(({ theme }: { theme: IDefaultThem
 }));
 
 export const StyledRootSlot = styled('div')(({ theme }: { theme: IDefaultTheme }) => ({
+
 }));

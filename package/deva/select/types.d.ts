@@ -16,6 +16,7 @@ export interface ISelectWrapperProps<TValue extends {}, Multiple extends boolean
   multiple: Multiple;
   // -------------------------------------------------------
   maxListBoxHeight?: number | string;
+  toggleWidth?: number | string;
   renderSelectedValue?: (value: SelectValue<TValue, Multiple>, options: TValue[]) => JSX.Element[] | JSX.Element | null;
   placeholder?: string;
 };
@@ -34,6 +35,11 @@ export interface IListboxWrapperProps extends IStyledListboxProps {
 export interface IStyledListboxProps {
   theme?: IDefaultTheme;
   maxHeight?: number | string;
+  width?: number | string;
+};
+
+export interface IStyledToggleProps {
+  theme?: IDefaultTheme;
   width?: number | string;
 }
 

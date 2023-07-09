@@ -1,10 +1,10 @@
 import { IDefaultTheme } from '@/package/preta/types';
 import { typographyCaption1 } from './TypographyStyled';
 
-export const defaultControllerContainer = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const defaultControllerContainer = <T extends IDefaultTheme>({ theme, width }: { theme?: T, width?: number | string }) => ({
   ...typographyCaption1({ theme }),
 
-  width: '100%',
+  width: width ? width : '100%',
   height: '1rem',
   padding: '0.75rem 0.5rem 0.75rem 0.5rem',
 

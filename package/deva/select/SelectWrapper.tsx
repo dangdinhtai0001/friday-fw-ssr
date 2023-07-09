@@ -1,15 +1,15 @@
 import { forwardRef, useState, useRef } from 'react';
 import Select, { SelectProps, SelectRootSlotPropsOverrides } from '@mui/base/Select';
 import { SelectValue } from '@mui/base/useSelect';
-import { ISelectWrapperProps, ItemProps, IListboxWrapperProps } from './types';
-import { useDatasource } from '@/package/preta/intergration';
-import { StyledOption, StyledPopper, StyledToggle } from './StyledElements';
-import ListboxWrapper from './ListboxWrapper';
-import OptionGroupWrapper from './OptionGroupWrapper';
 import { SelectOption } from '@mui/base/useOption';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { ISelectWrapperProps, ItemProps, IListboxWrapperProps, IStyledToggleProps } from './types';
+import { useDatasource } from '@/package/preta/intergration';
+import { StyledOption, StyledPopper, StyledToggle } from './StyledElements';
+import ListboxWrapper from './ListboxWrapper';
+import OptionGroupWrapper from './OptionGroupWrapper';
 
 function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   props: ISelectWrapperProps<TValue, Multiple>,
@@ -17,10 +17,14 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
 ) {
 
   // TODO: Chuyển sang dùng i18n cho giá trị mặc dịnh của placeholder
-  const { datasourceConfig, maxListBoxHeight = 256,
-    onChange, renderSelectedValue, placeholder = "Select an option...",
+  const { datasourceConfig,
+    maxListBoxHeight = 256,
+    onChange,
+    renderSelectedValue,
+    placeholder = "Select an option...",
     multiple,
-    value
+    value,
+    toggleWidth
   } = props;
 
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -41,7 +45,6 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
 
   const slots: SelectProps<TValue, Multiple>['slots'] = {
     root: StyledToggle,
-    // root: ToggleWrapper,
     listbox: ListboxWrapper,
     popper: StyledPopper,
   };
@@ -52,7 +55,10 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       open: listboxOpen,
       width: toggleRef.current?.offsetWidth,
     } as IListboxWrapperProps,
-    root: { ref: toggleRef },
+    root: {
+      ref: toggleRef,
+      width: toggleWidth
+    } as IStyledToggleProps,
     popper: { keepMounted: true },
   };
 

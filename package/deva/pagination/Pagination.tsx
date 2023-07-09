@@ -3,9 +3,17 @@ import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import { IPaginationProps } from './type.d';
-import { StyledPageControlContainer, StyledPageNavigationContainer, StyledPageNumber, StyledPaginationRoot, StyledTotalItemCountContainer } from './StyledElement';
+import {
+  StyledPageControlContainer,
+  StyledPageNavigationContainer,
+  StyledPageNumber,
+  StyledPaginationRoot,
+  StyledTotalItemCountContainer,
+  StyledPaginationText
+} from './StyledElement';
 import usePagination, { DOTS } from './usePagination';
-import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select'
+import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
+import InputWrapper from '../input';
 
 export default function Pagination(props: IPaginationProps) {
 
@@ -19,7 +27,12 @@ export default function Pagination(props: IPaginationProps) {
 
   const handleOnChangePageSize = (value: number): void | Promise<void> => {
 
-  }
+  };
+
+  const handleOnChangeJumpPage = (value: number): void | Promise<void> => {
+
+  };
+
 
   return (
     <StyledPaginationRoot>
@@ -46,7 +59,7 @@ export default function Pagination(props: IPaginationProps) {
         {paginationRange?.map((page, index) => {
           if (page === DOTS) {
             return (
-              <div key={index}>{page}</div>
+              <StyledPaginationText key={index}>{page}</StyledPaginationText>
             );
           }
 
@@ -76,6 +89,16 @@ export default function Pagination(props: IPaginationProps) {
       </StyledPageNavigationContainer>
       {/* ------------------------------------------------------------------------------------------ */}
       <StyledPageControlContainer>
+        <StyledPaginationText>Go to page: </StyledPaginationText>
+        <InputWrapper
+          hidden={false}
+          onChange={handleOnChangeJumpPage}
+          value={undefined}
+          disabled={false}
+          readOnly={false}
+          type='number'
+          width="4rem"
+        />
         <SelectWrapper
           onChange={handleOnChangePageSize}
           multiple={false}
@@ -84,14 +107,14 @@ export default function Pagination(props: IPaginationProps) {
           readOnly={false}
           hidden={false}
           itemDefs={[
-            { label: "1", value: 1 },
-            { label: "2", value: 2 },
             { label: "10", value: 10 },
+            { label: "20", value: 20 },
+            { label: "30", value: 30 },
           ]}
+          toggleWidth='4rem'
         />
         {/* TODO: Dùng i18n thay thế / page (item per pages)  */}
-        <span style={{ marginLeft: '0.1rem' }}> / </span>
-        <span> page</span>
+        <StyledPaginationText> /trang</StyledPaginationText>
       </StyledPageControlContainer>
     </StyledPaginationRoot>
   );

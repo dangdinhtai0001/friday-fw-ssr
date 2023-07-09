@@ -1,10 +1,9 @@
 import styled from '@mui/system/styled';
 import Option, { optionClasses } from '@mui/base/Option';
-import OptionGroup, { optionGroupClasses } from '@mui/base/OptionGroup';
 import Popper from '@mui/base/Popper';
 
 import { IDefaultTheme } from '@/package/preta/types';
-import { IStyledListboxProps, IStyledOptionProps } from './types.d';
+import { IStyledListboxProps, IStyledOptionProps, IStyledToggleProps } from './types.d';
 import { defaultControllerContainer, typographyBody1Strong, typographyCaption1 } from '../shared';
 
 const optionSelected = (theme?: IDefaultTheme) => ({
@@ -12,13 +11,14 @@ const optionSelected = (theme?: IDefaultTheme) => ({
   color: theme?.palette.primary.contrastText,
 });
 
-export const StyledToggle = styled('button', {})(({ theme }: { theme?: IDefaultTheme }) => ({
-  ...defaultControllerContainer({ theme }),
+export const StyledToggle = styled('button', {})<IStyledToggleProps>(({ theme, width }: IStyledToggleProps) => ({
+  ...defaultControllerContainer({ theme, width }),
 
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
+
 }));
 
 export const StyledListbox = styled('ul', {})<IStyledListboxProps>(({ theme, maxHeight, width }: IStyledListboxProps) => ({
