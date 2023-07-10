@@ -8,9 +8,8 @@ export interface IPaginationProps {
   totalCount: number;
   siblingCount?: number;
   // ----------------------
-  onPageChange?: (page: number) => void;
-  onPageSizeChange?: (pageSize: number) => void;
-  onTotalItemChange?: (totalItem: number) => void;
+  onPageChange?: (page: string | number) => void;
+  onPageSizeChange?: (pageSize: string | number) => void;
 }
 
 export interface IUsePaginationProps {
@@ -22,6 +21,7 @@ export interface IUsePaginationProps {
 
 export interface IUsePaginationReturns {
   paginationRange?: (sdtring | number)[];
+  totalPageCount: number;
   shouldDisplayPrevious: boolean;
   shouldDisplayNext: boolean;
   shouldDisplayJumpNext: boolean;

@@ -80,7 +80,7 @@ export default function usePagination(props: IUsePaginationProps): IUsePaginatio
 
   }, [totalCount, pageSize, siblingCount, currentPage]);
 
-  return { paginationRange, shouldDisplayPrevious, shouldDisplayNext, shouldDisplayJumpNext, shouldDisplayJumpPrevious };
+  return { paginationRange, shouldDisplayPrevious, shouldDisplayNext, shouldDisplayJumpNext, shouldDisplayJumpPrevious, totalPageCount };
 }
 
 /**

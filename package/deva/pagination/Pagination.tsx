@@ -17,20 +17,39 @@ import InputWrapper from '../input';
 
 export default function Pagination(props: IPaginationProps) {
 
-  const { currentPage, pageSize, totalCount, defaultCurrentPage = 1, defaultPageSize = 10, siblingCount = 2 } = props;
+  const {
+    currentPage,
+    pageSize,
+    totalCount,
+    defaultCurrentPage = 1,
+    defaultPageSize = 10,
+    siblingCount = 2,
+    onPageChange,
+    onPageSizeChange,
+  } = props;
 
-  const { paginationRange, shouldDisplayJumpNext, shouldDisplayJumpPrevious, shouldDisplayNext, shouldDisplayPrevious } = usePagination({ totalCount, pageSize, siblingCount, currentPage });
+  const {
+    paginationRange,
+    totalPageCount,
+    shouldDisplayJumpNext,
+    shouldDisplayJumpPrevious,
+    shouldDisplayNext,
+    shouldDisplayPrevious
+  } = usePagination({ totalCount, pageSize, siblingCount, currentPage });
 
   const handleOnPageChange = (pageNumber: string | number) => {
     console.log('pageNumber', pageNumber);
+    onPageChange?.(pageNumber);
   }
 
   const handleOnChangePageSize = (value: number): void | Promise<void> => {
-
+    console.log('pageSize', value);
+    onPageSizeChange?.(value);
   };
 
   const handleOnChangeJumpPage = (value: number): void | Promise<void> => {
-
+    console.log('handleOnChangeJumpPage', value);
+    onPageChange?.(value);
   };
 
 
@@ -42,14 +61,14 @@ export default function Pagination(props: IPaginationProps) {
       {/* ------------------------------------------------------------------------------------------ */}
       <StyledPageNavigationContainer>
         {shouldDisplayPrevious && (
-          <motion.div whileTap={{ scale: pageNumberHoverScale }} >
+          <motion.div whileTap={{ scale: pageNumberHoverScale }} onClick={() => { handleOnPageChange(currentPage - 1); }}>
             <StyledPageNumber>
               <FontAwesomeIcon icon={faAngleLeft} />
             </StyledPageNumber>
           </motion.div>
         )}
         {shouldDisplayJumpPrevious && (
-          <motion.div whileTap={{ scale: pageNumberHoverScale }} >
+          <motion.div whileTap={{ scale: pageNumberHoverScale }} onClick={() => { handleOnPageChange(currentPage - siblingCount); }}>
             <StyledPageNumber>
               <FontAwesomeIcon icon={faAnglesLeft} />
             </StyledPageNumber>
@@ -73,14 +92,14 @@ export default function Pagination(props: IPaginationProps) {
         })}
         {/* -------------- */}
         {shouldDisplayJumpNext && (
-          <motion.div whileTap={{ scale: pageNumberHoverScale }} >
+          <motion.div whileTap={{ scale: pageNumberHoverScale }} onClick={() => { handleOnPageChange(currentPage + siblingCount); }}>
             <StyledPageNumber>
               <FontAwesomeIcon icon={faAnglesRight} />
             </StyledPageNumber>
           </motion.div>
         )}
         {shouldDisplayNext && (
-          <motion.div whileTap={{ scale: pageNumberHoverScale }} >
+          <motion.div whileTap={{ scale: pageNumberHoverScale }} onClick={() => { handleOnPageChange(currentPage + 1); }} >
             <StyledPageNumber>
               <FontAwesomeIcon icon={faAngleRight} />
             </StyledPageNumber>
@@ -92,11 +111,12 @@ export default function Pagination(props: IPaginationProps) {
         <StyledPaginationText>Go to page: </StyledPaginationText>
         <InputWrapper
           hidden={false}
-          onChange={handleOnChangeJumpPage}
+          onChange={(e) => { handleOnChangeJumpPage(e.target.value) }}
           value={undefined}
           disabled={false}
           readOnly={false}
           type='number'
+          inputSlotProps={{ min: 1, max: totalPageCount }}
           width="4rem"
         />
         <SelectWrapper
