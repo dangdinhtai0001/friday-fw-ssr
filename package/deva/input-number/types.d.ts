@@ -1,4 +1,4 @@
-import { IInputWrapperProps } from '@/package/deva/input'
+import { IInputWrapperProps } from '@/package/deva/input';
 
 export interface IInputNumberWrapperProps extends IInputWrapperProps {
   min?: number
@@ -7,5 +7,5 @@ export interface IInputNumberWrapperProps extends IInputWrapperProps {
   precision?: number
 };
 
-export interface IInputHandlerProps {
+export interface INumberControlProps {
 }
