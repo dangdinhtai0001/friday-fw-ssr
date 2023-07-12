@@ -4,7 +4,7 @@ import Popper from '@mui/base/Popper';
 
 import { IDefaultTheme } from '@/package/preta/types';
 import { IStyledListboxProps, IStyledOptionProps, IStyledToggleProps } from './types.d';
-import { defaultControllerContainer, typographyBody1Strong, typographyCaption1 } from '../shared';
+import { defaultControllerContainer, typographyBody1Strong, typographyCaption1 } from '@/package/preta/styled-shared';
 
 const optionSelected = (theme?: IDefaultTheme) => ({
   backgroundColor: theme?.palette.primary.main,

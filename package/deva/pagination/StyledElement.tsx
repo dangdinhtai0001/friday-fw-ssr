@@ -1,6 +1,6 @@
 import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
-import { typographyCaption1 } from '../shared';
+import { typographyCaption1 } from '@/package/preta/styled-shared';
 import { IStyledPageNumber } from './type.d';
 
 export const StyledPaginationRoot = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
