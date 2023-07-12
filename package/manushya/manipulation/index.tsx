@@ -9,6 +9,7 @@ import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
 import { Box } from '@mui/system';
 import { Pagination } from '@/package/deva/pagination';
 import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number'
+import Input2, {IInputWrapperProps as IInputWrapperProps2} from '@/package/deva/input2'
 
 export interface IManipulationProps {
 }
@@ -108,6 +109,13 @@ const containerProps: ContainerProviderProps = {
       label: 'last_name lbl',
       initialValue: '',
       component: Input,
+      componentParams: { type: 'text', placeholder: 'last_name' }
+    },
+    {
+      name: 'last_name2',
+      label: 'last_name2 lbl',
+      initialValue: '',
+      component: Input2,
       componentParams: { type: 'text', placeholder: 'last_name' }
     },
     {
