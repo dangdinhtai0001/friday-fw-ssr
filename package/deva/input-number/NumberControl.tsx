@@ -12,11 +12,11 @@ export default function NumberControl(props: INumberControlProps) {
         </StyledNumberControlItem>
       </motion.div>
 
-      <motion.div whileTap={{ scale: numberControlHoverScale }} >
+      {/* <motion.div whileTap={{ scale: numberControlHoverScale }} >
         <StyledNumberControlItem>
           <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: '0.5rem' }} />
         </StyledNumberControlItem>
-      </motion.div>
+      </motion.div> */}
     </StyledNumberControlContainer>
   );
 }

@@ -12,6 +12,10 @@ export const StyledInputSlot = styled('input')(({ theme, width }: { theme: IDefa
   borderRadius: 'inherit',
   outline: 0,
   boxSizing: 'border-box',
+
+  '&[type="number"]::-webkit-inner-spin-button': {
+    WebkitAppearance: 'none',
+  },
 }));
 
 export const StyledRootSlot = styled('div')<IStyledRootSlotProps>(({ theme, width }: IStyledRootSlotProps) => ({
