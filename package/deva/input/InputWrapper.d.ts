@@ -1,9 +1,22 @@
-import { InputProps, InputOwnProps } from '@mui/base/Input';
-import { IControllerComponentProps } from '@/package/preta/types';
+import { InputOwnProps } from '@mui/base/Input';
+import { IControllerComponentProps, IDefaultTheme } from '@/package/preta/types';
 
-export interface IInputWrapperProps
-  extends InputProps, InputOwnProps, IControllerComponentProps, React.InputHTMLAttributes<HTMLInputElement> {
+// export interface IInputWrapperProps
+//   extends InputOwnProps, IControllerComponentProps {
+//   onChange: IControllerComponentProps['onChange'];
+//   width?: number | string;
+//   inputSlotProps?: InputOwnProps['slotProps']['input'];
+//   // endAdornment?: InputOwnProps['endAdornment'];
+// }
+
+export interface IInputWrapperProps extends InputOwnProps,
+  IControllerComponentProps {
   onChange: IControllerComponentProps['onChange'];
   width?: number | string;
-  inputSlotProps?: InputOwnProps['slotProps']['input']
+  inputSlotProps?: InputOwnProps['slotProps']['input'];
+}
+
+export interface IStyledRootSlotProps {
+  width?: number | string;
+  theme?: IDefaultTheme;
 }
