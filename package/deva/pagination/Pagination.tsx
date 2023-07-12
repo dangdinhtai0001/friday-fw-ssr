@@ -111,7 +111,7 @@ export default function Pagination(props: IPaginationProps) {
         <StyledPaginationText>Go to page: </StyledPaginationText>
         <InputWrapper
           hidden={false}
-          onChange={(e) => { handleOnChangeJumpPage(e.target.value) }}
+          onChange={handleOnChangeJumpPage}
           value={undefined}
           disabled={false}
           readOnly={false}
