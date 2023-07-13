@@ -16,7 +16,11 @@ function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLDivElemen
         </StyledAdornmentContainer>
       )}
 
-      <StyledInputElement {...props} {...getInputProps()} />
+      <StyledInputElement
+        {...props}
+        autoComplete='off'
+        {...getInputProps()}
+      />
 
       {endAdornment && (
         <StyledAdornmentContainer className='styled-end-adornment-container'>

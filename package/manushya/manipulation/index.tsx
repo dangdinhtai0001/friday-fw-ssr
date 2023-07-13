@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faCheck, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { ContainerProvider } from '@/package/naraka/manipulation-container';
 import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulation-container/types';
 import Input from '@mui/base/Input';
@@ -9,7 +11,8 @@ import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
 import { Box } from '@mui/system';
 import { Pagination } from '@/package/deva/pagination';
 import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number'
-import Input2, {IInputWrapperProps as IInputWrapperProps2} from '@/package/deva/input2'
+import Input2, { IInputWrapperProps as IInputWrapperProps2 } from '@/package/deva/input2'
+import ButtonWrapper from '@/package/deva/button';
 
 export interface IManipulationProps {
 }
@@ -32,12 +35,27 @@ export default function Manipulation(props: IManipulationProps) {
         }}
       >
         <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
-        <button onClick={() => { formRef.current?.submitForm() }}>Submit</button>
-        <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
-        <button onClick={() => { formRef.current?.setFieldValues('foo', 'bar', true); }}>Set foo value</button>
-        <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
-        <button onClick={() => { formRef.current?.applyFieldMessage({ foo: { type: 'warning', message: "This is custom warning message" } }); }}>push msg</button>
-        <button onClick={() => { formRef.current?.applyFieldMessage(); }}>clear msg</button>
+
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(6, 1fr)',
+            gap: 1,
+            marginTop: '10px'
+          }}
+        >
+          <ButtonWrapper
+            icon={<FontAwesomeIcon icon={faCheck} />}
+            onClick={() => { formRef.current?.submitForm() }}
+          >
+            Submit
+          </ButtonWrapper>
+          <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
+          <button onClick={() => { formRef.current?.setFieldValues('foo', 'bar', true); }}>Set foo value</button>
+          <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
+          <button onClick={() => { formRef.current?.applyFieldMessage({ foo: { type: 'warning', message: "This is custom warning message" } }); }}>push msg</button>
+          <button onClick={() => { formRef.current?.applyFieldMessage(); }}>clear msg</button>
+        </Box>
       </Box>
     </div>
   );

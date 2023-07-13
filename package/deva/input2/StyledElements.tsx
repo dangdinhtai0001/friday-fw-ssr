@@ -12,17 +12,23 @@ export const StyledInputElement = styled('input', {})(({ theme }: { theme?: IDef
   borderRadius: 'inherit',
   outline: 0,
   boxSizing: 'border-box',
+  padding: '0.3rem',
+
+  '&[type="number"]::-webkit-inner-spin-button': {
+    WebkitAppearance: 'none',
+  },
 }));
 
 export const StyledInputContainer = styled('div', {})<IStyledInputContainerProps>(({ theme, width }: IStyledInputContainerProps) => ({
   ...defaultControllerContainer({ theme, width }),
 
   width: '',
-  padding: '0.3rem',
+  padding: '5px 0px',
 
-  display: 'flex',
+  display: 'inline-flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
+  gap: '0.3rem',
 
   // firefox
   '&:focus-visible': {

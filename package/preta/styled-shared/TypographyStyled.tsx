@@ -9,6 +9,15 @@ export const typographyCaption1 = <T extends IDefaultTheme>({ theme }: { theme?:
   letterSpacing: theme?.typography.caption1.letterSpacing,
 });
 
+export const typographyCaption1Strong = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+  color: theme?.palette.text.primary,
+
+  fontSize: theme?.typography.caption1Strong.fontSize,
+  fontWeight: theme?.typography.caption1Strong.fontWeight,
+  lineHeight: theme?.typography.caption1Strong.lineHeight,
+  letterSpacing: theme?.typography.caption1Strong.letterSpacing,
+});
+
 export const typographyBody1 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
   color: theme?.palette.text.primary,
 

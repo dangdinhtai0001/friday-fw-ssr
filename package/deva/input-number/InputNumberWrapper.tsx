@@ -1,10 +1,9 @@
 import { ForwardedRef, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronUp, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { IInputNumberWrapperProps } from './types';
-import InputWrapper from '@/package/deva/input';
-import NumberControl from './NumberControl';
+import InputWrapper from '@/package/deva/input2';
 import { StyledAdornmentContainer, StyledAdornmentArrow } from './StyledElements';
 
 function InputNumberWrapper(
@@ -13,9 +12,21 @@ function InputNumberWrapper(
 ) {
   const { min, max, step, precision, } = props;
 
-  const renderAfterAdornment = () => {
+  const renderStartAdornment = () => {
     return (
-      <StyledAdornmentContainer className='styled-adornment-container'>
+      <StyledAdornmentContainer>
+        <motion.div whileTap={{ scale: numberControlHoverScale }} >
+          <StyledAdornmentArrow>
+            <FontAwesomeIcon icon={faMinus} />
+          </StyledAdornmentArrow>
+        </motion.div>
+      </StyledAdornmentContainer>
+    );
+  }
+
+  const renderEndAdornment = () => {
+    return (
+      <StyledAdornmentContainer>
         <motion.div whileTap={{ scale: numberControlHoverScale }} >
           <StyledAdornmentArrow>
             <FontAwesomeIcon icon={faPlus} />
@@ -27,8 +38,9 @@ function InputNumberWrapper(
 
   return <InputWrapper
     {...props}
+    endAdornment={renderEndAdornment()}
+    startAdornment={renderStartAdornment()}
     ref={ref}
-    endAdornment={renderAfterAdornment()}
   />;
 }
 const numberControlHoverScale = 0.7;

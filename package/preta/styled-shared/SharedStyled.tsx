@@ -1,7 +1,7 @@
 import { IDefaultTheme } from '@/package/preta/types';
 import { typographyCaption1 } from './TypographyStyled';
 
-export const defaultControllerContainer = <T extends IDefaultTheme>({ theme, width }: { theme?: T, width?: number | string }) => ({
+export const defaultControllerContainer = <T extends IDefaultTheme>({ theme, width, noneBorder }: { theme?: T, width?: number | string, noneBorder?: boolean }) => ({
   ...typographyCaption1({ theme }),
 
   width: width ? width : '100%',
@@ -12,15 +12,15 @@ export const defaultControllerContainer = <T extends IDefaultTheme>({ theme, wid
   color: theme?.palette.text.primary,
 
   borderRadius: theme?.components.cornerRadius.medium,
-  border: `${theme?.components.strokeWidth.thin} solid ${theme?.palette.secondary.main}`,
+  border: noneBorder ? 'none' : `${theme?.components.strokeWidth.thin} solid ${theme?.palette.secondary.main}`,
 
   ':hover': {
-    borderColor: theme?.palette.primary.main,
+    borderColor: noneBorder ? 'transparent' : theme?.palette.primary.main,
   },
 
   ':focus-within': {
     outline: 'none',
-    borderColor: theme?.palette.primary.main,
-    boxShadow: `0 0 0 1px ${theme?.palette.primary.dark}`
+    borderColor: noneBorder ? 'transparent' : theme?.palette.primary.main,
+    boxShadow: noneBorder ? '' : `0 0 0 1px ${theme?.palette.primary.dark}`
   },
 });
