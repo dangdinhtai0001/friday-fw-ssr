@@ -20,7 +20,7 @@ export const palette: ThemeOptions['palette'] = {
   },
   text: {
     primary: 'rgba(0, 0, 0, 0.87)',
-    secondary: 'rgba(0, 0, 0, 0.54)',
+    secondary: 'rgba(255, 245, 238, 1)',
     disabled: 'rgba(0, 0, 0, 0.38)',
     hint: 'rgba(0, 0, 0, 0.38)',
   },

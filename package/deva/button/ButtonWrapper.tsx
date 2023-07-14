@@ -5,7 +5,16 @@ import { IButtonWrapperProps } from './types.d';
 import { StyledButtonContainer } from './StyledElements';
 
 function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<any>) {
-  const { disabled, children, icon, colorType = 'primary', width = '' } = props;
+  const {
+    disabled,
+    children,
+    icon,
+    colorType = 'primary',
+    width = '',
+    color,
+    border,
+    textColor
+  } = props;
 
   const { active, focusVisible, getRootProps } = useButton({
     ...props,
@@ -24,7 +33,14 @@ function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<any>)
 
   return (
     <motion.div whileTap={{ scale: disabled ? 1 : hoverScale }}>
-      <StyledButtonContainer {...getRootProps()} colorType={colorType} width={width}>
+      <StyledButtonContainer
+        {...getRootProps()}
+        colorType={colorType}
+        width={width}
+        color={color}
+        border={border}
+        textColor={textColor}
+      >
         {renderChildContainer()}
       </StyledButtonContainer>
     </motion.div>

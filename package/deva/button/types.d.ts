@@ -13,5 +13,8 @@ export interface IStyledButtonProps {
   theme?: IDefaultTheme;
   width?: string | number;
   colorType?: ColorType;
+  color?: string;
   disabled?: boolean;
+  border?: boolean;
+  textColor?: 'primary' | 'secondary';
 }

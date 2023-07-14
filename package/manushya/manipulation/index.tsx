@@ -50,7 +50,15 @@ export default function Manipulation(props: IManipulationProps) {
           >
             Submit
           </ButtonWrapper>
-          <button onClick={() => { console.log(formRef.current?.getFormValues()); }}>Get Values</button>
+          <ButtonWrapper
+            onClick={() => { console.log(formRef.current?.getFormValues()); }}
+            color='transparent'
+            border
+            textColor='primary'
+            disabled={false}
+          >
+            Get Values
+          </ButtonWrapper>
           <button onClick={() => { formRef.current?.setFieldValues('foo', 'bar', true); }}>Set foo value</button>
           <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
           <button onClick={() => { formRef.current?.applyFieldMessage({ foo: { type: 'warning', message: "This is custom warning message" } }); }}>push msg</button>
