@@ -4,7 +4,7 @@ import { IInputWrapperProps } from './types.d';
 import { StyledInputElement, StyledInputContainer, StyledAdornmentContainer } from './StyledElements'
 
 function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLDivElement>) {
-  const { endAdornment, startAdornment } = props;
+  const { endAdornment, startAdornment, type } = props;
 
   const { getRootProps, getInputProps } = useInput(props);
 
@@ -19,6 +19,7 @@ function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLDivElemen
       <StyledInputElement
         {...props}
         autoComplete='off'
+        type={type}
         {...getInputProps()}
       />
 

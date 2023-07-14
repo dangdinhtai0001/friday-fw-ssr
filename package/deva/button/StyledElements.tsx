@@ -32,13 +32,12 @@ export const StyledButtonContainer = styled('button')<IStyledButtonProps>(({
     ...typographyCaption1Strong({ theme }),
     color: _color,
 
-    display: 'inline-flex',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     gap: '0.5rem',
 
     cursor: disabled ? 'not-allowed' : 'pointer',
-    // backgroundColor: colorType ? theme?.palette[colorType].main : 'transparent',
     backgroundColor: _backgroundColor,
   }
 });

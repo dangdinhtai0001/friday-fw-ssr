@@ -5,21 +5,38 @@ import { faChevronDown, faChevronUp, faPlus, faMinus } from '@fortawesome/free-s
 import { IInputNumberWrapperProps } from './types';
 import InputWrapper from '@/package/deva/input2';
 import { StyledAdornmentContainer, StyledAdornmentArrow } from './StyledElements';
+import ButtonWrapper from '@/package/deva/button';
 
 function InputNumberWrapper(
   props: IInputNumberWrapperProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
-  const { min, max, step, precision, } = props;
+  const { min, max, step = 1, precision, value, onChange } = props;
+
+  const handleOnIncrease = () => {
+    if (max === undefined || Number(value) + Number(step) <= max) {
+      onChange?.(Number(value) + Number(step));
+    }
+  };
+
+  const handleOnDecrease = () => {
+    if (min === undefined || Number(value) - Number(step) >= min) {
+      onChange?.(Number(value) - Number(step));
+    }
+  };
+
+
 
   const renderStartAdornment = () => {
     return (
       <StyledAdornmentContainer>
-        <motion.div whileTap={{ scale: numberControlHoverScale }} >
-          <StyledAdornmentArrow>
-            <FontAwesomeIcon icon={faMinus} />
-          </StyledAdornmentArrow>
-        </motion.div>
+        <ButtonWrapper
+          icon={<FontAwesomeIcon icon={faMinus} />}
+          color='transparent'
+          textColor='primary'
+          onClick={handleOnDecrease}
+          disabled={min === undefined || Number(value) - Number(step) < min}
+        ></ButtonWrapper>
       </StyledAdornmentContainer>
     );
   }
@@ -27,17 +44,20 @@ function InputNumberWrapper(
   const renderEndAdornment = () => {
     return (
       <StyledAdornmentContainer>
-        <motion.div whileTap={{ scale: numberControlHoverScale }} >
-          <StyledAdornmentArrow>
-            <FontAwesomeIcon icon={faPlus} />
-          </StyledAdornmentArrow>
-        </motion.div>
+        <ButtonWrapper
+          icon={<FontAwesomeIcon icon={faPlus} />}
+          color='transparent'
+          textColor='primary'
+          onClick={handleOnIncrease}
+          disabled={max !== undefined && Number(value) + Number(step) > max}
+        ></ButtonWrapper>
       </StyledAdornmentContainer>
     );
   }
 
   return <InputWrapper
     {...props}
+    type='number'
     endAdornment={renderEndAdornment()}
     startAdornment={renderStartAdornment()}
     ref={ref}
