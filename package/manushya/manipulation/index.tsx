@@ -11,7 +11,6 @@ import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
 import { Box } from '@mui/system';
 import { Pagination } from '@/package/deva/pagination';
 import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number'
-import Input2, { IInputWrapperProps as IInputWrapperProps2 } from '@/package/deva/input2'
 import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button';
 
 export interface IManipulationProps {
@@ -141,7 +140,7 @@ const containerProps: ContainerProviderProps = {
       name: 'last_name2',
       label: 'last_name2 lbl',
       initialValue: '',
-      component: Input2,
+      component: Input,
       componentParams: { type: 'text', placeholder: 'last_name' }
     },
     {
@@ -149,7 +148,7 @@ const containerProps: ContainerProviderProps = {
       label: 'Age lbl',
       initialValue: 1,
       component: InputNumberWrapper,
-      componentParams: { placeholder: 'Nhập số đê...', min: 1, max: 100  } as IButtonWrapperProps
+      componentParams: { placeholder: 'Nhập số đê...', min: 1, max: 100 } as unknown as IInputNumberWrapperProps
     },
   ],
   dataBlockComponent: DefaultDataBlock,

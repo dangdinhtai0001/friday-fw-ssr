@@ -1,28 +1,36 @@
-import { forwardRef, ForwardedRef, ChangeEvent } from 'react';
-import Input from '@mui/base/Input';
-import { IInputWrapperProps } from './InputWrapper.d';
-import { StyledInputSlot, StyledRootSlot } from './StyledElement';
+import { ForwardedRef, forwardRef } from 'react';
+import useInput from '@mui/base/useInput';
+import { IInputWrapperProps } from './types.d';
+import { StyledInputElement, StyledInputContainer, StyledAdornmentContainer } from './StyledElements'
 
+function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLDivElement>) {
+  const { endAdornment, startAdornment, type } = props;
 
-function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLDivElement>,) {
-  const { width, inputSlotProps, onChange, value } = props;
+  const { getRootProps, getInputProps } = useInput(props);
 
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
-  }
+  return (
+    <StyledInputContainer {...getRootProps()}>
+      {startAdornment && (
+        <StyledAdornmentContainer className='styled-start-adornment-container'>
+          {startAdornment}
+        </StyledAdornmentContainer>
+      )}
 
-  return <Input
-    {...props}
-    slots={{
-      input: StyledInputSlot,
-      root: StyledRootSlot
-    }}
-    slotProps={{
-      input: { width, onChange: handleOnChange, ...inputSlotProps },
-    }}
-    value={value}
-    ref={ref}
-  />;
-};
+      <StyledInputElement
+        {...props}
+        autoComplete='off'
+        type={type}
+        {...getInputProps()}
+      />
+
+      {endAdornment && (
+        <StyledAdornmentContainer className='styled-end-adornment-container'>
+          {endAdornment}
+        </StyledAdornmentContainer>
+      )}
+
+    </StyledInputContainer>
+  );
+}
 
 export default forwardRef(InputWrapper);

@@ -1,2 +1,2 @@
 export { default } from './InputWrapper';
-export * from './InputWrapper.d';
+export * from './types.d';

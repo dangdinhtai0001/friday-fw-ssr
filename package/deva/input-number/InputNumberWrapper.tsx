@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { IInputNumberWrapperProps } from './types';
-import InputWrapper from '@/package/deva/input2';
+import InputWrapper from '@/package/deva/input';
 import { StyledAdornmentContainer, StyledAdornmentArrow } from './StyledElements';
 import ButtonWrapper from '@/package/deva/button';
 
