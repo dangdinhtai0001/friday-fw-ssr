@@ -3,13 +3,13 @@ import useInput from '@mui/base/useInput';
 import { IInputWrapperProps } from './types.d';
 import { StyledInputElement, StyledInputContainer, StyledAdornmentContainer } from './StyledElements'
 
-function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLDivElement>) {
-  const { endAdornment, startAdornment, type } = props;
+function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLInputElement>) {
+  const { endAdornment, startAdornment, type, width } = props;
 
   const { getRootProps, getInputProps } = useInput(props);
 
   return (
-    <StyledInputContainer {...getRootProps()}>
+    <StyledInputContainer {...getRootProps()} width={width}>
       {startAdornment && (
         <StyledAdornmentContainer className='styled-start-adornment-container'>
           {startAdornment}
@@ -21,6 +21,7 @@ function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLDivElemen
         autoComplete='off'
         type={type}
         {...getInputProps()}
+        ref={ref}
       />
 
       {endAdornment && (

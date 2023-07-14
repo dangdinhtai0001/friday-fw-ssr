@@ -22,7 +22,6 @@ export const StyledInputElement = styled('input', {})(({ theme }: { theme?: IDef
 export const StyledInputContainer = styled('div', {})<IStyledInputContainerProps>(({ theme, width }: IStyledInputContainerProps) => ({
   ...defaultControllerContainer({ theme, width }),
 
-  width: '',
   padding: '5px 0px',
 
   display: 'inline-flex',

@@ -13,7 +13,7 @@ import {
 } from './StyledElement';
 import usePagination, { DOTS } from './usePagination';
 import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
-import InputWrapper from '../input';
+import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number';
 
 export default function Pagination(props: IPaginationProps) {
 
@@ -109,15 +109,16 @@ export default function Pagination(props: IPaginationProps) {
       {/* ------------------------------------------------------------------------------------------ */}
       <StyledPageControlContainer>
         <StyledPaginationText>Go to page: </StyledPaginationText>
-        <InputWrapper
+        <InputNumberWrapper
           hidden={false}
           onChange={handleOnChangeJumpPage}
-          value={undefined}
+          value={pageSize}
           disabled={false}
           readOnly={false}
-          type='number'
-          inputSlotProps={{ min: 1, max: totalPageCount }}
-          width="4rem"
+          type={'number'}
+          min={1}
+          max={totalCount}
+          width="fit-content"
         />
         <SelectWrapper
           onChange={handleOnChangePageSize}

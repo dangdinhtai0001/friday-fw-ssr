@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { IInputNumberWrapperProps } from './types';
 import InputWrapper from '@/package/deva/input';
-import { StyledAdornmentContainer, StyledAdornmentArrow } from './StyledElements';
 import ButtonWrapper from '@/package/deva/button';
+import { StyledAdornmentContainer } from './StyledElements';
 
 function InputNumberWrapper(
   props: IInputNumberWrapperProps,
-  ref: ForwardedRef<HTMLDivElement>
+  ref: ForwardedRef<HTMLInputElement>
 ) {
   const { min, max, step = 1, precision, value, onChange } = props;
 
@@ -24,8 +24,6 @@ function InputNumberWrapper(
       onChange?.(Number(value) - Number(step));
     }
   };
-
-
 
   const renderStartAdornment = () => {
     return (
