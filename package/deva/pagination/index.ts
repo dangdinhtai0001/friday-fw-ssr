@@ -1,1 +1,2 @@
-export { default as Pagination } from "./Pagination";
+export { default } from "./PaginationWrapper";
+export * from './type.d';

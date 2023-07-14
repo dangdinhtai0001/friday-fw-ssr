@@ -3,6 +3,7 @@ import Button from '@mui/base/Button';
 import Input from '@mui/base/Input';
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import { ContextHookValue } from '@/package/naraka/searchable-container/types';
+import PaginationWrapper from '@/package/deva/pagination';
 
 const PaginationBlock: React.FC = (props: any) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
@@ -31,6 +32,13 @@ const PaginationBlock: React.FC = (props: any) => {
   return (
     <div>
       Pagination block
+      <PaginationWrapper
+        currentPage={context.paginationInstance.currentPage}
+        pageSize={context.paginationInstance.itemsPerPage}
+        totalCount={context.paginationInstance.totalItems}
+        onPageChange={onGo2Page}
+        onPageSizeChange={onChangeItemsPerPage}
+      />
       <br />
       <Button onClick={handleOnNextPage}>next</Button>
       <Button onClick={handleOnPreviousPage}>prev</Button>

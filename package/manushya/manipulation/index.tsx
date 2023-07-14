@@ -9,7 +9,7 @@ import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
 import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
 import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
 import { Box } from '@mui/system';
-import { Pagination } from '@/package/deva/pagination';
+import Pagination from '@/package/deva/pagination';
 import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number'
 import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button';
 

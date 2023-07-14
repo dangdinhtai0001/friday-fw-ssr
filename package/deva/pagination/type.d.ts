@@ -1,6 +1,6 @@
 import { IDefaultTheme } from '@/package/preta/types';
 
-export interface IPaginationProps {
+export interface IPaginationWrapperProps {
   currentPage: number;
   defaultCurrentPage?: number;
   pageSize: number;
