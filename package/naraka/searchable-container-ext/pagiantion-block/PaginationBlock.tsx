@@ -3,6 +3,7 @@ import PaginationWrapper from '@/package/deva/pagination';
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import { ContextHookValue } from '@/package/naraka/searchable-container/types';
 import { IPaginationBlockProps } from './types.d';
+import { StyledPaginationBlockRoot } from './StyledElements'
 
 export default function PaginationBlock(props: IPaginationBlockProps) {
 
@@ -11,7 +12,7 @@ export default function PaginationBlock(props: IPaginationBlockProps) {
   const { context, contextApi }: ContextHookValue = useContainerContext();
 
   return (
-    <>
+    <StyledPaginationBlockRoot>
       <PaginationWrapper
         currentPage={context.paginationInstance.currentPage}
         pageSize={context.paginationInstance.itemsPerPage}
@@ -19,6 +20,6 @@ export default function PaginationBlock(props: IPaginationBlockProps) {
         onPageChange={onGo2Page}
         onPageSizeChange={onChangeItemsPerPage}
       />
-    </>
+    </StyledPaginationBlockRoot>
   );
 }

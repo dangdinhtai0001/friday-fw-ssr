@@ -71,14 +71,7 @@ const PaginationPanel: React.FC<PaginationPanelProps> = (props: PaginationPanelP
     }
   };
 
-  return (
-    <div>
-      Pagination panel
-      {createPaginationBlock()}
-      <JSONPretty json={context.paginationInstance} />
-      {JSON.stringify(context.paginationInstance)}
-    </div>
-  );
+  return createPaginationBlock();
 };
 
 export default PaginationPanel;
