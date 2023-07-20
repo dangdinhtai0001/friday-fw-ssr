@@ -15,7 +15,7 @@ export interface ContainerProviderProps {
   taskControls?: TaskControl[]
   // ==================================================
   paginationBlockParams?: any;
-  paginationBlockComponent?: React.ComponentType<PaginationBlockProps>;
+  paginationBlockComponent?: React.ComponentType<T & PaginationBlockProps>;
   // ==================================================
   onFetchData?: (taskBlock?: TaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 };

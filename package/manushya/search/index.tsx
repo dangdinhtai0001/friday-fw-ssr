@@ -6,7 +6,7 @@ import { ContextState as ManipulationContextState } from '@/package/naraka/manip
 import FilterBlock from './FilterBlock';
 import PaginationBlock from './PaginationBlock';
 import ToolbarBlock from './ToolbarBlock';
-import { DefaultFilterBlock } from '@/package/naraka/searchable-container-ext';
+import { DefaultFilterBlock, DefaultPaginationBlock, IPaginationBlockProps } from '@/package/naraka/searchable-container-ext';
 
 import Input from '@mui/base/Input';
 
@@ -67,8 +67,8 @@ export default function ComponentPage() {
 
     ],
     // ------------
-    paginationBlockParams: {},
-    paginationBlockComponent: PaginationBlock,
+    paginationBlockParams: {} as IPaginationBlockProps,
+    paginationBlockComponent: DefaultPaginationBlock,
     // ------------
     onFetchData: async () => {
       await sleep(2000);
