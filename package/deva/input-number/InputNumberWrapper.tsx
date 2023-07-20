@@ -53,9 +53,20 @@ function InputNumberWrapper(
     );
   }
 
+  const handleOnChange = (value: number) => {
+    console.log(value, (max && max >= value), (min && min <= value))
+    if (
+      (max && max >= value) &&
+      (min && min <= value)
+    ) {
+      onChange?.(value);
+    }
+  };
+
   return <InputWrapper
     {...props}
     type='number'
+    onChange={handleOnChange}
     endAdornment={renderEndAdornment()}
     startAdornment={renderStartAdornment()}
     ref={ref}

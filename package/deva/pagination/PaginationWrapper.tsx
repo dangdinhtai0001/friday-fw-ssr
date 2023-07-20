@@ -40,17 +40,14 @@ export default function PaginationWrapper(props: IPaginationWrapperProps) {
   const [jumperPage, setJumperPage] = useState<number>(1);
 
   const handleOnPageChange = (pageNumber: string | number) => {
-    console.log('pageNumber', pageNumber);
     onPageChange?.(pageNumber);
   }
 
   const handleOnChangePageSize = (value: number): void | Promise<void> => {
-    console.log('pageSize', value);
     onPageSizeChange?.(value);
   };
 
   const handleOnChangeJumpPage = (value: number): void | Promise<void> => {
-    console.log('handleOnChangeJumpPage', value);
     setJumperPage(value);
     onPageChange?.(Number(value));
   };
