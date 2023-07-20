@@ -1,18 +1,17 @@
 import { useRef } from 'react';
-import { IFilterBlockProps } from '@/package/naraka/searchable-container/types';
+
 import { ContainerProvider as FormContainerProvider } from '@/package/naraka/manipulation-container';
 import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext';
-import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulation-container/types';
+import { ContainerRef } from '@/package/naraka/manipulation-container/types';
 import { useContainerContext } from '@/package/naraka/searchable-container';
-import { ContextHookValue } from '@/package/naraka/searchable-container/types';
 import Button from '@mui/base/Button';
 import Box from '@mui/system/Box';
-import styled from '@mui/system/styled';
+import { StyledBox } from './StyledElements'
+import { IFilterBlock } from './types.d'
 
-export interface FilterBlock extends IFilterBlockProps, ContainerProviderProps {
-}
 
-export default function FilterBlock(props: FilterBlock) {
+// TODO: Viết lại block này cho đúng style code
+export default function FilterBlock(props: IFilterBlock) {
   const { context, contextApi } = useContainerContext();
 
   const formRef = useRef<ContainerRef>(null);
@@ -43,7 +42,7 @@ export default function FilterBlock(props: FilterBlock) {
   }
 
   return (
-    <BoxStyled sx={{ display: 'grid', gap: 1 }}>
+    <StyledBox sx={{ display: 'grid', gap: 1 }}>
       <FormContainerProvider
         {...props}
         fieldDefs={context.filterDefs ? context.filterDefs : []}
@@ -55,11 +54,6 @@ export default function FilterBlock(props: FilterBlock) {
       <Box sx={{ textAlign: 'right' }}>
         <Button onClick={handleOnclick}>apply filter</Button>
       </Box>
-    </BoxStyled>
+    </StyledBox>
   );
 }
-
-const BoxStyled = styled(Box, {})(({ theme }) => ({
-  // border: `0.1rem solid ${theme.palette.primary.main}`,
-  padding: `0.5rem 0.5rem 0.5rem 0.5rem`
-}));
