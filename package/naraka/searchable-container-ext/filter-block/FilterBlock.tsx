@@ -7,11 +7,11 @@ import { useContainerContext } from '@/package/naraka/searchable-container';
 import Button from '@mui/base/Button';
 import Box from '@mui/system/Box';
 import { StyledBox } from './StyledElements'
-import { IFilterBlock } from './types.d'
+import { IDefaultFilterBlockProps } from './types.d'
 
 
 // TODO: Viết lại block này cho đúng style code
-export default function FilterBlock(props: IFilterBlock) {
+export default function FilterBlock(props: IDefaultFilterBlockProps) {
   const { context, contextApi } = useContainerContext();
 
   const formRef = useRef<ContainerRef>(null);

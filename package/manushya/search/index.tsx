@@ -3,12 +3,10 @@ import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/narak
 import { ContainerProviderProps, ContextApi, ContextState, TaskBlock } from '@/package/naraka/searchable-container/types';
 import { ContextState as ManipulationContextState } from '@/package/naraka/manipulation-container/types';
 
-import FilterBlock from './FilterBlock';
-import PaginationBlock from './PaginationBlock';
 import ToolbarBlock from './ToolbarBlock';
-import { DefaultFilterBlock, DefaultPaginationBlock, IPaginationBlockProps } from '@/package/naraka/searchable-container-ext';
+import { DefaultFilterBlock, DefaultPaginationBlock, IPaginationBlockProps, IDefaultFilterBlockProps } from '@/package/naraka/searchable-container-ext';
+import InputWrappper, { IInputWrapperProps } from '@/package/deva/input';
 
-import Input from '@mui/base/Input';
 
 const sleep = (ms: number) => new Promise(
   resolve => setTimeout(resolve, ms));
@@ -21,22 +19,22 @@ export default function ComponentPage() {
         name: 'fromDate',
         label: "Từ ngày",
         initialValue: '',
-        component: Input
+        component: InputWrappper
       },
       {
         name: 'toDate',
         label: "Đến ngày",
         initialValue: '',
-        component: Input
+        component: InputWrappper
       }
     ],
     filterBlockParams: {
       onMounted(context: ManipulationContextState) {
         console.log("on mounted event: ", context.formId);
       },
-      defaultCols: 2
-    },
-    // filterBlockComponent: FilterBlock,
+      defaultCols: 3,
+      defaultFieldRaito: '20% 80%'
+    } as unknown as IDefaultFilterBlockProps,
     filterBlockComponent: DefaultFilterBlock,
     // ------------
     toolbarBlockComponent: ToolbarBlock,

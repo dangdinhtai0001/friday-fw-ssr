@@ -6,7 +6,7 @@ import { FilterDef } from './Common.d'
 export interface ContainerProviderProps {
   // ==================================================
   filterDefs?: FilterDef[];
-  filterBlockParams?: any;
+  filterBlockParams?: unknown;
   filterBlockComponent?: React.ComponentType<T & IFilterBlockProps>;
   // ==================================================
   toolbarBlockParams?: any;

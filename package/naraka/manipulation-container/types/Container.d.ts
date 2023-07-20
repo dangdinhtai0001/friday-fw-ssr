@@ -1,4 +1,4 @@
-import { FieldDef, DataFieldLabel_TextAlign } from './Common.d';
+import { FieldDef, LabelTextAlign } from './Common.d';
 import { OnValueChangeProps, ContextState, ContextApi } from './Context.d';
 import { IDataFieldLabelProps } from './Block.d';
 import { FieldValues, Resolver, Mode, CriteriaMode, ValidationMode } from 'react-hook-form';
@@ -11,7 +11,7 @@ export interface ContainerProviderProps {
   reValidateMode?: "onBlur" | "onChange" | "onSubmit";
   criteriaMode?: CriteriaMode;
   defaultFieldRaito?: string;
-  defaultFieldLabelAlign?: DataFieldLabel_TextAlign;
+  defaultFieldLabelAlign?: LabelTextAlign;
   dataBlockComponent?: React.ComponentType<IDataFieldBlockProps>;
   defaultCols?: number;
   onValueChange?: (props: OnValueChangeProps) => void | Promise<void>;

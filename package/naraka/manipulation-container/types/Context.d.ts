@@ -1,4 +1,4 @@
-import { FieldDef, DataFieldLabel_TextAlign } from './Common.d';
+import { FieldDef, LabelTextAlign } from './Common.d';
 import { IDataFieldLabelProps } from './Block.d';
 import React from 'react';
 
@@ -25,7 +25,7 @@ export interface ContextState {
   fieldHidden: { [key: string]: boolean };
   fieldMessage: Record<string, { type: string, message: string }>;
   defaultFieldRaito: string;
-  defaultFieldLabelAlign: DataFieldLabel_TextAlign;
+  defaultFieldLabelAlign: LabelTextAlign;
   dataBlockComponent?: React.ComponentType<IDataFieldBlockProps>;
   defaultCols: number;
   // ---------------------------------------------------------------------------

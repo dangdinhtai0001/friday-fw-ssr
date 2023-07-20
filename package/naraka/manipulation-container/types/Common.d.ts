@@ -12,11 +12,11 @@ export interface FieldDef<T> {
   component: React.ComponentType<T>;
   // 
   fieldRaito?: string;
-  labelAlign?: DataFieldLabel_TextAlign
+  labelAlign?: LabelTextAlign
 }
 
-export type DataFieldLabel_Status = 'error' | 'warning';
-export type DataFieldLabel_TextAlign = 'left' | 'center' | 'right';
+export type DataFieldStatus = 'error' | 'warning';
+export type LabelTextAlign = 'left' | 'center' | 'right';
 export interface IDataFieldBlockProps {
   fieldItemProps: IFieldItemProps;
 }
