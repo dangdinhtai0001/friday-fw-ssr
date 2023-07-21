@@ -4,7 +4,15 @@ import { ContainerProviderProps, ContextApi, ContextState, TaskBlock } from '@/p
 import { ContextState as ManipulationContextState } from '@/package/naraka/manipulation-container/types';
 
 import ToolbarBlock from './ToolbarBlock';
-import { DefaultFilterBlock, DefaultPaginationBlock, IPaginationBlockProps, IDefaultFilterBlockProps } from '@/package/naraka/searchable-container-ext';
+import { 
+  DefaultFilterBlock, 
+  DefaultPaginationBlock, 
+  DefaultToolbarBlock,
+  // 
+  IPaginationBlockProps, 
+  IDefaultFilterBlockProps,
+  IToolbarBlockExtProps
+ } from '@/package/naraka/searchable-container-ext';
 import InputWrappper, { IInputWrapperProps } from '@/package/deva/input';
 
 
@@ -37,8 +45,8 @@ export default function ComponentPage() {
     } as unknown as IDefaultFilterBlockProps,
     filterBlockComponent: DefaultFilterBlock,
     // ------------
-    toolbarBlockComponent: ToolbarBlock,
-    toolbarBlockParams: {},
+    toolbarBlockComponent: DefaultToolbarBlock,
+    toolbarBlockParams: {} as IToolbarBlockExtProps,
     // ------------
     taskControls: [
       {
