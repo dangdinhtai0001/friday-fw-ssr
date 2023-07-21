@@ -9,7 +9,7 @@ export const typographyCaption2 = <T extends IDefaultTheme>({ theme }: { theme?:
   letterSpacing: theme?.typography.caption2.letterSpacing,
 });
 
-export const typographyCaption2trong = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyCaption2Strong = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.caption2Strong.fontSize,

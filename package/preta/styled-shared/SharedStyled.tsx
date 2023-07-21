@@ -13,7 +13,7 @@ export const defaultControllerContainer = <T extends IDefaultTheme>({ theme, wid
 
   ...defaultComponentContainer({ theme, width, noneBorder }),
 
-  height: '1rem',
+  height: 'fit-content',
   padding: '0.75rem 0.5rem 0.75rem 0.5rem',
 
   backgroundColor: theme?.palette.background.default,

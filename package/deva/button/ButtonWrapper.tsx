@@ -4,7 +4,7 @@ import useButton from '@mui/base/useButton';
 import { IButtonWrapperProps } from './types.d';
 import { StyledButtonContainer } from './StyledElements';
 
-function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<any>) {
+function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<HTMLButtonElement>) {
   const {
     disabled,
     children,

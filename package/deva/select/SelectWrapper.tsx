@@ -7,9 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { ISelectWrapperProps, ItemProps, IListboxWrapperProps, IStyledToggleProps } from './types';
 import { useDatasource } from '@/package/preta/intergration';
-import { StyledOption, StyledPopper, StyledToggle } from './StyledElements';
+import { StyledOption, StyledPopper, StyledValue } from './StyledElements';
 import ListboxWrapper from './ListboxWrapper';
 import OptionGroupWrapper from './OptionGroupWrapper';
+import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button'
 
 function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   props: ISelectWrapperProps<TValue, Multiple>,
@@ -44,7 +45,8 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   };
 
   const slots: SelectProps<TValue, Multiple>['slots'] = {
-    root: StyledToggle,
+    // root: StyledToggle,
+    root: ButtonWrapper,
     listbox: ListboxWrapper,
     popper: StyledPopper,
   };
@@ -55,10 +57,26 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       open: listboxOpen,
       width: toggleRef.current?.offsetWidth,
     } as IListboxWrapperProps,
+    // root: {
+    //   ref: toggleRef,
+    //   width: toggleWidth
+    // } as IStyledToggleProps, 
     root: {
       ref: toggleRef,
-      width: toggleWidth
-    } as IStyledToggleProps,
+      icon: (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+          animate={{ opacity: 1, scale: 1, rotate: listboxOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <FontAwesomeIcon icon={faChevronDown} />
+        </motion.div>
+      ),
+      width: toggleWidth,
+      color: 'transparent',
+      textColor: 'primary',
+      border: true,
+    } as IButtonWrapperProps,
     popper: { keepMounted: true },
   };
 
@@ -76,18 +94,9 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     }
 
     return (
-      <>
-        <div>
-          {Array.isArray(option) ? option.map((opt) => opt.label).join(', ') : option.label}
-        </div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
-          animate={{ opacity: 1, scale: 1, rotate: listboxOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <FontAwesomeIcon icon={faChevronDown} />
-        </motion.div>
-      </>
+      <StyledValue>
+        {Array.isArray(option) ? option.map((opt) => opt.label).join(', ') : option.label}
+      </StyledValue>
     );
   }
 
