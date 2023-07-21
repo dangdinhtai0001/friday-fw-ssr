@@ -19,3 +19,8 @@ export interface IStyledMessageProps {
   theme?: IDefaultTheme;
   status?: DataFieldStatus;
 }
+
+export interface IStyledDataBlockRootProps {
+  theme?: IDefaultTheme;
+  fieldRaito?: string;
+}

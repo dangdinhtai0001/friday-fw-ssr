@@ -1,7 +1,11 @@
 import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
 import { typographyBody1Strong } from '@/package/preta/styled-shared';
-import { IStyledLabelProps, IStyledMessageProps } from './types.d'
+import {
+  IStyledLabelProps,
+  IStyledMessageProps,
+  IStyledDataBlockRootProps
+} from './types.d'
 
 export const StyledLabel = styled('div', {})<IStyledLabelProps>(({ theme, status, textAlign }: IStyledLabelProps) => ({
   ...typographyBody1Strong({ theme }),
@@ -22,7 +26,10 @@ export const StyledRequiredIcon = styled('span', {})(({ theme }: { theme?: IDefa
   marginLeft: '0.1rem',
 }));
 
-export const StyledDataBlockRoot = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
-  display: 'flex',
-  alignContent: 'center',
+export const StyledDataBlockRoot = styled('div', {})<IStyledDataBlockRootProps>(({ fieldRaito }: IStyledDataBlockRootProps) => ({
+  display: 'grid',
+  width: '100%',
+  gridTemplateColumns: fieldRaito,
+  alignItems: 'center',
+  padding: '0px 3px 0px 3px',
 }));

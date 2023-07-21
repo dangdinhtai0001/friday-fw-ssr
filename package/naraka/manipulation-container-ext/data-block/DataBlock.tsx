@@ -7,7 +7,7 @@ import { motion, useAnimation, AnimationControls } from "framer-motion";
 import useAsyncEffect from "@n1ru4l/use-async-effect";
 import { useContainerContext } from '@/package/naraka/manipulation-container/context/useContainerContext';
 import FieldItem from '@/package/naraka/manipulation-container/items/DataFieldItem';
-import { StyledLabel, StyledRequiredIcon, StyledMessage } from './StyledElements'
+import { StyledLabel, StyledRequiredIcon, StyledMessage, StyledDataBlockRoot } from './StyledElements'
 
 export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const { fieldItemProps } = props;
@@ -47,7 +47,7 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
     // TODO: Check lại xem vì sao không có label thì nó không render cả control luôn 
     if (label) {
       return (
-        <div>
+        <StyledDataBlockRoot fieldRaito={fieldRaito ? fieldRaito : defaultFieldRaito}>
           <div>
             <StyledLabel status={errorMessage ? 'error' : undefined} textAlign={labelAlign ? labelAlign : defaultFieldLabelAlign}>
               {label}
@@ -65,7 +65,7 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
             </motion.div>
             <StyledMessage status='warning'>{message}</StyledMessage>
           </div>
-        </div>
+        </StyledDataBlockRoot>
       );
     } else {
       return (
