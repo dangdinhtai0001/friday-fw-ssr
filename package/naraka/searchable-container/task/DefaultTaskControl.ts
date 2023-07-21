@@ -1,7 +1,7 @@
-import { TaskControl, TaskBlock, ContextState, ContextApi } from '../types';
+import { ITaskControl, ITaskBlock, ContextState, ContextApi } from '../types';
 import { DefaultTaskName, TASK_STATUS } from '../Constant';
 
-const onProcessTask_FilterModified = async (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => {
+const onProcessTask_FilterModified = async (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => {
   console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
   // mặc định thì payload.data sẽ là filterInstance trong context
   contextApi?.applyFilterInstance(payload.data);
@@ -10,7 +10,7 @@ const onProcessTask_FilterModified = async (payload: TaskBlock, context?: Contex
   return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
-const onProcessTask_PaginationModified = async (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => {
+const onProcessTask_PaginationModified = async (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => {
   console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
 
   // mặc định thì payload.data sẽ là paginationInstance trong context
@@ -20,7 +20,7 @@ const onProcessTask_PaginationModified = async (payload: TaskBlock, context?: Co
   return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
-const onProcessTask_FetchData = async (payload: TaskBlock, context?: ContextState, contextApi?: ContextApi) => {
+const onProcessTask_FetchData = async (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => {
   console.log(`Process Task ${payload.name}-${payload.id}: `, payload);
   let containerData = [];
 
@@ -35,7 +35,7 @@ const onProcessTask_FetchData = async (payload: TaskBlock, context?: ContextStat
   return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
-export const createDefaultTaskControls = (): TaskControl[] => {
+export const createDefaultTaskControls = (): ITaskControl[] => {
   return [
     {
       id: DefaultTaskName.FILTER_MODIFIED,

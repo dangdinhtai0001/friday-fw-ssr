@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container';
-import { ContainerProviderProps, ContextApi, ContextState, TaskBlock } from '@/package/naraka/searchable-container/types';
+import { ContainerProviderProps, ContextApi, ContextState, ITaskBlock } from '@/package/naraka/searchable-container/types';
 import { ContextState as ManipulationContextState } from '@/package/naraka/manipulation-container/types';
 
 import ToolbarBlock from './ToolbarBlock';
-import { 
-  DefaultFilterBlock, 
-  DefaultPaginationBlock, 
+import {
+  DefaultFilterBlock,
+  DefaultPaginationBlock,
   DefaultToolbarBlock,
   // 
-  IPaginationBlockProps, 
+  IPaginationBlockProps,
   IDefaultFilterBlockProps,
   IToolbarBlockExtProps
- } from '@/package/naraka/searchable-container-ext';
+} from '@/package/naraka/searchable-container-ext';
 import InputWrappper, { IInputWrapperProps } from '@/package/deva/input';
 
 
@@ -46,19 +46,45 @@ export default function ComponentPage() {
     filterBlockComponent: DefaultFilterBlock,
     // ------------
     toolbarBlockComponent: DefaultToolbarBlock,
-    toolbarBlockParams: {} as IToolbarBlockExtProps,
+    toolbarBlockParams: {
+      taskControls: [
+        {
+          name: "Thêm",
+          colorType: "primary",
+          onCreateTaskChainEvent: () => {
+            return {
+              requests: [
+                { name: 'add' },
+                { name: DefaultTaskName.FETCH_DATA }
+              ]
+            };
+          }
+        },
+        {
+          name: "Xóa",
+          colorType: "error",
+          onCreateTaskChainEvent: () => {
+            return {
+              requests: [
+                { name: 'delete' },
+              ]
+            };
+          }
+        }
+      ]
+    } as IToolbarBlockExtProps,
     // ------------
     taskControls: [
       {
         id: 'add',
-        onProcessTask(payload: TaskBlock): TaskBlock {
+        onProcessTask(payload: ITaskBlock): ITaskBlock {
           console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
           return { ...payload, data: { foo: 'bar' }, status: TASK_STATUS.SUCCESS };
         },
       },
       {
         id: 'delete',
-        async onProcessTask(payload: TaskBlock, context?: ContextState, contextApi?: ContextApi): Promise<TaskBlock> {
+        async onProcessTask(payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi): Promise<ITaskBlock> {
           console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
 
           contextApi?.applyProcessingData(context?.containerData[0]);

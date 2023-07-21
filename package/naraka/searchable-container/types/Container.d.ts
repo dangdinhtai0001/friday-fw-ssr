@@ -1,6 +1,6 @@
 import { FilterBlockProps, PaginationBlockProps } from './Panel.d';
 import { IFilterBlockProps } from './Block.d';
-import { TaskControl } from './Task.d';
+import { ITaskControl } from './Task.d';
 import { FilterDef } from './Common.d'
 
 export interface ContainerProviderProps {
@@ -12,7 +12,7 @@ export interface ContainerProviderProps {
   toolbarBlockParams?: any;
   toolbarBlockComponent?: React.ComponentType<ToolbarBlockProps>;
   // ==================================================
-  taskControls?: TaskControl[]
+  taskControls?: ITaskControl[]
   // ==================================================
   paginationBlockParams?: any;
   paginationBlockComponent?: React.ComponentType<T & PaginationBlockProps>;

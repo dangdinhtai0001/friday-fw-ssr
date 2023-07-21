@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PaginationPanelProps, ContextHookValue, PaginationModel, CreateTaskChainEvent, TaskBlock } from '../types';
+import { PaginationPanelProps, ContextHookValue, PaginationModel, ICreateTaskChainEvent, ITaskBlock } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import useTask from '../task/useTask';
 import { DefaultTaskName } from '../Constant';

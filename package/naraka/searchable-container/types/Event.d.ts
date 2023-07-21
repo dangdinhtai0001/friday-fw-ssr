@@ -1,22 +1,22 @@
 import { ContextHelper, ContextState } from './Context';
 import { FilterCriteria, PaginationModel } from './Common.d';
-import { TaskRequest } from './Task.d'
+import { ITaskRequest } from './Task.d'
 
-export interface BaseEvent {
+export interface IBaseEvent {
   // Event identifier
   type: string;
 }
 
-export interface FilterModifiedEvent extends BaseEvent {
+export interface IFilterModifiedEvent extends IBaseEvent {
   filterInstance: FilterCriteria[];
 }
 
-export interface PaginationModifiedEvent extends BaseEvent {
+export interface IPaginationModifiedEvent extends IBaseEvent {
   value: PaginationModel;
 }
 
-export interface CreateTaskChainEvent extends BaseEvent {
-  requests: TaskRequest[];
+export interface ICreateTaskChainEvent extends IBaseEvent {
+  requests: ITaskRequest[];
 }
 
 

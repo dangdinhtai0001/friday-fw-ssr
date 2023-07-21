@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContextHookValue, TaskBlock } from '../types';
+import { ContextHookValue, ITaskBlock } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import useTask from '../task/useTask';
 import useAsyncEffect from "@n1ru4l/use-async-effect";

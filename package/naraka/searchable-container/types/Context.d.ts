@@ -1,7 +1,7 @@
 import React from 'react';
-import { FilterModifiedEvent } from './Event.d';
+import { IFilterModifiedEvent } from './Event.d';
 import { FilterCriteria, PaginationModel, FilterDef } from './Common.d';
-import { TaskControl, TaskBlock } from './Task.d';
+import { ITaskControl, ITaskBlock } from './Task.d';
 import { FilterBlockProps, ToolbarBlockProps, PaginationBlockProps } from './Panel'
 
 export interface ContextState {
@@ -17,9 +17,9 @@ export interface ContextState {
   toolbarBlockParams?: any;
   toolbarBlockComponent?: React.ComponentType<ToolbarBlockProps>;
 
-  taskControls?: TaskControl[];
-  taskChain: TaskBlock[];
-  taskResult: TaskBlock[];
+  taskControls?: ITaskControl[];
+  taskChain: ITaskBlock[];
+  taskResult: ITaskBlock[];
 
   paginationInstance: PaginationModel;
 
@@ -29,17 +29,17 @@ export interface ContextState {
   containerData: any[];
   processingData?: any;
 
-  onFetchData?: (taskBlock?: TaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
+  onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 }
 
 export interface ContextApi {
   // filter
   applyFilterInstance: (filterInstance: FilterCriteria[]) => void;
   // Task 
-  createTaskChain: (taskChain: TaskBlock[]) => void;
-  applyTaskBatch: (tasks: TaskBlock[]) => void;
+  createTaskChain: (taskChain: ITaskBlock[]) => void;
+  applyTaskBatch: (tasks: ITaskBlock[]) => void;
   clearTaskResult: () => void;
-  completeTask: (task: TaskBlock) => void;
+  completeTask: (task: ITaskBlock) => void;
   // pagiantion
   applyPaginationInstance: (paginationModel: PaginationModel) => void;
   // data

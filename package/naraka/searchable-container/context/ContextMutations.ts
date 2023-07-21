@@ -1,6 +1,6 @@
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 import { Dispatch } from 'react';
-import { ContextState, ContextApi, TaskBlock, FilterCriteria, PaginationModel } from '../types'
+import { ContextState, ContextApi, ITaskBlock, FilterCriteria, PaginationModel } from '../types'
 // - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính
 // - create... ==> Tính toán và thay đổi hoàn toàn giá trị  cuẩ thuộc tính
 // - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
@@ -18,7 +18,7 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
-    createTaskChain: (taskChain: TaskBlock[]): void => {
+    createTaskChain: (taskChain: ITaskBlock[]): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
           ...prevContext,
@@ -68,7 +68,7 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
-    applyTaskBatch: (taskChain: TaskBlock[]): void => {
+    applyTaskBatch: (taskChain: ITaskBlock[]): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
           ...prevContext,
@@ -88,9 +88,9 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
-    completeTask: (task: TaskBlock): void => {
+    completeTask: (task: ITaskBlock): void => {
       setContext((prevContext: ContextState) => {
-        let _taskResult: TaskBlock[] = prevContext.taskResult;
+        let _taskResult: ITaskBlock[] = prevContext.taskResult;
         _taskResult.push(task);
 
         const updatedContext: ContextState = {

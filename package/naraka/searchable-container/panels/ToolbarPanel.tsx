@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToolbarPanelProps, ContextHookValue, CreateTaskChainEvent, TaskControl } from '../types';
+import { ToolbarPanelProps, ContextHookValue, ICreateTaskChainEvent, ITaskControl } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import useTask from '../task/useTask';
 
@@ -7,7 +7,7 @@ const ToolbarPanel: React.FC<ToolbarPanelProps> = () => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
   const { onCreateTaskChain } = useTask();
 
-  const handleOnCreateTask = (events: CreateTaskChainEvent): void => {
+  const handleOnCreateTask = (events: ICreateTaskChainEvent): void => {
     onCreateTaskChain(events.requests);
   };
 
