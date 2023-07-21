@@ -6,8 +6,9 @@ import { ContainerRef } from '@/package/naraka/manipulation-container/types';
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import Button from '@mui/base/Button';
 import Box from '@mui/system/Box';
-import { StyledBox } from './StyledElements'
-import { IDefaultFilterBlockProps } from './types.d'
+import { StyledFilterBlock, StyledFilterBlockButton } from './StyledElements'
+import { IDefaultFilterBlockProps } from './types.d';
+import ButtonWrapper from '@/package/deva/button'
 
 
 // TODO: Viết lại block này cho đúng style code
@@ -42,7 +43,7 @@ export default function FilterBlock(props: IDefaultFilterBlockProps) {
   }
 
   return (
-    <StyledBox sx={{ display: 'grid', gap: 1 }}>
+    <StyledFilterBlock className='styled-filter-block'>
       <FormContainerProvider
         {...props}
         fieldDefs={context.filterDefs ? context.filterDefs : []}
@@ -51,9 +52,10 @@ export default function FilterBlock(props: IDefaultFilterBlockProps) {
         onSubmitError={handleOnSubmitErrors}
         ref={formRef}
       />
-      <Box sx={{ textAlign: 'right' }}>
-        <Button onClick={handleOnclick}>apply filter</Button>
-      </Box>
-    </StyledBox>
+      <StyledFilterBlockButton>
+        {/* TODO: chuyển sang dùng i18n */}
+        <ButtonWrapper onClick={handleOnclick} width="fit-content">apply filter</ButtonWrapper>
+      </StyledFilterBlockButton>
+    </StyledFilterBlock>
   );
 }

@@ -32,7 +32,7 @@ function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<HTMLB
   }
 
   return (
-    <motion.div whileTap={{ scale: disabled ? 1 : hoverScale }}>
+    <motion.div whileTap={{ scale: disabled ? 1 : hoverScale }} style={{width: 'fit-content'}}>
       <StyledButtonContainer
         {...getRootProps()}
         colorType={colorType}

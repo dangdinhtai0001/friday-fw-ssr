@@ -1,6 +1,6 @@
 import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
-import { defaultControllerContainer, typographyCaption2Strong } from '@/package/preta/styled-shared';
+import { defaultControllerContainer, typographyCaption2Strong, typographyCaption2 } from '@/package/preta/styled-shared';
 import { IStyledButtonProps } from './types.d'
 
 
@@ -29,14 +29,15 @@ export const StyledButtonContainer = styled('button')<IStyledButtonProps>(({
 
   return {
     ...defaultControllerContainer({ theme, width, noneBorder: !border }),
-    ...typographyCaption2Strong({ theme }),
+    // ...typographyCaption2Strong({ theme }),
+    ...typographyCaption2({ theme }),
     color: _color,
 
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     gap: '0.5rem',
-    padding: '0.1rem',
+    padding: '0.1rem 0.3rem',
 
     cursor: disabled ? 'not-allowed' : 'pointer',
     backgroundColor: _backgroundColor,

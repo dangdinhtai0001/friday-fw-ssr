@@ -28,7 +28,6 @@ export const StyledRequiredIcon = styled('span', {})(({ theme }: { theme?: IDefa
 
 export const StyledDataBlockRoot = styled('div', {})<IStyledDataBlockRootProps>(({ fieldRaito }: IStyledDataBlockRootProps) => ({
   display: 'grid',
-  width: '100%',
   gridTemplateColumns: fieldRaito,
   alignItems: 'center',
   padding: '0px 3px 0px 3px',

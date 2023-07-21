@@ -32,7 +32,7 @@ export default function ComponentPage() {
       onMounted(context: ManipulationContextState) {
         console.log("on mounted event: ", context.formId);
       },
-      defaultCols: 3,
+      defaultCols: 2,
       defaultFieldRaito: '20% 80%'
     } as unknown as IDefaultFilterBlockProps,
     filterBlockComponent: DefaultFilterBlock,
