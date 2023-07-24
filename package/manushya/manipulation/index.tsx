@@ -26,7 +26,12 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
-      <ModalWrapper></ModalWrapper>
+      <ModalWrapper footerDefs={[
+        { label: 'Confirm', colorType: 'success' },
+        { label: 'Load', colorType: 'warning' },
+        { label: 'Cancel', color: 'transparent', textColor: 'primary', border: true }
+      ]}
+      ></ModalWrapper>
       <Box
         sx={{
           backgroundColor: 'background.paper',

@@ -1,12 +1,19 @@
 import { IDefaultTheme } from '@/package/preta/types';
+import { IButtonWrapperProps } from '@/package/deva/button';
 
-export interface IModalProviderProps {
+export interface IModalProviderProps extends IModalWrapperProps {
   id?: string,
 }
 
-export interface IModalWrapperProps extends IModalProviderProps {
+export interface footerConfig extends IButtonWrapperProps {
+  label?: string,
+  onClick?: () => void,
+}
+
+export interface IModalWrapperProps {
   width?: string | number,
   height?: string | number,
+  footerDefs?: footerConfig[],
 }
 
 export interface IBackDropProps {

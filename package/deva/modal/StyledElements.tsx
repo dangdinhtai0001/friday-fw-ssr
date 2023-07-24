@@ -24,7 +24,7 @@ export const StyledModal = styled(Modal, {})(({ theme }: { theme?: IDefaultTheme
 // --------------------------------------------------------------------------
 
 export const StyledModalContainer = styled('div', {})<IStyledModalContainerProps>(({ theme, width, height }: IStyledModalContainerProps) => ({
-  ...defaultComponentContainer({ theme, width }),
+  ...defaultComponentContainer({ theme, width, noneBorder: true }),
   height: height,
 
   display: "flex",
@@ -70,6 +70,7 @@ export const StyledModalFooter = styled('div', {})(({ theme }: { theme?: IDefaul
   display: "flex",
   justifyContent: "end",
   alignItems: "center",
+  gap: theme?.components?.spacing.sx,
 
   padding: theme?.components?.spacing.sx,
 }));

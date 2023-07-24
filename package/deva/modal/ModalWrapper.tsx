@@ -8,17 +8,31 @@ import {
   StyledModalContent,
   StyledModalFooter
 } from './StyledElements';
+import ButtonWrapper from '@/package/deva/button';
 
 function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
 
   const {
     height = "50vh",
-    width = "50vw"
+    width = "50vw",
+    footerDefs,
   } = props;
 
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const renderFooter = () => {
+    return footerDefs?.map((item, index) => {
+      let { label, ...buttonProps } = item;
+      return (
+        <ButtonWrapper {...buttonProps} key={index}>
+          {label}
+        </ButtonWrapper>
+      );
+    });
+  }
 
   return (
     <div>
@@ -45,8 +59,12 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
           <StyledModalContent className='styled-modal-content'>
             Aliquid amet deserunt earum!
           </StyledModalContent>
-          <StyledModalFooter className='styled-modal-footer'>
-          </StyledModalFooter>
+          {footerDefs && (
+            <StyledModalFooter className='styled-modal-footer'>
+              {renderFooter()}
+            </StyledModalFooter>
+          )}
+
         </StyledModalContainer>
       </StyledModal>
     </div>
