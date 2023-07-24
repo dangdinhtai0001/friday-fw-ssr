@@ -27,21 +27,49 @@ export const StyledModalContainer = styled('div', {})<IStyledModalContainerProps
   ...defaultComponentContainer({ theme, width }),
   height: height,
 
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  // alignItems: "center",
+
   backgroundColor: theme?.palette?.background?.paper,
 }));
 
 export const StyledModalHeader = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
-  ...defaultComponentContainer({ theme }),
+  ...defaultComponentContainer({ theme, noneBorder: true }),
   width: '',
-
-  ...typographyBody1Strong({ theme }),
-  color: theme?.palette?.text?.secondary,
+  borderRadius: `${theme?.components.cornerRadius.medium} ${theme?.components.cornerRadius.medium} 0px 0px`,
 
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
 
+  ...typographyBody1Strong({ theme }),
+  color: theme?.palette?.text?.secondary,
+
   padding: theme?.components?.spacing.sx,
 
   backgroundColor: theme?.palette?.primary.main,
+}));
+
+export const StyledModalContent = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+  ...defaultComponentContainer({ theme, noneBorder: true }),
+  width: '',
+  borderRadius: `0px 0px 0px 0px`,
+  height: '100%',
+
+  padding: theme?.components?.spacing.sx,
+}));
+
+export const StyledModalFooter = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+  ...defaultComponentContainer({ theme, noneBorder: true }),
+  width: '',
+  borderRadius: `0px 0px ${theme?.components.cornerRadius.medium} ${theme?.components.cornerRadius.medium}`,
+  borderTop: `${theme?.components.strokeWidth.thin} solid ${theme?.palette.secondary.main}`,
+
+  display: "flex",
+  justifyContent: "end",
+  alignItems: "center",
+
+  padding: theme?.components?.spacing.sx,
 }));

@@ -1,6 +1,6 @@
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 import { Dispatch } from 'react';
-import { ContextState, ContextApi, DataFieldStatus } from '../types'
+import { ContextState, ContextApi, DataFieldStatus, FieldStatus } from '../types';
 // - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính
 // - create... ==> Tính toán và thay đổi hoàn toàn giá trị  cuẩ thuộc tính
 // - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
@@ -29,7 +29,7 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
      * @param {DataFieldStatus} fieldStatus - Đối tượng chứa trạng thái vô hiệu hóa của các trường.
      * @returns {void}
      */
-    applyFieldDisabled(fieldStatus: DataFieldStatus): void {
+    applyFieldDisabled(fieldStatus: FieldStatus): void {
       setContext((prevContext: ContextState) => {
         // Tạo một bản sao của ngữ cảnh trước đó
         const updatedContext: ContextState = {
@@ -45,7 +45,7 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
      * @param {DataFieldStatus} fieldStatus - Đối tượng chứa trạng thái chỉ đọc của các trường.
      * @returns {void}
      */
-    applyFieldReadOnly(fieldStatus: DataFieldStatus): void {
+    applyFieldReadOnly(fieldStatus: FieldStatus): void {
       setContext((prevContext: ContextState) => {
         // Tạo một bản sao của ngữ cảnh trước đó
         const updatedContext: ContextState = {
@@ -61,7 +61,7 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
      * @param {DataFieldStatus} fieldStatus - Đối tượng chứa trạng thái ẩn của các trường.
      * @returns {void}
      */
-    applyFieldHidden(fieldStatus: DataFieldStatus): void {
+    applyFieldHidden(fieldStatus: FieldStatus): void {
       setContext((prevContext: ContextState) => {
         // Tạo một bản sao của ngữ cảnh trước đó
         const updatedContext: ContextState = {

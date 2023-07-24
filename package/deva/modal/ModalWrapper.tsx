@@ -1,16 +1,22 @@
-import * as React from 'react';
+import { forwardRef, ForwardedRef, useState } from 'react';
 import { IModalWrapperProps } from './types.d';
 import {
   StyledBackdrop,
   StyledModal,
   StyledModalContainer,
-  StyledModalHeader
+  StyledModalHeader,
+  StyledModalContent,
+  StyledModalFooter
 } from './StyledElements';
 
-export default function ModalWrapper(props: IModalWrapperProps) {
-  const { height = "50vh", width = "50vw" } = props;
+function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
 
-  const [open, setOpen] = React.useState(false);
+  const {
+    height = "50vh",
+    width = "50vw"
+  } = props;
+
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -26,6 +32,7 @@ export default function ModalWrapper(props: IModalWrapperProps) {
       >
         <StyledModalContainer
           className='styled-modal-container'
+          id="unstyled-modal-description"
           width={width}
           height={height}
         >
@@ -35,9 +42,15 @@ export default function ModalWrapper(props: IModalWrapperProps) {
           >
             This is header
           </StyledModalHeader>
-          <p id="unstyled-modal-description">Aliquid amet deserunt earum!</p>
+          <StyledModalContent className='styled-modal-content'>
+            Aliquid amet deserunt earum!
+          </StyledModalContent>
+          <StyledModalFooter className='styled-modal-footer'>
+          </StyledModalFooter>
         </StyledModalContainer>
       </StyledModal>
     </div>
   );
 }
+
+export default forwardRef(ModalWrapper);
