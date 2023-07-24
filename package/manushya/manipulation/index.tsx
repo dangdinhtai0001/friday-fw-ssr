@@ -12,6 +12,7 @@ import { Box } from '@mui/system';
 import Pagination from '@/package/deva/pagination';
 import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number'
 import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button';
+import ModalWrapper from '@/package/deva/modal';
 
 export interface IManipulationProps {
 }
@@ -25,7 +26,7 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
-      <Pagination currentPage={10} pageSize={10} totalCount={1000}></Pagination>
+      <ModalWrapper></ModalWrapper>
       <Box
         sx={{
           backgroundColor: 'background.paper',
