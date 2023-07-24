@@ -1,8 +1,8 @@
 import styled from '@mui/system/styled';
 import Modal from '@mui/base/Modal';
 import { IDefaultTheme } from '@/package/preta/types';
-import { defaultControllerContainer, typographyCaption2 } from '@/package/preta/styled-shared';
-import { } from './types.d'
+import { defaultControllerContainer, typographyBody1Strong, defaultComponentContainer } from '@/package/preta/styled-shared';
+import { IStyledModalContainerProps } from './types.d'
 
 export const StyledBackdrop = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
   zIndex: -1,
@@ -19,4 +19,29 @@ export const StyledModal = styled(Modal, {})(({ theme }: { theme?: IDefaultTheme
   display: "flex",
   alignItems: "center",
   justifyContent: "center"
+}));
+
+// --------------------------------------------------------------------------
+
+export const StyledModalContainer = styled('div', {})<IStyledModalContainerProps>(({ theme, width, height }: IStyledModalContainerProps) => ({
+  ...defaultComponentContainer({ theme, width }),
+  height: height,
+
+  backgroundColor: theme?.palette?.background?.paper,
+}));
+
+export const StyledModalHeader = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+  ...defaultComponentContainer({ theme }),
+  width: '',
+
+  ...typographyBody1Strong({ theme }),
+  color: theme?.palette?.text?.secondary,
+
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+
+  padding: theme?.components?.spacing.sx,
+
+  backgroundColor: theme?.palette?.primary.main,
 }));

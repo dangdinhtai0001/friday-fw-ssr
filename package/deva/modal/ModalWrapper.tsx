@@ -1,8 +1,15 @@
 import * as React from 'react';
 import { IModalWrapperProps } from './types.d';
-import { StyledBackdrop, StyledModal } from './StyledElements';
+import {
+  StyledBackdrop,
+  StyledModal,
+  StyledModalContainer,
+  StyledModalHeader
+} from './StyledElements';
 
 export default function ModalWrapper(props: IModalWrapperProps) {
+  const { height = "50vh", width = "50vw" } = props;
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -17,10 +24,19 @@ export default function ModalWrapper(props: IModalWrapperProps) {
         onClose={handleClose}
         slots={{ backdrop: StyledBackdrop }}
       >
-        <div>
-          <h2 id="unstyled-modal-title">Text in a modal</h2>
+        <StyledModalContainer
+          className='styled-modal-container'
+          width={width}
+          height={height}
+        >
+          <StyledModalHeader
+            id="unstyled-modal-title"
+            className='styled-modal-header'
+          >
+            This is header
+          </StyledModalHeader>
           <p id="unstyled-modal-description">Aliquid amet deserunt earum!</p>
-        </div>
+        </StyledModalContainer>
       </StyledModal>
     </div>
   );
