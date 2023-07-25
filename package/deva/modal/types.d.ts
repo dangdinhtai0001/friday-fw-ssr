@@ -5,15 +5,15 @@ export interface IModalProviderProps extends IModalWrapperProps {
   id?: string,
 }
 
-export interface footerConfig extends IButtonWrapperProps {
+export interface IFooterConfig extends IButtonWrapperProps {
   label?: string,
-  onClick?: () => void,
+  onClick?: (context?: ContextState, contextApi?: ContextApi) => void | Promise<void>,
 }
 
 export interface IModalWrapperProps {
   width?: string | number,
   height?: string | number,
-  footerDefs?: footerConfig[],
+  footerDefs?: IFooterConfig[],
 }
 
 export interface IBackDropProps {
@@ -28,9 +28,13 @@ export interface IStyledModalContainerProps {
 }
 
 export interface ContextState {
+  modalId?: string;
+  open: boolean;
+  footerDefs?: IFooterConfig[],
 }
 
 export interface ContextApi {
+  commitOpen: (open: boolean) => void;
 }
 
 /**

@@ -1,2 +1,2 @@
-export {default} from './ModalWrapper';
+export { default } from './ModalProvider';
 export * from './types.d';

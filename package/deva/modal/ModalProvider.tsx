@@ -7,6 +7,8 @@ import ModalWrapper from './ModalWrapper';
 const createDefaultContextStateValue = (props: IModalProviderProps): ContextState => {
   return {
     modalId: props.id ? props.id : uuidv4(),
+    open: false,
+    footerDefs: props.footerDefs,
   };
 }
 

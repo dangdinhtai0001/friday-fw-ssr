@@ -1,5 +1,5 @@
 import { forwardRef, ForwardedRef, useState } from 'react';
-import { IModalWrapperProps } from './types.d';
+import { ContextHookValue, IModalWrapperProps, IFooterConfig } from './types.d';
 import {
   StyledBackdrop,
   StyledModal,
@@ -9,6 +9,7 @@ import {
   StyledModalFooter
 } from './StyledElements';
 import ButtonWrapper from '@/package/deva/button';
+import { useModalContext } from './context/useModalContext'
 
 function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
 
@@ -18,16 +19,21 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
     footerDefs,
   } = props;
 
-  const [open, setOpen] = useState(false);
+  const { context, contextApi }: ContextHookValue = useModalContext();
+  const { open } = context;
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    contextApi.commitOpen(true);
+  };
+  const handleClose = (event: object, reason: string) => {
+    contextApi.commitOpen(false);
+  }
 
   const renderFooter = () => {
-    return footerDefs?.map((item, index) => {
-      let { label, ...buttonProps } = item;
+    return footerDefs?.map((item: IFooterConfig, index) => {
+      let { label, onClick, ...buttonProps } = item;
       return (
-        <ButtonWrapper {...buttonProps} key={index}>
+        <ButtonWrapper {...buttonProps} key={index} onClick={() => { onClick?.(context, contextApi); }}>
           {label}
         </ButtonWrapper>
       );

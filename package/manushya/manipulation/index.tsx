@@ -12,7 +12,7 @@ import { Box } from '@mui/system';
 import Pagination from '@/package/deva/pagination';
 import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number'
 import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button';
-import ModalWrapper from '@/package/deva/modal';
+import ModalWrapper, { ContextApi as ModalContextApi, ContextState as ModalContextState } from '@/package/deva/modal';
 
 export interface IManipulationProps {
 }
@@ -29,7 +29,15 @@ export default function Manipulation(props: IManipulationProps) {
       <ModalWrapper footerDefs={[
         { label: 'Confirm', colorType: 'success' },
         { label: 'Load', colorType: 'warning' },
-        { label: 'Cancel', color: 'transparent', textColor: 'primary', border: true }
+        {
+          label: 'Cancel',
+          color: 'transparent',
+          textColor: 'primary',
+          border: true,
+          onClick: (context?: ModalContextState, contextApi?: ModalContextApi) => {
+            contextApi?.commitOpen(false);
+          }
+        }
       ]}
       ></ModalWrapper>
       <Box

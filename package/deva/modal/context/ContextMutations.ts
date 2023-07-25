@@ -8,6 +8,16 @@ import { ContextState, ContextApi } from '../types.d';
 // --------------------------------------------------------------------------------
 export function mutations(context: ContextState, setContext: Dispatch<React.SetStateAction<ContextState>>): ContextApi {
   return {
-
+    commitOpen(open: boolean) {
+      setContext((prevContext: ContextState) => {
+        // Tạo một bản sao mới của prevContext để tránh thay đổi trực tiếp
+        const updatedContext: ContextState = {
+          ...prevContext,
+          open: open
+        };
+        // Trả về context đã được cập nhật
+        return updatedContext;
+      });
+    }
   };
 }
