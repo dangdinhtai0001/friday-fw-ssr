@@ -14,6 +14,9 @@ export interface IModalWrapperProps {
   width?: string | number,
   height?: string | number,
   footerDefs?: IFooterConfig[],
+  title?: string,
+  width?: string,
+  height?: string,
 }
 
 export interface IBackDropProps {
@@ -31,6 +34,9 @@ export interface ContextState {
   modalId?: string;
   open: boolean;
   footerDefs?: IFooterConfig[],
+  title?: string,
+  width?: string,
+  height?: string,
 }
 
 export interface ContextApi {

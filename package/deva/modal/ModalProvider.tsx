@@ -9,6 +9,9 @@ const createDefaultContextStateValue = (props: IModalProviderProps): ContextStat
     modalId: props.id ? props.id : uuidv4(),
     open: false,
     footerDefs: props.footerDefs,
+    width: String(props.width ? props.width : '50vw'),
+    height: String(props.height ? props.height : '50vh'),
+    title: props.title,
   };
 }
 

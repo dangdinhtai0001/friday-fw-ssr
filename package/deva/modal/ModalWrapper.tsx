@@ -13,14 +13,8 @@ import { useModalContext } from './context/useModalContext'
 
 function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
 
-  const {
-    height = "50vh",
-    width = "50vw",
-    footerDefs,
-  } = props;
-
   const { context, contextApi }: ContextHookValue = useModalContext();
-  const { open } = context;
+  const { open, width, height, footerDefs, title } = context;
 
   const handleOpen = () => {
     contextApi.commitOpen(true);
@@ -60,7 +54,7 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
             id="unstyled-modal-title"
             className='styled-modal-header'
           >
-            This is header
+            {title}
           </StyledModalHeader>
           <StyledModalContent className='styled-modal-content'>
             Aliquid amet deserunt earum!

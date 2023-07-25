@@ -26,7 +26,9 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
-      <ModalWrapper footerDefs={[
+      <ModalWrapper 
+        title= "Đây là title"
+      footerDefs={[
         { label: 'Confirm', colorType: 'success' },
         { label: 'Load', colorType: 'warning' },
         {
