@@ -13,6 +13,7 @@ import Pagination from '@/package/deva/pagination';
 import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number'
 import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button';
 import ModalWrapper, { ContextApi as ModalContextApi, ContextState as ModalContextState } from '@/package/deva/modal';
+import TabsWrapper from '@/package/deva/tabs';
 
 export interface IManipulationProps {
 }
@@ -26,21 +27,26 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
-      <ModalWrapper 
-        title= "Đây là title"
-      footerDefs={[
-        { label: 'Confirm', colorType: 'success' },
-        { label: 'Load', colorType: 'warning' },
-        {
-          label: 'Cancel',
-          color: 'transparent',
-          textColor: 'primary',
-          border: true,
-          onClick: (context?: ModalContextState, contextApi?: ModalContextApi) => {
-            contextApi?.commitOpen(false);
+      <TabsWrapper tabDefs={[
+        { title: 'Tab 1', id: 'tab1' },
+        { title: 'Tab 2', id: 'tab2' },
+        { title: 'Tab 3', id: 'tab3' }
+      ]}></TabsWrapper>
+      <ModalWrapper
+        title="Đây là title"
+        footerDefs={[
+          { label: 'Confirm', colorType: 'success' },
+          { label: 'Load', colorType: 'warning' },
+          {
+            label: 'Cancel',
+            color: 'transparent',
+            textColor: 'primary',
+            border: true,
+            onClick: (context?: ModalContextState, contextApi?: ModalContextApi) => {
+              contextApi?.commitOpen(false);
+            }
           }
-        }
-      ]}
+        ]}
       ></ModalWrapper>
       <Box
         sx={{
