@@ -29,7 +29,12 @@ export default function Manipulation(props: IManipulationProps) {
       Manipulation page
       <TabsWrapper tabDefs={[
         { title: 'Tab 1', id: 'tab1' },
-        { title: 'Tab 2', id: 'tab2' },
+        { title: 'Tab 2', id: 'tab2', disabled: true },
+        { title: 'Tab 3', id: 'tab3' }
+      ]}></TabsWrapper>
+      <TabsWrapper tabDefs={[
+        { title: 'Tab 1', id: 'tab1' },
+        { title: 'Tab 2', id: 'tab2', disabled: true },
         { title: 'Tab 3', id: 'tab3' }
       ]}></TabsWrapper>
       <ModalWrapper
