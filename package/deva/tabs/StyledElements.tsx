@@ -4,7 +4,7 @@ import Tab, { tabClasses } from '@mui/base/Tab';
 import TabPanel from '@mui/base/TabPanel';
 import { IDefaultTheme } from '@/package/preta/types';
 import { } from './types.d';
-import { defaultControllerContainer, typographyCaption1Strong, typographyCaption2 } from '@/package/preta/styled-shared';
+import { defaultComponentContainer, typographyCaption1Strong, typographyCaption2 } from '@/package/preta/styled-shared';
 
 export const StyledTabsList = styled(TabsList, {})(({ theme }: { theme?: IDefaultTheme }) => ({
 

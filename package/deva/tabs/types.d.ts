@@ -6,4 +6,7 @@ export interface ITabDef {
 export interface ITabsWrapperProps {
   defaultTab?: string | number;
   tabDefs: ITabDef[];
+  value: string | number;
+  onChange?: (value: string | number | null) => void;
+  orientation?: 'horizontal' | 'vertical';
 }
