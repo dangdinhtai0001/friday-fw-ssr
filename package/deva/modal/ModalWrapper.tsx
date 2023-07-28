@@ -1,4 +1,4 @@
-import { forwardRef, ForwardedRef, useState } from 'react';
+import { forwardRef, ForwardedRef, createElement } from 'react';
 import { ContextHookValue, IModalWrapperProps, IFooterConfig } from './types.d';
 import {
   StyledBackdrop,
@@ -12,7 +12,7 @@ import ButtonWrapper from '@/package/deva/button';
 import { useModalContext } from './context/useModalContext'
 
 function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
-
+  const { component, componentParams = {} } = props;
   const { context, contextApi }: ContextHookValue = useModalContext();
   const { open, width, height, footerDefs, title } = context;
 
@@ -57,7 +57,7 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
             {title}
           </StyledModalHeader>
           <StyledModalContent className='styled-modal-content'>
-            Aliquid amet deserunt earum!
+            {component && createElement(component!, componentParams)}
           </StyledModalContent>
           {footerDefs && (
             <StyledModalFooter className='styled-modal-footer'>

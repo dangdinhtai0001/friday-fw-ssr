@@ -3,14 +3,22 @@ import Tabs from '@mui/base/Tabs';
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { v4 as uuidv4 } from 'uuid';
 import { ITabsWrapperProps } from './types.d';
-import { StyledTabsList, StyledTab, StyledTabPanel, StyledTabUnderline } from './StyledElements';
+import {
+  StyledTabs,
+  StyledTabsList,
+  StyledTab,
+  StyledTabPanel,
+  StyledTabUnderline
+} from './StyledElements';
 function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<unknown>) {
   const {
     tabDefs,
     defaultTab = tabDefs[0].id,
     value,
     onChange,
-    orientation = 'horizontal'
+    orientation = 'horizontal',
+    tabListStartAddOn,
+    tabListEndAddOn
   } = props;
 
   const [selectedTab, setSelectedTab] = useState<string | number | null>(defaultTab);
@@ -28,7 +36,7 @@ function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<unknown>) {
         >
           {tabDef.title}
           {tabDef.id === selectedTab ? (
-            <MotionTabUnderline layoutId="hihi" />
+            <MotionTabUnderline layoutId="tab-layout" />
           ) : null}
         </StyledTab>
       )
@@ -38,7 +46,7 @@ function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<unknown>) {
   const renderTabPanel = () => {
     return tabDefs.map((tabDef, index) => {
       return (
-        <StyledTabPanel key={index} value={tabDef.id}>
+        <StyledTabPanel key={index} value={tabDef.id} className='styled-tab-panel'>
 
           <AnimatePresence >
             <motion.div
@@ -63,19 +71,22 @@ function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<unknown>) {
   }
 
   return (
-    <Tabs
+    <StyledTabs
       defaultValue={defaultTab}
       value={value}
       onChange={handleOnChangeTab}
       orientation={orientation}
+      className='styled-tabs'
     >
+      {tabListStartAddOn}
       <StyledTabsList>
         <LayoutGroup id={uuidv4()}>
           {renderTab()}
         </LayoutGroup>
       </StyledTabsList>
+      {tabListEndAddOn}
       {renderTabPanel()}
-    </Tabs>
+    </StyledTabs>
   );
 };
 

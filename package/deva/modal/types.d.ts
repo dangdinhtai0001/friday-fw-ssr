@@ -17,6 +17,8 @@ export interface IModalWrapperProps {
   title?: string,
   width?: string,
   height?: string,
+  component?: React.ComponentType<any>;
+  componentParams?: any;
 }
 
 export interface IBackDropProps {

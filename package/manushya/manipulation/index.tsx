@@ -14,6 +14,7 @@ import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/inp
 import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button';
 import ModalWrapper, { ContextApi as ModalContextApi, ContextState as ModalContextState } from '@/package/deva/modal';
 import TabsWrapper from '@/package/deva/tabs';
+import { Tab } from '@mui/base';
 
 export interface IManipulationProps {
 }
@@ -27,16 +28,20 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
+      <TabsWrapper
+        tabDefs={[
+          { title: 'Tab 1', id: 'tab1' },
+          { title: 'Tab 2', id: 'tab2', disabled: true },
+          { title: 'Tab 3', id: 'tab3' }
+        ]}
+        tabListStartAddOn={<div>hihi</div>}
+        value={''}
+      ></TabsWrapper>
       <TabsWrapper tabDefs={[
         { title: 'Tab 1', id: 'tab1' },
         { title: 'Tab 2', id: 'tab2', disabled: true },
         { title: 'Tab 3', id: 'tab3' }
-      ]}></TabsWrapper>
-      <TabsWrapper tabDefs={[
-        { title: 'Tab 1', id: 'tab1' },
-        { title: 'Tab 2', id: 'tab2', disabled: true },
-        { title: 'Tab 3', id: 'tab3' }
-      ]}></TabsWrapper>
+      ]} value={''}></TabsWrapper>
       <ModalWrapper
         title="Đây là title"
         footerDefs={[
@@ -52,6 +57,14 @@ export default function Manipulation(props: IManipulationProps) {
             }
           }
         ]}
+        component={TabsWrapper}
+        componentParams={{
+          tabDefs:[
+            { title: 'Tab 1', id: 'tab1' },
+            { title: 'Tab 2', id: 'tab2', disabled: true },
+            { title: 'Tab 3', id: 'tab3' }
+          ]
+        }}
       ></ModalWrapper>
       <Box
         sx={{

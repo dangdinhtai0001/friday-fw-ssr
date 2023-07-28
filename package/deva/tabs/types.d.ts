@@ -1,5 +1,6 @@
 import { TabOwnerState } from '@mui/base/Tab';
 import { IDefaultTheme } from '@/package/preta/types';
+import React from 'react';
 
 export interface ITabDef {
   id: string | number,
@@ -23,4 +24,6 @@ export interface ITabsWrapperProps {
   value: string | number;
   onChange?: (value: string | number | null) => void;
   orientation?: 'horizontal' | 'vertical';
-}
+  tabListStartAddOn?: React.ReactNode;
+  tabListEndAddOn?: React.ReactNode;
+} 

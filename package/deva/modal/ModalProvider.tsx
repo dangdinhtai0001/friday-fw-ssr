@@ -20,7 +20,11 @@ function ModalProvider(props: IModalProviderProps, ref: ForwardedRef<unknown>) {
 
   return (
     <ModalContextProvider initialState={initialState}>
-      <ModalWrapper {...initialState} ref={ref}></ModalWrapper>
+      <ModalWrapper
+        {...initialState}
+        component={props.component}
+        componentParams={props.componentParams}
+        ref={ref}></ModalWrapper>
     </ModalContextProvider>
   );
 }
