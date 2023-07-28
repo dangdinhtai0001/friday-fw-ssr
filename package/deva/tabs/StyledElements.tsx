@@ -9,6 +9,9 @@ import { defaultComponentContainer, typographyCaption1Strong, typographyCaption2
 
 export const StyledTabs = styled(Tabs, {})(({ theme }: { theme?: IDefaultTheme }) => ({
   height: '100%',
+
+  display: 'flex',
+  flexDirection: 'column',
 }));
 
 export const StyledTabsList = styled(TabsList, {})(({ theme }: { theme?: IDefaultTheme }) => ({
@@ -25,9 +28,7 @@ export const StyledTab = styled(Tab, {})<IStyledTabProps>(({ theme, disabled }: 
 }));
 
 export const StyledTabPanel = styled(TabPanel, {})(({ theme }: { theme?: IDefaultTheme }) => ({
-  border: '3px solid red',
   height: '100%',
-
   overflow: 'auto',
 }));
 
