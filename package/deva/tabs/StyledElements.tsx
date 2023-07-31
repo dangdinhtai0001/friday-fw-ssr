@@ -20,8 +20,13 @@ export const StyledTabsList = styled(TabsList, {})(({ theme }: { theme?: IDefaul
   justifyContent: 'start',
 }));
 
-export const StyledTab = styled(Tab, {})<IStyledTabProps>(({ theme, disabled }: IStyledTabProps) => ({
+export const StyledTab = styled(Tab, {
+  shouldForwardProp: (prop) => prop !== 'active' && prop !== 'highlighted',
+})<IStyledTabProps>(({ theme, disabled }: IStyledTabProps) => ({
   ...defaultComponentContainer({ theme, noneBorder: true }),
+  backgroundColor: 'inherit',
+
+  height: '2rem',
   width: 'fit',
   cursor: disabled ? 'not-allowed' : 'pointer',
   color: disabled ? theme?.palette?.text?.disabled : theme?.palette?.text?.primary,

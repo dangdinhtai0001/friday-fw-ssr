@@ -57,7 +57,7 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
             {title}
           </StyledModalHeader>
           <StyledModalContent className='styled-modal-content'>
-            {component && createElement(component!, componentParams)}
+            {component && createElement(component, componentParams)}
           </StyledModalContent>
           {footerDefs && (
             <StyledModalFooter className='styled-modal-footer'>

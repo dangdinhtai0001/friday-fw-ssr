@@ -28,20 +28,24 @@ export default function Manipulation(props: IManipulationProps) {
   return (
     <div>
       Manipulation page
+
       <TabsWrapper
         tabDefs={[
-          { title: 'Tab 1', id: 'tab1' },
-          { title: 'Tab 2', id: 'tab2', disabled: true },
-          { title: 'Tab 3', id: 'tab3' }
+          {
+            title: 'Tab 1', id: 'tab1',
+            component: 'div',
+            componentParams: { children: "hello" }
+          },
+          {
+            title: 'Tab 2', id: 'tab2', disabled: true,
+          },
+          {
+            title: 'Tab 3', id: 'tab3',
+            component: Box,
+          }
         ]}
-        tabListStartAddOn={<div>hihi</div>}
-        value={''}
+        tabListStartAddOn={<div>tabListStartAddOn</div>}
       ></TabsWrapper>
-      <TabsWrapper tabDefs={[
-        { title: 'Tab 1', id: 'tab1' },
-        { title: 'Tab 2', id: 'tab2', disabled: true },
-        { title: 'Tab 3', id: 'tab3' }
-      ]} value={''}></TabsWrapper>
       <ModalWrapper
         title="Đây là title"
         footerDefs={[
@@ -59,10 +63,18 @@ export default function Manipulation(props: IManipulationProps) {
         ]}
         component={TabsWrapper}
         componentParams={{
-          tabDefs:[
-            { title: 'Tab 1', id: 'tab1' },
-            { title: 'Tab 2', id: 'tab2', disabled: true },
-            { title: 'Tab 3', id: 'tab3' }
+          tabDefs: [
+            {
+              title: 'Tab 1', id: 'tab1',
+              component: 'div',
+              componentParams: { children: "hello", style: { height: '500px', backgroundColor: 'red' } }
+            },
+            { title: 'Tab 2', id: 'tab2', disabled: true,  },
+            {
+              title: 'Tab 3', id: 'tab3',
+              component: 'div',
+              componentParams: { children: "hello", style: { width: '1500px', backgroundColor: 'blue' } }
+            }
           ]
         }}
       ></ModalWrapper>

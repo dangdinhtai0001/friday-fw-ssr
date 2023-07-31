@@ -30,7 +30,6 @@ export const StyledModalContainer = styled('div', {})<IStyledModalContainerProps
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
-  // alignItems: "center",
 
   backgroundColor: theme?.palette?.background?.paper,
 }));
@@ -59,6 +58,8 @@ export const StyledModalContent = styled('div', {})(({ theme }: { theme?: IDefau
   height: '100%',
 
   padding: theme?.components?.spacing.sx,
+
+  overflow: 'auto',
 }));
 
 export const StyledModalFooter = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({

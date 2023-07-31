@@ -1,5 +1,4 @@
-import { forwardRef, ForwardedRef, useState } from 'react';
-import Tabs from '@mui/base/Tabs';
+import { forwardRef, ForwardedRef, useState, createElement, useRef } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { v4 as uuidv4 } from 'uuid';
 import { ITabsWrapperProps } from './types.d';
@@ -10,6 +9,7 @@ import {
   StyledTabPanel,
   StyledTabUnderline
 } from './StyledElements';
+
 function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<unknown>) {
   const {
     tabDefs,
@@ -21,13 +21,15 @@ function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<unknown>) {
     tabListEndAddOn
   } = props;
 
+  const tabRefs = useRef<any>([]);
+
   const [selectedTab, setSelectedTab] = useState<string | number | null>(defaultTab);
 
   const renderTab = () => {
-    return tabDefs.map((tabDef, index) => {
+    return tabDefs.map((tabDef) => {
       return (
         <StyledTab
-          key={index}
+          key={tabDef.id}
           value={tabDef.id}
           disabled={tabDef.disabled}
           active={false}
@@ -44,20 +46,23 @@ function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<unknown>) {
   };
 
   const renderTabPanel = () => {
-    return tabDefs.map((tabDef, index) => {
+    return tabDefs.map((tabDef) => {
       return (
-        <StyledTabPanel key={index} value={tabDef.id} className='styled-tab-panel'>
-
+        <StyledTabPanel key={tabDef.id} value={tabDef.id} className='styled-tab-panel'>
           <AnimatePresence >
             <motion.div
-              key={index}
               variants={tabVariant}          // Sử dụng variant đã định nghĩa
               initial="initial"              // Trạng thái ban đầu
               animate="animate"              // Trạng thái khi hiển thị
               exit="exit"                    // Trạng thái khi thoát
               transition={{ duration: 0.2 }} // Thời gian animation
             >
-              {tabDef.title} content
+              {tabDef.component && createElement(tabDef.component,
+                {
+                  ...tabDef.componentParams,
+                  ref: (ref: any) => (tabRefs.current[tabDef.id] = ref),
+                }
+              )}
             </motion.div>
           </AnimatePresence>
         </StyledTabPanel>

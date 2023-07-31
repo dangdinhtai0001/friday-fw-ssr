@@ -6,6 +6,8 @@ export interface ITabDef {
   id: string | number,
   title: string | React.ReactNode;
   disabled?: boolean;
+  component?: React.ComponentType<any> | string;
+  componentParams?: any;
 }
 
 export interface IStyledTabUnderlineProps {
@@ -21,7 +23,7 @@ export interface IStyledTabProps extends TabOwnerState {
 export interface ITabsWrapperProps {
   defaultTab?: string | number;
   tabDefs: ITabDef[];
-  value: string | number;
+  value?: string | number;
   onChange?: (value: string | number | null) => void;
   orientation?: 'horizontal' | 'vertical';
   tabListStartAddOn?: React.ReactNode;
