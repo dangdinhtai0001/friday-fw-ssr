@@ -1,4 +1,4 @@
-import { forwardRef, ForwardedRef, createElement } from 'react';
+import { forwardRef, ForwardedRef, createElement, useImperativeHandle } from 'react';
 import { ContextHookValue, IModalWrapperProps, IFooterConfig } from './types.d';
 import {
   StyledBackdrop,
@@ -15,6 +15,10 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
   const { component, componentParams = {} } = props;
   const { context, contextApi }: ContextHookValue = useModalContext();
   const { open, width, height, footerDefs, title } = context;
+
+  useImperativeHandle(ref, () => ({
+
+  }));
 
   const handleOpen = () => {
     contextApi.commitOpen(true);
