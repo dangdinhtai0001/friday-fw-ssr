@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faCheck, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { ContainerProvider } from '@/package/naraka/manipulation-container';
 import { ContainerProviderProps, ContainerRef } from '@/package/naraka/manipulation-container/types';
 import Input from '@mui/base/Input';
@@ -9,12 +9,10 @@ import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext'
 import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
 import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
 import { Box } from '@mui/system';
-import Pagination from '@/package/deva/pagination';
 import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number'
-import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button';
-import ModalWrapper, { ContextApi as ModalContextApi, ContextState as ModalContextState } from '@/package/deva/modal';
+import ButtonWrapper from '@/package/deva/button';
+import ModalWrapper, { ContextApi as ModalContextApi, ContextState as ModalContextState, IModalWrapperRef } from '@/package/deva/modal';
 import TabsWrapper from '@/package/deva/tabs';
-import { Tab } from '@mui/base';
 
 export interface IManipulationProps {
 }
@@ -24,6 +22,7 @@ export interface IManipulationProps {
 export default function Manipulation(props: IManipulationProps) {
 
   const formRef = React.useRef<ContainerRef>(null);
+  const modalRef = React.useRef<IModalWrapperRef>(null);
 
   return (
     <div>
@@ -46,8 +45,10 @@ export default function Manipulation(props: IManipulationProps) {
         ]}
         tabListStartAddOn={<div>tabListStartAddOn</div>}
       ></TabsWrapper>
+      <ButtonWrapper onClick={() => { modalRef.current?.open(); }}>open modal</ButtonWrapper>
       <ModalWrapper
         title="Đây là title"
+        ref={modalRef}
         footerDefs={[
           { label: 'Confirm', colorType: 'success' },
           { label: 'Load', colorType: 'warning' },
@@ -69,7 +70,7 @@ export default function Manipulation(props: IManipulationProps) {
               component: 'div',
               componentParams: { children: "hello", style: { height: '500px', backgroundColor: 'red' } }
             },
-            { title: 'Tab 2', id: 'tab2', disabled: true,  },
+            { title: 'Tab 2', id: 'tab2', disabled: true, },
             {
               title: 'Tab 3', id: 'tab3',
               component: 'div',

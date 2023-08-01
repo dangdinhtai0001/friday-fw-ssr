@@ -1,6 +1,10 @@
 import { IDefaultTheme } from '@/package/preta/types';
 import { IButtonWrapperProps } from '@/package/deva/button';
 
+export interface IModalWrapperRef {
+  open: () => void;
+}
+
 export interface IModalProviderProps extends IModalWrapperProps {
   id?: string,
 }

@@ -1,5 +1,5 @@
-import { forwardRef, ForwardedRef, createElement, useImperativeHandle } from 'react';
-import { ContextHookValue, IModalWrapperProps, IFooterConfig } from './types.d';
+import { forwardRef, ForwardedRef, createElement, useImperativeHandle, useRef } from 'react';
+import { ContextHookValue, IModalWrapperProps, IFooterConfig, IModalWrapperRef } from './types.d';
 import {
   StyledBackdrop,
   StyledModal,
@@ -11,13 +11,17 @@ import {
 import ButtonWrapper from '@/package/deva/button';
 import { useModalContext } from './context/useModalContext'
 
-function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
+function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<IModalWrapperRef>) {
   const { component, componentParams = {} } = props;
   const { context, contextApi }: ContextHookValue = useModalContext();
   const { open, width, height, footerDefs, title } = context;
 
-  useImperativeHandle(ref, () => ({
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
+  useImperativeHandle(ref, () => ({
+    open: () => {
+      toggleRef.current?.click();
+    }
   }));
 
   const handleOpen = () => {
@@ -40,7 +44,7 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>Open modal</button>
+      <button type="button" onClick={handleOpen} ref={toggleRef} style={{ display: 'none' }} />
       <StyledModal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
@@ -75,4 +79,4 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<unknown>) {
   );
 }
 
-export default forwardRef(ModalWrapper);
+export default forwardRef<IModalWrapperRef, IModalWrapperProps>(ModalWrapper);
