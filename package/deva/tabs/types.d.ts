@@ -28,4 +28,9 @@ export interface ITabsWrapperProps {
   orientation?: 'horizontal' | 'vertical';
   tabListStartAddOn?: React.ReactNode;
   tabListEndAddOn?: React.ReactNode;
+}
+
+export interface ITabsWrapperRef {
+  getTabRefs: () => MutableRefObject.current,
+  getTabRefById: (id: string) => MutableRefObject.current;
 } 

@@ -26,10 +26,12 @@ function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<any>) {
   const [selectedTab, setSelectedTab] = useState<string | number | null>(defaultTab);
 
   useImperativeHandle(ref, () => ({
-    ping: () => {
-      console.log('ping');
+    getTabRefs: () => {
+      return tabRefs.current;
+    },
+    getTabRefById: (id: string) => {
+      return tabRefs.current[id];
     }
-    ,
   }));
 
   const renderTab = () => {

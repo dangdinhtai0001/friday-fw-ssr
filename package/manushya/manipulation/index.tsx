@@ -46,7 +46,6 @@ export default function Manipulation(props: IManipulationProps) {
         tabListStartAddOn={<div>tabListStartAddOn</div>}
       ></TabsWrapper>
       <ButtonWrapper onClick={() => {
-        console.log(modalRef.current?.getContentRef())
         modalRef.current?.open();
       }}>open modal</ButtonWrapper>
       <ModalWrapper
@@ -58,7 +57,9 @@ export default function Manipulation(props: IManipulationProps) {
             label: 'Load',
             colorType: 'warning',
             onClick: (context?: ModalContextState, contextApi?: ModalContextApi, cRef?: any) => {
-              console.log(cRef?.current);
+              let tRef = cRef?.current.getTabRefById('tab1');
+              tRef.submitForm();
+              console.log(tRef)
             }
           },
           {

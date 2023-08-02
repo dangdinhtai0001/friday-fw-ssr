@@ -22,9 +22,6 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<IModalWrapper
   useImperativeHandle(ref, () => ({
     open: () => {
       toggleRef.current?.click();
-    },
-    getContentRef: () => {
-      return contentRef.current;
     }
   }));
 
@@ -39,7 +36,7 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<IModalWrapper
     return footerDefs?.map((item: IFooterConfig, index) => {
       let { label, onClick, ...buttonProps } = item;
       return (
-        <ButtonWrapper {...buttonProps} key={index} onClick={() => { onClick?.(context, contextApi); }}>
+        <ButtonWrapper {...buttonProps} key={index} onClick={() => { onClick?.(context, contextApi, contentRef); }}>
           {label}
         </ButtonWrapper>
       );

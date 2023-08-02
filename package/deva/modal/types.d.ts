@@ -3,7 +3,6 @@ import { IButtonWrapperProps } from '@/package/deva/button';
 
 export interface IModalWrapperRef {
   open: () => void;
-  getContentRef: () => MutableRefObject<any>;
 }
 
 export interface IModalProviderProps extends IModalWrapperProps {
