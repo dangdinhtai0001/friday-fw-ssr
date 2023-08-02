@@ -45,13 +45,22 @@ export default function Manipulation(props: IManipulationProps) {
         ]}
         tabListStartAddOn={<div>tabListStartAddOn</div>}
       ></TabsWrapper>
-      <ButtonWrapper onClick={() => { modalRef.current?.open(); }}>open modal</ButtonWrapper>
+      <ButtonWrapper onClick={() => {
+        console.log(modalRef.current?.getContentRef())
+        modalRef.current?.open();
+      }}>open modal</ButtonWrapper>
       <ModalWrapper
         title="Đây là title"
         ref={modalRef}
         footerDefs={[
           { label: 'Confirm', colorType: 'success' },
-          { label: 'Load', colorType: 'warning' },
+          {
+            label: 'Load',
+            colorType: 'warning',
+            onClick: (context?: ModalContextState, contextApi?: ModalContextApi, cRef?: any) => {
+              console.log(cRef?.current);
+            }
+          },
           {
             label: 'Cancel',
             color: 'transparent',
@@ -66,9 +75,10 @@ export default function Manipulation(props: IManipulationProps) {
         componentParams={{
           tabDefs: [
             {
-              title: 'Tab 1', id: 'tab1',
-              component: 'div',
-              componentParams: { children: "hello", style: { height: '500px', backgroundColor: 'red' } }
+              id: 'tab1',
+              title: 'Tab 1',
+              component: ContainerProvider,
+              componentParams: { ...containerProps, ref: formRef }
             },
             { title: 'Tab 2', id: 'tab2', disabled: true, },
             {
@@ -86,9 +96,9 @@ export default function Manipulation(props: IManipulationProps) {
           padding: '3px',
         }}
       >
-        <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
+        {/* <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider> */}
 
-        <Box
+        {/* <Box
           sx={{
             display: 'grid',
             gridTemplateColumns: 'repeat(6, 1fr)',
@@ -115,7 +125,7 @@ export default function Manipulation(props: IManipulationProps) {
           <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
           <button onClick={() => { formRef.current?.applyFieldMessage({ foo: { type: 'warning', message: "This is custom warning message" } }); }}>push msg</button>
           <button onClick={() => { formRef.current?.applyFieldMessage(); }}>clear msg</button>
-        </Box>
+        </Box> */}
       </Box>
     </div>
   );

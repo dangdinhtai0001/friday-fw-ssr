@@ -17,10 +17,14 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<IModalWrapper
   const { open, width, height, footerDefs, title } = context;
 
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const contentRef = useRef<any>(null);
 
   useImperativeHandle(ref, () => ({
     open: () => {
       toggleRef.current?.click();
+    },
+    getContentRef: () => {
+      return contentRef.current;
     }
   }));
 
@@ -65,7 +69,7 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<IModalWrapper
             {title}
           </StyledModalHeader>
           <StyledModalContent className='styled-modal-content'>
-            {component && createElement(component, componentParams)}
+            {component && createElement(component, { ...componentParams, ref: contentRef })}
           </StyledModalContent>
           {footerDefs && (
             <StyledModalFooter className='styled-modal-footer'>

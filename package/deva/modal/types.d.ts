@@ -3,6 +3,7 @@ import { IButtonWrapperProps } from '@/package/deva/button';
 
 export interface IModalWrapperRef {
   open: () => void;
+  getContentRef: () => MutableRefObject<any>;
 }
 
 export interface IModalProviderProps extends IModalWrapperProps {
@@ -11,7 +12,7 @@ export interface IModalProviderProps extends IModalWrapperProps {
 
 export interface IFooterConfig extends IButtonWrapperProps {
   label?: string,
-  onClick?: (context?: ContextState, contextApi?: ContextApi) => void | Promise<void>,
+  onClick?: (context?: ContextState, contextApi?: ContextApi, contentRef?: MutableRefObject<any>) => void | Promise<void>,
 }
 
 export interface IModalWrapperProps {

@@ -1,4 +1,4 @@
-import { forwardRef, ForwardedRef, useState, createElement, useRef } from 'react';
+import { forwardRef, ForwardedRef, useState, createElement, useRef, useImperativeHandle } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { v4 as uuidv4 } from 'uuid';
 import { ITabsWrapperProps } from './types.d';
@@ -10,7 +10,7 @@ import {
   StyledTabUnderline
 } from './StyledElements';
 
-function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<unknown>) {
+function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<any>) {
   const {
     tabDefs,
     defaultTab = tabDefs[0].id,
@@ -24,6 +24,13 @@ function TabsWrapper(props: ITabsWrapperProps, ref: ForwardedRef<unknown>) {
   const tabRefs = useRef<any>([]);
 
   const [selectedTab, setSelectedTab] = useState<string | number | null>(defaultTab);
+
+  useImperativeHandle(ref, () => ({
+    ping: () => {
+      console.log('ping');
+    }
+    ,
+  }));
 
   const renderTab = () => {
     return tabDefs.map((tabDef) => {
