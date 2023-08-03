@@ -17,10 +17,6 @@ export const StyledValue = styled('div', {})(({ theme }: { theme?: IDefaultTheme
   padding: '4px 0px',
   width: '100%',
 
-  // display: 'inline-flex',
-  // alignItems: 'center',
-  // justifyContent: 'space-between',
-  // gap: '0.3rem',
 }));
 
 export const StyledToggle = styled('button', {})<IStyledToggleProps>(({ theme, width }: IStyledToggleProps) => ({
@@ -29,8 +25,7 @@ export const StyledToggle = styled('button', {})<IStyledToggleProps>(({ theme, w
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  justifyContent: 'space-between',
-
+  justifyContent: 'space-start',
 }));
 
 export const StyledListbox = styled('ul', {})<IStyledListboxProps>(({ theme, maxHeight, width }: IStyledListboxProps) => ({
@@ -92,7 +87,7 @@ export const StyledOption = styled(Option, {
 }));
 
 export const StyledPopper = styled(Popper)`
-  z-index: 1;
+  z-index: 2300;
 `;
 
 export const StyledOptionGroupLabel = styled('div', {})

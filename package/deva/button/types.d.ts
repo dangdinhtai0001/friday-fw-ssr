@@ -3,7 +3,7 @@ import { UseButtonParameters } from '@mui/base/useButton';
 
 export type ColorType = 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
 
-export interface IButtonWrapperProps extends UseButtonParameters, IStyledButtonProps {
+export interface IButtonWrapperProps extends UseButtonParameters, Omit<IStyledButtonProps, 'hasIcon'> {
   icon?: React.ReactNode;
   children?: React.ReactNode;
   onClick?: () => void | Promise<Void>;
@@ -17,4 +17,6 @@ export interface IStyledButtonProps {
   disabled?: boolean;
   border?: boolean;
   textColor?: 'primary' | 'secondary';
+  block?: boolean;
+  hasIcon?: boolean;
 }

@@ -45,7 +45,6 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   };
 
   const slots: SelectProps<TValue, Multiple>['slots'] = {
-    // root: StyledToggle,
     root: ButtonWrapper,
     listbox: ListboxWrapper,
     popper: StyledPopper,
@@ -55,12 +54,8 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     listbox: {
       maxHeight: maxListBoxHeight,
       open: listboxOpen,
-      width: toggleRef.current?.offsetWidth,
+      width: Number(toggleRef.current?.offsetWidth),
     } as IListboxWrapperProps,
-    // root: {
-    //   ref: toggleRef,
-    //   width: toggleWidth
-    // } as IStyledToggleProps, 
     root: {
       ref: toggleRef,
       icon: (
@@ -76,6 +71,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       color: 'transparent',
       textColor: 'primary',
       border: true,
+      className: 'select-wrapper-toggle',
     } as IButtonWrapperProps,
     popper: { keepMounted: true },
   };

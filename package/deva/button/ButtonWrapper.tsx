@@ -13,7 +13,8 @@ function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<HTMLB
     width = '',
     color,
     border,
-    textColor
+    textColor,
+    block
   } = props;
 
   const { active, focusVisible, getRootProps } = useButton({
@@ -32,7 +33,7 @@ function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<HTMLB
   }
 
   return (
-    <motion.div whileTap={{ scale: disabled ? 1 : hoverScale }} style={{width: 'fit-content'}}>
+    <motion.div whileTap={{ scale: disabled ? 1 : hoverScale }}>
       <StyledButtonContainer
         {...getRootProps()}
         colorType={colorType}
@@ -40,6 +41,8 @@ function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<HTMLB
         color={color}
         border={border}
         textColor={textColor}
+        block={block}
+        hasIcon={!!icon}
       >
         {renderChildContainer()}
       </StyledButtonContainer>

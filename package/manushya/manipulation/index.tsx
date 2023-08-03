@@ -184,6 +184,7 @@ const containerProps: ContainerProviderProps = {
           }
         },
         multiple: true,
+        // toggleWidth: '100%',
       } as ISelectWrapperProps<any, true>,
     },
     {
@@ -252,5 +253,6 @@ const containerProps: ContainerProviderProps = {
       errors: errors
     }
   },
-  defaultFieldRaito: '30% 70%'
+  defaultFieldRaito: '30% 70%',
+  defaultCols: 2
 }
