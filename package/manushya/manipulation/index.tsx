@@ -45,9 +45,13 @@ export default function Manipulation(props: IManipulationProps) {
         ]}
         tabListStartAddOn={<div>tabListStartAddOn</div>}
       ></TabsWrapper>
-      <ButtonWrapper onClick={() => {
-        modalRef.current?.open();
-      }}>open modal</ButtonWrapper>
+      <ButtonWrapper
+        width={'fit-content'}
+        onClick={() => {
+          modalRef.current?.open();
+        }}>
+        open modal
+      </ButtonWrapper>
       <ModalWrapper
         title="Đây là title"
         ref={modalRef}
@@ -90,16 +94,16 @@ export default function Manipulation(props: IManipulationProps) {
           ]
         }}
       ></ModalWrapper>
-      <Box
+      {/* <Box
         sx={{
           backgroundColor: 'background.paper',
           border: '1px solid',
           padding: '3px',
         }}
       >
-        {/* <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider> */}
+        <ContainerProvider {...containerProps} ref={formRef}></ContainerProvider>
 
-        {/* <Box
+        <Box
           sx={{
             display: 'grid',
             gridTemplateColumns: 'repeat(6, 1fr)',
@@ -126,8 +130,8 @@ export default function Manipulation(props: IManipulationProps) {
           <button onClick={() => { formRef.current?.resetFormValues(); }}>reset</button>
           <button onClick={() => { formRef.current?.applyFieldMessage({ foo: { type: 'warning', message: "This is custom warning message" } }); }}>push msg</button>
           <button onClick={() => { formRef.current?.applyFieldMessage(); }}>clear msg</button>
-        </Box> */}
-      </Box>
+        </Box>
+      </Box> */}
     </div>
   );
 }

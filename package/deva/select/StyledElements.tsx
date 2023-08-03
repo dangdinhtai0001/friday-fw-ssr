@@ -4,7 +4,7 @@ import Popper from '@mui/base/Popper';
 
 import { IDefaultTheme } from '@/package/preta/types';
 import { IStyledListboxProps, IStyledOptionProps, IStyledToggleProps } from './types.d';
-import { defaultControllerContainer, typographyCaption1Strong, typographyCaption2 } from '@/package/preta/styled-shared';
+import { defaultControllerContainer, typographyCaption1, typographyCaption1Strong, typographyCaption2 } from '@/package/preta/styled-shared';
 
 const optionSelected = (theme?: IDefaultTheme) => ({
   backgroundColor: theme?.palette.primary.main,
@@ -12,9 +12,9 @@ const optionSelected = (theme?: IDefaultTheme) => ({
 });
 
 export const StyledValue = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
-  ...typographyCaption2({ theme }),
+  ...typographyCaption1({ theme }),
 
-  padding: '4px 0px',
+  padding: '0.1rem 0px',
   width: '100%',
 
 }));

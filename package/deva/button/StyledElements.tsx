@@ -4,7 +4,7 @@ import { IStyledButtonProps } from './types.d'
 
 
 export const StyledButtonContainer = styled('button')<IStyledButtonProps>(({
-  theme, width, colorType, disabled, color, border, textColor, block, hasIcon
+  theme, width, colorType, disabled, color, border, textColor, hasIcon
 }: IStyledButtonProps) => {
   let _backgroundColor = 'transparent';
   let _color = theme?.palette.text.secondary;
@@ -35,7 +35,7 @@ export const StyledButtonContainer = styled('button')<IStyledButtonProps>(({
     alignItems: 'center',
     justifyContent: hasIcon ? 'space-between' : 'center',
     gap: '0.5rem',
-    padding: '0.2rem 0.4rem',
+    padding: '0.1rem 0.4rem',
 
     cursor: disabled ? 'not-allowed' : 'pointer',
     backgroundColor: _backgroundColor,

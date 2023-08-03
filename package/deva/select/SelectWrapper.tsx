@@ -71,6 +71,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       color: 'transparent',
       textColor: 'primary',
       border: true,
+      animationDisabled: true,
       className: 'select-wrapper-toggle',
     } as IButtonWrapperProps,
     popper: { keepMounted: true },
