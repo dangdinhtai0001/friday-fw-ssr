@@ -9,7 +9,7 @@ export const StyledBackdrop = styled('div', {})(({ theme }: { theme?: IDefaultTh
   position: "fixed",
   inset: 0,
   backgroundColor: "rgb(0, 0, 0, 0.5)",
-  "-webkit-tap-highlight-color": "transparent",
+  // "-webkit-tap-highlight-color": "transparent",
 }));
 
 export const StyledModal = styled(Modal, {})(({ theme }: { theme?: IDefaultTheme }) => ({

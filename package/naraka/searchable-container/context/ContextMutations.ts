@@ -100,6 +100,16 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
 
         return updatedContext;
       });
+    },
+    commitCurrentModalTemplate: (modalTemplate?: string): void => {
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          currentModalTeamplate: modalTemplate,
+        };
+
+        return updatedContext;
+      });
     }
   }
 }

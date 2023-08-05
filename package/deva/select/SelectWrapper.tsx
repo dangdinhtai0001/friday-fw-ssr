@@ -54,7 +54,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     listbox: {
       maxHeight: maxListBoxHeight,
       open: listboxOpen,
-      width: Number(toggleRef.current?.offsetWidth),
+      width: Number(toggleRef.current?.offsetWidth) || 0,
     } as IListboxWrapperProps,
     root: {
       ref: toggleRef,

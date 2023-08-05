@@ -1,5 +1,6 @@
-import { forwardRef, ForwardedRef, createElement, useImperativeHandle, useRef } from 'react';
-import { ContextHookValue, IModalWrapperProps, IFooterConfig, IModalWrapperRef } from './types.d';
+import { forwardRef, ForwardedRef, createElement, useState, useRef, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { IModalWrapperProps, IFooterConfig, IModalWrapperRef } from './types.d';
 import {
   StyledBackdrop,
   StyledModal,
@@ -9,34 +10,37 @@ import {
   StyledModalFooter
 } from './StyledElements';
 import ButtonWrapper from '@/package/deva/button';
-import { useModalContext } from './context/useModalContext'
 
 function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<IModalWrapperRef>) {
-  const { component, componentParams = {} } = props;
-  const { context, contextApi }: ContextHookValue = useModalContext();
-  const { open, width, height, footerDefs, title } = context;
+  const {
+    component,
+    componentParams = {},
+    open = false,
+    footerDefs,
+    width = String(props.width ? props.width : '50vw'),
+    height = String(props.height ? props.height : '50vh'),
+    title,
+    id = uuidv4(),
+    onClose,
+  } = props;
 
-  const toggleRef = useRef<HTMLButtonElement>(null);
+  const [isOpen, setOpen] = useState<boolean>(open);
   const contentRef = useRef<any>(null);
 
-  useImperativeHandle(ref, () => ({
-    open: () => {
-      toggleRef.current?.click();
-    }
-  }));
+  useEffect(() => {
+    setOpen(open);
+  }, [open]);
 
-  const handleOpen = () => {
-    contextApi.commitOpen(true);
-  };
   const handleClose = (event: object, reason: string) => {
-    contextApi.commitOpen(false);
+    onClose?.(event, reason);
+    setOpen(false);
   }
 
   const renderFooter = () => {
     return footerDefs?.map((item: IFooterConfig, index) => {
       let { label, onClick, ...buttonProps } = item;
       return (
-        <ButtonWrapper {...buttonProps} key={index} onClick={() => { onClick?.(context, contextApi, contentRef); }}>
+        <ButtonWrapper {...buttonProps} key={index} onClick={() => { onClick?.(contentRef); }}>
           {label}
         </ButtonWrapper>
       );
@@ -45,11 +49,10 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<IModalWrapper
 
   return (
     <div>
-      <button type="button" onClick={handleOpen} ref={toggleRef} style={{ display: 'none' }} />
       <StyledModal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
-        open={open}
+        open={isOpen}
         onClose={handleClose}
         slots={{ backdrop: StyledBackdrop }}
       >

@@ -2,7 +2,8 @@ import React from 'react';
 import { IFilterModifiedEvent } from './Event.d';
 import { FilterCriteria, PaginationModel, FilterDef } from './Common.d';
 import { ITaskControl, ITaskBlock } from './Task.d';
-import { FilterBlockProps, ToolbarBlockProps, PaginationBlockProps } from './Panel'
+import { FilterBlockProps, ToolbarBlockProps, PaginationBlockProps } from './Panel';
+import { IModalWrapperRef, IModalProviderProps } from '@/package/deva/modal';
 
 export interface ContextState {
   containerReady: boolean;
@@ -29,6 +30,10 @@ export interface ContextState {
   containerData: any[];
   processingData?: any;
 
+  // modalRef: React.RefObject<IModalWrapperRef>;
+  modalTemplate?: Record<string, IModalProviderProps>;
+  currentModalTeamplate?: string;
+
   onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 }
 
@@ -45,6 +50,8 @@ export interface ContextApi {
   // data
   applyProcessingData: (data: any | null) => void;
   applyContainerData: (data: any[]) => void;
+  // modal
+  commitCurrentModalTemplate: (template?: string) => void;
   // common
   applyContainerLoadingStatus: (isLoading: boolean) => void;
 }

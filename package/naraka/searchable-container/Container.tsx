@@ -1,7 +1,14 @@
 import React from 'react';
 import { ContextHookValue, ContainerProps } from './types';
 import { useContainerContext } from './context/useContainerContext';
-import { FilterPanel, ToolbarPanel, PaginationPanel, DataPanel, TaskWorkerPanel } from './panels'
+import {
+  FilterPanel,
+  ToolbarPanel,
+  PaginationPanel,
+  DataPanel,
+  TaskWorkerPanel,
+  ModalPanel
+} from './panels'
 import useTask from './task/useTask';
 
 const Container: React.FC<ContainerProps> = (props: ContainerProps) => {
@@ -18,6 +25,7 @@ const Container: React.FC<ContainerProps> = (props: ContainerProps) => {
       <DataPanel></DataPanel>
       <PaginationPanel></PaginationPanel>
       <TaskWorkerPanel></TaskWorkerPanel>
+      <ModalPanel></ModalPanel>
     </div>
   );
 }

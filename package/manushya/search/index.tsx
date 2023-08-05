@@ -22,6 +22,26 @@ const sleep = (ms: number) => new Promise(
 export default function ComponentPage() {
   const searchableContainerProps: ContainerProviderProps = {
     // ------------
+    modalTemplate: {
+      "temp_1": {
+        title: "title của temp_1 nè",
+        component: "div",
+        componentParams: { children: "Hello temp_1" },
+        footerDefs: [
+          {
+            label: 'Cancel',
+            color: 'transparent',
+            textColor: 'primary',
+            border: true,
+            //TODO: onClick của modal đang chưa đóng dduwwojc modal đâu 
+            onClick: () => {
+
+            }
+          }
+        ]
+      }
+    },
+    // ------------
     filterDefs: [
       {
         name: 'fromDate',
@@ -54,8 +74,9 @@ export default function ComponentPage() {
           onCreateTaskChainEvent: () => {
             return {
               requests: [
-                { name: 'add' },
-                { name: DefaultTaskName.FETCH_DATA }
+                { name: DefaultTaskName.ACTIVE_MODAL, data: { templateName: "temp_1" } },
+                // { name: 'add' },
+                // { name: DefaultTaskName.FETCH_DATA },
               ]
             };
           }

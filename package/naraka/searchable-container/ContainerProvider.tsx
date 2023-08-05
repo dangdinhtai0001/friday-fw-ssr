@@ -1,8 +1,9 @@
-import React from 'react';
+import { useRef } from 'react';
 import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
 import { ContextState, ContainerProviderProps } from './types';
-import { createDefaultTaskControls } from './task/DefaultTaskControl'
+import { createDefaultTaskControls } from './task/DefaultTaskControl';
+import { IModalWrapperRef } from '@/package/deva/modal'
 
 // hàm định nghĩa giá trị default của context state
 const createDefaultContextStateValue = (props: ContainerProviderProps): ContextState => {
@@ -31,15 +32,18 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
     // ---------------------------
     paginationBlockComponent: props.paginationBlockComponent,
     paginationBlockParams: props.paginationBlockParams,
-
+    // ---------------------------
     containerData: [],
-
+    // ---------------------------
+    // modalRef: modalRef,
+    modalTemplate: props.modalTemplate,
+    currentModalTeamplate: undefined,
+    // ---------------------------
     onFetchData: props.onFetchData
   };
 };
 
 const ContainerProvider: React.FC<ContainerProviderProps> = (props: ContainerProviderProps) => {
-
 
   let initialState: ContextState = createDefaultContextStateValue(props);
 

@@ -2,6 +2,9 @@ export type FilterPanelProps = {};
 
 export type ToolbarPanelProps = {};
 
+export interface IModalPanelProps {
+}
+
 export type ToolbarBlockProps = {
   // Định nghĩa props cho ToolbarBlock tại đây (nếu có)
 };

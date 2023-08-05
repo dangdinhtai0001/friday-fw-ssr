@@ -1,7 +1,8 @@
 import { FilterBlockProps, PaginationBlockProps } from './Panel.d';
 import { IFilterBlockProps } from './Block.d';
 import { ITaskControl } from './Task.d';
-import { FilterDef } from './Common.d'
+import { FilterDef } from './Common.d';
+import { IModalProviderProps } from '@/package/deva/modal'
 
 export interface ContainerProviderProps {
   // ==================================================
@@ -16,6 +17,8 @@ export interface ContainerProviderProps {
   // ==================================================
   paginationBlockParams?: any;
   paginationBlockComponent?: React.ComponentType<T & PaginationBlockProps>;
+  // ==================================================
+  modalTemplate?: Record<string, IModalProviderProps>;
   // ==================================================
   onFetchData?: (taskBlock?: TaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 };
