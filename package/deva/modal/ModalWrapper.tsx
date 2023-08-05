@@ -22,6 +22,7 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<IModalWrapper
     title,
     id = uuidv4(),
     onClose,
+    context
   } = props;
 
   const [isOpen, setOpen] = useState<boolean>(open);
@@ -40,7 +41,7 @@ function ModalWrapper(props: IModalWrapperProps, ref: ForwardedRef<IModalWrapper
     return footerDefs?.map((item: IFooterConfig, index) => {
       let { label, onClick, ...buttonProps } = item;
       return (
-        <ButtonWrapper {...buttonProps} key={index} onClick={() => { onClick?.(contentRef); }}>
+        <ButtonWrapper {...buttonProps} key={index} onClick={() => { onClick?.(contentRef, context); }}>
           {label}
         </ButtonWrapper>
       );

@@ -7,7 +7,7 @@ export interface IModalWrapperRef {
 
 export interface IFooterConfig extends IButtonWrapperProps {
   label?: string,
-  onClick?: (contentRef?: MutableRefObject<any>) => void | Promise<void>,
+  onClick?: (contentRef?: MutableRefObject<any>, context?: any) => void | Promise<void>,
 }
 
 export interface IModalWrapperProps {
@@ -21,6 +21,7 @@ export interface IModalWrapperProps {
   component?: React.ComponentType<any> | string;
   componentParams?: any;
   open?: boolean;
+  context?: any;
   onClose?: (event: object, reason: string) => void;
 }
 

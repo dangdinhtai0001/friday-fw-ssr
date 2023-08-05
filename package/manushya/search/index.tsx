@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container';
-import { ContainerProviderProps, ContextApi, ContextState, ITaskBlock } from '@/package/naraka/searchable-container/types';
+import { ContainerProviderProps, ContextApi, ContextState, ITaskBlock, IModalBlockProps, ContextHookValue } from '@/package/naraka/searchable-container/types';
 import { ContextState as ManipulationContextState } from '@/package/naraka/manipulation-container/types';
 
 import ToolbarBlock from './ToolbarBlock';
@@ -34,8 +34,27 @@ export default function ComponentPage() {
             textColor: 'primary',
             border: true,
             //TODO: onClick của modal đang chưa đóng dduwwojc modal đâu 
-            onClick: () => {
-
+            onClick: (contentRef: any, _context: IModalBlockProps) => {
+              const { contextApi } = _context;
+              contextApi.commitCurrentModalTemplate();
+            }
+          }
+        ]
+      },
+      "temp_2": {
+        title: "title của temp_2 nè",
+        component: "div",
+        componentParams: { children: "Hello temp_2" },
+        footerDefs: [
+          {
+            label: 'Cancel',
+            color: 'transparent',
+            textColor: 'primary',
+            border: true,
+            //TODO: onClick của modal đang chưa đóng dduwwojc modal đâu 
+            onClick: (contentRef: any, _context: IModalBlockProps) => {
+              const { contextApi } = _context;
+              contextApi.commitCurrentModalTemplate();
             }
           }
         ]
@@ -75,6 +94,19 @@ export default function ComponentPage() {
             return {
               requests: [
                 { name: DefaultTaskName.ACTIVE_MODAL, data: { templateName: "temp_1" } },
+                // { name: 'add' },
+                // { name: DefaultTaskName.FETCH_DATA },
+              ]
+            };
+          }
+        },
+        {
+          name: "Cập nhật",
+          colorType: "success",
+          onCreateTaskChainEvent: () => {
+            return {
+              requests: [
+                { name: DefaultTaskName.ACTIVE_MODAL, data: { templateName: "temp_2" } },
                 // { name: 'add' },
                 // { name: DefaultTaskName.FETCH_DATA },
               ]

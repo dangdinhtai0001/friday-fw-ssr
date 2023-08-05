@@ -1,3 +1,5 @@
+import { ContextHelper, ContextState } from './Context';
+
 export type FilterPanelProps = {};
 
 export type ToolbarPanelProps = {};
@@ -20,4 +22,9 @@ export type DataPanelProps = {};
 export type DataBlockProps = {
   // Định nghĩa props cho PaginationBlock tại đây (nếu có)
 };
+
+export interface IModalBlockProps {
+  context: ContextState;
+  contextApi: ContextHelper;
+}
 
