@@ -2,21 +2,31 @@ import React from 'react';
 import { IFilterModifiedEvent } from './Event.d';
 import { FilterCriteria, PaginationModel, FilterDef } from './Common.d';
 import { ITaskControl, ITaskBlock } from './Task.d';
-import { FilterBlockProps, ToolbarBlockProps, PaginationBlockProps, IModalBlockProps } from './Panel';
-import { IModalWrapperRef, IModalProviderProps } from '@/package/deva/modal';
+import { 
+  IFilterBlockProps, 
+  IToolbarBlockProps,
+   IPaginationBlockProps, 
+   IModalBlockProps,
+    IModalTemplateValue } from './Block.d';
 
-export interface ContextState {
+export interface ContextState<
+  EFilterBlockProps extends IFilterBlockProps,
+  EToolbarBlockProps extends IToolbarBlockProps,
+  EPaginationBlockProps extends IPaginationBlockProps,
+  EModalBlockProps extends IModalBlockProps,
+  EDataBlockProps extends IDataBlockProps,
+> {
   containerReady: boolean;
   containerLoading: boolean;
 
   filterInstance: FilterCriteria[];
 
   filterDefs?: FieldDef[];
-  filterBlockParams?: any;
-  filterBlockComponent?: React.ComponentType<FilterBlockProps>;
+  filterBlockParams?: EFilterBlockProps;
+  filterBlockComponent?: React.ComponentType<EFilterBlockProps>;
 
-  toolbarBlockParams?: any;
-  toolbarBlockComponent?: React.ComponentType<ToolbarBlockProps>;
+  toolbarBlockParams?: EToolbarBlockProps;
+  toolbarBlockComponent?: React.ComponentType<EToolbarBlockProps>;
 
   taskControls?: ITaskControl[];
   taskChain: ITaskBlock[];
@@ -24,17 +34,16 @@ export interface ContextState {
 
   paginationInstance: PaginationModel;
 
-  paginationBlockParams?: any;
-  paginationBlockComponent?: React.ComponentType<PaginationBlockProps>;
+  paginationBlockParams?: EPaginationBlockProps;
+  paginationBlockComponent?: React.ComponentType<EPaginationBlockProps>;
 
   containerData: any[];
   processingData?: any;
 
-  // modalRef: React.RefObject<IModalWrapperRef>;
-  modalTemplate?: Record<string, IModalProviderProps>;
+  modalTemplate?: Record<string, IModalTemplateValue>;
   currentModalTeamplate?: string;
-  modalBlockParams?: any;
-  modalBlockComponent?: React.ComponentType<IModalBlockProps>;
+  modalBlockParams?: EModalBlockProps;
+  modalBlockComponent?: React.ComponentType<EModalBlockProps>;
 
   onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 }

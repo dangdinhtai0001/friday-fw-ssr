@@ -17,7 +17,19 @@ const createDefaultContextStateValue = <
   EPaginationBlockProps extends IPaginationBlockProps,
   EModalBlockProps extends IModalBlockProps,
   EDataBlockProps extends IDataBlockProps,
->(props: ContainerProviderProps<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>): ContextState => {
+>(props: ContainerProviderProps<
+  EFilterBlockProps,
+  EToolbarBlockProps,
+  EPaginationBlockProps,
+  EModalBlockProps,
+  EDataBlockProps
+>): ContextState<
+  EFilterBlockProps,
+  EToolbarBlockProps,
+  EPaginationBlockProps,
+  EModalBlockProps,
+  EDataBlockProps
+> => {
   return {
     containerReady: true,
     containerLoading: false,
@@ -46,7 +58,6 @@ const createDefaultContextStateValue = <
     // ---------------------------
     containerData: [],
     // ---------------------------
-    // modalRef: modalRef,
     modalTemplate: props.modalTemplate,
     currentModalTeamplate: undefined,
     modalBlockComponent: props.modalBlockComponent,
@@ -64,7 +75,13 @@ function ContainerProvider<
   EDataBlockProps extends IDataBlockProps,
 >(props: ContainerProviderProps<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>) {
 
-  let initialState: ContextState = createDefaultContextStateValue(props);
+  let initialState: ContextState<
+    EFilterBlockProps,
+    EToolbarBlockProps,
+    EPaginationBlockProps,
+    EModalBlockProps,
+    EDataBlockProps
+  > = createDefaultContextStateValue(props);
 
   return (
     <>

@@ -22,6 +22,7 @@ import {
 } from '@/package/naraka/searchable-container-ext';
 import InputWrappper from '@/package/deva/input';
 
+type TContextState = [IFilterBlockExtProps, IToolbarBlockExtProps, IPaginationBlockExtProps, IModalBlockExtProps, any];
 
 const sleep = (ms: number) => new Promise(
   resolve => setTimeout(resolve, ms));
@@ -40,9 +41,8 @@ export default function ComponentPage() {
             color: 'transparent',
             textColor: 'primary',
             border: true,
-            //TODO: onClick của modal đang chưa đóng dduwwojc modal đâu 
-            onClick: (contentRef: any, _context: IModalBlockProps) => {
-
+            onClick: (contentRef: any, state: any, onCloseModal) => {
+              onCloseModal();
             }
           }
         ]
@@ -142,7 +142,7 @@ export default function ComponentPage() {
       },
       {
         id: 'delete',
-        async onProcessTask(payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi): Promise<ITaskBlock> {
+        async onProcessTask(payload: ITaskBlock, context?: ContextState<any, any, any, any, any>, contextApi?: ContextApi): Promise<ITaskBlock> {
           console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
 
           contextApi?.applyProcessingData(context?.containerData[0]);

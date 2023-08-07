@@ -9,7 +9,6 @@ import {
   TaskWorkerPanel,
   ModalPanel
 } from './panels'
-import useTask from './task/useTask';
 
 const Container: React.FC<ContainerProps> = (props: ContainerProps) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();

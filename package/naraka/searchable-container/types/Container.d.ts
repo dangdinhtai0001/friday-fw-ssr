@@ -4,6 +4,7 @@ import {
   IPaginationBlockProps,
   IModalBlockProps,
   IDataBlockProps,
+  IModalTemplateValue
 } from './Block.d';
 import { ITaskControl } from './Task.d';
 import { FilterDef } from './Common.d';
@@ -29,7 +30,7 @@ export interface ContainerProviderProps<
   paginationBlockParams?: EPaginationBlockProps;
   paginationBlockComponent?: React.ComponentType<EPaginationBlockProps>;
   // ==================================================
-  modalTemplate?: Record<string, IModalWrapperProps>;
+  modalTemplate?: Record<string, IModalTemplateValue>;
   modalBlockParams?: EModalBlockProps;
   modalBlockComponent?: React.ComponentType<EModalBlockProps>;
   // ==================================================
