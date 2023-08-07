@@ -45,6 +45,16 @@ const onProcessActiveModal = async (payload: ITaskBlock, context?: ContextState,
   return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
+const onProcessHiddenModal = async (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => {
+  console.log(`Process Task ${payload.name}-${payload.id}: `, payload);
+
+  // tổng hợp dữ liệu của modal 
+  contextApi?.commitCurrentModalTemplate();
+
+  // đánh dấu là hoàn thành task 
+  return { ...payload, status: TASK_STATUS.SUCCESS };
+};
+
 export const createDefaultTaskControls = (): ITaskControl[] => {
   return [
     {
@@ -62,6 +72,10 @@ export const createDefaultTaskControls = (): ITaskControl[] => {
     {
       id: DefaultTaskName.ACTIVE_MODAL,
       onProcessTask: onProcessActiveModal
+    },
+    {
+      id: DefaultTaskName.HIDDEN_MODAL,
+      onProcessTask: onProcessHiddenModal
     },
   ];
 }
