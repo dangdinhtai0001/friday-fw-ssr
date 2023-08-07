@@ -1,12 +1,23 @@
-import { useRef } from 'react';
 import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
-import { ContextState, ContainerProviderProps } from './types';
+import {
+  ContextState, ContainerProviderProps,
+  IFilterBlockProps,
+  IToolbarBlockProps,
+  IPaginationBlockProps,
+  IModalBlockProps,
+  IDataBlockProps,
+} from './types';
 import { createDefaultTaskControls } from './task/DefaultTaskControl';
-import { IModalWrapperRef } from '@/package/deva/modal'
 
 // hàm định nghĩa giá trị default của context state
-const createDefaultContextStateValue = (props: ContainerProviderProps): ContextState => {
+const createDefaultContextStateValue = <
+  EFilterBlockProps extends IFilterBlockProps,
+  EToolbarBlockProps extends IToolbarBlockProps,
+  EPaginationBlockProps extends IPaginationBlockProps,
+  EModalBlockProps extends IModalBlockProps,
+  EDataBlockProps extends IDataBlockProps,
+>(props: ContainerProviderProps<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>): ContextState => {
   return {
     containerReady: true,
     containerLoading: false,
@@ -38,12 +49,20 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
     // modalRef: modalRef,
     modalTemplate: props.modalTemplate,
     currentModalTeamplate: undefined,
+    modalBlockComponent: props.modalBlockComponent,
+    modalBlockParams: props.modalBlockParams,
     // ---------------------------
     onFetchData: props.onFetchData
   };
 };
 
-const ContainerProvider: React.FC<ContainerProviderProps> = (props: ContainerProviderProps) => {
+function ContainerProvider<
+  EFilterBlockProps extends IFilterBlockProps,
+  EToolbarBlockProps extends IToolbarBlockProps,
+  EPaginationBlockProps extends IPaginationBlockProps,
+  EModalBlockProps extends IModalBlockProps,
+  EDataBlockProps extends IDataBlockProps,
+>(props: ContainerProviderProps<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>) {
 
   let initialState: ContextState = createDefaultContextStateValue(props);
 

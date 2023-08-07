@@ -1,26 +1,33 @@
 import * as React from 'react';
 import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container';
-import { ContainerProviderProps, ContextApi, ContextState, ITaskBlock, IModalBlockProps, ContextHookValue } from '@/package/naraka/searchable-container/types';
 import { ContextState as ManipulationContextState } from '@/package/naraka/manipulation-container/types';
 
-import ToolbarBlock from './ToolbarBlock';
+import {
+  ContextApi,
+  ContextState,
+  ContainerProviderProps,
+  ITaskBlock,
+  IModalBlockProps
+} from '@/package/naraka/searchable-container/types';
 import {
   DefaultFilterBlock,
   DefaultPaginationBlock,
   DefaultToolbarBlock,
+  DefaultModalBlock,
   // 
-  IPaginationBlockProps,
-  IDefaultFilterBlockProps,
-  IToolbarBlockExtProps
+  IPaginationBlockExtProps,
+  IFilterBlockExtProps,
+  IToolbarBlockExtProps,
+  IModalBlockExtProps
 } from '@/package/naraka/searchable-container-ext';
-import InputWrappper, { IInputWrapperProps } from '@/package/deva/input';
+import InputWrappper from '@/package/deva/input';
 
 
 const sleep = (ms: number) => new Promise(
   resolve => setTimeout(resolve, ms));
 
 export default function ComponentPage() {
-  const searchableContainerProps: ContainerProviderProps = {
+  const searchableContainerProps: ContainerProviderProps<IFilterBlockExtProps, IToolbarBlockExtProps, IPaginationBlockExtProps, IModalBlockExtProps, any> = {
     // ------------
     modalTemplate: {
       "temp_1": {
@@ -35,8 +42,7 @@ export default function ComponentPage() {
             border: true,
             //TODO: onClick của modal đang chưa đóng dduwwojc modal đâu 
             onClick: (contentRef: any, _context: IModalBlockProps) => {
-              const { contextApi } = _context;
-              contextApi.commitCurrentModalTemplate();
+
             }
           }
         ]
@@ -53,8 +59,7 @@ export default function ComponentPage() {
             border: true,
             //TODO: onClick của modal đang chưa đóng dduwwojc modal đâu 
             onClick: (contentRef: any, _context: IModalBlockProps) => {
-              const { contextApi } = _context;
-              contextApi.commitCurrentModalTemplate();
+
             }
           }
         ]
@@ -81,7 +86,7 @@ export default function ComponentPage() {
       },
       defaultCols: 2,
       defaultFieldRaito: '20% 80%'
-    } as unknown as IDefaultFilterBlockProps,
+    } as unknown as IFilterBlockExtProps,
     filterBlockComponent: DefaultFilterBlock,
     // ------------
     toolbarBlockComponent: DefaultToolbarBlock,
@@ -152,8 +157,11 @@ export default function ComponentPage() {
 
     ],
     // ------------
-    paginationBlockParams: {} as IPaginationBlockProps,
+    paginationBlockParams: {} as IPaginationBlockExtProps,
     paginationBlockComponent: DefaultPaginationBlock,
+    // ------------
+    modalBlockComponent: DefaultModalBlock,
+    modalBlockParams: {} as IModalBlockExtProps,
     // ------------
     onFetchData: async () => {
       await sleep(2000);

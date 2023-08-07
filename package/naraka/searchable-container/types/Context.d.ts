@@ -2,7 +2,7 @@ import React from 'react';
 import { IFilterModifiedEvent } from './Event.d';
 import { FilterCriteria, PaginationModel, FilterDef } from './Common.d';
 import { ITaskControl, ITaskBlock } from './Task.d';
-import { FilterBlockProps, ToolbarBlockProps, PaginationBlockProps } from './Panel';
+import { FilterBlockProps, ToolbarBlockProps, PaginationBlockProps, IModalBlockProps } from './Panel';
 import { IModalWrapperRef, IModalProviderProps } from '@/package/deva/modal';
 
 export interface ContextState {
@@ -33,6 +33,8 @@ export interface ContextState {
   // modalRef: React.RefObject<IModalWrapperRef>;
   modalTemplate?: Record<string, IModalProviderProps>;
   currentModalTeamplate?: string;
+  modalBlockParams?: any;
+  modalBlockComponent?: React.ComponentType<IModalBlockProps>;
 
   onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 }

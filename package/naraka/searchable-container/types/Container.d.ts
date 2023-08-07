@@ -1,24 +1,37 @@
-import { FilterBlockProps, PaginationBlockProps } from './Panel.d';
-import { IFilterBlockProps } from './Block.d';
+import {
+  IFilterBlockProps,
+  IToolbarBlockProps,
+  IPaginationBlockProps,
+  IModalBlockProps,
+  IDataBlockProps,
+} from './Block.d';
 import { ITaskControl } from './Task.d';
 import { FilterDef } from './Common.d';
-import { IModalWrapperProps } from '@/package/deva/modal'
+import { IModalWrapperProps } from '@/package/deva/modal';
 
-export interface ContainerProviderProps {
+export interface ContainerProviderProps<
+  EFilterBlockProps extends IFilterBlockProps,
+  EToolbarBlockProps extends IToolbarBlockProps,
+  EPaginationBlockProps extends IPaginationBlockProps,
+  EModalBlockProps extends IModalBlockProps,
+  EDataBlockProps extends IDataBlockProps,
+> {
   // ==================================================
   filterDefs?: FilterDef[];
-  filterBlockParams?: unknown;
-  filterBlockComponent?: React.ComponentType<T & IFilterBlockProps>;
+  filterBlockParams?: EFilterBlockProps;
+  filterBlockComponent?: React.ComponentType<EFilterBlockProps>;
   // ==================================================
-  toolbarBlockParams?: any;
-  toolbarBlockComponent?: React.ComponentType<ToolbarBlockProps>;
+  toolbarBlockParams?: EToolbarBlockProps;
+  toolbarBlockComponent?: React.ComponentType<EToolbarBlockProps>;
   // ==================================================
   taskControls?: ITaskControl[]
   // ==================================================
-  paginationBlockParams?: any;
-  paginationBlockComponent?: React.ComponentType<T & PaginationBlockProps>;
+  paginationBlockParams?: EPaginationBlockProps;
+  paginationBlockComponent?: React.ComponentType<EPaginationBlockProps>;
   // ==================================================
   modalTemplate?: Record<string, IModalWrapperProps>;
+  modalBlockParams?: EModalBlockProps;
+  modalBlockComponent?: React.ComponentType<EModalBlockProps>;
   // ==================================================
   onFetchData?: (taskBlock?: TaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 };
