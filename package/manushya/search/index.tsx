@@ -1,13 +1,18 @@
 import * as React from 'react';
-import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container';
+
+import axios from 'axios';
+
+import FormProvider, { } from '@/package/naraka/manipulation-container';
 import { ContextState as ManipulationContextState } from '@/package/naraka/manipulation-container/types';
 
+import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container';
 import {
   ContextApi,
   ContextState,
   ContainerProviderProps,
   ITaskBlock,
-  IModalBlockProps
+  IModalBlockProps,
+  IModalTemplateValue
 } from '@/package/naraka/searchable-container/types';
 import {
   DefaultFilterBlock,
@@ -22,10 +27,34 @@ import {
 } from '@/package/naraka/searchable-container-ext';
 import InputWrappper from '@/package/deva/input';
 
-type TContextState = [IFilterBlockExtProps, IToolbarBlockExtProps, IPaginationBlockExtProps, IModalBlockExtProps, any];
 
-const sleep = (ms: number) => new Promise(
-  resolve => setTimeout(resolve, ms));
+const onFetchData = async () => {
+  let url = "http://127.0.0.1:3658/m1/370198-0-default/accounts";
+  let headers = {
+    'Accept': '*/*',
+  }
+  let method = "GET";
+  const response = await axios.request({ url, headers, method });
+  // console.log(response.data);
+  return response.data;
+}
+const modalTemplate: Record<string, IModalTemplateValue> = {
+  "create": {
+    title: "Tạo mới tài khoản",
+    component: FormProvider,
+    footerDefs: [
+      {
+        label: 'Cancel',
+        color: 'transparent',
+        textColor: 'primary',
+        border: true,
+        onClick: (contentRef: any, state: any, onCloseModal) => {
+          onCloseModal();
+        }
+      }
+    ]
+  }
+}
 
 export default function ComponentPage() {
   const searchableContainerProps: ContainerProviderProps<IFilterBlockExtProps, IToolbarBlockExtProps, IPaginationBlockExtProps, IModalBlockExtProps, any> = {
@@ -163,46 +192,7 @@ export default function ComponentPage() {
     modalBlockComponent: DefaultModalBlock,
     modalBlockParams: {} as IModalBlockExtProps,
     // ------------
-    onFetchData: async () => {
-      await sleep(2000);
-
-      return [{
-        "id": 1,
-        "first_name": "Zita",
-        "last_name": "Orys",
-        "email": "zorys0@examiner.com",
-        "gender": "Female",
-        "ip_address": "180.242.89.38"
-      }, {
-        "id": 2,
-        "first_name": "Cordie",
-        "last_name": "Ovitz",
-        "email": "covitz1@flickr.com",
-        "gender": "Male",
-        "ip_address": "104.229.116.160"
-      }, {
-        "id": 3,
-        "first_name": "Sheree",
-        "last_name": "Edy",
-        "email": "sedy2@google.fr",
-        "gender": "Female",
-        "ip_address": "102.21.211.10"
-      }, {
-        "id": 4,
-        "first_name": "Shelby",
-        "last_name": "Isaac",
-        "email": "sisaac3@livejournal.com",
-        "gender": "Male",
-        "ip_address": "107.75.92.190"
-      }, {
-        "id": 5,
-        "first_name": "Waylen",
-        "last_name": "Blofield",
-        "email": "wblofield4@tamu.edu",
-        "gender": "Male",
-        "ip_address": "155.56.252.189"
-      }]
-    }
+    onFetchData: onFetchData
     // ------------
   };
 
@@ -212,3 +202,7 @@ export default function ComponentPage() {
     </div>
   );
 }
+
+const sleep = (ms: number) => new Promise(
+  resolve => setTimeout(resolve, ms)
+);
