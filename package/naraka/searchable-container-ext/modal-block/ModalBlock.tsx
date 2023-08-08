@@ -7,7 +7,7 @@ export default function ModalBlock(props: IModalBlockProps) {
   const { context, contextApi } = useContainerContext();
   const { modalTemplate, currentModalTeamplate } = context;
 
-  const { onCloseModal } = props;
+  const { onCloseModal, onCreateTaskChain } = props;
 
   const createFooterDefs = (): IFooterConfig[] | undefined => {
     let p_footerDefs: IModalTemplateFooterConfig[] | undefined = modalTemplate?.[currentModalTeamplate!]?.footerDefs;
@@ -21,7 +21,7 @@ export default function ModalBlock(props: IModalBlockProps) {
         return {
           ...item,
           onClick: (contentRef?: MutableRefObject<any>, context?: any) => {
-            item.onClick!(contentRef, context, onCloseModal, context, contextApi);
+            item.onClick!(contentRef, context, onCloseModal, onCreateTaskChain, context, contextApi);
           }
         }
       });

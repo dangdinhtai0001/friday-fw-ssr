@@ -28,11 +28,12 @@ export interface ContextState {
   defaultFieldLabelAlign: LabelTextAlign;
   dataBlockComponent?: React.ComponentType<IDataFieldBlockProps>;
   defaultCols: number;
+  externalContext: any;
   // ---------------------------------------------------------------------------
   onValueChange?: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
-  onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
-  onSubmitError: (errors: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
+  onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi, externalContext?: unknown) => void | Promise<void>;
+  onSubmitError: (errors: unknown, context: ContextState, api: ContextApi, externalContext?: unknown) => void | Promise<void>;
   onMounted?: (context: ContextState, contextApi: ContextApi) => void | Promise<void>;
 }
 

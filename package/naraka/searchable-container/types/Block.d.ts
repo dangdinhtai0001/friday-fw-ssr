@@ -1,5 +1,6 @@
 import { ContextApi, ContextState } from './Context.d';
 import { IFilterModifiedEvent, ICreateTaskChainEvent } from './Event.d';
+import { ITaskRequest } from './Task.d';
 import { IModalWrapperProps, IFooterConfig } from './External.d';
 
 // ==========================  FILTER  ==========================
@@ -15,6 +16,7 @@ export interface IToolbarBlockProps {
 // ==========================  MODAL  ==========================  
 export interface IModalBlockProps {
   onCloseModal: () => void;
+  onCreateTaskChain: <T extends ITaskRequest>(requests: T[]) => void;
 }
 
 export interface IModalTemplateFooterConfig extends IFooterConfig {
@@ -22,6 +24,7 @@ export interface IModalTemplateFooterConfig extends IFooterConfig {
     contentRef?: MutableRefObject<any>,
     state: any,
     onCloseModal: () => void,
+    onCreateTaskChain: <T extends ITaskRequest>(requests: T[]) => void,
     context?: ContextState,
     contextApi?: ContextApi,
   ) => void | Promise<void>;

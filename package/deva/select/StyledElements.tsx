@@ -16,7 +16,7 @@ export const StyledValue = styled('div', {})(({ theme }: { theme?: IDefaultTheme
 
   padding: '0.1rem 0px',
   width: '100%',
-
+  textAlign: 'left',
 }));
 
 export const StyledToggle = styled('button', {})<IStyledToggleProps>(({ theme, width }: IStyledToggleProps) => ({

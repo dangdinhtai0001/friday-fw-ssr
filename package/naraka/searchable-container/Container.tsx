@@ -10,7 +10,7 @@ import {
   ModalPanel
 } from './panels'
 
-const Container: React.FC<ContainerProps> = (props: ContainerProps) => {
+const Container = (props: ContainerProps) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
 
   return (

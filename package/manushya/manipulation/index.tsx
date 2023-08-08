@@ -11,7 +11,7 @@ import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
 import { Box } from '@mui/system';
 import InputNumberWrapper, { IInputNumberWrapperProps } from '@/package/deva/input-number'
 import ButtonWrapper from '@/package/deva/button';
-import ModalWrapper, { ContextApi as ModalContextApi, ContextState as ModalContextState, IModalWrapperRef } from '@/package/deva/modal';
+import ModalWrapper, { IModalWrapperRef } from '@/package/deva/modal';
 import TabsWrapper from '@/package/deva/tabs';
 
 export interface IManipulationProps {

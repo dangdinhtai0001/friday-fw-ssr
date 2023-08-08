@@ -2,7 +2,7 @@ import React, { forwardRef, useRef, useImperativeHandle, Ref } from 'react';
 import { ContainerProps, ContainerRef } from './types';
 import { WatcherPanel, DataPanel } from './panels';
 import { useContainerContext } from './context/useContainerContext';
-import { useFormContext, Controller } from 'react-hook-form';
+import { useFormContext, useFormState } from 'react-hook-form';
 
 const Container = forwardRef<ContainerRef, ContainerProps>((props, ref: Ref<ContainerRef>) => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -10,6 +10,7 @@ const Container = forwardRef<ContainerRef, ContainerProps>((props, ref: Ref<Cont
 
   const { handleSubmit, getValues, setValue, trigger, reset } = useFormContext();
   const { context, contextApi } = useContainerContext();
+  const { externalContext } = context;
 
   useImperativeHandle(ref, () => ({
     /**
@@ -56,14 +57,14 @@ const Container = forwardRef<ContainerRef, ContainerProps>((props, ref: Ref<Cont
     // tăng số lần submit lên 
     contextApi.increaseSubmitCounter();
 
-    await onSubmitSuccess(data, context, contextApi);
+    await onSubmitSuccess(data, context, contextApi, externalContext);
   };
 
   const onInvalid = async (errors: unknown): Promise<void> => {
     // tăng số lần submit lên 
     contextApi.increaseSubmitCounter();
 
-    await onSubmitError(errors, context, contextApi);
+    await onSubmitError(errors, context, contextApi, externalContext);
   };
 
 

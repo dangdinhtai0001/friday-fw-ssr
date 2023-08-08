@@ -19,6 +19,8 @@ export interface ISelectWrapperProps<TValue extends {}, Multiple extends boolean
   toggleWidth?: number | string;
   renderSelectedValue?: (value: SelectValue<TValue, Multiple>, options: TValue[]) => JSX.Element[] | JSX.Element | null;
   placeholder?: string;
+  renderOption?: (option?: any) => React.ReactNode;
+  valueProps?: string ;
 };
 
 export interface ItemProps {

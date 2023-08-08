@@ -1,7 +1,7 @@
 import { FieldDef, LabelTextAlign } from './Common.d';
 import { OnValueChangeProps, ContextState, ContextApi } from './Context.d';
 import { IDataFieldLabelProps } from './Block.d';
-import { FieldValues, Resolver, Mode, CriteriaMode, ValidationMode } from 'react-hook-form';
+import { FieldValues, Resolver, Mode, CriteriaMode, ValidationMode, FormState } from 'react-hook-form';
 
 export interface ContainerProviderProps {
   fieldDefs: FieldDef[];
@@ -17,9 +17,10 @@ export interface ContainerProviderProps {
   onValueChange?: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
   getDefaultValues?: Promise<FieldValues>;
-  onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
-  onSubmitError: (errors: unknown, context: ContextState, api: ContextApi) => void | Promise<void>;
+  onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi, externalContext?: unknown) => void | Promise<void>;
+  onSubmitError: (errors: unknown, context: ContextState, api: ContextApi, externalContext?: unknown) => void | Promise<void>;
   onMounted?: (context: ContextState, contextApi: ContextApi) => void | Promise<void>;
+  externalContext?: any; // Chứa các hàm và các thông tin của các đối tuwọng không thuộc container
 };
 
 export interface ContainerProps extends ContainerProviderProps {

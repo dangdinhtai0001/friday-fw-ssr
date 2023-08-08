@@ -52,7 +52,8 @@ const useTask = (): ITaskHook => {
 
     for (let i = 0; i < tasks.length; i++) {
       const task = tasks[i];
-      let taskControl = context.taskControls?.find((control) => task && control.id === task.name);
+      let taskControl: any = context.taskControls
+        ?.find((control: any) => task && control.id === task.name);
 
       let previousTask = taskResults[i - 1];
 
@@ -65,7 +66,7 @@ const useTask = (): ITaskHook => {
         let block: ITaskBlock = await taskControl.onProcessTask?.({ ...task, previousBlock: previousTask }, context, contextApi);
         taskResults.push(block);
       } else {
-        console.error(`Không tìm thấy task control nào có id là ${task.name}`);
+        console.error(`Không tìm thấy task control nào có id là '${task.name}'`);
         taskResults.push({ ...task, status: TASK_STATUS.ERROR });
       }
     }

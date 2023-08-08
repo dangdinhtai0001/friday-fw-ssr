@@ -2,7 +2,7 @@ import React, { forwardRef, useRef, useImperativeHandle, Ref } from 'react';
 import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
 import { ContainerProviderProps, ContextState, ContainerRef } from './types';
-import { useForm, FormProvider, UseFormProps, FieldValues } from "react-hook-form";
+import { useForm, FormProvider, UseFormProps, FieldValues, Resolver } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
 
 // 'DeepPartial<T> | AsyncDefaultValues<T> | undefined'
@@ -33,6 +33,7 @@ const createDefaultContextStateValue = (props: ContainerProviderProps, fieldRefs
     defaultFieldLabelAlign: "left",
     dataBlockComponent: props.dataBlockComponent,
     defaultCols: props.defaultCols ? props.defaultCols : 3,
+    externalContext: props.externalContext,
     // ------------------------------------
     onValueChange: props.onValueChange,
     afterValueChange: props.afterValueChange,
@@ -70,7 +71,7 @@ const createReactHookFormProps = (props: ContainerProviderProps): UseFormProps =
     shouldUnregister: false,
     shouldUseNativeValidation: false,
     defaultValues: defaultValues,
-    resolver: props.resolver
+    resolver: props.resolver,
   };
 }
 

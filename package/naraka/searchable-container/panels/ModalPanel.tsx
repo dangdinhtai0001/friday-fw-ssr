@@ -1,15 +1,12 @@
 import * as React from 'react';
 import { IModalPanelProps, ContextHookValue, IModalBlockProps } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
-import ModalWrapper, { } from '@/package/deva/modal';
 import useTask from '../task/useTask';
 import { DefaultTaskName } from '../Constant';
 
 function ModalPanel(props: IModalPanelProps) {
-  const { context, contextApi }: ContextHookValue = useContainerContext();
+  const { context }: ContextHookValue = useContainerContext();
   const { onCreateTaskChain } = useTask();
-
-  const { modalTemplate, currentModalTeamplate } = context;
 
   const handleOnCloseModal = (): void => {
     onCreateTaskChain([
@@ -22,6 +19,7 @@ function ModalPanel(props: IModalPanelProps) {
       const params = {
         ...context.modalBlockParams,
         onCloseModal: handleOnCloseModal,
+        onCreateTaskChain
       };
 
       return React.createElement(

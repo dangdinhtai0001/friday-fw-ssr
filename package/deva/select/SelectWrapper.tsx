@@ -17,15 +17,18 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   ref: React.ForwardedRef<HTMLButtonElement>
 ) {
 
-  // TODO: Chuyển sang dùng i18n cho giá trị mặc dịnh của placeholder
-  const { datasourceConfig,
+  const {
+    datasourceConfig,
     maxListBoxHeight = 256,
     onChange,
     renderSelectedValue,
+    renderOption,
+    // TODO: Chuyển sang dùng i18n cho giá trị mặc dịnh của placeholder
     placeholder = "Select an option...",
     multiple,
     value,
-    toggleWidth
+    toggleWidth,
+    valueProps = 'value'
   } = props;
 
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -79,9 +82,9 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
 
   const renderOptionItems = () => {
     return props.itemDefs
-      ? renderOption(props.itemDefs)
+      ? renderAllOptions(props.itemDefs)
       : datasource?.data
-        ? renderOption(datasource.data)
+        ? renderAllOptions(datasource.data)
         : null;
   };
 
@@ -96,6 +99,40 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       </StyledValue>
     );
   }
+
+  const renderAllOptions = (items: any[]) => {
+    if (items?.length) {
+      return items.map((item: any, index: number) => {
+
+        if (item.itemDefs && item.itemDefs.length) {
+          return (
+            <OptionGroupWrapper {...item} key={index}>
+              {renderAllOptions(item.itemDefs)}
+            </OptionGroupWrapper>
+          );
+        } else {
+          let { disabled, label, slotProps, slots } = item;
+          let value = item[valueProps];
+
+          return (
+            <StyledOption
+              key={index}
+              value={value}
+              disabled={disabled}
+              label={label}
+              slotProps={slotProps}
+              slots={slots}
+            >
+              {renderOption ? renderOption(item) : item.label}
+              {/* {item.currencyCode} | {item.currencyName} | {item.currencySymbol} */}
+            </StyledOption>
+          );
+        }
+      });
+    }
+
+    return null;
+  };
 
 
   return (
@@ -115,26 +152,26 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   );
 };
 
-const renderOption = (items: ItemProps[]) => {
-  if (items?.length) {
-    return items.map((item: ItemProps, index: number) => {
-      if (item.itemDefs && item.itemDefs.length) {
-        return (
-          <OptionGroupWrapper {...item} key={index}>
-            {renderOption(item.itemDefs)}
-          </OptionGroupWrapper>
-        );
-      } else {
-        return (
-          <StyledOption {...item} key={index}>
-            {item.label}
-          </StyledOption>
-        );
-      }
-    });
-  }
+// const renderAllOptions = (items: ItemProps[], renderOption?: (option?: any) => void) => {
+//   if (items?.length) {
+//     return items.map((item: ItemProps, index: number) => {
+//       if (item.itemDefs && item.itemDefs.length) {
+//         return (
+//           <OptionGroupWrapper {...item} key={index}>
+//             {renderAllOptions(item.itemDefs, renderOption)}
+//           </OptionGroupWrapper>
+//         );
+//       } else {
+//         return (
+//           <StyledOption {...item} key={index}>
+//             {renderOption ? renderOption(item) : item.label}
+//           </StyledOption>
+//         );
+//       }
+//     });
+//   }
 
-  return null;
-};
+//   return null;
+// };
 
 export default forwardRef(SelectWrapper);
