@@ -3,7 +3,7 @@ import { IDefaultTheme } from '@/package/preta/types';
 import { defaultControllerContainer, typographyCaption2 } from '@/package/preta/styled-shared';
 import { IStyledInputContainerProps } from './types.d'
 
-export const StyledInputElement = styled('input', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+export const StyledInputElement = styled('input', {})(({ theme, disabled }: { theme?: IDefaultTheme, disabled: boolean }) => ({
   ...typographyCaption2({ theme }),
   width: '100%',
   flexGrow: 1,
@@ -17,6 +17,8 @@ export const StyledInputElement = styled('input', {})(({ theme }: { theme?: IDef
   '&[type="number"]::-webkit-inner-spin-button': {
     WebkitAppearance: 'none',
   },
+
+  cursor: disabled ? 'not-allowed' : 'inherit',
 }));
 
 export const StyledInputContainer = styled('div', {})<IStyledInputContainerProps>(({ theme, width }: IStyledInputContainerProps) => ({
