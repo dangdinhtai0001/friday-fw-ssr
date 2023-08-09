@@ -29,12 +29,7 @@ const ToolbarPanel: React.FC<ToolbarPanelProps> = () => {
     }
   };
 
-  return (
-    <div>
-      ToolbarPanel
-      {createToolbarBlocks()}
-    </div>
-  );
+  return createToolbarBlocks();
 };
 
 export default ToolbarPanel;

@@ -9,7 +9,8 @@ import { DefaultTaskName } from '../Constant';
 const DataPanel: React.FC<DataPanelProps> = (props: DataPanelProps) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
   const { onCreateTaskChain } = useTask();
-  const createModalBlock = () => {
+
+  const createDataBlock = () => {
 
     if (context.dataBlockComponent) {
       const params = {
@@ -26,7 +27,7 @@ const DataPanel: React.FC<DataPanelProps> = (props: DataPanelProps) => {
     }
   };
 
-  return createModalBlock();
+  return createDataBlock();
   // return (
   //   <div>
   //     Data panel

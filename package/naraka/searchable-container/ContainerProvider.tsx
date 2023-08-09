@@ -63,6 +63,9 @@ const createDefaultContextStateValue = <
     modalBlockComponent: props.modalBlockComponent,
     modalBlockParams: props.modalBlockParams,
     // ---------------------------
+    dataBlockComponent: props.dataBlockComponent,
+    dataBlockParams: props.dataBlockParams,
+    // ---------------------------
     onFetchData: props.onFetchData
   };
 };
