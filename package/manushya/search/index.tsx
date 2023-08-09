@@ -18,9 +18,11 @@ import {
   DefaultToolbarBlock,
   IFilterBlockExtProps,
   IModalBlockExtProps,
+  DefaultDataBlock as DefaultSearchableDataBlock,
   // 
   IPaginationBlockExtProps,
-  IToolbarBlockExtProps
+  IToolbarBlockExtProps,
+  IDataBlockExtProps
 } from '@/package/naraka/searchable-container-ext';
 import {
   ContainerProviderProps,
@@ -177,42 +179,6 @@ const taskControls: ITaskControl[] = [
 
 export default function ComponentPage() {
   const searchableContainerProps: ContainerProviderProps<IFilterBlockExtProps, IToolbarBlockExtProps, IPaginationBlockExtProps, IModalBlockExtProps, any> = {
-    // ------------
-    // modalTemplate: {
-    //   "temp_1": {
-    //     title: "title của temp_1 nè",
-    //     component: "div",
-    //     componentParams: { children: "Hello temp_1" },
-    //     footerDefs: [
-    //       {
-    //         label: 'Cancel',
-    //         color: 'transparent',
-    //         textColor: 'primary',
-    //         border: true,
-    //         onClick: (contentRef: any, state: any, onCloseModal) => {
-    //           onCloseModal();
-    //         }
-    //       }
-    //     ]
-    //   },
-    //   "temp_2": {
-    //     title: "title của temp_2 nè",
-    //     component: "div",
-    //     componentParams: { children: "Hello temp_2" },
-    //     footerDefs: [
-    //       {
-    //         label: 'Cancel',
-    //         color: 'transparent',
-    //         textColor: 'primary',
-    //         border: true,
-    //         //TODO: onClick của modal đang chưa đóng dduwwojc modal đâu 
-    //         onClick: (contentRef: any, _context: IModalBlockProps) => {
-
-    //         }
-    //       }
-    //     ]
-    //   }
-    // },
     modalTemplate: modalTemplate,
     // ------------
     filterDefs: [
@@ -281,30 +247,6 @@ export default function ComponentPage() {
       ]
     } as IToolbarBlockExtProps,
     // ------------
-    // taskControls: [
-    //   {
-    //     id: 'add',
-    //     onProcessTask(payload: ITaskBlock): ITaskBlock {
-    //       console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
-    //       return { ...payload, data: { foo: 'bar' }, status: TASK_STATUS.SUCCESS };
-    //     },
-    //   },
-    //   {
-    //     id: 'delete',
-    //     async onProcessTask(payload: ITaskBlock, context?: ContextState<any, any, any, any, any>, contextApi?: ContextApi): Promise<ITaskBlock> {
-    //       console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
-
-    //       contextApi?.applyProcessingData(context?.containerData[0]);
-
-    //       await sleep(2000);
-
-    //       contextApi?.applyProcessingData(null);
-
-    //       return { ...payload, status: TASK_STATUS.SUCCESS };
-    //     },
-    //   }
-
-    // ],
     taskControls: taskControls,
     // ------------
     paginationBlockParams: {} as IPaginationBlockExtProps,
@@ -312,6 +254,9 @@ export default function ComponentPage() {
     // ------------
     modalBlockComponent: DefaultModalBlock,
     modalBlockParams: {} as IModalBlockExtProps,
+    // ------------
+    dataBlockComponent: DefaultDataBlock,
+    dataBlockParams: {},
     // ------------
     onFetchData: onFetchData
     // ------------

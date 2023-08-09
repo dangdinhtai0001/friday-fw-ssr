@@ -46,6 +46,9 @@ export interface ContextState<
   modalBlockParams?: EModalBlockProps;
   modalBlockComponent?: React.ComponentType<EModalBlockProps>;
 
+  dataBlockParams?: EDataBlockProps;
+  dataBlockComponent?: React.ComponentType<EDataBlockProps>;
+
   onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 }
 

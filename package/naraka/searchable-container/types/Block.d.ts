@@ -40,4 +40,5 @@ export interface IPaginationBlockProps {
 
 // ==========================  DATA  ==========================
 export interface IDataBlockProps {
+  onCreateTaskChain: <T extends ITaskRequest>(requests: T[]) => void;
 }
