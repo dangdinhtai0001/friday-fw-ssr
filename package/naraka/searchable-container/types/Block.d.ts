@@ -31,7 +31,7 @@ export interface IModalTemplateFooterConfig extends IFooterConfig {
 }
 
 export interface IModalTemplateValue extends IModalWrapperProps {
-  footerDefs: IModalTemplateFooterConfig[]
+  footerDefs?: IModalTemplateFooterConfig[]
 }
 
 // ==========================  PAGINATION  ==========================

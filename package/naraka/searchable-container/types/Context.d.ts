@@ -2,12 +2,13 @@ import React from 'react';
 import { IFilterModifiedEvent } from './Event.d';
 import { FilterCriteria, PaginationModel, FilterDef } from './Common.d';
 import { ITaskControl, ITaskBlock } from './Task.d';
-import { 
-  IFilterBlockProps, 
+import {
+  IFilterBlockProps,
   IToolbarBlockProps,
-   IPaginationBlockProps, 
-   IModalBlockProps,
-    IModalTemplateValue } from './Block.d';
+  IPaginationBlockProps,
+  IModalBlockProps,
+  IModalTemplateValue
+} from './Block.d';
 
 export interface ContextState<
   EFilterBlockProps extends IFilterBlockProps,
@@ -40,7 +41,7 @@ export interface ContextState<
   containerData: any[];
   processingData?: any;
 
-  modalTemplate?: Record<string, IModalTemplateValue>;
+  modalTemplate?: Record<string, IModalTemplateValue> | ((param: IModalTemplateFuncParam) => Record<string, IModalTemplateValue>);
   currentModalTeamplate?: string;
   modalBlockParams?: EModalBlockProps;
   modalBlockComponent?: React.ComponentType<EModalBlockProps>;

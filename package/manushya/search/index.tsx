@@ -1,38 +1,34 @@
-import * as React from 'react';
 
 import axios from 'axios';
 
 import FormProvider from '@/package/naraka/manipulation-container';
-import {
-  ContextState as ManipulationContextState,
-  ContainerProviderProps as FormProps,
-  ContainerRef as FormRef,
-} from '@/package/naraka/manipulation-container/types';
 import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext';
+import {
+  ContainerProviderProps as FormProps,
+  ContextState as ManipulationContextState
+} from '@/package/naraka/manipulation-container/types';
 
-import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container';
-import {
-  ContextApi,
-  ContextState,
-  ContainerProviderProps,
-  ITaskBlock,
-  IModalBlockProps,
-  IModalTemplateValue,
-  ITaskControl
-} from '@/package/naraka/searchable-container/types';
-import {
-  DefaultFilterBlock,
-  DefaultPaginationBlock,
-  DefaultToolbarBlock,
-  DefaultModalBlock,
-  // 
-  IPaginationBlockExtProps,
-  IFilterBlockExtProps,
-  IToolbarBlockExtProps,
-  IModalBlockExtProps
-} from '@/package/naraka/searchable-container-ext';
 import InputWrappper, { IInputWrapperProps } from '@/package/deva/input';
 import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
+import { ContainerProvider, DefaultTaskName, TASK_STATUS } from '@/package/naraka/searchable-container';
+import {
+  DefaultFilterBlock,
+  DefaultModalBlock,
+  DefaultPaginationBlock,
+  DefaultToolbarBlock,
+  IFilterBlockExtProps,
+  IModalBlockExtProps,
+  // 
+  IPaginationBlockExtProps,
+  IToolbarBlockExtProps
+} from '@/package/naraka/searchable-container-ext';
+import {
+  ContainerProviderProps,
+  IModalTemplateFuncParam,
+  IModalTemplateValue,
+  ITaskBlock,
+  ITaskControl
+} from '@/package/naraka/searchable-container/types';
 
 const onFetchData = async () => {
   let url = "http://127.0.0.1:3658/m1/370198-0-default/accounts";
@@ -43,118 +39,116 @@ const onFetchData = async () => {
   const response = await axios.request({ url, headers, method });
   // console.log(response.data);
   return response.data;
-}
-const modalTemplate: Record<string, IModalTemplateValue> = {
-  "create": {
-    title: "Tạo mới tài khoản",
-    component: FormProvider,
-    componentParams: {
-      fieldDefs: [
-        {
-          name: 'account',
-          label: 'Account',
-          initialValue: '',
-          required: false,
-          disabled: true,
-          component: InputWrappper,
-          componentParams: { type: 'text', placeholder: 'account' } as IInputWrapperProps
-        },
-        {
-          name: 'accountName',
-          label: 'Account Name',
-          initialValue: '',
-          required: false,
-          component: InputWrappper,
-          componentParams: { type: 'text', placeholder: 'accountName' } as IInputWrapperProps
-        },
-        {
-          name: 'amount',
-          label: 'Amount',
-          initialValue: '',
-          required: false,
-          component: InputWrappper,
-          componentParams: { type: 'text', placeholder: 'Amount' } as IInputWrapperProps
-        },
-        {
-          name: 'currencyCode',
-          label: 'Currency',
-          required: false,
-          component: SelectWrapper,
-          componentParams: {
-            datasourceConfig: {
-              url: "http://127.0.0.1:3658/m1/370198-0-default/currencies",
-              swrOptions: {
-                refreshInterval: 0,
+};
+
+const modalTemplate = (params: IModalTemplateFuncParam): Record<string, IModalTemplateValue> => {
+  const { onCreateTaskChain } = params;
+  return {
+    "create": {
+      title: "Tạo mới tài khoản",
+      component: FormProvider,
+      componentParams: {
+        fieldDefs: [
+          {
+            name: 'account',
+            label: 'Account',
+            initialValue: '',
+            required: false,
+            disabled: true,
+            component: InputWrappper,
+            componentParams: { type: 'text', placeholder: 'account' } as IInputWrapperProps
+          },
+          {
+            name: 'accountName',
+            label: 'Account Name',
+            initialValue: '',
+            required: false,
+            component: InputWrappper,
+            componentParams: { type: 'text', placeholder: 'accountName' } as IInputWrapperProps
+          },
+          {
+            name: 'amount',
+            label: 'Amount',
+            initialValue: '',
+            required: false,
+            component: InputWrappper,
+            componentParams: { type: 'text', placeholder: 'Amount' } as IInputWrapperProps
+          },
+          {
+            name: 'currencyCode',
+            label: 'Currency',
+            required: false,
+            component: SelectWrapper,
+            componentParams: {
+              datasourceConfig: {
+                url: "http://127.0.0.1:3658/m1/370198-0-default/currencies",
+                swrOptions: {
+                  refreshInterval: 0,
+                }
+              },
+              multiple: false,
+              valueProps: 'currencyCode',
+              renderOption: (option) => {
+                return <>{option.currencyCode} | {option.currencyName} | {option.currencySymbol}</>
               }
-            },
-            multiple: false,
-            valueProps: 'currencyCode',
-            renderOption: (option) => {
-              return <>{option.currencyCode} | {option.currencyName} | {option.currencySymbol}</>
+            } as ISelectWrapperProps<string, false>
+          },
+        ],
+        dataBlockComponent: DefaultDataBlock,
+        defaultFieldRaito: '20% 80%',
+        defaultCols: 1,
+        externalContext: { foo: 'bar' },
+        onSubmitSuccess: (values, context, api, externalContext) => {
+          console.log("onValid submit", values, externalContext);
+
+          onCreateTaskChain([
+            { name: 'create', data: values }
+          ])
+        },
+        onSubmitError: (errors, context, api, externalContext) => {
+          console.log("onInvalid submit", errors, externalContext);
+        },
+        resolver: async (values, context, options) => {
+          console.log("validate ", values, options, context);
+
+          let errors: any = {};
+
+          if (values.accountName === '') {
+            errors.accountName = {
+              type: "custom",
+              message: "accountName field không được để trống."
             }
-          } as ISelectWrapperProps<string, false>
-        },
-      ],
-      dataBlockComponent: DefaultDataBlock,
-      defaultFieldRaito: '20% 80%',
-      defaultCols: 1,
-      externalContext: { foo: 'bar' },
-      onSubmitSuccess: (values, context, api, externalContext) => {
-        console.log("onValid submit", values, externalContext);
-      },
-      onSubmitError: (errors, context, api, externalContext) => {
-        console.log("onInvalid submit", errors, externalContext);
-      },
-      resolver: async (values, context, options) => {
-        console.log("validate ", values, options, context);
-
-        let errors: any = {};
-
-        if (values.accountName === '') {
-          errors.accountName = {
-            type: "custom",
-            message: "accountName field không được để trống."
           }
-        }
 
-        // await sleep(3000);
-
-        return {
-          values: values,
-          errors: errors
-        }
-      },
-      onValueChange(props) {
-        // console.log("Trigger on change", props.fieldName, props.changedValue);
-      },
-    } as FormProps,
-    footerDefs: [
-      {
-        label: 'Xác nhận',
-        onClick: (contentRef: any, state: any, onCloseModal, onCreateTaskChain) => {
-          contentRef?.current?.submitForm();
-
-          let formData = contentRef.current.getFormValues();
-
-          console.log("formData", formData);
-
-          // onCreateTaskChain([
-          //   { name: 'create', data: formData }
-          // ])
+          return {
+            values: values,
+            errors: errors
+          }
         },
-      },
-      {
-        label: 'Cancel',
-        color: 'transparent',
-        textColor: 'primary',
-        border: true,
-        onClick: (contentRef: any, state: any, onCloseModal) => {
-          onCloseModal();
+        onValueChange(props) {
+          // console.log("Trigger on change", props.fieldName, props.changedValue);
         },
-      }
-    ]
+      } as FormProps,
+      footerDefs: [
+        {
+          label: 'Xác nhận',
+          onClick: (contentRef: any, externalContext: any, onCloseModal, onCreateTaskChain) => {
+            contentRef?.current?.submitForm();
+          },
+        },
+        {
+          label: 'Cancel',
+          color: 'transparent',
+          textColor: 'primary',
+          border: true,
+          onClick: (contentRef: any, state: any, onCloseModal) => {
+            onCloseModal();
+          },
+        }
+      ]
+    }
   }
-}
+};
 
 const taskControls: ITaskControl[] = [
   {
@@ -179,7 +173,7 @@ const taskControls: ITaskControl[] = [
 
     },
   },
-]
+];
 
 export default function ComponentPage() {
   const searchableContainerProps: ContainerProviderProps<IFilterBlockExtProps, IToolbarBlockExtProps, IPaginationBlockExtProps, IModalBlockExtProps, any> = {

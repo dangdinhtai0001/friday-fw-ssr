@@ -21,7 +21,7 @@ export interface IModalWrapperProps {
   component?: React.ComponentType<any> | string;
   componentParams?: any;
   open?: boolean;
-  context?: any;
+  externalContext?: any;
   onClose?: (event: object, reason: string) => void;
 }
 

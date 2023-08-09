@@ -6,7 +6,7 @@ import {
   IDataBlockProps,
   IModalTemplateValue
 } from './Block.d';
-import { ITaskControl } from './Task.d';
+import { ITaskControl, ITaskRequest } from './Task.d';
 import { FilterDef } from './Common.d';
 import { IModalWrapperProps } from '@/package/deva/modal';
 
@@ -30,12 +30,16 @@ export interface ContainerProviderProps<
   paginationBlockParams?: EPaginationBlockProps;
   paginationBlockComponent?: React.ComponentType<EPaginationBlockProps>;
   // ==================================================
-  modalTemplate?: Record<string, IModalTemplateValue>;
+  modalTemplate?: Record<string, IModalTemplateValue> | ((param: IModalTemplateFuncParam) => Record<string, IModalTemplateValue>);
   modalBlockParams?: EModalBlockProps;
   modalBlockComponent?: React.ComponentType<EModalBlockProps>;
   // ==================================================
   onFetchData?: (taskBlock?: TaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 };
+
+export interface IModalTemplateFuncParam {
+  onCreateTaskChain: <T extends ITaskRequest>(requests: T[]) => void;
+}
 
 export interface ContainerProps extends ContainerProviderProps {
 
