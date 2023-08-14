@@ -16,6 +16,7 @@ function DataBlock(props: IDataBlockExtProps) {
   const { containerData } = context;
 
   const [columnDefs] = React.useState([
+    { checkboxSelection: true, headerCheckboxSelection: true, },
     { field: 'account', resizable: true },
     { field: 'accountName', resizable: true },
     { field: 'amount', resizable: true },
