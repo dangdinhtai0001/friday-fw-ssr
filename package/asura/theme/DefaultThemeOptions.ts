@@ -28,14 +28,6 @@ const strokeWidth: IStrokeWidth = {
   thickest: '4px',
 }
 
-const baseTypography: Record<string, any> = {
-  fontFamily: 'Segoe UI',
-  fontSize: '14px',
-  fontWeight: fontWeight.regular,
-  lineHeight: '20px',
-  letterSpacing: spacing.none,
-};
-
 const cornerRadius: ICornerRadius = {
   none: '0px',
   small: '2px',
@@ -45,9 +37,14 @@ const cornerRadius: ICornerRadius = {
   circle: '50%'
 }
 
-// export const typography: ThemeOptions['typography'] = {
 export const typography: IThemeTypography = {
-  ...baseTypography,
+  root: {
+    fontFamily: 'Segoe UI',
+    fontSize: '14px',
+    fontWeight: fontWeight.regular,
+    lineHeight: '20px',
+    letterSpacing: spacing.none,
+  },
   caption2: {
     fontSize: '0.7143rem', // 10px / 14px
     lineHeight: '14px',

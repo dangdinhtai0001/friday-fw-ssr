@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IDataBlockExtProps } from './types.d';
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import { ContextHookValue, ContextState } from '@/package/naraka/searchable-container/types';
+import { StyledGridContainer } from './StyledElements';
 
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
@@ -15,20 +16,26 @@ function DataBlock(props: IDataBlockExtProps) {
   const { containerData } = context;
 
   const [columnDefs] = React.useState([
-    { field: 'account' },
-    { field: 'accountName' },
-    { field: 'amount' },
-    { field: 'currencyCode' }
+    { field: 'account', resizable: true },
+    { field: 'accountName', resizable: true },
+    { field: 'amount', resizable: true },
+    { field: 'currencyCode', resizable: true }
   ]);
 
   return (
     <div>
-      <div className="ag-theme-alpine" style={{ height: '300px', width: '100%' }}>
+      <StyledGridContainer
+        className="ag-theme-alpine"
+        height='200px'
+        width='100%'
+      >
         <AgGridReact
           rowData={containerData}
-          columnDefs={columnDefs}>
+          columnDefs={columnDefs}
+
+        >
         </AgGridReact>
-      </div>
+      </StyledGridContainer>
     </div>
   );
 }

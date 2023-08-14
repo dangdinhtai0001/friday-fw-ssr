@@ -32,10 +32,10 @@ const GlobalStyled = () => {
     <Global
       styles={{
         body: {
-          fontFamily: theme.typography.fontFamily,
-          fontSize: theme.typography.fontSize,
-          fontWeight: theme.typography.fontWeight,
-          lineHeight: theme.typography.lineHeight,
+          fontFamily: theme.typography.root.fontFamily,
+          fontSize: theme.typography.root.fontSize,
+          fontWeight: theme.typography.root.fontWeight,
+          lineHeight: theme.typography.root.lineHeight,
           backgroundColor: theme.palette.background.default,
           color: theme.palette.text.primary,
         },

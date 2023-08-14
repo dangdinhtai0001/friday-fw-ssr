@@ -44,12 +44,15 @@ export interface IThemeComponents {
 };
 
 export interface IThemeTypographyOption {
-  fontSize: any;
-  lineHeight: any;
-  letterSpacing: any;
-  fontWeight: any;
+  fontSize: string;
+  lineHeight: string | number;
+  letterSpacing: string | number;
+  fontWeight: string | number;
+
+  fontFamily?: string;
 }
-export type IThemeTypographyKey = "caption2" | "caption2Strong" | "caption1" | "caption1Strong" | "caption1Stronger" | "body1" | "body1Strong" | "body1Stronger" | "body2" | "subtitle2" | "subtitle2Stronger" | "subtitle1" | "title3" | "title2" | "title1" | "largeTitle" | "display"
+
+export type IThemeTypographyKey = "root" | "caption2" | "caption2Strong" | "caption1" | "caption1Strong" | "caption1Stronger" | "body1" | "body1Strong" | "body1Stronger" | "body2" | "subtitle2" | "subtitle2Stronger" | "subtitle1" | "title3" | "title2" | "title1" | "largeTitle" | "display"
 
 export interface IThemeTypography extends Record<IThemeTypographyKey, IThemeTypographyOption> {
 
