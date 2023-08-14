@@ -3,8 +3,10 @@ import { IDataBlockExtProps } from './types.d';
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import { ContextHookValue, ContextState } from '@/package/naraka/searchable-container/types';
 import { StyledGridContainer } from './StyledElements';
+import DefaultHeader from './headers';
 
 import { AgGridReact } from 'ag-grid-react';
+import { ColDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
@@ -17,10 +19,10 @@ function DataBlock(props: IDataBlockExtProps) {
 
   const [columnDefs] = React.useState([
     { checkboxSelection: true, headerCheckboxSelection: true, },
-    { field: 'account', resizable: true },
-    { field: 'accountName', resizable: true },
-    { field: 'amount', resizable: true },
-    { field: 'currencyCode', resizable: true }
+    { field: 'account' },
+    { field: 'accountName' },
+    { field: 'amount' },
+    { field: 'currencyCode' }
   ]);
 
   return (
@@ -33,12 +35,20 @@ function DataBlock(props: IDataBlockExtProps) {
         <AgGridReact
           rowData={containerData}
           columnDefs={columnDefs}
-
+          defaultColDef={createDefaultColDef()}
         >
         </AgGridReact>
       </StyledGridContainer>
     </div>
   );
+};
+
+function createDefaultColDef(): ColDef {
+  return {
+    resizable: true,
+    headerComponent: DefaultHeader,
+    headerComponentParams: {}
+  };
 }
 
 export default DataBlock;
