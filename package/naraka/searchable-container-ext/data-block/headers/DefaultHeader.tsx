@@ -1,9 +1,14 @@
 import { forwardRef, useImperativeHandle, ForwardedRef } from 'react';
-import { IDefaultHeaderProps, IDefaultHeaderRef } from './types.d';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
+import { IDefaultHeaderProps, IDefaultHeaderRef } from './types';
+import { StyledDefaultHeaderContainer } from './StyledElements';
+import ButtonWrapper from '@/package/deva/button';
 
 function DefaultHeader(props: IDefaultHeaderProps, ref: ForwardedRef<IDefaultHeaderRef>) {
 
-  const { displayName } = props;
+  const { displayName, enableMenu,  } = props;
 
   useImperativeHandle(ref, () => ({
     refresh(props: IDefaultHeaderProps): boolean {
@@ -12,9 +17,10 @@ function DefaultHeader(props: IDefaultHeaderProps, ref: ForwardedRef<IDefaultHea
   }));
 
   return (
-    <div>
-      {displayName}-{displayName}
-    </div>
+    <StyledDefaultHeaderContainer className='styled-default-header-container'>
+      <span>{displayName}</span>
+      {enableMenu && <ButtonWrapper icon={<FontAwesomeIcon icon={faBars} />} />}
+    </StyledDefaultHeaderContainer>
   );
 }
 

@@ -72,8 +72,8 @@ export const StyledGridContainer = styled('div', {})((props: IStyledGridContaine
     // Width of the header column separator
     '--ag-header-column-separator-width': '1px',
 
-    // Colour of the header column separator
-    '--ag-header-column-separator-color': theme?.palette.text.secondary,
+    // Colour of the header column separator (Nhớ để cùng màu với border)
+    '--ag-header-column-separator-color': theme?.palette.secondary.main,
 
     // Whether to show the header column resize handle - a vertical line that displays only between resizeable header columns, indicating where to drag in order to resize the column.
     '--ag-header-column-resize-handle-display': 'none',
@@ -91,5 +91,18 @@ export const StyledGridContainer = styled('div', {})((props: IStyledGridContaine
 
     // Default font size for text in the grid
     '--ag-font-size': theme?.typography.root.fontSize,
+
+    // Horizontal padding for grid and header cells (vertical padding is not set explicitly, but inferred from row-height / header-height
+    '--ag-cell-horizontal-padding': theme?.components.spacing.s,
+
+    // Default border for cells. This can be used to specify the border-style and border-color properties e.g. dashed red but the border-width is fixed at 1px. Set to solid transparent to show no border.
+    '--ag-cell-horizontal-border': 'solid ' + theme?.palette.secondary.main,
+
+    // ------------------------------------------------------------------------------------------------------------------------
+    // Override css 
+    // ------------------------------------------------------------------------------------------------------------------------
+    '.ag-header-group-cell:after': {
+      height: '100px'
+    }
   };
 });

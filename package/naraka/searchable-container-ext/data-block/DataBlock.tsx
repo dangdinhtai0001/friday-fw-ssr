@@ -3,10 +3,10 @@ import { IDataBlockExtProps } from './types.d';
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import { ContextHookValue, ContextState } from '@/package/naraka/searchable-container/types';
 import { StyledGridContainer } from './StyledElements';
-import DefaultHeader from './headers';
+import { DefaultHeader, DefaultHeaderGroup } from './headers';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ColGroupDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
@@ -17,12 +17,22 @@ function DataBlock(props: IDataBlockExtProps) {
 
   const { containerData } = context;
 
-  const [columnDefs] = React.useState([
-    { checkboxSelection: true, headerCheckboxSelection: true, },
-    { field: 'account' },
+  const [columnDefs] = React.useState<(ColDef | ColGroupDef)[]>([
+    { checkboxSelection: true, headerCheckboxSelection: true, headerComponentParams: { enableMenu: false }, width: 50 },
+    {
+      headerName: 'Test group',
+      children: [
+        { field: 'account', },
+        { field: 'accountName' },
+        { field: 'amount' },
+        { field: 'currencyCode' },
+      ]
+    },
+    { field: 'account', },
     { field: 'accountName' },
     { field: 'amount' },
-    { field: 'currencyCode' }
+    { field: 'currencyCode' },
+
   ]);
 
   return (
@@ -36,6 +46,11 @@ function DataBlock(props: IDataBlockExtProps) {
           rowData={containerData}
           columnDefs={columnDefs}
           defaultColDef={createDefaultColDef()}
+          defaultColGroupDef={createDefaultColGroupDef()}
+          components={{
+            agColumnHeader: DefaultHeader,
+            agColumnHeaderGroup: DefaultHeaderGroup,
+          }}
         >
         </AgGridReact>
       </StyledGridContainer>
@@ -46,9 +61,15 @@ function DataBlock(props: IDataBlockExtProps) {
 function createDefaultColDef(): ColDef {
   return {
     resizable: true,
-    headerComponent: DefaultHeader,
-    headerComponentParams: {}
+    headerComponentParams: { enableMenu: true },
   };
-}
+};
+
+function createDefaultColGroupDef(): Partial<ColGroupDef> {
+  return {
+    headerGroupComponent: DefaultHeaderGroup,
+    headerGroupComponentParams: {},
+  };
+};
 
 export default DataBlock;
