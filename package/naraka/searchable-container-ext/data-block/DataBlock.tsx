@@ -21,7 +21,6 @@ function DataBlock(props: IDataBlockExtProps) {
     { checkboxSelection: true, headerCheckboxSelection: true, headerComponentParams: { enableMenu: false }, width: 50 },
     {
       headerName: 'Test group',
-
       children: [
         { field: 'account', columnGroupShow: 'open', },
         { field: 'accountName', columnGroupShow: 'open', },
@@ -50,7 +49,7 @@ function DataBlock(props: IDataBlockExtProps) {
           defaultColGroupDef={createDefaultColGroupDef()}
           components={{
             agColumnHeader: DefaultHeader,
-            agColumnHeaderGroup: DefaultHeaderGroup,
+            agColumnGroupHeader: DefaultHeaderGroup,
           }}
           showOpenedGroup={false}
         >
@@ -69,9 +68,7 @@ function createDefaultColDef(): ColDef {
 
 function createDefaultColGroupDef(): Partial<ColGroupDef> {
   return {
-    headerGroupComponent: DefaultHeaderGroup,
     headerGroupComponentParams: {},
-
   };
 };
 

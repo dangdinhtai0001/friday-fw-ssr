@@ -1,6 +1,6 @@
 import { forwardRef, ForwardedRef, useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightLong } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 
 import { IDefaultHeaderGroupProps, IDefaultHeaderGroupRef } from './types.d';
@@ -11,6 +11,10 @@ function DefaultHeaderGroup(props: IDefaultHeaderGroupProps, ref: ForwardedRef<I
 
   const [_, setExpandState] = useState('collapsed');
 
+  const childrenLength = columnGroup.getChildren()?.length || 0;
+  if (childrenLength <= 1) {
+    return null;
+  }
   const expandOrCollapse = () => {
     let currentState = columnGroup.getProvidedColumnGroup().isExpanded();
     setExpanded(!currentState);
@@ -18,23 +22,23 @@ function DefaultHeaderGroup(props: IDefaultHeaderGroupProps, ref: ForwardedRef<I
     setExpandState(currentState ? 'expanded' : 'collapsed');
   }
 
+  const isExpanded = columnGroup.getProvidedColumnGroup().isExpanded();
+
   return (
     <StyledDefaultHeaderGroupContainer className='styled-default-header-group-container'>
       {displayName}
-      {columnGroup.getUniqueId() && (
-        <ButtonWrapper
-          icon={(
-            <motion.div
-              initial={{ rotate: 0 }}
-              animate={{ rotate: columnGroup.getProvidedColumnGroup().isExpanded() ? 180 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <FontAwesomeIcon icon={faRightLong} />
-            </motion.div>
-          )}
-          onClick={expandOrCollapse}
-        />
-      )}
+      <ButtonWrapper
+        icon={(
+          <motion.div
+            initial={{ rotate: 0 }}
+            animate={{ rotate: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <FontAwesomeIcon icon={faChevronRight} />
+          </motion.div>
+        )}
+        onClick={expandOrCollapse}
+      />
     </StyledDefaultHeaderGroupContainer>
   );
 };
