@@ -8,7 +8,7 @@ import ButtonWrapper from '@/package/deva/button';
 
 function DefaultHeader(props: IDefaultHeaderProps, ref: ForwardedRef<IDefaultHeaderRef>) {
 
-  const { displayName, enableMenu,  } = props;
+  const { displayName, enableMenu } = props;
 
   useImperativeHandle(ref, () => ({
     refresh(props: IDefaultHeaderProps): boolean {

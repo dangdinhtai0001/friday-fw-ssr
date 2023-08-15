@@ -21,9 +21,10 @@ function DataBlock(props: IDataBlockExtProps) {
     { checkboxSelection: true, headerCheckboxSelection: true, headerComponentParams: { enableMenu: false }, width: 50 },
     {
       headerName: 'Test group',
+
       children: [
-        { field: 'account', },
-        { field: 'accountName' },
+        { field: 'account', columnGroupShow: 'open', },
+        { field: 'accountName', columnGroupShow: 'open', },
         { field: 'amount' },
         { field: 'currencyCode' },
       ]
@@ -51,6 +52,7 @@ function DataBlock(props: IDataBlockExtProps) {
             agColumnHeader: DefaultHeader,
             agColumnHeaderGroup: DefaultHeaderGroup,
           }}
+          showOpenedGroup={false}
         >
         </AgGridReact>
       </StyledGridContainer>
@@ -69,6 +71,7 @@ function createDefaultColGroupDef(): Partial<ColGroupDef> {
   return {
     headerGroupComponent: DefaultHeaderGroup,
     headerGroupComponentParams: {},
+
   };
 };
 
