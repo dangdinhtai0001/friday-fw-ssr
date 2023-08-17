@@ -7,6 +7,7 @@ import {
   IToolbarBlockProps,
   IPaginationBlockProps,
   IModalBlockProps,
+  IDataBlockProps,
   IModalTemplateValue
 } from './Block.d';
 
@@ -49,7 +50,7 @@ export interface ContextState<
   dataBlockParams?: EDataBlockProps;
   dataBlockComponent?: React.ComponentType<EDataBlockProps>;
 
-  onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
+  onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;      
 }
 
 export interface ContextApi {

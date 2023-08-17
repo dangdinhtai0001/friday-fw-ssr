@@ -1,7 +1,20 @@
-import { ITaskControl, ITaskBlock, ContextState, ContextApi } from '../types';
+import {
+  ITaskControl, ITaskBlock, ContextState, ContextApi,
+  IFilterBlockProps,
+  IToolbarBlockProps,
+  IPaginationBlockProps,
+  IModalBlockProps,
+  IDataBlockProps
+} from '../types';
 import { DefaultTaskName, TASK_STATUS } from '../Constant';
 
-const onProcessModifyFilterModel = async (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => {
+const onProcessModifyFilterModel = async <
+  EFilterBlockProps extends IFilterBlockProps,
+  EToolbarBlockProps extends IToolbarBlockProps,
+  EPaginationBlockProps extends IPaginationBlockProps,
+  EModalBlockProps extends IModalBlockProps,
+  EDataBlockProps extends IDataBlockProps,
+>(payload: ITaskBlock, context?: ContextState<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>, contextApi?: ContextApi) => {
   console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
   // mặc định thì payload.data sẽ là filterInstance trong context
   contextApi?.applyFilterInstance(payload.data);
@@ -10,7 +23,13 @@ const onProcessModifyFilterModel = async (payload: ITaskBlock, context?: Context
   return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
-const onProcessModifyPagiantionModel = async (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => {
+const onProcessModifyPagiantionModel = async <
+  EFilterBlockProps extends IFilterBlockProps,
+  EToolbarBlockProps extends IToolbarBlockProps,
+  EPaginationBlockProps extends IPaginationBlockProps,
+  EModalBlockProps extends IModalBlockProps,
+  EDataBlockProps extends IDataBlockProps,
+>(payload: ITaskBlock, context?: ContextState<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>, contextApi?: ContextApi) => {
   console.log(`Process Task ${payload.name}-${payload.id}: `, payload.data);
 
   // mặc định thì payload.data sẽ là paginationInstance trong context
@@ -20,7 +39,13 @@ const onProcessModifyPagiantionModel = async (payload: ITaskBlock, context?: Con
   return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
-const onProcessFetchData = async (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => {
+const onProcessFetchData = async <
+  EFilterBlockProps extends IFilterBlockProps,
+  EToolbarBlockProps extends IToolbarBlockProps,
+  EPaginationBlockProps extends IPaginationBlockProps,
+  EModalBlockProps extends IModalBlockProps,
+  EDataBlockProps extends IDataBlockProps,
+>(payload: ITaskBlock, context?: ContextState<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>, contextApi?: ContextApi) => {
   console.log(`Process Task ${payload.name}-${payload.id}: `, payload);
   let containerData = [];
 
@@ -35,7 +60,13 @@ const onProcessFetchData = async (payload: ITaskBlock, context?: ContextState, c
   return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
-const onProcessActiveModal = async (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => {
+const onProcessActiveModal = async <
+  EFilterBlockProps extends IFilterBlockProps,
+  EToolbarBlockProps extends IToolbarBlockProps,
+  EPaginationBlockProps extends IPaginationBlockProps,
+  EModalBlockProps extends IModalBlockProps,
+  EDataBlockProps extends IDataBlockProps,
+>(payload: ITaskBlock, context?: ContextState<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>, contextApi?: ContextApi) => {
   console.log(`Process Task ${payload.name}-${payload.id}: `, payload);
 
   // tổng hợp dữ liệu của modal 
@@ -45,7 +76,13 @@ const onProcessActiveModal = async (payload: ITaskBlock, context?: ContextState,
   return { ...payload, status: TASK_STATUS.SUCCESS };
 };
 
-const onProcessHiddenModal = async (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => {
+const onProcessHiddenModal = async <
+  EFilterBlockProps extends IFilterBlockProps,
+  EToolbarBlockProps extends IToolbarBlockProps,
+  EPaginationBlockProps extends IPaginationBlockProps,
+  EModalBlockProps extends IModalBlockProps,
+  EDataBlockProps extends IDataBlockProps,
+>(payload: ITaskBlock, context?: ContextState<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>, contextApi?: ContextApi) => {
   console.log(`Process Task ${payload.name}-${payload.id}: `, payload);
 
   // tổng hợp dữ liệu của modal 

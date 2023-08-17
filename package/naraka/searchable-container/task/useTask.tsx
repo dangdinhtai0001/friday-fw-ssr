@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { ITaskRequest, ContextHookValue, ITaskBlock, ITaskHook, ContextState } from '../types';
+import { ITaskRequest, ContextHookValue, ITaskBlock, ITaskHook, ITaskControl } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import { v4 as uuidv4 } from 'uuid';
 import { TASK_STATUS } from '../Constant';
@@ -50,16 +49,15 @@ const useTask = (): ITaskHook => {
 
     let taskResults: ITaskBlock[] = [];
 
-    for (let i = 0; i < tasks.length; i++) {
-      const task = tasks[i];
-      let taskControl: any = context.taskControls
-        ?.find((control: any) => task && control.id === task.name);
+    tasks.forEach(async (task, i) => {
+      let taskControl: ITaskControl = context.taskControls
+        ?.find((control: ITaskControl) => task && control.id === task.name);
 
       let previousTask = taskResults[i - 1];
 
       if (previousTask?.status === TASK_STATUS.ERROR) {
         console.error('Task trước đó đã fail, không thể chạy tiếp');
-        break;
+        return;
       }
 
       if (taskControl) {
@@ -69,7 +67,7 @@ const useTask = (): ITaskHook => {
         console.error(`Không tìm thấy task control nào có id là '${task.name}'`);
         taskResults.push({ ...task, status: TASK_STATUS.ERROR });
       }
-    }
+    });
 
     // sau khi chạy xong thì xóa task 
     contextApi.applyTaskBatch([]);
