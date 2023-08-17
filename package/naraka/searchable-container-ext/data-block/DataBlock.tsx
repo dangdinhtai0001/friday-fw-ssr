@@ -4,6 +4,7 @@ import { useContainerContext } from '@/package/naraka/searchable-container';
 import { ContextHookValue, ContextState } from '@/package/naraka/searchable-container/types';
 import { StyledGridContainer } from './StyledElements';
 import { DefaultHeader, DefaultHeaderGroup } from './headers';
+import { TextFloatingFilter } from './floating-filter';
 
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef } from 'ag-grid-community';
@@ -18,7 +19,13 @@ function DataBlock(props: IDataBlockExtProps) {
   const { containerData } = context;
 
   const [columnDefs] = React.useState<(ColDef | ColGroupDef)[]>([
-    { checkboxSelection: true, headerCheckboxSelection: true, headerComponentParams: { enableMenu: false }, width: 50 },
+    {
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      headerComponentParams: { enableMenu: false },
+      width: 50,
+      floatingFilter: false
+    },
     {
       headerName: 'Test group',
       children: [
@@ -51,6 +58,7 @@ function DataBlock(props: IDataBlockExtProps) {
             agColumnHeader: DefaultHeader,
             agColumnGroupHeader: DefaultHeaderGroup,
           }}
+          columnTypes={columnTypes}
           showOpenedGroup={false}
         >
         </AgGridReact>
@@ -62,6 +70,9 @@ function DataBlock(props: IDataBlockExtProps) {
 function createDefaultColDef(): ColDef {
   return {
     resizable: true,
+    filter: true,
+    type: 'textColumn',
+    floatingFilter: true,
     headerComponentParams: { enableMenu: true },
   };
 };
@@ -70,6 +81,14 @@ function createDefaultColGroupDef(): Partial<ColGroupDef> {
   return {
     headerGroupComponentParams: {},
   };
+};
+
+// define a column type (you can define as many as you like)
+const columnTypes: Record<string, ColDef> = {
+  textColumn: {
+    floatingFilter: true,
+    floatingFilterComponent: TextFloatingFilter,
+  },
 };
 
 export default DataBlock;
