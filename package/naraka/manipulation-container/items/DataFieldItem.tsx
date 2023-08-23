@@ -52,6 +52,13 @@ export default function FieldItem(props: IFieldItemProps) {
       ref: (ref: any) => (context.fieldRefs.current[name] = ref),
       ...componentParams!
     }
+
+    console.log(context.fieldHidden[name])
+
+    if (context.fieldHidden[name]) {
+      return null;
+    }
+
     return React.createElement<IFieldItemComponentProps>(component, _params);
   };
 

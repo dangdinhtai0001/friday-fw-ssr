@@ -20,9 +20,9 @@ export interface ContextState {
   fieldDefs: FieldDef[];
   fieldRefs: React.MutableRefObject<{ [key: string]: any; }>;
   submitCounter: number;
-  fieldDisabled: { [key: string]: boolean };
-  fieldReadOnly: { [key: string]: boolean };
-  fieldHidden: { [key: string]: boolean };
+  fieldDisabled: Record<string, any>;
+  fieldReadOnly: Record<string, any>;
+  fieldHidden: Record<string, any>;
   fieldMessage: Record<string, { type: string, message: string }>;
   defaultFieldRaito: string;
   defaultFieldLabelAlign: LabelTextAlign;

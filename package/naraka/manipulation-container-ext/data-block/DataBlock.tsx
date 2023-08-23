@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { IDataFieldBlockProps } from './types.d';
 
-import Box from '@mui/system/Box';
 import { useController } from 'react-hook-form';
 import { motion, useAnimation, AnimationControls } from "framer-motion";
 import useAsyncEffect from "@n1ru4l/use-async-effect";
@@ -12,7 +11,7 @@ import { StyledLabel, StyledRequiredIcon, StyledMessage, StyledDataBlockRoot } f
 export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const { fieldItemProps } = props;
 
-  const { context: { fieldMessage, defaultFieldLabelAlign, defaultFieldRaito } } = useContainerContext();
+  const { context: { fieldMessage, defaultFieldLabelAlign, defaultFieldRaito, fieldHidden } } = useContainerContext();
   const { formState: { errors } } = useController(fieldItemProps);
 
   const errorMsgControls = useAnimation();

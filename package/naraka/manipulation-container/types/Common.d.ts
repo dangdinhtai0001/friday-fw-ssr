@@ -1,4 +1,9 @@
 import { UseControllerProps } from 'react-hook-form';
+import { IControllerComponentProps } from '@/package/preta/types';
+
+export interface IFieldItemComponentProps extends IControllerComponentProps {
+
+}
 
 export interface FieldDef<T> {
   name: string;
@@ -21,6 +26,6 @@ export interface IDataFieldBlockProps {
   fieldItemProps: IFieldItemProps;
 }
 
-export interface IFieldItemProps extends UseControllerProps {
+export interface IFieldItemProps extends UseControllerProps, IFieldItemComponentProps {
   fieldDef: FieldDef
 }

@@ -22,7 +22,7 @@ function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLInputElem
    * @param e - The change event object.
    */
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
 
     onChange?.(e.target.value);
   }

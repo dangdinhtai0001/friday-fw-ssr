@@ -28,7 +28,8 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     multiple,
     value,
     toggleWidth,
-    valueProps = 'value'
+    valueProps = 'value',
+    disabled
   } = props;
 
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -67,7 +68,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
           animate={{ opacity: 1, scale: 1, rotate: listboxOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <FontAwesomeIcon icon={faChevronDown} size="1x"/>
+          <FontAwesomeIcon icon={faChevronDown} size="1x" />
         </motion.div>
       ),
       width: toggleWidth,
@@ -138,6 +139,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   return (
     <Select
       value={value as SelectValue<TValue, Multiple>}
+      disabled={disabled}
       listboxOpen={listboxOpen}
       onListboxOpenChange={handleOnListboxOpenChange}
       onChange={handleOnOptionChange}

@@ -1,4 +1,4 @@
-import { FieldDef, LabelTextAlign } from './Common.d';
+import { FieldDef, LabelTextAlign, IDataFieldBlockProps } from './Common.d';
 import { OnValueChangeProps, ContextState, ContextApi } from './Context.d';
 import { IDataFieldLabelProps } from './Block.d';
 import { FieldValues, Resolver, Mode, CriteriaMode, ValidationMode, FormState } from 'react-hook-form';

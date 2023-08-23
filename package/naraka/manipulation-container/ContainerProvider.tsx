@@ -10,9 +10,9 @@ import { v4 as uuidv4 } from 'uuid';
 // hàm định nghĩa giá trị default của context state
 const createDefaultContextStateValue = (props: ContainerProviderProps, fieldRefs: React.MutableRefObject<{ [key: string]: any; }>): ContextState => {
 
-  let fieldDisabled: { [key: string]: boolean } = {};
-  let fieldReadOnly: { [key: string]: boolean } = {};
-  let fieldHidden: { [key: string]: boolean } = {};
+  let fieldDisabled: Record<string, any> = {};
+  let fieldReadOnly: Record<string, any> = {};
+  let fieldHidden: Record<string, any> = {};
 
   props.fieldDefs.forEach(e => {
     fieldDisabled[e.name] = (e.disabled !== undefined) ? e.disabled : false;
