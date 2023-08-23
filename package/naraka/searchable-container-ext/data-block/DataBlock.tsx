@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { createElement, useState } from 'react';
 import { IDataBlockExtProps } from './types.d';
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import { ContextHookValue, ContextState } from '@/package/naraka/searchable-container/types';
@@ -12,13 +12,15 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 function DataBlock(props: IDataBlockExtProps) {
-  const { onCreateTaskChain } = props;
+  const {
+    onCreateTaskChain,
+  } = props;
 
   const { context, contextApi }: ContextHookValue = useContainerContext();
 
   const { containerData } = context;
 
-  const [columnDefs] = React.useState<(ColDef | ColGroupDef)[]>([
+  const [columnDefs] = useState<(ColDef | ColGroupDef)[]>([
     {
       checkboxSelection: true,
       headerCheckboxSelection: true,
@@ -43,27 +45,25 @@ function DataBlock(props: IDataBlockExtProps) {
   ]);
 
   return (
-    <div>
-      <StyledGridContainer
-        className="ag-theme-alpine"
-        height='200px'
-        width='100%'
+    <StyledGridContainer
+      className="ag-theme-alpine"
+      height='300px'
+      width='100%'
+    >
+      <AgGridReact
+        rowData={containerData}
+        columnDefs={columnDefs}
+        defaultColDef={createDefaultColDef()}
+        defaultColGroupDef={createDefaultColGroupDef()}
+        components={{
+          agColumnHeader: DefaultHeader,
+          agColumnGroupHeader: DefaultHeaderGroup,
+        }}
+        columnTypes={columnTypes}
+        showOpenedGroup={false}
       >
-        <AgGridReact
-          rowData={containerData}
-          columnDefs={columnDefs}
-          defaultColDef={createDefaultColDef()}
-          defaultColGroupDef={createDefaultColGroupDef()}
-          components={{
-            agColumnHeader: DefaultHeader,
-            agColumnGroupHeader: DefaultHeaderGroup,
-          }}
-          columnTypes={columnTypes}
-          showOpenedGroup={false}
-        >
-        </AgGridReact>
-      </StyledGridContainer>
-    </div>
+      </AgGridReact>
+    </StyledGridContainer>
   );
 };
 
@@ -86,8 +86,7 @@ function createDefaultColGroupDef(): Partial<ColGroupDef> {
 // define a column type (you can define as many as you like)
 const columnTypes: Record<string, ColDef> = {
   textColumn: {
-    floatingFilter: true,
-    floatingFilterComponent: TextFloatingFilter,
+    floatingFilter: false,
   },
 };
 

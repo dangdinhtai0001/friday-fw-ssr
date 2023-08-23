@@ -256,7 +256,8 @@ export default function ComponentPage() {
     modalBlockParams: {} as IModalBlockExtProps,
     // ------------
     dataBlockComponent: DefaultSearchableDataBlock,
-    dataBlockParams: {},
+    dataBlockParams: {
+    } as IDataBlockExtProps,
     // ------------
     onFetchData: onFetchData
     // ------------

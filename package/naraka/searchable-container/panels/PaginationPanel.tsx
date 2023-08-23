@@ -3,7 +3,6 @@ import { PaginationPanelProps, ContextHookValue, PaginationModel, ICreateTaskCha
 import { useContainerContext } from '../context/useContainerContext';
 import useTask from '../task/useTask';
 import { DefaultTaskName } from '../Constant';
-import JSONPretty from 'react-json-prettify';
 
 const PaginationPanel: React.FC<PaginationPanelProps> = (props: PaginationPanelProps) => {
   const { context, contextApi }: ContextHookValue = useContainerContext();
