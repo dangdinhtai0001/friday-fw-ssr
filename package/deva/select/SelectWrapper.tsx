@@ -1,5 +1,5 @@
 import { forwardRef, useState, useRef } from 'react';
-import Select, { SelectProps, SelectRootSlotPropsOverrides } from '@mui/base/Select';
+import Select, { SelectProps } from '@mui/base/Select';
 import { SelectValue } from '@mui/base/useSelect';
 import { SelectOption } from '@mui/base/useOption';
 import { motion } from 'framer-motion';
@@ -67,7 +67,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
           animate={{ opacity: 1, scale: 1, rotate: listboxOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <FontAwesomeIcon icon={faChevronDown} />
+          <FontAwesomeIcon icon={faChevronDown} size="1x"/>
         </motion.div>
       ),
       width: toggleWidth,
@@ -151,27 +151,5 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     </Select>
   );
 };
-
-// const renderAllOptions = (items: ItemProps[], renderOption?: (option?: any) => void) => {
-//   if (items?.length) {
-//     return items.map((item: ItemProps, index: number) => {
-//       if (item.itemDefs && item.itemDefs.length) {
-//         return (
-//           <OptionGroupWrapper {...item} key={index}>
-//             {renderAllOptions(item.itemDefs, renderOption)}
-//           </OptionGroupWrapper>
-//         );
-//       } else {
-//         return (
-//           <StyledOption {...item} key={index}>
-//             {renderOption ? renderOption(item) : item.label}
-//           </StyledOption>
-//         );
-//       }
-//     });
-//   }
-
-//   return null;
-// };
 
 export default forwardRef(SelectWrapper);

@@ -23,7 +23,7 @@ export const popperSlideDownVariant = {
     y: '-50%',
     scaleY: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       ease: 'easeInOut',
     },
   },
@@ -32,7 +32,7 @@ export const popperSlideDownVariant = {
     y: '0%',
     scaleY: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.3,
       ease: 'easeInOut',
     },
   }

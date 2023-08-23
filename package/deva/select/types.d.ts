@@ -12,7 +12,7 @@ export interface ISelectWrapperProps<TValue extends {}, Multiple extends boolean
   // useSelectParams?: UseSelectParameters<TValue, Multiple>;
   datasourceConfig?: IDatasourceProps;
   itemDefs?: ItemProps[];
-  onChange: IControllerComponentProps['onChange'];
+  onChange?: IControllerComponentProps['onChange'];
   multiple: Multiple;
   // -------------------------------------------------------
   maxListBoxHeight?: number | string;
