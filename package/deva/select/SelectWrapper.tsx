@@ -1,16 +1,18 @@
-import { forwardRef, useState, useRef } from 'react';
+import { forwardRef, useState, useRef, useEffect, useImperativeHandle, MouseEvent } from 'react';
 import Select, { SelectProps } from '@mui/base/Select';
 import { SelectValue } from '@mui/base/useSelect';
 import { SelectOption } from '@mui/base/useOption';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { useTheme } from '@mui/system';
 import { ISelectWrapperProps, ItemProps, IListboxWrapperProps, IStyledToggleProps } from './types';
 import { useDatasource } from '@/package/preta/intergration';
 import { StyledOption, StyledPopper, StyledValue } from './StyledElements';
 import ListboxWrapper from './ListboxWrapper';
 import OptionGroupWrapper from './OptionGroupWrapper';
-import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button'
+import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button';
+import { IDefaultTheme } from '@/package/preta/types';
 
 function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   props: ISelectWrapperProps<TValue, Multiple>,
@@ -29,8 +31,16 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     value,
     toggleWidth,
     valueProps = 'value',
-    disabled
+    disabled,
+    // -----------------
+    keepMounted = true,
+    disablePortal = false,
+    anchorEl,
+    popperRef,
+    popperClassName
   } = props;
+
+  const theme = useTheme<IDefaultTheme>();
 
   const toggleRef = useRef<HTMLButtonElement>(null);
 
@@ -55,11 +65,6 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   };
 
   const slotProps: SelectProps<TValue, Multiple>['slotProps'] = {
-    listbox: {
-      maxHeight: maxListBoxHeight,
-      open: listboxOpen,
-      width: Number(toggleRef.current?.offsetWidth) || 0,
-    } as IListboxWrapperProps,
     root: {
       ref: toggleRef,
       icon: (
@@ -68,7 +73,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
           animate={{ opacity: 1, scale: 1, rotate: listboxOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <FontAwesomeIcon icon={faChevronDown} size="1x" />
+          <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: theme.components.spacing.mNudge }} />
         </motion.div>
       ),
       width: toggleWidth,
@@ -78,7 +83,17 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       animationDisabled: true,
       className: 'select-wrapper-toggle',
     } as IButtonWrapperProps,
-    popper: { keepMounted: true },
+    listbox: {
+      maxHeight: maxListBoxHeight,
+      open: listboxOpen,
+      width: Number(toggleRef.current?.offsetWidth) || 0,
+    } as IListboxWrapperProps,
+    popper: {
+      keepMounted: keepMounted,
+      disablePortal: disablePortal,
+      popperRef: popperRef,
+      className: popperClassName
+    },
   };
 
   const renderOptionItems = () => {

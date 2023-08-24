@@ -27,9 +27,6 @@ export default function DataPanel(props: IDataPanelProps) {
     })
   };
 
-  console.log(theme.components.spacing);
-
-
   return (
     <Box
       sx={{

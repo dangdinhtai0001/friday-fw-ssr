@@ -26,10 +26,12 @@ export const StyledInputContainer = styled('div', {})<IStyledInputContainerProps
 
   padding: '0.1rem 0px',
 
-  display: 'inline-flex',
+  display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: '0.3rem',
+
+  margin: `${theme?.components.spacing.none}`,
 
   // firefox
   '&:focus-visible': {

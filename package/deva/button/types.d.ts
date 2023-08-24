@@ -7,7 +7,7 @@ export interface IButtonWrapperProps extends UseButtonParameters, Omit<IStyledBu
   icon?: React.ReactNode;
   children?: React.ReactNode;
   animationDisabled?: boolean;
-  onClick?: () => void | Promise<Void>;
+  onClick?: (event?: MouseEvent<HTMLElement>) => void | Promise<Void>;
 }
 
 export interface IStyledButtonProps {

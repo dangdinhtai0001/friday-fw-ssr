@@ -5,6 +5,7 @@ import { ContextHookValue, ContextState } from '@/package/naraka/searchable-cont
 import { StyledGridContainer } from './StyledElements';
 import { DefaultHeader, DefaultHeaderGroup } from './headers';
 import { TextFloatingFilter } from './floating-filter';
+import { TextFilter } from './filter';
 
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef } from 'ag-grid-community';
@@ -37,7 +38,7 @@ function DataBlock(props: IDataBlockExtProps) {
         { field: 'currencyCode' },
       ]
     },
-    { field: 'account', },
+    { field: 'account', floatingFilter: true, filter: TextFilter },
     { field: 'accountName' },
     { field: 'amount' },
     { field: 'currencyCode' },

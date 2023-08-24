@@ -1,6 +1,12 @@
-import { useRef } from 'react';
+import { ForwardedRef, forwardRef, useImperativeHandle, useRef } from 'react';
+
+import { ITextFilterProps, ITextFilterRef, IFilterModel } from './types.d';
+
 import FormContainer from '@/package/naraka/manipulation-container';
-import { ContainerRef as FormmRef, FieldDef, ContainerProviderProps, ContextState, ContextApi } from '@/package/naraka/manipulation-container/types';
+import {
+  ContainerRef as FormmRef, FieldDef, ContainerProviderProps,
+  ContextState as FormContextState, ContextApi as FormContextApi
+} from '@/package/naraka/manipulation-container/types';
 
 import DefaultDataBlock from '@/package/naraka/manipulation-container-ext'
 
@@ -8,15 +14,49 @@ import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
 import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
 import ButtonWrapper from '@/package/deva/button/ButtonWrapper';
 
-export interface IManipulationProps {
-}
+import { StyledFilterContainer } from './StyledElements';
 
-export interface IFormValue {
-  first_operator: string;
-  first_value: string;
-  combination_operator: string;
-  second_operator: string;
-  second_value: string;
+function TextFilter(props: ITextFilterProps, ref: ForwardedRef<ITextFilterRef>) {
+
+  const formRef = useRef<FormmRef>(null);
+
+  useImperativeHandle(ref, () => {
+    return {}
+  }, []);
+
+  return (
+    <StyledFilterContainer className='styled-filter-container'>
+      <FormContainer
+        fieldDefs={fieldDefs}
+        dataBlockComponent={DefaultDataBlock}
+        onSubmitSuccess={(data) => { }}
+        onSubmitError={(errors) => { }}
+        defaultCols={1}
+        afterValueChange={afterValueChange}
+        ref={formRef}
+      />
+    </StyledFilterContainer>
+  );
+};
+
+const afterValueChange = (values: IFilterModel, context: FormContextState, contextApi: FormContextApi) => {
+  const { first_value } = values;
+
+  console.log(values);
+
+  if (first_value !== '') {
+    contextApi.applyFieldHidden({
+      combination_operator: false,
+      second_operator: false,
+      second_value: false
+    });
+  } else {
+    contextApi.applyFieldHidden({
+      combination_operator: true,
+      second_operator: true,
+      second_value: true
+    });
+  }
 }
 
 const fieldDefs: FieldDef<any>[] = [
@@ -25,6 +65,7 @@ const fieldDefs: FieldDef<any>[] = [
     initialValue: "",
     component: SelectWrapper,
     componentParams: {
+      className: 'ag-custom-component-popup',
       itemDefs: [
         { label: "equals", value: "EQUALS" },
         { label: "not equals", value: "NOT_EQUALS" },
@@ -35,6 +76,7 @@ const fieldDefs: FieldDef<any>[] = [
         { label: "none", value: "" },
       ],
       multiple: false,
+      popperClassName: 'ag-custom-component-popup'
     } as ISelectWrapperProps<any, false>
   },
   {
@@ -55,6 +97,7 @@ const fieldDefs: FieldDef<any>[] = [
         { label: "Or", value: "OR" },
       ],
       multiple: false,
+      popperClassName: 'ag-custom-component-popup'
     } as ISelectWrapperProps<('AND' | 'OR'), false>
   },
   {
@@ -72,6 +115,8 @@ const fieldDefs: FieldDef<any>[] = [
         { label: "none", value: "" },
       ],
       multiple: false,
+      // muốn dùng popper trên grid thì phải có cái này: ref: 
+      popperClassName: 'ag-custom-component-popup'
     } as ISelectWrapperProps<any, false>
   },
   {
@@ -82,51 +127,4 @@ const fieldDefs: FieldDef<any>[] = [
   }
 ];
 
-
-const afterValueChange = (values: IFormValue, context: ContextState, contextApi: ContextApi) => {
-  const { first_value } = values;
-
-  console.log(values);
-
-  if (first_value !== '') {
-    contextApi.applyFieldHidden({
-      combination_operator: false,
-      second_operator: false,
-      second_value: false
-    });
-  } else {
-    contextApi.applyFieldHidden({
-      combination_operator: true,
-      second_operator: true,
-      second_value: true
-    });
-  }
-}
-
-const onMounted = (context: ContextState) => {
-  const { fieldRefs } = context;
-  const el = fieldRefs.current['first_operator'];
-
-  el.classList.add('class-4', 'class-5', 'class-6');
-  
-  console.log(el)
-}
-
-
-export default function Manipulation(props: IManipulationProps) {
-  const formRef = useRef<FormmRef>(null);
-  return (<>
-    <FormContainer
-      fieldDefs={fieldDefs}
-      dataBlockComponent={DefaultDataBlock}
-      onSubmitSuccess={(data) => { }}
-      onSubmitError={(errors) => { }}
-      defaultCols={1}
-      afterValueChange={afterValueChange}
-      onMounted={onMounted}
-      ref={formRef}
-    />
-    <ButtonWrapper>Apply</ButtonWrapper>
-    <ButtonWrapper>Clear</ButtonWrapper>
-  </>)
-}
+export default forwardRef(TextFilter);
