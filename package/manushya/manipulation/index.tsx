@@ -6,6 +6,7 @@ import DefaultDataBlock from '@/package/naraka/manipulation-container-ext'
 
 import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
 import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
+import ButtonWrapper from '@/package/deva/button/ButtonWrapper';
 
 export interface IManipulationProps {
 }
@@ -100,10 +101,6 @@ const afterValueChange = (values: IFormValue, context: ContextState, contextApi:
       second_value: true
     });
   }
-
-
-  // contextApi.applyFieldHidden({ combination_operator: first_value !== '' });
-
 }
 
 
@@ -119,6 +116,7 @@ export default function Manipulation(props: IManipulationProps) {
       afterValueChange={afterValueChange}
       ref={formRef}
     />
-
+    <ButtonWrapper>Apply</ButtonWrapper>
+    <ButtonWrapper>Clear</ButtonWrapper>
   </>)
 }

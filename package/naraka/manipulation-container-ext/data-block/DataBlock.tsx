@@ -9,10 +9,10 @@ import FieldItem from '@/package/naraka/manipulation-container/items/DataFieldIt
 import { StyledLabel, StyledRequiredIcon, StyledMessage, StyledDataBlockRoot } from './StyledElements'
 
 export default function DataFieldBlock(props: IDataFieldBlockProps) {
-  const { fieldItemProps } = props;
+  const { fieldDef, name } = props;
 
   const { context: { fieldMessage, defaultFieldLabelAlign, defaultFieldRaito, fieldHidden } } = useContainerContext();
-  const { formState: { errors } } = useController(fieldItemProps);
+  const { formState: { errors } } = useController({ name: name });
 
   const errorMsgControls = useAnimation();
   const customMsgControls = useAnimation();
@@ -21,7 +21,7 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const [message, setMessage] = React.useState<string | undefined>();
 
   const renderControlContainer = () => {
-    return <FieldItem {...fieldItemProps}></FieldItem>
+    return <FieldItem fieldDef={fieldDef} name={name}></FieldItem>
   };
 
   /**
@@ -33,15 +33,15 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
  * @param {Object} controls - The controls for animation.
  */
   useAsyncEffect(function* (onCancel, cast) {
-    useMessageHandling(setErrorMessage, errors, fieldItemProps.name, errorMsgControls);
+    useMessageHandling(setErrorMessage, errors, name, errorMsgControls);
   }, [errors]);
 
   useAsyncEffect(function* (onCancel, cast) {
-    useMessageHandling(setMessage, fieldMessage, fieldItemProps.name, customMsgControls);
+    useMessageHandling(setMessage, fieldMessage, name, customMsgControls);
   }, [fieldMessage]);
 
   const renderDataFieldBlock = () => {
-    let { fieldDef: { label, required, fieldRaito, labelAlign } } = fieldItemProps;
+    let { label, required, fieldRaito, labelAlign } = fieldDef;
 
     // TODO: Check lại xem vì sao không có label thì nó không render cả control luôn 
     if (label) {

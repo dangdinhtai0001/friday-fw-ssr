@@ -53,8 +53,6 @@ export default function FieldItem(props: IFieldItemProps) {
       ...componentParams!
     }
 
-    console.log(context.fieldHidden[name])
-
     if (context.fieldHidden[name]) {
       return null;
     }

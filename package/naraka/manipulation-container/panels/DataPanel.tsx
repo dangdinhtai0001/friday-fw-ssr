@@ -1,37 +1,46 @@
-import * as React from 'react';
+import { createElement } from 'react';
+import Box from '@mui/system/Box';
+import { useTheme } from '@mui/system';
+
 import { IDataPanelProps, IFieldItemProps, IDataFieldBlockProps } from '../types';
 import { useContainerContext } from '../context/useContainerContext';
-import Box from '@mui/system/Box';
+import { IDefaultTheme } from '@/package/preta/types';
 
 export default function DataPanel(props: IDataPanelProps) {
   const { context } = useContainerContext();
+  const theme = useTheme<IDefaultTheme>();
 
-  const creatFieldItems = () => {
+  const createDataBlock = () => {
     if (!context.fieldDefs) {
       return <></>
     };
 
     return context.fieldDefs.map((item, index) => {
-      let _props: IFieldItemProps = {
+      let _props: IDataFieldBlockProps = {
         fieldDef: item,
         name: item.name,
       };
 
-      return context.dataBlockComponent ? React.createElement<IDataFieldBlockProps>(context.dataBlockComponent, { key: index, fieldItemProps: _props }) : null;
+      return context.dataBlockComponent ?
+        createElement<IDataFieldBlockProps>(context.dataBlockComponent, { ..._props, key: index })
+        : null;
     })
   };
+
+  console.log(theme.components.spacing);
+
 
   return (
     <Box
       sx={{
         display: 'grid',
         gridTemplateColumns: `repeat(${context.defaultCols}, 1fr)`,
-        rowGap: 1,
-        columnGap: 4,
+        rowGap: theme.components.spacing.xxs,
+        columnGap: theme.components.spacing.s,
       }}
       className="data-panel"
     >
-      {creatFieldItems()}
+      {createDataBlock()}
     </Box>
-  );
+  )
 }

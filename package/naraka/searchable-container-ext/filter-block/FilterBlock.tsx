@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import { ContainerProvider as FormContainerProvider } from '@/package/naraka/manipulation-container';
-import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext';
+import DefaultDataBlock from '@/package/naraka/manipulation-container-ext';
 import { ContainerRef } from '@/package/naraka/manipulation-container/types';
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import { StyledFilterBlock, StyledFilterBlockButton } from './StyledElements'

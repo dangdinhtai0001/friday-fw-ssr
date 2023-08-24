@@ -23,9 +23,10 @@ export interface FieldDef<T> {
 export type DataFieldStatus = 'error' | 'warning';
 export type LabelTextAlign = 'left' | 'center' | 'right';
 export interface IDataFieldBlockProps {
-  fieldItemProps: IFieldItemProps;
+  fieldDef: FieldDef;
+  name: string;
 }
 
-export interface IFieldItemProps extends UseControllerProps, IFieldItemComponentProps {
+export interface IFieldItemProps extends UseControllerProps, IControllerComponentProps {
   fieldDef: FieldDef
 }

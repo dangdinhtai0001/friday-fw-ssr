@@ -13,6 +13,7 @@ export interface ContainerProviderProps {
   defaultFieldRaito?: string;
   defaultFieldLabelAlign?: LabelTextAlign;
   dataBlockComponent?: React.ComponentType<IDataFieldBlockProps>;
+  dataBlockParams?: IDataFieldBlockProps;
   defaultCols?: number;
   onValueChange?: (props: OnValueChangeProps) => void | Promise<void>;
   afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
