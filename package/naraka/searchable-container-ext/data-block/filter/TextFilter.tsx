@@ -12,6 +12,7 @@ import DefaultDataBlock from '@/package/naraka/manipulation-container-ext'
 
 import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
 import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
+import RadioGroup, { IRadioGroupProps } from '@/package/deva/radio-group';
 import ButtonWrapper from '@/package/deva/button/ButtonWrapper';
 
 import { StyledFilterContainer } from './StyledElements';
@@ -90,15 +91,13 @@ const fieldDefs: FieldDef<any>[] = [
     name: "combination_operator",
     initialValue: "AND",
     isHidden: true,
-    component: SelectWrapper,
+    component: RadioGroup,
     componentParams: {
-      itemDefs: [
-        { label: "And", value: "AND" },
-        { label: "Or", value: "OR" },
+      options: [
+        { label: 'And', value: '&', xs: 6 },
+        { label: 'Or', value: '||', xs: 6 },
       ],
-      multiple: false,
-      popperClassName: 'ag-custom-component-popup'
-    } as ISelectWrapperProps<('AND' | 'OR'), false>
+    } as IRadioGroupProps
   },
   {
     name: "second_operator",
