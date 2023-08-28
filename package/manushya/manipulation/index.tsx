@@ -6,6 +6,7 @@ import DefaultDataBlock from '@/package/naraka/manipulation-container-ext'
 
 import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
 import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
+import RadioGroup, { IRadioGroupProps } from '@/package/deva/radio-group';
 import ButtonWrapper from '@/package/deva/button/ButtonWrapper';
 
 export interface IManipulationProps {
@@ -58,6 +59,20 @@ const fieldDefs: FieldDef<any>[] = [
     } as ISelectWrapperProps<('AND' | 'OR'), false>
   },
   {
+    name: "combination_operator2",
+    initialValue: "AND",
+    component: RadioGroup,
+    componentParams: {
+      columns: 12,
+      options: [
+        { label: "AND", value: '&', xs: 12 },
+        { label: "Or 1", value: '||' },
+        { label: "Or 2", value: '||' },
+        { label: "Or 3", value: '||' },
+      ]
+    } as IRadioGroupProps
+  },
+  {
     name: "second_operator",
     initialValue: "",
     component: SelectWrapper,
@@ -108,7 +123,7 @@ const onMounted = (context: ContextState) => {
   const el = fieldRefs.current['first_operator'];
 
   el.classList.add('class-4', 'class-5', 'class-6');
-  
+
   console.log(el)
 }
 
