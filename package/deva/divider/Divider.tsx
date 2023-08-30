@@ -1,55 +1,12 @@
-import * as React from 'react';
-import { styled } from '@mui/system';
-import {
-  IDividerProps,
-  IDividerContainerProps,
-  IDividerLineProps,
-  IDividerTextProps,
-} from './Divider.d';
+import { IDividerProps } from './types';
+import { StyledDividerContainer, StyledDividerLine, StyledDividerText } from './StyledElements';
 
 export default function Divider(props: IDividerProps) {
-  const { color = '#000', height = 1, type = 'solid', text } = props;
-
+  const { height = 1, type = 'solid', text, color } = props;
   return (
-    <DividerContainer height={height}>
-      <DividerLine color={color} type={type} />
-      {text && <DividerText>{text}</DividerText>}
-    </DividerContainer>
+    <StyledDividerContainer height={height}>
+      <StyledDividerLine type={type} />
+      {text && <StyledDividerText>{text}</StyledDividerText>}
+    </StyledDividerContainer>
   );
 }
-
-const DividerContainer = styled(
-  'div',
-  {}
-)<IDividerContainerProps>(({ height }) => ({
-  position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: `${height}px`,
-  margin: '16px 0',
-}));
-
-const DividerLine = styled(
-  'div',
-  {}
-)<IDividerLineProps>(props => ({
-  width: '100%',
-  borderBottom: `${props.type} ${props.theme.palette.divider} 1px`,
-}));
-
-const DividerText = styled(
-  'div',
-  {}
-)<IDividerTextProps>(props => ({
-  fontSize: '14px',
-  fontWeight: 500,
-  backgroundColor: props.theme.palette.background.paper || '#fff',
-  padding: '0 12px',
-  color: props.color
-    ? props.color
-    : props.theme.palette.text.primary,
-  position: 'absolute',
-  top: '50%',
-  transform: 'translateY(-50%)',
-}));
