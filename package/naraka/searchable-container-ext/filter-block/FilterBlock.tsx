@@ -7,6 +7,7 @@ import { useContainerContext } from '@/package/naraka/searchable-container';
 import { StyledFilterBlock, StyledFilterBlockButton } from './StyledElements'
 import { IFilterBlockExtProps } from './types.d';
 import ButtonWrapper from '@/package/deva/button'
+import { FilterCriteria } from '../../searchable-container/types';
 
 
 export default function FilterBlock(props: IFilterBlockExtProps) {
@@ -24,7 +25,7 @@ export default function FilterBlock(props: IFilterBlockExtProps) {
     let filterInstance = [...context.filterInstance];
 
     const keys = Object.keys(values);
-    const newFilters = keys.map((key) => ({ key: key, value: values[key] }));
+    const newFilters = keys.map((key): FilterCriteria => ({ key: key, value: values[key], operator: '' }));
 
     filterInstance.push(...newFilters);
 

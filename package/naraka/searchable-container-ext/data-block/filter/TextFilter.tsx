@@ -28,6 +28,7 @@ function TextFilter(props: ITextFilterProps, ref: ForwardedRef<ITextFilterRef>) 
   }, []);
 
   const handleOnSubmitSuccess = (data: any) => {
+    const { first_value, first_operator, second_value, second_operator, combination_operator } = data as IFilterModel;
     console.log(data);
   }
 
@@ -120,7 +121,7 @@ const fieldDefs: FieldDef<any>[] = [
         { label: "ends with", value: "ENDS_WITH" },
       ],
       multiple: false,
-      // muốn dùng popper trên grid thì phải có cái này: ref: 
+      // muốn dùng popper trên grid thì phải có cái này: ref: https://www.ag-grid.com/react-data-grid/component-date/
       popperClassName: 'ag-custom-component-popup'
     } as ISelectWrapperProps<TextOperators, false>
   },

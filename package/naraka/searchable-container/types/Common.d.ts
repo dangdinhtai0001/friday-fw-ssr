@@ -3,6 +3,7 @@ import { FieldDef } from './External.d'
 export type FilterCriteria = {
   key: string;
   value: unknown;
+  operator: string;
 };
 
 export type PaginationModel = {

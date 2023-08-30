@@ -6,8 +6,20 @@ import { ContextState, ContextApi, ITaskBlock, FilterCriteria, PaginationModel }
 // - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
 // - apply... ==> Thay đổi 1 phần giá trị của thuộc tính đó
 // --------------------------------------------------------------------------------
+
+/**
+ * Các hàm dưới đây định nghĩa các thay đổi (mutations) cho context của ứng dụng.
+ * Mỗi hàm thay đổi một phần cụ thể của context, và sử dụng hàm setContext để cập nhật giá trị mới.
+ * @param context - Trạng thái hiện tại của context.
+ * @param setContext - Hàm để cập nhật giá trị mới cho context.
+ * @returns Object chứa các hàm thay đổi cho context.
+ */
 export function mutations(context: ContextState, setContext: Dispatch<React.SetStateAction<ContextState>>): ContextApi {
   return {
+    /**
+    * Thay đổi filterInstance trong context.
+    * @param filterInstance - Mảng các tiêu chí filter mới.
+    */
     applyFilterInstance: (filterInstance: FilterCriteria[]): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -18,6 +30,10 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+    * Thay đổi taskChain trong context.
+    * @param taskChain - Mảng các ITaskBlock mới tạo thành một chuỗi nhiệm vụ.
+    */
     createTaskChain: (taskChain: ITaskBlock[]): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -28,6 +44,10 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+    * Thay đổi paginationInstance trong context.
+    * @param paginationModel - Mô hình đối tượng PaginationModel mới.
+    */
     applyPaginationInstance: (paginationModel: PaginationModel): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -38,6 +58,10 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+    * Thay đổi containerData trong context.
+    * @param data - Mảng dữ liệu mới cho containerData.
+    */
     applyContainerData: (data: any[]): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -48,6 +72,10 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+    * Thay đổi processingData trong context.
+    * @param data - Dữ liệu mới cho processingData, hoặc null nếu không có dữ liệu.
+    */
     applyProcessingData: (data: any | null): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -58,6 +86,10 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+     * Thay đổi trạng thái loading của container trong context.
+     * @param isLoading - Trạng thái loading mới.
+     */
     applyContainerLoadingStatus: (isLoading: boolean) => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -68,6 +100,10 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+     * Thay đổi taskChain trong context.
+     * @param taskChain - Mảng các ITaskBlock mới tạo thành một chuỗi nhiệm vụ.
+     */
     applyTaskBatch: (taskChain: ITaskBlock[]): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -78,6 +114,9 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+   * Xóa kết quả của nhiệm vụ đã thực hiện trong context.
+   */
     clearTaskResult: (): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -88,6 +127,10 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+    * Hoàn thành một nhiệm vụ và thêm kết quả vào danh sách kết quả trong context.
+    * @param task - ITaskBlock đại diện cho nhiệm vụ đã hoàn thành.
+    */
     completeTask: (task: ITaskBlock): void => {
       setContext((prevContext: ContextState) => {
         let _taskResult: ITaskBlock[] = prevContext.taskResult;
@@ -101,6 +144,10 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+    * Thay đổi template hiện tại cho modal trong context.
+    * @param modalTemplate - Tên template modal mới.
+    */
     commitCurrentModalTemplate: (modalTemplate?: string): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
