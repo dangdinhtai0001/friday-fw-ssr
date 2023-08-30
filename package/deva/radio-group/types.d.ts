@@ -12,7 +12,7 @@ export interface IRadioGroupOptions extends GridProps {
   disabled?: boolean;
 }
 
-export interface IRadioGroupProps extends IControllerComponentProps, GridProps {
+export interface IRadioGroupProps<TValue> extends IControllerComponentProps<TValue>, GridProps {
   options: IRadioGroupOptions[];
   name?: string;
 }

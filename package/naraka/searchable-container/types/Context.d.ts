@@ -8,27 +8,22 @@ import {
   IPaginationBlockProps,
   IModalBlockProps,
   IDataBlockProps,
-  IModalTemplateValue
+  IModalTemplateValue,
+  IBlockProps
 } from './Block.d';
 
-export interface ContextState<
-  EFilterBlockProps extends IFilterBlockProps,
-  EToolbarBlockProps extends IToolbarBlockProps,
-  EPaginationBlockProps extends IPaginationBlockProps,
-  EModalBlockProps extends IModalBlockProps,
-  EDataBlockProps extends IDataBlockProps,
-> {
+export interface ContextState {
   containerReady: boolean;
   containerLoading: boolean;
 
   filterInstance: FilterCriteria[];
 
   filterDefs?: FieldDef[];
-  filterBlockParams?: EFilterBlockProps;
-  filterBlockComponent?: React.ComponentType<EFilterBlockProps>;
+  filterBlockParams?: unknown;
+  filterBlockComponent?: React.ComponentType<unknown>;
 
-  toolbarBlockParams?: EToolbarBlockProps;
-  toolbarBlockComponent?: React.ComponentType<EToolbarBlockProps>;
+  toolbarBlockParams?: unknown;
+  toolbarBlockComponent?: React.ComponentType<unknown>;
 
   taskControls?: ITaskControl[];
   taskChain: ITaskBlock[];
@@ -36,21 +31,21 @@ export interface ContextState<
 
   paginationInstance: PaginationModel;
 
-  paginationBlockParams?: EPaginationBlockProps;
-  paginationBlockComponent?: React.ComponentType<EPaginationBlockProps>;
+  paginationBlockParams?: unknown;
+  paginationBlockComponent?: React.ComponentType<unknown>;
 
   containerData: any[];
   processingData?: any;
 
   modalTemplate?: Record<string, IModalTemplateValue> | ((param: IModalTemplateFuncParam) => Record<string, IModalTemplateValue>);
   currentModalTeamplate?: string;
-  modalBlockParams?: EModalBlockProps;
-  modalBlockComponent?: React.ComponentType<EModalBlockProps>;
+  modalBlockParams?: unknown;
+  modalBlockComponent?: React.ComponentType<unknown>;
 
-  dataBlockParams?: EDataBlockProps;
-  dataBlockComponent?: React.ComponentType<EDataBlockProps>;
+  dataBlockParams?: unknown;
+  dataBlockComponent?: React.ComponentType<unknown>;
 
-  onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;      
+  onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 }
 
 export interface ContextApi {

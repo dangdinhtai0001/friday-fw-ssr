@@ -9,10 +9,10 @@ import { OptionGroupOwnProps } from '@mui/base/OptionGroup';
 import { SelectProps } from '@mui/base/Select';
 import { PopperProps } from '@mui/base/Popper';
 
-export interface ISelectWrapperProps<TValue extends {}, Multiple extends boolean> extends IControllerComponentProps {
+export interface ISelectWrapperProps<TValue extends {}, Multiple extends boolean> extends IControllerComponentProps<TValue> {
   // useSelectParams?: UseSelectParameters<TValue, Multiple>;
   datasourceConfig?: IDatasourceProps;
-  itemDefs?: ItemProps[];
+  itemDefs?: ItemProps<TValue>[];
   onChange?: IControllerComponentProps['onChange'];
   multiple: Multiple;
   // -------------------------------------------------------
@@ -30,11 +30,11 @@ export interface ISelectWrapperProps<TValue extends {}, Multiple extends boolean
   popperClassName?: string;
 };
 
-export interface ItemProps {
-  value: any;
+export interface ItemProps<TValue> {
+  value: TValue;
   label: string | ReactNode;
   disabled?: boolean;
-  itemDefs?: ItemProps[];
+  itemDefs?: ItemProps<TValue>[];
 }
 
 export interface IListboxWrapperProps extends IStyledListboxProps {

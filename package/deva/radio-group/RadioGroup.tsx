@@ -10,11 +10,12 @@ import {
 } from './StyledElements';
 
 
-function RadioGroup(props: IRadioGroupProps, ref: ForwardedRef<IRadioGroupRef>) {
+function RadioGroup<TValue>(props: IRadioGroupProps<TValue>, ref: ForwardedRef<IRadioGroupRef>) {
   const {
     options,
     name = uuidv4(),
     disabled,
+    value,
     onChange,
     ...gridProps
   } = props;
@@ -22,14 +23,14 @@ function RadioGroup(props: IRadioGroupProps, ref: ForwardedRef<IRadioGroupRef>) 
   const renderRadioOption = (option: IRadioGroupOptions, index: number) => {
     const {
       id = uuidv4(),
-      value,
       label,
       ...optionGridProps
     } = option;
 
     let _disabled = disabled ? true : option.disabled;
+    let _checked = value === option.value ? true : false;
 
-    const handleOnChange = (value: any) => {
+    const handleOnChange = (value: TValue) => {
       onChange?.(value);
     }
 
@@ -41,9 +42,10 @@ function RadioGroup(props: IRadioGroupProps, ref: ForwardedRef<IRadioGroupRef>) 
             type="radio"
             id={id}
             name={name}
-            value={value}
+            value={option.value}
             disabled={_disabled}
-            onChange={(e) => { handleOnChange(e.target.value) }}
+            onChange={(e) => { handleOnChange(e.target.value as TValue) }}
+            checked={_checked}
           />
           {label &&
             <StyledRadioGroupOptionLabel

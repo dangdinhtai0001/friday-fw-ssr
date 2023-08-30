@@ -28,7 +28,7 @@ export default function FilterBlock(props: IFilterBlockExtProps) {
 
     filterInstance.push(...newFilters);
 
-    onFilterModified({
+    onFilterModified?.({
       filterInstance: filterInstance,
       type: 'FilterBlock',
     });

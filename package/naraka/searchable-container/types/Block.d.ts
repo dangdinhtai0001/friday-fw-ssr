@@ -4,17 +4,17 @@ import { ITaskRequest } from './Task.d';
 import { IModalWrapperProps, IFooterConfig } from './External.d';
 
 // ==========================  FILTER  ==========================
-export interface IFilterBlockProps {
-  onFilterModified: (e: IFilterModifiedEvent) => void;
+export interface IFilterBlockProps  {
+  onFilterModified?: (e: IFilterModifiedEvent) => void;
 };
 
 // ==========================  TOOLBAR  ==========================
-export interface IToolbarBlockProps {
+export interface IToolbarBlockProps  {
   onCreateTask: (events: ICreateTaskChainEvent) => void;
 }
 
 // ==========================  MODAL  ==========================  
-export interface IModalBlockProps {
+export interface IModalBlockProps  {
   onCloseModal: () => void;
   onCreateTaskChain: <T extends ITaskRequest>(requests: T[]) => void;
 }
@@ -35,10 +35,10 @@ export interface IModalTemplateValue extends IModalWrapperProps {
 }
 
 // ==========================  PAGINATION  ==========================
-export interface IPaginationBlockProps {
+export interface IPaginationBlockProps  {
 }
 
 // ==========================  DATA  ==========================
-export interface IDataBlockProps {
+export interface IDataBlockProps  {
   onCreateTaskChain: <T extends ITaskRequest>(requests: T[]) => void;
 }

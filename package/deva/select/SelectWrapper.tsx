@@ -140,7 +140,6 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
               slots={slots}
             >
               {renderOption ? renderOption(item) : item.label}
-              {/* {item.currencyCode} | {item.currencyName} | {item.currencySymbol} */}
             </StyledOption>
           );
         }

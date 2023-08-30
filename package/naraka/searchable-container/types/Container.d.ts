@@ -1,41 +1,27 @@
-import {
-  IFilterBlockProps,
-  IToolbarBlockProps,
-  IPaginationBlockProps,
-  IModalBlockProps,
-  IDataBlockProps,
-  IModalTemplateValue
-} from './Block.d';
 import { ITaskControl, ITaskRequest } from './Task.d';
 import { FilterDef } from './Common.d';
 import { IModalWrapperProps } from '@/package/deva/modal';
 
-export interface ContainerProviderProps<
-  EFilterBlockProps extends IFilterBlockProps,
-  EToolbarBlockProps extends IToolbarBlockProps,
-  EPaginationBlockProps extends IPaginationBlockProps,
-  EModalBlockProps extends IModalBlockProps,
-  EDataBlockProps extends IDataBlockProps,
-> {
+export interface ContainerProviderProps {
   // ==================================================
   filterDefs?: FilterDef[];
-  filterBlockParams?: EFilterBlockProps;
-  filterBlockComponent?: React.ComponentType<EFilterBlockProps>;
+  filterBlockParams?: unknown;
+  filterBlockComponent?: React.ComponentType<unknown>;
   // ==================================================
-  toolbarBlockParams?: EToolbarBlockProps;
-  toolbarBlockComponent?: React.ComponentType<EToolbarBlockProps>;
+  toolbarBlockParams?: unknown;
+  toolbarBlockComponent?: React.ComponentType<unknown>;
   // ==================================================
   taskControls?: ITaskControl[]
   // ==================================================
-  paginationBlockParams?: EPaginationBlockProps;
-  paginationBlockComponent?: React.ComponentType<EPaginationBlockProps>;
+  paginationBlockParams?: unknown;
+  paginationBlockComponent?: React.ComponentType<unknown>;
   // ==================================================
   modalTemplate?: Record<string, IModalTemplateValue> | ((param: IModalTemplateFuncParam) => Record<string, IModalTemplateValue>);
-  modalBlockParams?: EModalBlockProps;
-  modalBlockComponent?: React.ComponentType<EModalBlockProps>;
+  modalBlockParams?: unknown;
+  modalBlockComponent?: React.ComponentType<unknown>;
   // ==================================================
-  dataBlockParams?: EDataBlockProps;
-  dataBlockComponent?: React.ComponentType<EDataBlockProps>;
+  dataBlockParams?: unknown;
+  dataBlockComponent?: React.ComponentType<unknown>;
   // ==================================================
   onFetchData?: (taskBlock?: TaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
 };

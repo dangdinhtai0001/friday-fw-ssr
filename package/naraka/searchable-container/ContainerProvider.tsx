@@ -11,25 +11,7 @@ import {
 import { createDefaultTaskControls } from './task/DefaultTaskControl';
 
 // hàm định nghĩa giá trị default của context state
-const createDefaultContextStateValue = <
-  EFilterBlockProps extends IFilterBlockProps,
-  EToolbarBlockProps extends IToolbarBlockProps,
-  EPaginationBlockProps extends IPaginationBlockProps,
-  EModalBlockProps extends IModalBlockProps,
-  EDataBlockProps extends IDataBlockProps,
->(props: ContainerProviderProps<
-  EFilterBlockProps,
-  EToolbarBlockProps,
-  EPaginationBlockProps,
-  EModalBlockProps,
-  EDataBlockProps
->): ContextState<
-  EFilterBlockProps,
-  EToolbarBlockProps,
-  EPaginationBlockProps,
-  EModalBlockProps,
-  EDataBlockProps
-> => {
+const createDefaultContextStateValue = (props: ContainerProviderProps): ContextState => {
   return {
     containerReady: true,
     containerLoading: false,
@@ -76,15 +58,9 @@ function ContainerProvider<
   EPaginationBlockProps extends IPaginationBlockProps,
   EModalBlockProps extends IModalBlockProps,
   EDataBlockProps extends IDataBlockProps,
->(props: ContainerProviderProps<EFilterBlockProps, EToolbarBlockProps, EPaginationBlockProps, EModalBlockProps, EDataBlockProps>) {
+>(props: ContainerProviderProps) {
 
-  let initialState: ContextState<
-    EFilterBlockProps,
-    EToolbarBlockProps,
-    EPaginationBlockProps,
-    EModalBlockProps,
-    EDataBlockProps
-  > = createDefaultContextStateValue(props);
+  let initialState: ContextState = createDefaultContextStateValue(props);
 
   return (
     <>

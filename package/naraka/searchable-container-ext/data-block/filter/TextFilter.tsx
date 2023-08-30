@@ -1,6 +1,7 @@
 import { ForwardedRef, forwardRef, useImperativeHandle, useRef } from 'react';
 
 import { ITextFilterProps, ITextFilterRef, IFilterModel } from './types.d';
+import { TextOperators, CombinationOperators } from '@/package/naraka/searchable-container-ext/data-block/types.d'
 
 import FormContainer from '@/package/naraka/manipulation-container';
 import {
@@ -72,22 +73,20 @@ const afterValueChange = (values: IFilterModel, context: FormContextState, conte
 const fieldDefs: FieldDef<any>[] = [
   {
     name: "first_operator",
-    initialValue: "",
+    initialValue: "EQUALS",
     component: SelectWrapper,
     componentParams: {
-      className: 'ag-custom-component-popup',
       itemDefs: [
-        { label: "equals", value: "EQUALS" },
+        { label: "equals", value: 'EQUALS' },
         { label: "not equals", value: "NOT_EQUALS" },
         { label: "contains", value: "CONTAINS" },
         { label: "not contains", value: "NOT_CONTAINS" },
         { label: "starts with", value: "STARTS_WITH" },
         { label: "ends with", value: "ENDS_WITH" },
-        { label: "none", value: "" },
       ],
       multiple: false,
       popperClassName: 'ag-custom-component-popup'
-    } as ISelectWrapperProps<any, false>
+    } as ISelectWrapperProps<TextOperators, false>
   },
   {
     name: "first_value",
@@ -95,7 +94,6 @@ const fieldDefs: FieldDef<any>[] = [
     component: InputWrapper,
     componentParams: {} as IInputWrapperProps
   },
-  // combination_operator
   {
     name: "combination_operator",
     initialValue: "AND",
@@ -103,14 +101,14 @@ const fieldDefs: FieldDef<any>[] = [
     component: RadioGroup,
     componentParams: {
       options: [
-        { label: 'And', value: '&', xs: 6 },
-        { label: 'Or', value: '||', xs: 6 },
+        { label: 'And', value: 'AND', xs: 6 },
+        { label: 'Or', value: 'OR', xs: 6 },
       ],
-    } as IRadioGroupProps
+    } as IRadioGroupProps<CombinationOperators>
   },
   {
     name: "second_operator",
-    initialValue: "",
+    initialValue: "EQUALS",
     component: SelectWrapper,
     componentParams: {
       itemDefs: [
@@ -120,12 +118,11 @@ const fieldDefs: FieldDef<any>[] = [
         { label: "not contains", value: "NOT_CONTAINS" },
         { label: "starts with", value: "STARTS_WITH" },
         { label: "ends with", value: "ENDS_WITH" },
-        { label: "none", value: "" },
       ],
       multiple: false,
       // muốn dùng popper trên grid thì phải có cái này: ref: 
       popperClassName: 'ag-custom-component-popup'
-    } as ISelectWrapperProps<any, false>
+    } as ISelectWrapperProps<TextOperators, false>
   },
   {
     name: "second_value",

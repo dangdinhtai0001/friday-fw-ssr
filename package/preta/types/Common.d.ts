@@ -1,8 +1,8 @@
-export interface IControllerComponentProps {
-  value?: unknown;
+export interface IControllerComponentProps<TValue> {
+  value?: TValue;
   disabled?: boolean;
   readOnly?: boolean;
   hidden?: boolean;
-  onChange?: (value: any) => void | Promise<void>;
+  onChange?: (value: TValue) => void | Promise<void>;
   ref?: any;
 }

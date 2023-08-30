@@ -178,7 +178,7 @@ const taskControls: ITaskControl[] = [
 ];
 
 export default function ComponentPage() {
-  const searchableContainerProps: ContainerProviderProps<IFilterBlockExtProps, IToolbarBlockExtProps, IPaginationBlockExtProps, IModalBlockExtProps, any> = {
+  const searchableContainerProps: ContainerProviderProps = {
     modalTemplate: modalTemplate,
     // ------------
     filterDefs: [
@@ -200,11 +200,11 @@ export default function ComponentPage() {
         console.log("on mounted event: ", context.formId);
       },
       defaultCols: 2,
-      defaultFieldRaito: '20% 80%'
+      defaultFieldRaito: '20% 80%',
     } as unknown as IFilterBlockExtProps,
-    filterBlockComponent: DefaultFilterBlock,
+    filterBlockComponent: DefaultFilterBlock as React.ComponentType<unknown>,
     // ------------
-    toolbarBlockComponent: DefaultToolbarBlock,
+    toolbarBlockComponent: DefaultToolbarBlock as React.ComponentType<unknown>,
     toolbarBlockParams: {
       taskControls: [
         {
@@ -250,12 +250,12 @@ export default function ComponentPage() {
     taskControls: taskControls,
     // ------------
     paginationBlockParams: {} as IPaginationBlockExtProps,
-    paginationBlockComponent: DefaultPaginationBlock,
+    paginationBlockComponent: DefaultPaginationBlock as React.ComponentType<unknown>,
     // ------------
-    modalBlockComponent: DefaultModalBlock,
+    modalBlockComponent: DefaultModalBlock as React.ComponentType<unknown>,
     modalBlockParams: {} as IModalBlockExtProps,
     // ------------
-    dataBlockComponent: DefaultSearchableDataBlock,
+    dataBlockComponent: DefaultSearchableDataBlock as React.ComponentType<unknown>,
     dataBlockParams: {
     } as IDataBlockExtProps,
     // ------------

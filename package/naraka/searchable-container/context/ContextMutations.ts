@@ -1,6 +1,6 @@
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 import { Dispatch } from 'react';
-import { ContextState, ContextApi, ITaskBlock, FilterCriteria, PaginationModel } from '../types'
+import { ContextState, ContextApi, ITaskBlock, FilterCriteria, PaginationModel } from '../types';
 // - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính
 // - create... ==> Tính toán và thay đổi hoàn toàn giá trị  cuẩ thuộc tính
 // - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
