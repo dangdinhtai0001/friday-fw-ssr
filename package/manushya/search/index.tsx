@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 import FormProvider from '@/package/naraka/manipulation-container';
-import { DefaultDataBlock } from '@/package/naraka/manipulation-container-ext';
+import DefaultDataBlock from '@/package/naraka/manipulation-container-ext';
 import {
   ContainerProviderProps as FormProps,
   ContextState as ManipulationContextState

@@ -13,9 +13,10 @@ import DefaultDataBlock from '@/package/naraka/manipulation-container-ext'
 import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
 import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
 import RadioGroup, { IRadioGroupProps } from '@/package/deva/radio-group';
+import Divider, { IDividerProps } from '@/package/deva/divider';
 import ButtonWrapper from '@/package/deva/button/ButtonWrapper';
 
-import { StyledFilterContainer } from './StyledElements';
+import { StyledFilterContainer, StyledFilterActionContainer } from './StyledElements';
 
 function TextFilter(props: ITextFilterProps, ref: ForwardedRef<ITextFilterRef>) {
 
@@ -25,25 +26,33 @@ function TextFilter(props: ITextFilterProps, ref: ForwardedRef<ITextFilterRef>) 
     return {}
   }, []);
 
+  const handleOnSubmitSuccess = (data: any) => {
+    console.log(data);
+  }
+
   return (
     <StyledFilterContainer className='styled-filter-container'>
       <FormContainer
         fieldDefs={fieldDefs}
         dataBlockComponent={DefaultDataBlock}
-        onSubmitSuccess={(data) => { }}
+        onSubmitSuccess={handleOnSubmitSuccess}
         onSubmitError={(errors) => { }}
         defaultCols={1}
         afterValueChange={afterValueChange}
         ref={formRef}
       />
+      {/* <Divider /> */}
+      <StyledFilterActionContainer className='styled-filter-action-container'>
+        {/* TODO: sử dụng i18n ở đây */}
+        <ButtonWrapper onClick={() => formRef.current?.submitForm()}>Áp dụng</ButtonWrapper>
+        <ButtonWrapper onClick={() => formRef.current?.resetFormValues()}>Xóa</ButtonWrapper>
+      </StyledFilterActionContainer>
     </StyledFilterContainer>
   );
 };
 
 const afterValueChange = (values: IFilterModel, context: FormContextState, contextApi: FormContextApi) => {
   const { first_value } = values;
-
-  console.log(values);
 
   if (first_value !== '') {
     contextApi.applyFieldHidden({

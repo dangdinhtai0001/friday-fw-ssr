@@ -26,9 +26,9 @@ export const StyledRequiredIcon = styled('span', {})(({ theme }: { theme?: IDefa
   marginLeft: '0.1rem',
 }));
 
-export const StyledDataBlockRoot = styled('div', {})<IStyledDataBlockRootProps>(({ fieldRaito }: IStyledDataBlockRootProps) => ({
+export const StyledDataBlockRoot = styled('div', {})<IStyledDataBlockRootProps>(({ theme, fieldRaito }: IStyledDataBlockRootProps) => ({
   display: 'grid',
   gridTemplateColumns: fieldRaito,
   alignItems: 'center',
-  padding: '0px 3px 0px 3px',
+  padding: `0px ${theme?.components.spacing.s} 0px ${theme?.components.spacing.s}`,
 }));

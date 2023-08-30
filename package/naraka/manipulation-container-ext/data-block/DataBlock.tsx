@@ -46,7 +46,7 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
     // TODO: Check lại xem vì sao không có label thì nó không render cả control luôn 
     if (label) {
       return (
-        <StyledDataBlockRoot fieldRaito={fieldRaito ? fieldRaito : defaultFieldRaito}>
+        <StyledDataBlockRoot className='styled-data-block-root' fieldRaito={fieldRaito ? fieldRaito : defaultFieldRaito}>
           <div>
             <StyledLabel status={errorMessage ? 'error' : undefined} textAlign={labelAlign ? labelAlign : defaultFieldLabelAlign}>
               {label}

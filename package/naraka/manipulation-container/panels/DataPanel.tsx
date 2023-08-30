@@ -32,7 +32,7 @@ export default function DataPanel(props: IDataPanelProps) {
       sx={{
         display: 'grid',
         gridTemplateColumns: `repeat(${context.defaultCols}, 1fr)`,
-        rowGap: theme.components.spacing.xxs,
+        rowGap: theme.components.spacing.sx,
         columnGap: theme.components.spacing.s,
       }}
       className="data-panel"
