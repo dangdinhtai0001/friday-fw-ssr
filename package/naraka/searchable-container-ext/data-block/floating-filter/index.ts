@@ -1,2 +1,2 @@
-export { default as TextFloatingFilter } from './TextFloatingFilter';
+export { default } from './FloatingFilter';
 export * from './types.d';

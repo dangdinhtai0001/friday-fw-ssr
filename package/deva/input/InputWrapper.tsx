@@ -11,7 +11,7 @@ import { StyledInputElement, StyledInputContainer, StyledAdornmentContainer } fr
  * @returns The rendered input field with optional start and end adornments.
  */
 function InputWrapper(props: IInputWrapperProps, ref: ForwardedRef<HTMLInputElement>) {
-  const { endAdornment, startAdornment, type, width=-1, onChange } = props;
+  const { endAdornment, startAdornment, type='text', width=-1, onChange } = props;
 
   const { getRootProps, getInputProps } = useInput(props);
 
