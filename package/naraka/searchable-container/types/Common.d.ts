@@ -4,6 +4,7 @@ export type FilterCriteria = {
   key: string;
   value: unknown;
   operator: string;
+  source?: string;
 };
 
 export type PaginationModel = {

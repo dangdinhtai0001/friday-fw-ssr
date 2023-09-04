@@ -51,12 +51,13 @@ export interface ContextState {
 export interface ContextApi {
   // filter
   applyFilterInstance: (filterInstance: FilterCriteria[]) => void;
+  addFilterCriterias: (criterias: FilterCriteria[]) => void;
   // Task 
   createTaskChain: (taskChain: ITaskBlock[]) => void;
   applyTaskBatch: (tasks: ITaskBlock[]) => void;
   clearTaskResult: () => void;
   completeTask: (task: ITaskBlock) => void;
-  // pagiantion
+  // pagination
   applyPaginationInstance: (paginationModel: PaginationModel) => void;
   // data
   applyProcessingData: (data: any | null) => void;

@@ -1,9 +1,10 @@
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 import { Dispatch } from 'react';
+import _ from 'lodash';
 import { ContextState, ContextApi, ITaskBlock, FilterCriteria, PaginationModel } from '../types';
 // - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính
 // - create... ==> Tính toán và thay đổi hoàn toàn giá trị  cuẩ thuộc tính
-// - inrease/ decrease... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
+// - inrease/ decrease/ add... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
 // - apply... ==> Thay đổi 1 phần giá trị của thuộc tính đó
 // --------------------------------------------------------------------------------
 
@@ -16,6 +17,7 @@ import { ContextState, ContextApi, ITaskBlock, FilterCriteria, PaginationModel }
  */
 export function mutations(context: ContextState, setContext: Dispatch<React.SetStateAction<ContextState>>): ContextApi {
   return {
+    //#region ----------------------|| Filter ||----------------------
     /**
     * Thay đổi filterInstance trong context.
     * @param filterInstance - Mảng các tiêu chí filter mới.
@@ -31,19 +33,28 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
       });
     },
     /**
-    * Thay đổi taskChain trong context.
-    * @param taskChain - Mảng các ITaskBlock mới tạo thành một chuỗi nhiệm vụ.
-    */
-    createTaskChain: (taskChain: ITaskBlock[]): void => {
+     * Thêm các filter criteria vào context.
+     *
+     * @param {FilterCriteria[]} criterias - Mảng chứa các filter criteria cần thêm vào.
+     * @returns {void}
+     */
+    addFilterCriterias(criterias: FilterCriteria[]): void {
+      let currentFilterInstance = context.filterInstance;
+
+      const updatedFilterInstance = _.unionWith(currentFilterInstance, criterias, (obj1: FilterCriteria, obj2: FilterCriteria) => {
+        return obj1.key === obj2.key && obj1.source === obj2.source;
+      });
+
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
           ...prevContext,
-          taskChain: taskChain,
+          filterInstance: updatedFilterInstance,
         };
 
         return updatedContext;
       });
     },
+    //#endregion
     /**
     * Thay đổi paginationInstance trong context.
     * @param paginationModel - Mô hình đối tượng PaginationModel mới.
@@ -100,6 +111,7 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    //#region ----------------------|| task  || ----------------------
     /**
      * Thay đổi taskChain trong context.
      * @param taskChain - Mảng các ITaskBlock mới tạo thành một chuỗi nhiệm vụ.
@@ -144,6 +156,21 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
         return updatedContext;
       });
     },
+    /**
+    * Thay đổi taskChain trong context.
+    * @param taskChain - Mảng các ITaskBlock mới tạo thành một chuỗi nhiệm vụ.
+    */
+    createTaskChain: (taskChain: ITaskBlock[]): void => {
+      setContext((prevContext: ContextState) => {
+        const updatedContext: ContextState = {
+          ...prevContext,
+          taskChain: taskChain,
+        };
+
+        return updatedContext;
+      });
+    },
+    //#endregion
     /**
     * Thay đổi template hiện tại cho modal trong context.
     * @param modalTemplate - Tên template modal mới.
