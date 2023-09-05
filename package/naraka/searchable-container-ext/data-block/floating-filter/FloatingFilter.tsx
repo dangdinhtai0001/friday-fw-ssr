@@ -6,8 +6,16 @@ import ButtonWrapper from '@/package/deva/button/ButtonWrapper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StyledFloatingFilterContainer, StyledDisplayContainer } from './StyledComponents'
 
+import useFilter from '@/package/naraka/searchable-container-ext/data-block/filter/useFilter';
+import { FilterCriteria } from '@/package/naraka/searchable-container/types';
+
+import { textOperationSymbol } from '@/package/naraka/searchable-container-ext/data-block/constant';
+
 function FloatingFilter(props: IFloatingFilterProps, ref: ForwardedRef<ITextFloatingFilterRef>) {
-  const { showParentFilter } = props;
+  const { showParentFilter, column } = props;
+
+  const { getDisplayedCriteriaAsString } = useFilter({ column });
+  
   // expose AG Grid Filter Lifecycle callbacks
   useImperativeHandle(ref, () => {
     return {
@@ -28,7 +36,7 @@ function FloatingFilter(props: IFloatingFilterProps, ref: ForwardedRef<ITextFloa
 
   return (
     <StyledFloatingFilterContainer className='styled-floating-filter-container'>
-      <StyledDisplayContainer className='styled-display-container'> hehehe</StyledDisplayContainer>
+      <StyledDisplayContainer className='styled-display-container'> {getDisplayedCriteriaAsString()}</StyledDisplayContainer>
       <ButtonWrapper
         width='fit-content'
         icon={<FontAwesomeIcon icon={faFilter} />}

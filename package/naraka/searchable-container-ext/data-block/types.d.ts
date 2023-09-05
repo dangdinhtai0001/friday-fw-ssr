@@ -10,11 +10,13 @@ export interface IStyledGridContainerProps {
   width?: number | string;
 }
 
-export type TextOperators = 'EQUALS'
+export type TextOperator = 'EQUALS'
   | "NOT_EQUALS"
   | "CONTAINS"
   | "NOT_CONTAINS"
   | "STARTS_WITH"
-  | "ENDS_WITH";
+  | "NOT_STARTS_WITH"
+  | "ENDS_WITH"
+  | "NOT_ENDS_WITH";
 
-export type CombinationOperators = 'AND' | 'OR';
+export type CombinationOperator = 'AND' | 'OR';

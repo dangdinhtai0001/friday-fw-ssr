@@ -4,8 +4,13 @@ export type FilterCriteria = {
   key: string;
   value: unknown;
   operator: string;
-  source?: string;
+  source?: FilterSource;
+  criteriaAsString?: string;
 };
+
+export type FilterSource = 'COLUMN_1' |
+  'COLUMN_2' |
+  "PANEL";
 
 export type PaginationModel = {
   totalItems: number;

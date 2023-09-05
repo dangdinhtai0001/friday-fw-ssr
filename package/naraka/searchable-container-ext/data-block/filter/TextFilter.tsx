@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef, useImperativeHandle, useRef } from 'react';
 
-import { ITextFilterProps, ITextFilterRef, IFilterModel } from './types.d';
-import { TextOperators, CombinationOperators } from '@/package/naraka/searchable-container-ext/data-block/types.d'
+import { ITextFilterProps, ITextFilterRef, IColumnFilterModel } from './types.d';
+import { TextOperator, CombinationOperator } from '@/package/naraka/searchable-container-ext/data-block/types.d'
 
 import FormContainer from '@/package/naraka/manipulation-container';
 import {
@@ -14,12 +14,19 @@ import DefaultDataBlock from '@/package/naraka/manipulation-container-ext'
 import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
 import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
 import RadioGroup, { IRadioGroupProps } from '@/package/deva/radio-group';
-import Divider, { IDividerProps } from '@/package/deva/divider';
 import ButtonWrapper from '@/package/deva/button/ButtonWrapper';
 
 import { StyledFilterContainer, StyledFilterActionContainer } from './StyledElements';
+import { FilterCriteria } from '@/package/naraka/searchable-container/types';
+
+import useFilter from './useFilter';
+import { reverseTextOperation, textOperationSymbol } from '@/package/naraka/searchable-container-ext/data-block/constant';
 
 function TextFilter(props: ITextFilterProps, ref: ForwardedRef<ITextFilterRef>) {
+
+  const { column } = props;
+
+  const { addFilterCriteria2Context } = useFilter({ column, reserveCriteria, convertCriteria2String });
 
   const formRef = useRef<FormmRef>(null);
 
@@ -28,8 +35,7 @@ function TextFilter(props: ITextFilterProps, ref: ForwardedRef<ITextFilterRef>) 
   }, []);
 
   const handleOnSubmitSuccess = (data: any) => {
-    const { first_value, first_operator, second_value, second_operator, combination_operator } = data as IFilterModel;
-    console.log(data);
+    addFilterCriteria2Context(data);
   }
 
   return (
@@ -53,7 +59,17 @@ function TextFilter(props: ITextFilterProps, ref: ForwardedRef<ITextFilterRef>) 
   );
 };
 
-const afterValueChange = (values: IFilterModel, context: FormContextState, contextApi: FormContextApi) => {
+const reserveCriteria = (criteria: FilterCriteria): FilterCriteria => {
+  let operator = criteria.operator as TextOperator;
+
+  return { ...criteria, operator: reverseTextOperation[operator] };
+}
+
+const convertCriteria2String = (criteria: FilterCriteria): string => {
+  return textOperationSymbol[criteria.operator as TextOperator] + ' ' + criteria.value;
+}
+
+const afterValueChange = (values: IColumnFilterModel, context: FormContextState, contextApi: FormContextApi) => {
   const { first_value } = values;
 
   if (first_value !== '') {
@@ -87,7 +103,7 @@ const fieldDefs: FieldDef<any>[] = [
       ],
       multiple: false,
       popperClassName: 'ag-custom-component-popup'
-    } as ISelectWrapperProps<TextOperators, false>
+    } as ISelectWrapperProps<TextOperator, false>
   },
   {
     name: "first_value",
@@ -105,7 +121,7 @@ const fieldDefs: FieldDef<any>[] = [
         { label: 'And', value: 'AND', xs: 6 },
         { label: 'Or', value: 'OR', xs: 6 },
       ],
-    } as IRadioGroupProps<CombinationOperators>
+    } as IRadioGroupProps<CombinationOperator>
   },
   {
     name: "second_operator",
@@ -123,7 +139,7 @@ const fieldDefs: FieldDef<any>[] = [
       multiple: false,
       // muốn dùng popper trên grid thì phải có cái này: ref: https://www.ag-grid.com/react-data-grid/component-date/
       popperClassName: 'ag-custom-component-popup'
-    } as ISelectWrapperProps<TextOperators, false>
+    } as ISelectWrapperProps<TextOperator, false>
   },
   {
     name: "second_value",
