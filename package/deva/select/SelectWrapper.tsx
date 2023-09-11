@@ -82,6 +82,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       border: true,
       animationDisabled: true,
       className: 'select-wrapper-toggle',
+      iconPosition: 'right'
     } as IButtonWrapperProps,
     listbox: {
       maxHeight: maxListBoxHeight,

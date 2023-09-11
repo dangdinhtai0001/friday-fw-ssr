@@ -1,10 +1,10 @@
 import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
-import { defaultControllerContainer, typographyCaption2 } from '@/package/preta/styled-shared';
+import { defaultControllerContainer, typographyCaption2, typographyCaption1 } from '@/package/preta/styled-shared';
 import { IStyledInputContainerProps } from './types.d'
 
 export const StyledInputElement = styled('input', {})(({ theme, disabled }: { theme?: IDefaultTheme, disabled: boolean }) => ({
-  ...typographyCaption2({ theme }),
+  ...typographyCaption1({ theme }),
   width: '100%',
   flexGrow: 1,
   background: 'inherit',
@@ -24,12 +24,14 @@ export const StyledInputElement = styled('input', {})(({ theme, disabled }: { th
 export const StyledInputContainer = styled('div', {})<IStyledInputContainerProps>(({ theme, width }: IStyledInputContainerProps) => ({
   ...defaultControllerContainer({ theme, width }),
 
-  padding: '0.1rem 0px',
+  // padding: '0.1rem 0px',
+  padding: `${theme?.components.spacing.sx} ${theme?.components.spacing.mNudge}`,
 
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '0.3rem',
+  // gap: '0.3rem',
+  gap: theme?.components.spacing.s,
 
   margin: `${theme?.components.spacing.none}`,
 

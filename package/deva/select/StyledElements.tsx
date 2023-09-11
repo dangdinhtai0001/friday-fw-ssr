@@ -4,7 +4,7 @@ import Popper from '@mui/base/Popper';
 
 import { IDefaultTheme } from '@/package/preta/types';
 import { IStyledListboxProps, IStyledOptionProps, IStyledToggleProps } from './types.d';
-import { defaultControllerContainer, typographyCaption2Strong, typographyCaption2 } from '@/package/preta/styled-shared';
+import { defaultControllerContainer, typographyCaption2Strong, typographyCaption2, typographyCaption1 } from '@/package/preta/styled-shared';
 
 const optionSelected = (theme?: IDefaultTheme) => ({
   backgroundColor: theme?.palette.primary.main,
@@ -12,9 +12,9 @@ const optionSelected = (theme?: IDefaultTheme) => ({
 });
 
 export const StyledValue = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
-  ...typographyCaption2({ theme }),
+  ...typographyCaption1({ theme }),
 
-  padding: '0.1rem 0px',
+  // padding: '0.1rem 0px',
   width: '100%',
   textAlign: 'left',
 }));
@@ -31,7 +31,7 @@ export const StyledToggle = styled('button', {})<IStyledToggleProps>(({ theme, w
 export const StyledListbox = styled('ul', {})<IStyledListboxProps>(({ theme, maxHeight, width }: IStyledListboxProps) => ({
   marginTop: '5px',
 
-  padding: '5px',
+  padding: theme?.components.spacing.sNudge,
   paddingRight: '0px',
   marginRight: '0px',
 
@@ -92,7 +92,7 @@ export const StyledPopper = styled(Popper)`
 
 export const StyledOptionGroupLabel = styled('div', {})
   (({ theme }: { theme?: IDefaultTheme }) => ({
-    ...typographyCaption2({ theme }),
+    ...typographyCaption1({ theme }),
     padding: '0.2rem 0rem 0.2rem 0rem',
   }));
 

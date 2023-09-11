@@ -19,4 +19,5 @@ export interface IStyledButtonProps {
   border?: boolean;
   textColor?: 'primary' | 'secondary';
   hasIcon?: boolean;
+  iconPosition?: 'left' | 'right';
 }

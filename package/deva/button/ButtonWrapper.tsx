@@ -1,8 +1,10 @@
 import { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import useButton from '@mui/base/useButton';
+import { useTheme } from '@mui/system';
 import { IButtonWrapperProps } from './types.d';
 import { StyledButtonContainer } from './StyledElements';
+import { IDefaultTheme } from '@/package/preta/types';
 
 function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<HTMLButtonElement>) {
   const {
@@ -14,7 +16,8 @@ function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<HTMLB
     color,
     border,
     textColor,
-    animationDisabled
+    animationDisabled,
+    iconPosition = 'left'
   } = props;
 
   const { active, focusVisible, getRootProps } = useButton({
@@ -22,11 +25,17 @@ function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<HTMLB
     rootRef: ref,
   });
 
+  const theme = useTheme<IDefaultTheme>();
+
   const renderChildContainer = () => {
     if (icon) {
-      return (
-        <>{children}{icon}</>
-      );
+      if (iconPosition === 'right') {
+        return <>{children}{icon}</>
+      }
+      if (iconPosition === 'left') {
+        return <>{icon}{children}</>
+      }
+      return null;
     }
 
     return children;
@@ -51,7 +60,17 @@ function ButtonWrapper(props: IButtonWrapperProps, ref: React.ForwardedRef<HTMLB
   return animationDisabled ?
     renderButton() :
     (
-      <motion.div whileTap={{ scale: disabled ? 1 : hoverScale }} style={{ width: width }}>
+      <motion.div
+        whileTap={{ scale: disabled ? 1 : hoverScale, y: 0 }}
+        whileHover={{
+          y: disabled ? 0 : `-${theme.components.spacing.xxs}`,
+          boxShadow: disabled ? '' : `${theme.components.spacing.xxs} ${theme.components.spacing.xxs} ${theme.components.spacing.sNudge} rgba(0,0,0,0.51)`
+        }}
+        style={{
+          width: width,
+          borderRadius: theme?.components.cornerRadius.medium,
+        }}
+      >
         {renderButton()}
       </motion.div>
     );

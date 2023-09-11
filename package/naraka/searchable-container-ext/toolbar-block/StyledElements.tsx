@@ -11,7 +11,7 @@ export const StyledToolbarBlockExt = styled('div', {})(({ theme }: { theme?: IDe
   alignItems: 'center',
   flexWrap: 'wrap',
   justifyContent: 'end',
-  gap: "0.3rem",
-  margin: `${theme?.components.spacing.xxs} 0px ${theme?.components.spacing.xxs} 0px`
+  gap: theme?.components.spacing.sx,
+  margin: `${theme?.components.spacing.sNudge} 0px`
 }));
 

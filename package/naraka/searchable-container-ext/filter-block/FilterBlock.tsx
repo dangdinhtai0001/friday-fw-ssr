@@ -1,4 +1,6 @@
 import { useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 import { ContainerProvider as FormContainerProvider } from '@/package/naraka/manipulation-container';
 import DefaultDataBlock from '@/package/naraka/manipulation-container-ext';
@@ -52,7 +54,13 @@ export default function FilterBlock(props: IFilterBlockExtProps) {
       />
       <StyledFilterBlockButton>
         {/* TODO: chuyển sang dùng i18n */}
-        <ButtonWrapper onClick={handleOnclick} width="fit-content">apply filter</ButtonWrapper>
+        <ButtonWrapper
+          icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
+          onClick={handleOnclick}
+          width="fit-content"
+        >
+          Áp dụng
+        </ButtonWrapper>
       </StyledFilterBlockButton>
     </StyledFilterBlock>
   );

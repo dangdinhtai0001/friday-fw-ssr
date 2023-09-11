@@ -31,6 +31,8 @@ import {
   ITaskBlock,
   ITaskControl
 } from '@/package/naraka/searchable-container/types';
+import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const onFetchData = async () => {
   let url = "http://127.0.0.1:3658/m1/370198-0-default/accounts";
@@ -210,6 +212,7 @@ export default function ComponentPage() {
         {
           name: "Thêm",
           colorType: "primary",
+          icon: <FontAwesomeIcon icon={faPlus} />,
           onCreateTaskChainEvent: () => {
             return {
               requests: [
@@ -223,12 +226,11 @@ export default function ComponentPage() {
         {
           name: "Cập nhật",
           colorType: "success",
+          icon: <FontAwesomeIcon icon={faPen} />,
           onCreateTaskChainEvent: () => {
             return {
               requests: [
                 { name: DefaultTaskName.ACTIVE_MODAL, data: { templateName: "temp_2" } },
-                // { name: 'add' },
-                // { name: DefaultTaskName.FETCH_DATA },
               ]
             };
           }
@@ -236,6 +238,7 @@ export default function ComponentPage() {
         {
           name: "Xóa",
           colorType: "error",
+          icon: <FontAwesomeIcon icon={faTrash} />,
           onCreateTaskChainEvent: () => {
             return {
               requests: [
