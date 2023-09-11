@@ -11,6 +11,9 @@ function DefaultHeaderGroup(props: IDefaultHeaderGroupProps, ref: ForwardedRef<I
 
   const [_, setExpandState] = useState('collapsed');
 
+  console.log("rerendering",displayName ? displayName : 'null' );
+  
+
   const childrenLength = columnGroup.getChildren()?.length || 0;
   if (childrenLength <= 1) {
     return null;
@@ -22,8 +25,6 @@ function DefaultHeaderGroup(props: IDefaultHeaderGroupProps, ref: ForwardedRef<I
     setExpandState(currentState ? 'expanded' : 'collapsed');
   }
 
-  const isExpanded = columnGroup.getProvidedColumnGroup().isExpanded();
-
   return (
     <StyledDefaultHeaderGroupContainer className='styled-default-header-group-container'>
       {displayName}
@@ -31,7 +32,7 @@ function DefaultHeaderGroup(props: IDefaultHeaderGroupProps, ref: ForwardedRef<I
         icon={(
           <motion.div
             initial={{ rotate: 0 }}
-            animate={{ rotate: isExpanded ? 180 : 0 }}
+            animate={{ rotate: columnGroup.getProvidedColumnGroup().isExpanded() ? 180 : 0 }}
             transition={{ duration: 0.2 }}
           >
             <FontAwesomeIcon icon={faChevronRight} />
