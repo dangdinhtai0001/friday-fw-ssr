@@ -6,18 +6,21 @@ export interface IModalWrapperRef {
 }
 
 export interface IFooterConfig extends IButtonWrapperProps {
-  label?: string,
-  onClick?: (contentRef?: MutableRefObject<any>, context?: any) => void | Promise<void>,
+  label?: string;
+  onClick?: (
+    contentRef?: MutableRefObject<any>,
+    context?: any
+  ) => void | Promise<void>;
 }
 
 export interface IModalWrapperProps {
-  id?: string,
-  width?: string | number,
-  height?: string | number,
-  footerDefs?: IFooterConfig[],
-  title?: string,
-  width?: string,
-  height?: string,
+  id?: string;
+  width?: string | number;
+  height?: string | number;
+  footerDefs?: IFooterConfig[];
+  title?: string;
+  width?: string;
+  height?: string;
   component?: React.ComponentType<any> | string;
   componentParams?: any;
   open?: boolean;
@@ -27,12 +30,11 @@ export interface IModalWrapperProps {
 
 export interface IBackDropProps {
   open?: boolean;
-  className: string
+  className: string;
 }
 
 export interface IStyledModalContainerProps {
-  theme?: IDefaultTheme,
-  width?: string | number,
-  height?: string | number,
+  theme?: IDefaultTheme;
+  width?: string | number;
+  height?: string | number;
 }
-

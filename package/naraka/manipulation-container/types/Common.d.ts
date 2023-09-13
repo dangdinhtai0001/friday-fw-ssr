@@ -1,9 +1,8 @@
 import { UseControllerProps } from 'react-hook-form';
 import { IControllerComponentProps } from '@/package/preta/types';
 
-export interface IFieldItemComponentProps extends IControllerComponentProps {
-
-}
+export interface IFieldItemComponentProps
+  extends IControllerComponentProps {}
 
 export interface FieldDef<T> {
   name: string;
@@ -15,9 +14,9 @@ export interface FieldDef<T> {
   initialValue: unknown;
   componentParams?: T;
   component: React.ComponentType<T>;
-  // 
+  //
   fieldRaito?: string;
-  labelAlign?: LabelTextAlign
+  labelAlign?: LabelTextAlign;
 }
 
 export type DataFieldStatus = 'error' | 'warning';
@@ -27,6 +26,8 @@ export interface IDataFieldBlockProps {
   name: string;
 }
 
-export interface IFieldItemProps extends UseControllerProps, IControllerComponentProps {
-  fieldDef: FieldDef
+export interface IFieldItemProps
+  extends UseControllerProps,
+    IControllerComponentProps {
+  fieldDef: FieldDef;
 }

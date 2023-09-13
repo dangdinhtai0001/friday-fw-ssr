@@ -5,7 +5,8 @@ import { ContextHookValue } from '@/package/naraka/searchable-container/types';
 import JSONPretty from 'react-json-prettify';
 
 const FilterBlock: React.FC = (props: any) => {
-  const { context, contextApi }: ContextHookValue = useContainerContext();
+  const { context, contextApi }: ContextHookValue =
+    useContainerContext();
 
   const { onFilterModified } = props;
 

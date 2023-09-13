@@ -1,7 +1,8 @@
 import { ContainerContextProvider } from './context/ContainerContext';
 import Container from './Container';
 import {
-  ContextState, ContainerProviderProps,
+  ContextState,
+  ContainerProviderProps,
   IFilterBlockProps,
   IToolbarBlockProps,
   IPaginationBlockProps,
@@ -11,7 +12,9 @@ import {
 import { createDefaultTaskControls } from './task/DefaultTaskControl';
 
 // hàm định nghĩa giá trị default của context state
-const createDefaultContextStateValue = (props: ContainerProviderProps): ContextState => {
+const createDefaultContextStateValue = (
+  props: ContainerProviderProps
+): ContextState => {
   return {
     containerReady: true,
     containerLoading: false,
@@ -21,17 +24,19 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
       itemsPerPage: 10,
       currentPage: 1,
       totalItems: 100,
-      totalPages: 10
+      totalPages: 10,
     },
     // ---------------------------
     filterDefs: props.filterDefs,
     filterBlockComponent: props.filterBlockComponent,
     filterBlockParams: props.filterBlockParams,
-    // ---------------------------    
+    // ---------------------------
     toolbarBlockComponent: props.toolbarBlockComponent,
     toolbarBlockParams: props.toolbarBlockParams,
     // ---------------------------
-    taskControls: createDefaultTaskControls().concat(props.taskControls!),
+    taskControls: createDefaultTaskControls().concat(
+      props.taskControls!
+    ),
     taskChain: [],
     taskResult: [],
     // ---------------------------
@@ -48,7 +53,7 @@ const createDefaultContextStateValue = (props: ContainerProviderProps): ContextS
     dataBlockComponent: props.dataBlockComponent,
     dataBlockParams: props.dataBlockParams,
     // ---------------------------
-    onFetchData: props.onFetchData
+    onFetchData: props.onFetchData,
   };
 };
 
@@ -57,10 +62,10 @@ function ContainerProvider<
   EToolbarBlockProps extends IToolbarBlockProps,
   EPaginationBlockProps extends IPaginationBlockProps,
   EModalBlockProps extends IModalBlockProps,
-  EDataBlockProps extends IDataBlockProps,
+  EDataBlockProps extends IDataBlockProps
 >(props: ContainerProviderProps) {
-
-  let initialState: ContextState = createDefaultContextStateValue(props);
+  let initialState: ContextState =
+    createDefaultContextStateValue(props);
 
   return (
     <>

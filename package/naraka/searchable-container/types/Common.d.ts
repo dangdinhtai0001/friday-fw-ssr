@@ -1,4 +1,4 @@
-import { FieldDef } from './External.d'
+import { FieldDef } from './External.d';
 
 export type FilterCriteria = {
   key: string;
@@ -8,9 +8,7 @@ export type FilterCriteria = {
   criteriaAsString?: string;
 };
 
-export type FilterSource = 'COLUMN_1' |
-  'COLUMN_2' |
-  "PANEL";
+export type FilterSource = 'COLUMN_1' | 'COLUMN_2' | 'PANEL';
 
 export type PaginationModel = {
   totalItems: number;
@@ -19,6 +17,4 @@ export type PaginationModel = {
   itemsPerPage: number;
 };
 
-export interface FilterDef extends FieldDef {
-
-}
+export interface FilterDef extends FieldDef {}

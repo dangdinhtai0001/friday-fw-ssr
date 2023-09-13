@@ -7,11 +7,12 @@ import {
   PaginationPanel,
   DataPanel,
   TaskWorkerPanel,
-  ModalPanel
-} from './panels'
+  ModalPanel,
+} from './panels';
 
 const Container = (props: ContainerProps) => {
-  const { context, contextApi }: ContextHookValue = useContainerContext();
+  const { context, contextApi }: ContextHookValue =
+    useContainerContext();
 
   return (
     <div>
@@ -27,6 +28,6 @@ const Container = (props: ContainerProps) => {
       <ModalPanel></ModalPanel>
     </div>
   );
-}
+};
 
 export default Container;

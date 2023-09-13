@@ -3,11 +3,11 @@ import { IFilterParams, Column } from 'ag-grid-community';
 import { CombinationOperator } from '@/package/naraka/searchable-container-ext/data-block/types.d.ts';
 import { FilterCriteria } from '@/package/naraka/searchable-container/types';
 
-export interface ITextFilterProps extends IFilterReactComp, IFilterParams {
-}
+export interface ITextFilterProps
+  extends IFilterReactComp,
+    IFilterParams {}
 
-export interface ITextFilterRef {
-}
+export interface ITextFilterRef {}
 
 export interface IColumnFilterModel {
   first_operator: string;
@@ -19,7 +19,7 @@ export interface IColumnFilterModel {
 
 //#region --------------------------------|| useFilter ||--------------------------------
 export interface IUseFilterProps {
-  column: Column,
+  column: Column;
   reserveCriteria?: (criteria: FilterCriteria) => FilterCriteria;
   convertCriteria2String?: (criterias: FilterCriteria) => string;
 }

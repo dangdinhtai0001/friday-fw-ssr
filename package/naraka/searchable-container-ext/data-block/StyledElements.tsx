@@ -1,10 +1,12 @@
 import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
-import { defaultComponentContainer, } from '@/package/preta/styled-shared';
+import { defaultComponentContainer } from '@/package/preta/styled-shared';
 import { IStyledGridContainerProps } from './types.d';
 
-
-export const StyledGridContainer = styled('div', {})((props: IStyledGridContainerProps) => {
+export const StyledGridContainer = styled(
+  'div',
+  {}
+)((props: IStyledGridContainerProps) => {
   const { height, width, theme } = props;
   return {
     height: height,
@@ -51,14 +53,16 @@ export const StyledGridContainer = styled('div', {})((props: IStyledGridContaine
     // ------------------------------------------------------------------------------------------------------------------------
 
     // Background color of selected rows in the grid and in dropdown menus
-    '--ag-selected-row-background-color': theme?.palette.primary.dark,
+    '--ag-selected-row-background-color':
+      theme?.palette.primary.dark,
 
     // ------------------------------------------------------------------------------------------------------------------------
     // Customising the Header (https://www.ag-grid.com/react-data-grid/global-style-customisation-header/)
     // ------------------------------------------------------------------------------------------------------------------------
 
     // Colour applied to header cells when the column is being dragged to a new position
-    '--ag-header-cell-moving-background-color': theme?.palette.secondary.main,
+    '--ag-header-cell-moving-background-color':
+      theme?.palette.secondary.main,
 
     // Height of header rows
     '--ag-header-height': '1.5rem',
@@ -73,7 +77,8 @@ export const StyledGridContainer = styled('div', {})((props: IStyledGridContaine
     '--ag-header-column-separator-width': '1px',
 
     // Colour of the header column separator (Nhớ để cùng màu với border)
-    '--ag-header-column-separator-color': theme?.palette.secondary.main,
+    '--ag-header-column-separator-color':
+      theme?.palette.secondary.main,
 
     // Whether to show the header column resize handle - a vertical line that displays only between resizeable header columns, indicating where to drag in order to resize the column.
     '--ag-header-column-resize-handle-display': 'none',
@@ -82,7 +87,7 @@ export const StyledGridContainer = styled('div', {})((props: IStyledGridContaine
     // CSS Variable Reference (https://www.ag-grid.com/react-data-grid/global-style-customisation-variables/)
     // ------------------------------------------------------------------------------------------------------------------------
 
-    // Enable or disable borders around most UI elements in the grid. Set this to a border style and thickness, e.g. solid 1px to enable borders, or none to disable borders. 
+    // Enable or disable borders around most UI elements in the grid. Set this to a border style and thickness, e.g. solid 1px to enable borders, or none to disable borders.
     // Use the other --ag-borders-* variables for more fine grained control over which UI elements get borders.
     '--ag-borders': 'solid 1px',
 
@@ -96,13 +101,14 @@ export const StyledGridContainer = styled('div', {})((props: IStyledGridContaine
     '--ag-cell-horizontal-padding': theme?.components.spacing.s,
 
     // Default border for cells. This can be used to specify the border-style and border-color properties e.g. dashed red but the border-width is fixed at 1px. Set to solid transparent to show no border.
-    '--ag-cell-horizontal-border': 'solid ' + theme?.palette.secondary.main,
+    '--ag-cell-horizontal-border':
+      'solid ' + theme?.palette.secondary.main,
 
     // ------------------------------------------------------------------------------------------------------------------------
-    // Override css 
+    // Override css
     // ------------------------------------------------------------------------------------------------------------------------
     '.ag-header-group-cell:after': {
-      height: '100px'
-    }
+      height: '100px',
+    },
   };
 });

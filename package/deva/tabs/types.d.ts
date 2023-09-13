@@ -3,7 +3,7 @@ import { IDefaultTheme } from '@/package/preta/types';
 import React from 'react';
 
 export interface ITabDef {
-  id: string | number,
+  id: string | number;
   title: string | React.ReactNode;
   disabled?: boolean;
   component?: React.ComponentType<any> | string;
@@ -31,6 +31,6 @@ export interface ITabsWrapperProps {
 }
 
 export interface ITabsWrapperRef {
-  getTabRefs: () => MutableRefObject.current,
+  getTabRefs: () => MutableRefObject.current;
   getTabRefById: (id: string) => MutableRefObject.current;
-} 
+}

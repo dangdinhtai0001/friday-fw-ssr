@@ -6,13 +6,13 @@ import { typography, components } from './DefaultThemeOptions';
 const lightTheme: Theme = createTheme({
   palette: lightPalette,
   typography: typography,
-  components: components
+  components: components,
 });
 
 const darkTheme: Theme = createTheme({
   palette: darkPalette,
   typography: typography,
-  components: components
+  components: components,
 });
 
 /**

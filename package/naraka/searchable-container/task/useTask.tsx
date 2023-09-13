@@ -1,10 +1,17 @@
-import { ITaskRequest, ContextHookValue, ITaskBlock, ITaskHook, ITaskControl } from '../types';
+import {
+  ITaskRequest,
+  ContextHookValue,
+  ITaskBlock,
+  ITaskHook,
+  ITaskControl,
+} from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import { v4 as uuidv4 } from 'uuid';
 import { TASK_STATUS } from '../Constant';
 
 const useTask = (): ITaskHook => {
-  const { context, contextApi }: ContextHookValue = useContainerContext();
+  const { context, contextApi }: ContextHookValue =
+    useContainerContext();
 
   if (!context) {
     throw new Error(
@@ -13,17 +20,21 @@ const useTask = (): ITaskHook => {
   }
 
   // Hàm tạo một task mới
-  const createTask = <T extends ITaskRequest>(request: T): ITaskBlock => {
+  const createTask = <T extends ITaskRequest>(
+    request: T
+  ): ITaskBlock => {
     return {
       ...request,
       id: uuidv4(),
       status: TASK_STATUS.PENDING,
-      isLast: true
+      isLast: true,
     };
   };
 
   // Hàm tạo một chuỗi các task
-  const createTaskChain = <T extends ITaskRequest>(requests: T[]): ITaskBlock[] => {
+  const createTaskChain = <T extends ITaskRequest>(
+    requests: T[]
+  ): ITaskBlock[] => {
     const lastIndex = requests.length - 1;
 
     return requests.map((request: ITaskRequest, index: number) => {
@@ -31,12 +42,14 @@ const useTask = (): ITaskHook => {
         ...request,
         id: uuidv4(),
         status: TASK_STATUS.PENDING,
-        isLast: lastIndex === index
-      }
+        isLast: lastIndex === index,
+      };
     });
   };
 
-  const processTaskChain = async (tasks: ITaskBlock[]): Promise<void> => {
+  const processTaskChain = async (
+    tasks: ITaskBlock[]
+  ): Promise<void> => {
     if (!tasks || tasks.length === 0) {
       return;
     }
@@ -44,14 +57,15 @@ const useTask = (): ITaskHook => {
     // đánh dấu trạng thái loading
     contextApi.applyContainerLoadingStatus(true);
 
-    // clear két quả chạy cũ 
+    // clear két quả chạy cũ
     contextApi.clearTaskResult();
 
     let taskResults: ITaskBlock[] = [];
 
     tasks.forEach(async (task, i) => {
-      let taskControl: ITaskControl = context.taskControls
-        ?.find((control: ITaskControl) => task && control.id === task.name);
+      let taskControl: ITaskControl = context.taskControls?.find(
+        (control: ITaskControl) => task && control.id === task.name
+      );
 
       let previousTask = taskResults[i - 1];
 
@@ -61,27 +75,35 @@ const useTask = (): ITaskHook => {
       }
 
       if (taskControl) {
-        let block: ITaskBlock = await taskControl.onProcessTask?.({ ...task, previousBlock: previousTask }, context, contextApi);
+        let block: ITaskBlock = await taskControl.onProcessTask?.(
+          { ...task, previousBlock: previousTask },
+          context,
+          contextApi
+        );
         taskResults.push(block);
       } else {
-        console.error(`Không tìm thấy task control nào có id là '${task.name}'`);
+        console.error(
+          `Không tìm thấy task control nào có id là '${task.name}'`
+        );
         taskResults.push({ ...task, status: TASK_STATUS.ERROR });
       }
     });
 
-    // sau khi chạy xong thì xóa task 
+    // sau khi chạy xong thì xóa task
     contextApi.applyTaskBatch([]);
 
     // đánh dấu trạng thái không còn loading
     contextApi.applyContainerLoadingStatus(false);
-  }
+  };
 
   const onCreateTask = <T extends ITaskRequest>(request: T) => {
     const taskBlock = createTask(request);
     contextApi.createTaskChain([taskBlock]);
   };
 
-  const onCreateTaskChain = <T extends ITaskRequest>(requests: T[]) => {
+  const onCreateTaskChain = <T extends ITaskRequest>(
+    requests: T[]
+  ) => {
     const taskChain = createTaskChain(requests);
     contextApi.createTaskChain(taskChain);
   };
@@ -89,7 +111,7 @@ const useTask = (): ITaskHook => {
   return {
     onCreateTask,
     onCreateTaskChain,
-    onProcessTaskChain: processTaskChain
+    onProcessTaskChain: processTaskChain,
   };
 };
 

@@ -8,33 +8,52 @@ export interface OnValueChangeProps {
   fieldName: string;
   context: ContextState;
   contextApi: ContextApi;
-  refs: React.MutableRefObject<{ [key: string]: any; }>;
+  refs: React.MutableRefObject<{ [key: string]: any }>;
 }
 
 export interface FieldStatus {
-  [key: string]: boolean
+  [key: string]: boolean;
 }
 
 export interface ContextState {
   formId: any;
   fieldDefs: FieldDef[];
-  fieldRefs: React.MutableRefObject<{ [key: string]: any; }>;
+  fieldRefs: React.MutableRefObject<{ [key: string]: any }>;
   submitCounter: number;
   fieldDisabled: Record<string, any>;
   fieldReadOnly: Record<string, any>;
   fieldHidden: Record<string, any>;
-  fieldMessage: Record<string, { type: string, message: string }>;
+  fieldMessage: Record<string, { type: string; message: string }>;
   defaultFieldRaito: string;
   defaultFieldLabelAlign: LabelTextAlign;
   dataBlockComponent?: React.ComponentType<IDataFieldBlockProps>;
   defaultCols: number;
   externalContext: any;
   // ---------------------------------------------------------------------------
-  onValueChange?: (props: OnValueChangeProps) => void | Promise<void>;
-  afterValueChange?: (values: any, context: ContextState, contextApi: ContextApi) => void | Promise<void>;
-  onSubmitSuccess: (values: unknown, context: ContextState, api: ContextApi, externalContext?: unknown) => void | Promise<void>;
-  onSubmitError: (errors: unknown, context: ContextState, api: ContextApi, externalContext?: unknown) => void | Promise<void>;
-  onMounted?: (context: ContextState, contextApi: ContextApi) => void | Promise<void>;
+  onValueChange?: (
+    props: OnValueChangeProps
+  ) => void | Promise<void>;
+  afterValueChange?: (
+    values: any,
+    context: ContextState,
+    contextApi: ContextApi
+  ) => void | Promise<void>;
+  onSubmitSuccess: (
+    values: unknown,
+    context: ContextState,
+    api: ContextApi,
+    externalContext?: unknown
+  ) => void | Promise<void>;
+  onSubmitError: (
+    errors: unknown,
+    context: ContextState,
+    api: ContextApi,
+    externalContext?: unknown
+  ) => void | Promise<void>;
+  onMounted?: (
+    context: ContextState,
+    contextApi: ContextApi
+  ) => void | Promise<void>;
 }
 
 export interface ContextApi {
@@ -42,7 +61,9 @@ export interface ContextApi {
   applyFieldDisabled: (fields: FieldStatus) => void;
   applyFieldReadOnly: (fields: FieldStatus) => void;
   applyFieldHidden: (fields: FieldStatus) => void;
-  applyFieldMessage: (fields?: Record<string, { type: string, message: string }>) => void;
+  applyFieldMessage: (
+    fields?: Record<string, { type: string; message: string }>
+  ) => void;
 }
 
 /**

@@ -50,4 +50,3 @@ export const palette: ThemeOptions['palette'] = {
   },
   divider: 'rgba(0, 0, 0, 0.12)',
 };
-

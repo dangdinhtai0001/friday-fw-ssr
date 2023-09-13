@@ -12,7 +12,6 @@ function ListboxWrapper(props: IListboxWrapperProps, ref: any) {
       initial={open ? 'open' : 'closed'}
       animate={open ? 'open' : 'closed'}
       exit={open ? 'open' : 'closed'}
-
       variants={popperSlideDownVariant}
     >
       <StyledListbox {...props} ref={ref} />

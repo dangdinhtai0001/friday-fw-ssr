@@ -1,5 +1,5 @@
 import { ThemeOptions } from '@mui/system';
-import { IColor } from './palette.d'
+import { IColor } from './palette.d';
 
 export const palette: ThemeOptions['palette'] = {
   type: 'dark',

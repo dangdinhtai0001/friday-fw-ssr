@@ -6,11 +6,13 @@ import { ContainerProvider as FormContainerProvider } from '@/package/naraka/man
 import DefaultDataBlock from '@/package/naraka/manipulation-container-ext';
 import { ContainerRef } from '@/package/naraka/manipulation-container/types';
 import { useContainerContext } from '@/package/naraka/searchable-container';
-import { StyledFilterBlock, StyledFilterBlockButton } from './StyledElements'
+import {
+  StyledFilterBlock,
+  StyledFilterBlockButton,
+} from './StyledElements';
 import { IFilterBlockExtProps } from './types.d';
-import ButtonWrapper from '@/package/deva/button'
+import ButtonWrapper from '@/package/deva/button';
 import { FilterCriteria } from '../../searchable-container/types';
-
 
 export default function FilterBlock(props: IFilterBlockExtProps) {
   const { context, contextApi } = useContainerContext();
@@ -27,7 +29,13 @@ export default function FilterBlock(props: IFilterBlockExtProps) {
     let filterInstance = [...context.filterInstance];
 
     const keys = Object.keys(values);
-    const newFilters = keys.map((key): FilterCriteria => ({ key: key, value: values[key], operator: '' }));
+    const newFilters = keys.map(
+      (key): FilterCriteria => ({
+        key: key,
+        value: values[key],
+        operator: '',
+      })
+    );
 
     filterInstance.push(...newFilters);
 
@@ -37,13 +45,12 @@ export default function FilterBlock(props: IFilterBlockExtProps) {
     });
   };
 
-
   const handleOnSubmitErrors = (errors: any) => {
-    console.log("Lỗi cmnr");
-  }
+    console.log('Lỗi cmnr');
+  };
 
   return (
-    <StyledFilterBlock className='styled-filter-block'>
+    <StyledFilterBlock className="styled-filter-block">
       <FormContainerProvider
         {...props}
         fieldDefs={context.filterDefs ? context.filterDefs : []}

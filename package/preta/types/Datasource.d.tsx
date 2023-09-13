@@ -7,11 +7,8 @@ export interface IDatasourceProps {
   swrOptions?: SWRConfiguration;
   transformData?: (data: any) => any;
   transformError?: (error: any) => any;
-};
-
-
-export interface IDatasourceReturn extends SWRResponse {
-};
-
-export interface IFetcherOptions extends AxiosRequestConfig{
 }
+
+export interface IDatasourceReturn extends SWRResponse {}
+
+export interface IFetcherOptions extends AxiosRequestConfig {}

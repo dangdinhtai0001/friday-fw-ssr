@@ -1,15 +1,17 @@
 import * as React from 'react';
-import { IFieldItemComponentProps } from '@/package/naraka/manipulation-container/types'
+import { IFieldItemComponentProps } from '@/package/naraka/manipulation-container/types';
 
-export interface ICustomFieldProps extends IFieldItemComponentProps {
-}
+export interface ICustomFieldProps
+  extends IFieldItemComponentProps {}
 
-export default React.forwardRef(function CustomField(props: ICustomFieldProps, ref) {
-
+export default React.forwardRef(function CustomField(
+  props: ICustomFieldProps,
+  ref
+) {
   React.useImperativeHandle(ref, () => ({
     doSomething: () => {
       // Logic của phương thức doSomething
-      console.log("CustomField doSomething...")
+      console.log('CustomField doSomething...');
     },
   }));
 

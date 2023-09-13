@@ -1,24 +1,36 @@
-import { forwardRef, useState, useRef, useEffect, useImperativeHandle, MouseEvent } from 'react';
-import Select, { SelectProps } from '@mui/base/Select';
+import {
+  forwardRef,
+  useState,
+  useRef,
+} from 'react';
+import { SelectProps, Select } from '@mui/base/Select';
 import { SelectValue } from '@mui/base/useSelect';
 import { SelectOption } from '@mui/base/useOption';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from '@mui/system';
-import { ISelectWrapperProps, ItemProps, IListboxWrapperProps, IStyledToggleProps } from './types';
+import {
+  ISelectWrapperProps,
+  IListboxWrapperProps,
+} from './types';
 import { useDatasource } from '@/package/preta/intergration';
-import { StyledOption, StyledPopper, StyledValue } from './StyledElements';
+import {
+  StyledOption,
+  StyledPopper,
+  StyledValue,
+} from './StyledElements';
 import ListboxWrapper from './ListboxWrapper';
 import OptionGroupWrapper from './OptionGroupWrapper';
-import ButtonWrapper, { IButtonWrapperProps } from '@/package/deva/button';
+import ButtonWrapper, {
+  IButtonWrapperProps,
+} from '@/package/deva/button';
 import { IDefaultTheme } from '@/package/preta/types';
 
 function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   props: ISelectWrapperProps<TValue, Multiple>,
   ref: React.ForwardedRef<HTMLButtonElement>
 ) {
-
   const {
     datasourceConfig,
     maxListBoxHeight = 256,
@@ -26,7 +38,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     renderSelectedValue,
     renderOption,
     // TODO: Chuyển sang dùng i18n cho giá trị mặc dịnh của placeholder
-    placeholder = "Select an option...",
+    placeholder = 'Select an option...',
     multiple,
     value,
     toggleWidth,
@@ -37,7 +49,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     disablePortal = false,
     anchorEl,
     popperRef,
-    popperClassName
+    popperClassName,
   } = props;
 
   const theme = useTheme<IDefaultTheme>();
@@ -50,11 +62,16 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
 
   const handleOnListboxOpenChange = (isOpen: boolean) => {
     setListboxOpen(isOpen);
-  }
+  };
 
   const handleOnOptionChange = (
-    event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null,
-    value: SelectValue<TValue, Multiple>) => {
+    event:
+      | React.MouseEvent
+      | React.KeyboardEvent
+      | React.FocusEvent
+      | null,
+    value: SelectValue<TValue, Multiple>
+  ) => {
     onChange?.(value);
   };
 
@@ -70,10 +87,17 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       icon: (
         <motion.div
           initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
-          animate={{ opacity: 1, scale: 1, rotate: listboxOpen ? 180 : 0 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            rotate: listboxOpen ? 180 : 0,
+          }}
           transition={{ duration: 0.3 }}
         >
-          <FontAwesomeIcon icon={faChevronDown} style={{ fontSize: theme.components.spacing.mNudge }} />
+          <FontAwesomeIcon
+            icon={faChevronDown}
+            style={{ fontSize: theme.components.spacing.mNudge }}
+          />
         </motion.div>
       ),
       width: toggleWidth,
@@ -82,7 +106,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       border: true,
       animationDisabled: true,
       className: 'select-wrapper-toggle',
-      iconPosition: 'right'
+      iconPosition: 'right',
     } as IButtonWrapperProps,
     listbox: {
       maxHeight: maxListBoxHeight,
@@ -93,7 +117,7 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       keepMounted: keepMounted,
       disablePortal: disablePortal,
       popperRef: popperRef,
-      className: popperClassName
+      className: popperClassName,
     },
   };
 
@@ -105,14 +129,21 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
         : null;
   };
 
-  function renderValue(option: SelectValue<SelectOption<TValue>, Multiple> | null) {
-    if (option == null || (Array.isArray(option) && option.length === 0)) {
+  function renderValue(
+    option: SelectValue<SelectOption<TValue>, Multiple> | null
+  ) {
+    if (
+      option == null ||
+      (Array.isArray(option) && option.length === 0)
+    ) {
       return <span>{placeholder}</span>;
     }
 
     return (
       <StyledValue>
-        {Array.isArray(option) ? option.map((opt) => opt.label).join(', ') : option.label}
+        {Array.isArray(option)
+          ? option.map(opt => opt.label).join(', ')
+          : option.label}
       </StyledValue>
     );
   }
@@ -120,7 +151,6 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
   const renderAllOptions = (items: any[]) => {
     if (items?.length) {
       return items.map((item: any, index: number) => {
-
         if (item.itemDefs && item.itemDefs.length) {
           return (
             <OptionGroupWrapper {...item} key={index}>
@@ -150,7 +180,6 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     return null;
   };
 
-
   return (
     <Select
       value={value as SelectValue<TValue, Multiple>}
@@ -167,6 +196,6 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
       {renderOptionItems()}
     </Select>
   );
-};
+}
 
 export default forwardRef(SelectWrapper);

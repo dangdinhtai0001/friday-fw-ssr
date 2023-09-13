@@ -1,7 +1,10 @@
 import { createElement, useState } from 'react';
 import { IDataBlockExtProps } from './types.d';
 import { useContainerContext } from '@/package/naraka/searchable-container';
-import { ContextHookValue, ContextState } from '@/package/naraka/searchable-container/types';
+import {
+  ContextHookValue,
+  ContextState,
+} from '@/package/naraka/searchable-container/types';
 import { StyledGridContainer } from './StyledElements';
 import { DefaultHeader, DefaultHeaderGroup } from './headers';
 import FloatingFilter from './floating-filter';
@@ -13,11 +16,10 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 function DataBlock(props: IDataBlockExtProps) {
-  const {
-    onCreateTaskChain,
-  } = props;
+  const { onCreateTaskChain } = props;
 
-  const { context, contextApi }: ContextHookValue = useContainerContext();
+  const { context, contextApi }: ContextHookValue =
+    useContainerContext();
 
   const { containerData } = context;
 
@@ -27,29 +29,34 @@ function DataBlock(props: IDataBlockExtProps) {
       headerCheckboxSelection: true,
       headerComponentParams: { enableMenu: false },
       width: 50,
-      floatingFilter: false
+      floatingFilter: false,
     },
     {
       headerName: 'Test group',
       children: [
-        { field: 'account', columnGroupShow: 'open', },
-        { field: 'accountName', columnGroupShow: 'open', },
+        { field: 'account', columnGroupShow: 'open' },
+        { field: 'accountName', columnGroupShow: 'open' },
         { field: 'amount' },
         { field: 'currencyCode' },
-      ]
+      ],
     },
-    { field: 'account', floatingFilter: true, filter: TextFilter, floatingFilterComponent: FloatingFilter, floatingFilterComponentParams: { suppressFilterButton: true } },
+    {
+      field: 'account',
+      floatingFilter: true,
+      filter: TextFilter,
+      floatingFilterComponent: FloatingFilter,
+      floatingFilterComponentParams: { suppressFilterButton: true },
+    },
     { field: 'accountName' },
     { field: 'amount' },
     { field: 'currencyCode' },
-
   ]);
 
   return (
     <StyledGridContainer
       className="ag-theme-alpine"
-      height='300px'
-      width='100%'
+      height="300px"
+      width="100%"
     >
       <AgGridReact
         rowData={containerData}
@@ -62,11 +69,10 @@ function DataBlock(props: IDataBlockExtProps) {
         }}
         columnTypes={columnTypes}
         showOpenedGroup={false}
-      >
-      </AgGridReact>
+      ></AgGridReact>
     </StyledGridContainer>
   );
-};
+}
 
 function createDefaultColDef(): ColDef {
   return {
@@ -76,13 +82,13 @@ function createDefaultColDef(): ColDef {
     floatingFilter: true,
     headerComponentParams: { enableMenu: true },
   };
-};
+}
 
 function createDefaultColGroupDef(): Partial<ColGroupDef> {
   return {
     headerGroupComponentParams: {},
   };
-};
+}
 
 // define a column type (you can define as many as you like)
 const columnTypes: Record<string, ColDef> = {

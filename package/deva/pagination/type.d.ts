@@ -17,7 +17,7 @@ export interface IUsePaginationProps {
   pageSize: number;
   totalCount: number;
   siblingCount: number;
-};
+}
 
 export interface IUsePaginationReturns {
   paginationRange?: (sdtring | number)[];

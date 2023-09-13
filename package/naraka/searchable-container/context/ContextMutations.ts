@@ -1,7 +1,13 @@
 // Định nghĩa các hàm thay đổi giá trị trong context (mutations)
 import { Dispatch } from 'react';
 import _ from 'lodash';
-import { ContextState, ContextApi, ITaskBlock, FilterCriteria, PaginationModel } from '../types';
+import {
+  ContextState,
+  ContextApi,
+  ITaskBlock,
+  FilterCriteria,
+  PaginationModel,
+} from '../types';
 // - commit... ==> Thay đổi toàn bộ giá trị của thuộc tính
 // - create... ==> Tính toán và thay đổi hoàn toàn giá trị  cuẩ thuộc tính
 // - inrease/ decrease/ add... ==>  Tăng/ giảm giá trị của các thuộc tính (Ví dụ: count,...)
@@ -15,14 +21,19 @@ import { ContextState, ContextApi, ITaskBlock, FilterCriteria, PaginationModel }
  * @param setContext - Hàm để cập nhật giá trị mới cho context.
  * @returns Object chứa các hàm thay đổi cho context.
  */
-export function mutations(context: ContextState, setContext: Dispatch<React.SetStateAction<ContextState>>): ContextApi {
+export function mutations(
+  context: ContextState,
+  setContext: Dispatch<React.SetStateAction<ContextState>>
+): ContextApi {
   return {
     //#region ----------------------|| Filter ||----------------------
     /**
-    * Thay đổi filterInstance trong context.
-    * @param filterInstance - Mảng các tiêu chí filter mới.
-    */
-    applyFilterInstance: (filterInstance: FilterCriteria[]): void => {
+     * Thay đổi filterInstance trong context.
+     * @param filterInstance - Mảng các tiêu chí filter mới.
+     */
+    applyFilterInstance: (
+      filterInstance: FilterCriteria[]
+    ): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
           ...prevContext,
@@ -41,9 +52,15 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
     addFilterCriterias(criterias: FilterCriteria[]): void {
       let currentFilterInstance = context.filterInstance;
 
-      const updatedFilterInstance = _.unionWith(currentFilterInstance, criterias, (obj1: FilterCriteria, obj2: FilterCriteria) => {
-        return obj1.key === obj2.key && obj1.source === obj2.source;
-      });
+      const updatedFilterInstance = _.unionWith(
+        currentFilterInstance,
+        criterias,
+        (obj1: FilterCriteria, obj2: FilterCriteria) => {
+          return (
+            obj1.key === obj2.key && obj1.source === obj2.source
+          );
+        }
+      );
 
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -56,10 +73,12 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
     },
     //#endregion
     /**
-    * Thay đổi paginationInstance trong context.
-    * @param paginationModel - Mô hình đối tượng PaginationModel mới.
-    */
-    applyPaginationInstance: (paginationModel: PaginationModel): void => {
+     * Thay đổi paginationInstance trong context.
+     * @param paginationModel - Mô hình đối tượng PaginationModel mới.
+     */
+    applyPaginationInstance: (
+      paginationModel: PaginationModel
+    ): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
           ...prevContext,
@@ -70,9 +89,9 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
       });
     },
     /**
-    * Thay đổi containerData trong context.
-    * @param data - Mảng dữ liệu mới cho containerData.
-    */
+     * Thay đổi containerData trong context.
+     * @param data - Mảng dữ liệu mới cho containerData.
+     */
     applyContainerData: (data: any[]): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -84,9 +103,9 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
       });
     },
     /**
-    * Thay đổi processingData trong context.
-    * @param data - Dữ liệu mới cho processingData, hoặc null nếu không có dữ liệu.
-    */
+     * Thay đổi processingData trong context.
+     * @param data - Dữ liệu mới cho processingData, hoặc null nếu không có dữ liệu.
+     */
     applyProcessingData: (data: any | null): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -105,7 +124,7 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
           ...prevContext,
-          containerLoading: isLoading
+          containerLoading: isLoading,
         };
 
         return updatedContext;
@@ -127,8 +146,8 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
       });
     },
     /**
-   * Xóa kết quả của nhiệm vụ đã thực hiện trong context.
-   */
+     * Xóa kết quả của nhiệm vụ đã thực hiện trong context.
+     */
     clearTaskResult: (): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -140,9 +159,9 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
       });
     },
     /**
-    * Hoàn thành một nhiệm vụ và thêm kết quả vào danh sách kết quả trong context.
-    * @param task - ITaskBlock đại diện cho nhiệm vụ đã hoàn thành.
-    */
+     * Hoàn thành một nhiệm vụ và thêm kết quả vào danh sách kết quả trong context.
+     * @param task - ITaskBlock đại diện cho nhiệm vụ đã hoàn thành.
+     */
     completeTask: (task: ITaskBlock): void => {
       setContext((prevContext: ContextState) => {
         let _taskResult: ITaskBlock[] = prevContext.taskResult;
@@ -157,9 +176,9 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
       });
     },
     /**
-    * Thay đổi taskChain trong context.
-    * @param taskChain - Mảng các ITaskBlock mới tạo thành một chuỗi nhiệm vụ.
-    */
+     * Thay đổi taskChain trong context.
+     * @param taskChain - Mảng các ITaskBlock mới tạo thành một chuỗi nhiệm vụ.
+     */
     createTaskChain: (taskChain: ITaskBlock[]): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -172,9 +191,9 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
     },
     //#endregion
     /**
-    * Thay đổi template hiện tại cho modal trong context.
-    * @param modalTemplate - Tên template modal mới.
-    */
+     * Thay đổi template hiện tại cho modal trong context.
+     * @param modalTemplate - Tên template modal mới.
+     */
     commitCurrentModalTemplate: (modalTemplate?: string): void => {
       setContext((prevContext: ContextState) => {
         const updatedContext: ContextState = {
@@ -184,6 +203,6 @@ export function mutations(context: ContextState, setContext: Dispatch<React.SetS
 
         return updatedContext;
       });
-    }
-  }
+    },
+  };
 }

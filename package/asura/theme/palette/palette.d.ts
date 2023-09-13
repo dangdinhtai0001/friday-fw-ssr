@@ -1,4 +1,4 @@
-export interface IColor  {
+export interface IColor {
   main?: string;
   light?: string;
   dark?: string;

@@ -2,7 +2,11 @@ import { createElement } from 'react';
 import Box from '@mui/system/Box';
 import { useTheme } from '@mui/system';
 
-import { IDataPanelProps, IFieldItemProps, IDataFieldBlockProps } from '../types';
+import {
+  IDataPanelProps,
+  IFieldItemProps,
+  IDataFieldBlockProps,
+} from '../types';
 import { useContainerContext } from '../context/useContainerContext';
 import { IDefaultTheme } from '@/package/preta/types';
 
@@ -12,8 +16,8 @@ export default function DataPanel(props: IDataPanelProps) {
 
   const createDataBlock = () => {
     if (!context.fieldDefs) {
-      return <></>
-    };
+      return <></>;
+    }
 
     return context.fieldDefs.map((item, index) => {
       let _props: IDataFieldBlockProps = {
@@ -21,10 +25,13 @@ export default function DataPanel(props: IDataPanelProps) {
         name: item.name,
       };
 
-      return context.dataBlockComponent ?
-        createElement<IDataFieldBlockProps>(context.dataBlockComponent, { ..._props, key: index })
+      return context.dataBlockComponent
+        ? createElement<IDataFieldBlockProps>(
+            context.dataBlockComponent,
+            { ..._props, key: index }
+          )
         : null;
-    })
+    });
   };
 
   return (
@@ -39,5 +46,5 @@ export default function DataPanel(props: IDataPanelProps) {
     >
       {createDataBlock()}
     </Box>
-  )
+  );
 }

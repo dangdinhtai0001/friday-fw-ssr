@@ -1,17 +1,29 @@
 import styled from '@mui/system/styled';
-import Option, { optionClasses } from '@mui/base/Option';
-import Popper from '@mui/base/Popper';
+import { optionClasses, Option } from '@mui/base/Option';
+import { Popper } from '@mui/base/Popper';
 
 import { IDefaultTheme } from '@/package/preta/types';
-import { IStyledListboxProps, IStyledOptionProps, IStyledToggleProps } from './types.d';
-import { defaultControllerContainer, typographyCaption2Strong, typographyCaption2, typographyCaption1 } from '@/package/preta/styled-shared';
+import {
+  IStyledListboxProps,
+  IStyledOptionProps,
+  IStyledToggleProps,
+} from './types.d';
+import {
+  defaultControllerContainer,
+  typographyCaption2Strong,
+  typographyCaption2,
+  typographyCaption1,
+} from '@/package/preta/styled-shared';
 
 const optionSelected = (theme?: IDefaultTheme) => ({
   backgroundColor: theme?.palette.primary.main,
   color: theme?.palette.primary.contrastText,
 });
 
-export const StyledValue = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+export const StyledValue = styled(
+  'div',
+  {}
+)(({ theme }: { theme?: IDefaultTheme }) => ({
   ...typographyCaption1({ theme }),
 
   // padding: '0.1rem 0px',
@@ -19,7 +31,10 @@ export const StyledValue = styled('div', {})(({ theme }: { theme?: IDefaultTheme
   textAlign: 'left',
 }));
 
-export const StyledToggle = styled('button', {})<IStyledToggleProps>(({ theme, width }: IStyledToggleProps) => ({
+export const StyledToggle = styled(
+  'button',
+  {}
+)<IStyledToggleProps>(({ theme, width }: IStyledToggleProps) => ({
   ...defaultControllerContainer({ theme, width }),
 
   display: 'flex',
@@ -28,36 +43,41 @@ export const StyledToggle = styled('button', {})<IStyledToggleProps>(({ theme, w
   justifyContent: 'space-start',
 }));
 
-export const StyledListbox = styled('ul', {})<IStyledListboxProps>(({ theme, maxHeight, width }: IStyledListboxProps) => ({
-  marginTop: '5px',
+export const StyledListbox = styled(
+  'ul',
+  {}
+)<IStyledListboxProps>(
+  ({ theme, maxHeight, width }: IStyledListboxProps) => ({
+    marginTop: '5px',
 
-  padding: theme?.components.spacing.sNudge,
-  paddingRight: '0px',
-  marginRight: '0px',
+    padding: theme?.components.spacing.sNudge,
+    paddingRight: '0px',
+    marginRight: '0px',
 
-  overflow: 'auto',
-  height: 'auto',
-  width: width,
+    overflow: 'auto',
+    height: 'auto',
+    width: width,
 
-  outline: 0,
-  listStyle: 'none',
+    outline: 0,
+    listStyle: 'none',
 
-  border: `1px solid ${theme?.palette.secondary.main}`,
+    border: `1px solid ${theme?.palette.secondary.main}`,
 
-  borderRadius: theme?.components.cornerRadius.medium,
-  backgroundColor: theme?.palette.background.default,
+    borderRadius: theme?.components.cornerRadius.medium,
+    backgroundColor: theme?.palette.background.default,
 
-  maxHeight: maxHeight
-}));
+    maxHeight: maxHeight,
+  })
+);
 
 export const StyledOption = styled(Option, {
-  shouldForwardProp: (prop) => prop !== 'itemDefs',
+  shouldForwardProp: prop => prop !== 'itemDefs',
 })<IStyledOptionProps>(({ theme }: IStyledOptionProps) => ({
   ...typographyCaption2Strong({ theme }),
 
   // padding: '3px 3px 3px 3px',
   padding: '0.2rem 0.2rem 0.2rem 0.5rem ',
-  cursor: "pointer",
+  cursor: 'pointer',
   margin: '0.1rem 0.2rem 0rem 0rem',
   width: 'fit',
 
@@ -73,7 +93,7 @@ export const StyledOption = styled(Option, {
 
     '&:hover': {
       ...optionSelected(theme),
-    }
+    },
   },
 
   [`&.${optionClasses.disabled}`]: {
@@ -82,7 +102,7 @@ export const StyledOption = styled(Option, {
   },
 
   '&:hover': {
-    backgroundColor: theme?.palette.background.paper
+    backgroundColor: theme?.palette.background.paper,
   },
 }));
 
@@ -90,17 +110,25 @@ export const StyledPopper = styled(Popper)`
   z-index: 2300;
 `;
 
-export const StyledOptionGroupLabel = styled('div', {})
-  (({ theme }: { theme?: IDefaultTheme }) => ({
-    ...typographyCaption1({ theme }),
-    padding: '0.2rem 0rem 0.2rem 0rem',
-  }));
+export const StyledOptionGroupLabel = styled(
+  'div',
+  {}
+)(({ theme }: { theme?: IDefaultTheme }) => ({
+  ...typographyCaption1({ theme }),
+  padding: '0.2rem 0rem 0.2rem 0rem',
+}));
 
-export const StyledOptionGroupList = styled('ul', {})(() => ({
+export const StyledOptionGroupList = styled(
+  'ul',
+  {}
+)(() => ({
   listStyle: 'none',
   paddingLeft: 0,
 }));
 
-export const StyledOptionGroupRoot = styled('li', {})(() => ({
+export const StyledOptionGroupRoot = styled(
+  'li',
+  {}
+)(() => ({
   cursor: 'default',
 }));

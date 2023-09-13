@@ -6,18 +6,28 @@ import { IToolbarBlockExtProps, ITaskControl } from './types.d';
 import { StyledToolbarBlockExt } from './StyledElements';
 import ButtonWrapper from '@/package/deva/button';
 
-export default function ToolbarBlockExt(props: IToolbarBlockExtProps) {
+export default function ToolbarBlockExt(
+  props: IToolbarBlockExtProps
+) {
   const { onCreateTask, taskControls } = props;
 
-  const { context, contextApi }: ContextHookValue = useContainerContext();
+  const { context, contextApi }: ContextHookValue =
+    useContainerContext();
 
   const handleCreateTask = (taskControl: ITaskControl) => {
     onCreateTask(taskControl.onCreateTaskChainEvent());
-  }
+  };
 
   const renderTaskControls = () => {
     return taskControls.map((taskControl: ITaskControl) => {
-      let { id, name, component, componentProps, onCreateTaskChainEvent, ..._props } = taskControl;
+      let {
+        id,
+        name,
+        component,
+        componentProps,
+        onCreateTaskChainEvent,
+        ..._props
+      } = taskControl;
       return (
         <ButtonWrapper
           key={id ? id : uuidv4()}
@@ -29,7 +39,6 @@ export default function ToolbarBlockExt(props: IToolbarBlockExtProps) {
       );
     });
   };
-
 
   return (
     <StyledToolbarBlockExt>

@@ -1,6 +1,10 @@
 import { IDefaultTheme } from '@/package/preta/types';
 
-export const typographyCaption2 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyCaption2 = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.caption2.fontSize,
@@ -9,7 +13,11 @@ export const typographyCaption2 = <T extends IDefaultTheme>({ theme }: { theme?:
   letterSpacing: theme?.typography.caption2.letterSpacing,
 });
 
-export const typographyCaption2Strong = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyCaption2Strong = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.caption2Strong.fontSize,
@@ -18,7 +26,11 @@ export const typographyCaption2Strong = <T extends IDefaultTheme>({ theme }: { t
   letterSpacing: theme?.typography.caption2Strong.letterSpacing,
 });
 
-export const typographyCaption1 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyCaption1 = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.caption1.fontSize,
@@ -27,7 +39,11 @@ export const typographyCaption1 = <T extends IDefaultTheme>({ theme }: { theme?:
   letterSpacing: theme?.typography.caption1.letterSpacing,
 });
 
-export const typographyCaption1Strong = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyCaption1Strong = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.caption1Strong.fontSize,
@@ -36,7 +52,11 @@ export const typographyCaption1Strong = <T extends IDefaultTheme>({ theme }: { t
   letterSpacing: theme?.typography.caption1Strong.letterSpacing,
 });
 
-export const typographyCaption1tronger = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyCaption1tronger = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.caption1Stronger.fontSize,
@@ -45,7 +65,11 @@ export const typographyCaption1tronger = <T extends IDefaultTheme>({ theme }: { 
   letterSpacing: theme?.typography.caption1Stronger.letterSpacing,
 });
 
-export const typographyBody1 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyBody1 = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.body1.fontSize,
@@ -54,7 +78,11 @@ export const typographyBody1 = <T extends IDefaultTheme>({ theme }: { theme?: T 
   letterSpacing: theme?.typography.body1.letterSpacing,
 });
 
-export const typographyBody1Strong = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyBody1Strong = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.body1Strong.fontSize,
@@ -63,7 +91,11 @@ export const typographyBody1Strong = <T extends IDefaultTheme>({ theme }: { them
   letterSpacing: theme?.typography.body1Strong.letterSpacing,
 });
 
-export const typographyBody1Stronger = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyBody1Stronger = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.body1Stronger.fontSize,
@@ -72,7 +104,11 @@ export const typographyBody1Stronger = <T extends IDefaultTheme>({ theme }: { th
   letterSpacing: theme?.typography.body1Stronger.letterSpacing,
 });
 
-export const typographyBody2 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyBody2 = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.body2.fontSize,
@@ -81,7 +117,11 @@ export const typographyBody2 = <T extends IDefaultTheme>({ theme }: { theme?: T 
   letterSpacing: theme?.typography.body2.letterSpacing,
 });
 
-export const typographySubtitle2 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographySubtitle2 = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.subtitle2.fontSize,
@@ -90,7 +130,13 @@ export const typographySubtitle2 = <T extends IDefaultTheme>({ theme }: { theme?
   letterSpacing: theme?.typography.subtitle2.letterSpacing,
 });
 
-export const typographySubtitle2Stronger = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographySubtitle2Stronger = <
+  T extends IDefaultTheme
+>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.subtitle2Stronger.fontSize,
@@ -99,7 +145,11 @@ export const typographySubtitle2Stronger = <T extends IDefaultTheme>({ theme }: 
   letterSpacing: theme?.typography.subtitle2Stronger.letterSpacing,
 });
 
-export const typographySubtitle1 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographySubtitle1 = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.subtitle1.fontSize,
@@ -108,7 +158,11 @@ export const typographySubtitle1 = <T extends IDefaultTheme>({ theme }: { theme?
   letterSpacing: theme?.typography.subtitle1.letterSpacing,
 });
 
-export const typographyTitle3 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyTitle3 = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.title3.fontSize,
@@ -117,7 +171,11 @@ export const typographyTitle3 = <T extends IDefaultTheme>({ theme }: { theme?: T
   letterSpacing: theme?.typography.title3.letterSpacing,
 });
 
-export const typographyTitle2 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyTitle2 = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.title2.fontSize,
@@ -126,7 +184,11 @@ export const typographyTitle2 = <T extends IDefaultTheme>({ theme }: { theme?: T
   letterSpacing: theme?.typography.title2.letterSpacing,
 });
 
-export const typographyTitle1 = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyTitle1 = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.title1.fontSize,
@@ -135,7 +197,11 @@ export const typographyTitle1 = <T extends IDefaultTheme>({ theme }: { theme?: T
   letterSpacing: theme?.typography.title1.letterSpacing,
 });
 
-export const typographyLargeTitle = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyLargeTitle = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.largeTitle.fontSize,
@@ -144,7 +210,11 @@ export const typographyLargeTitle = <T extends IDefaultTheme>({ theme }: { theme
   letterSpacing: theme?.typography.largeTitle.letterSpacing,
 });
 
-export const typographyDisplay = <T extends IDefaultTheme>({ theme }: { theme?: T }) => ({
+export const typographyDisplay = <T extends IDefaultTheme>({
+  theme,
+}: {
+  theme?: T;
+}) => ({
   color: theme?.palette.text.primary,
 
   fontSize: theme?.typography.display.fontSize,
@@ -152,4 +222,3 @@ export const typographyDisplay = <T extends IDefaultTheme>({ theme }: { theme?: 
   lineHeight: theme?.typography.display.lineHeight,
   letterSpacing: theme?.typography.display.letterSpacing,
 });
-

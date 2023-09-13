@@ -1,16 +1,27 @@
 import { useRef } from 'react';
 import FormContainer from '@/package/naraka/manipulation-container';
-import { ContainerRef as FormmRef, FieldDef, ContainerProviderProps, ContextState, ContextApi } from '@/package/naraka/manipulation-container/types';
+import {
+  ContainerRef as FormmRef,
+  FieldDef,
+  ContainerProviderProps,
+  ContextState,
+  ContextApi,
+} from '@/package/naraka/manipulation-container/types';
 
-import DefaultDataBlock from '@/package/naraka/manipulation-container-ext'
+import DefaultDataBlock from '@/package/naraka/manipulation-container-ext';
 
-import SelectWrapper, { ISelectWrapperProps } from '@/package/deva/select';
-import InputWrapper, { IInputWrapperProps } from '@/package/deva/input';
-import RadioGroup, { IRadioGroupProps } from '@/package/deva/radio-group';
+import SelectWrapper, {
+  ISelectWrapperProps,
+} from '@/package/deva/select';
+import InputWrapper, {
+  IInputWrapperProps,
+} from '@/package/deva/input';
+import RadioGroup, {
+  IRadioGroupProps,
+} from '@/package/deva/radio-group';
 import ButtonWrapper from '@/package/deva/button/ButtonWrapper';
 
-export interface IManipulationProps {
-}
+export interface IManipulationProps {}
 
 export interface IFormValue {
   first_operator: string;
@@ -22,83 +33,86 @@ export interface IFormValue {
 
 const fieldDefs: FieldDef<any>[] = [
   {
-    name: "first_operator",
-    initialValue: "",
+    name: 'first_operator',
+    initialValue: '',
     component: SelectWrapper,
     componentParams: {
       itemDefs: [
-        { label: "equals", value: "EQUALS" },
-        { label: "not equals", value: "NOT_EQUALS" },
-        { label: "contains", value: "CONTAINS" },
-        { label: "not contains", value: "NOT_CONTAINS" },
-        { label: "starts with", value: "STARTS_WITH" },
-        { label: "ends with", value: "ENDS_WITH" },
-        { label: "none", value: "" },
+        { label: 'equals', value: 'EQUALS' },
+        { label: 'not equals', value: 'NOT_EQUALS' },
+        { label: 'contains', value: 'CONTAINS' },
+        { label: 'not contains', value: 'NOT_CONTAINS' },
+        { label: 'starts with', value: 'STARTS_WITH' },
+        { label: 'ends with', value: 'ENDS_WITH' },
+        { label: 'none', value: '' },
       ],
       multiple: false,
-    } as ISelectWrapperProps<any, false>
+    } as ISelectWrapperProps<any, false>,
   },
   {
-    name: "first_value",
-    initialValue: "",
+    name: 'first_value',
+    initialValue: '',
     component: InputWrapper,
-    componentParams: {} as IInputWrapperProps
+    componentParams: {} as IInputWrapperProps,
   },
   // combination_operator
   {
-    name: "combination_operator",
-    initialValue: "AND",
+    name: 'combination_operator',
+    initialValue: 'AND',
     isHidden: true,
     component: SelectWrapper,
     componentParams: {
       itemDefs: [
-        { label: "And", value: "AND" },
-        { label: "Or", value: "OR" },
+        { label: 'And', value: 'AND' },
+        { label: 'Or', value: 'OR' },
       ],
       multiple: false,
-    } as ISelectWrapperProps<('AND' | 'OR'), false>
+    } as ISelectWrapperProps<'AND' | 'OR', false>,
   },
   {
-    name: "combination_operator2",
-    initialValue: "AND",
+    name: 'combination_operator2',
+    initialValue: 'AND',
     component: RadioGroup,
     componentParams: {
       columns: 12,
       options: [
-        { label: "AND", value: '&', xs: 12 },
-        { label: "Or 1", value: '||' },
-        { label: "Or 2", value: '||' },
-        { label: "Or 3", value: '||' },
-      ]
-    } as IRadioGroupProps
+        { label: 'AND', value: '&', xs: 12 },
+        { label: 'Or 1', value: '||' },
+        { label: 'Or 2', value: '||' },
+        { label: 'Or 3', value: '||' },
+      ],
+    } as IRadioGroupProps,
   },
   {
-    name: "second_operator",
-    initialValue: "",
+    name: 'second_operator',
+    initialValue: '',
     component: SelectWrapper,
     componentParams: {
       itemDefs: [
-        { label: "equals", value: "EQUALS" },
-        { label: "not equals", value: "NOT_EQUALS" },
-        { label: "contains", value: "CONTAINS" },
-        { label: "not contains", value: "NOT_CONTAINS" },
-        { label: "starts with", value: "STARTS_WITH" },
-        { label: "ends with", value: "ENDS_WITH" },
-        { label: "none", value: "" },
+        { label: 'equals', value: 'EQUALS' },
+        { label: 'not equals', value: 'NOT_EQUALS' },
+        { label: 'contains', value: 'CONTAINS' },
+        { label: 'not contains', value: 'NOT_CONTAINS' },
+        { label: 'starts with', value: 'STARTS_WITH' },
+        { label: 'ends with', value: 'ENDS_WITH' },
+        { label: 'none', value: '' },
       ],
       multiple: false,
-    } as ISelectWrapperProps<any, false>
+    } as ISelectWrapperProps<any, false>,
   },
   {
-    name: "second_value",
-    initialValue: "",
+    name: 'second_value',
+    initialValue: '',
     component: InputWrapper,
-    componentParams: {} as IInputWrapperProps
-  }
+    componentParams: {} as IInputWrapperProps,
+  },
 ];
 
-
-const afterValueChange = (values: IFormValue, context: ContextState, contextApi: ContextApi) => {
+const afterValueChange = (
+  values: IFormValue,
+  context: ContextState,
+  contextApi: ContextApi
+) => {
   const { first_value } = values;
 
   console.log(values);
@@ -107,16 +121,16 @@ const afterValueChange = (values: IFormValue, context: ContextState, contextApi:
     contextApi.applyFieldHidden({
       combination_operator: false,
       second_operator: false,
-      second_value: false
+      second_value: false,
     });
   } else {
     contextApi.applyFieldHidden({
       combination_operator: true,
       second_operator: true,
-      second_value: true
+      second_value: true,
     });
   }
-}
+};
 
 const onMounted = (context: ContextState) => {
   const { fieldRefs } = context;
@@ -124,24 +138,25 @@ const onMounted = (context: ContextState) => {
 
   el.classList.add('class-4', 'class-5', 'class-6');
 
-  console.log(el)
-}
-
+  console.log(el);
+};
 
 export default function Manipulation(props: IManipulationProps) {
   const formRef = useRef<FormmRef>(null);
-  return (<>
-    <FormContainer
-      fieldDefs={fieldDefs}
-      dataBlockComponent={DefaultDataBlock}
-      onSubmitSuccess={(data) => { }}
-      onSubmitError={(errors) => { }}
-      defaultCols={1}
-      afterValueChange={afterValueChange}
-      onMounted={onMounted}
-      ref={formRef}
-    />
-    <ButtonWrapper>Apply</ButtonWrapper>
-    <ButtonWrapper>Clear</ButtonWrapper>
-  </>)
+  return (
+    <>
+      <FormContainer
+        fieldDefs={fieldDefs}
+        dataBlockComponent={DefaultDataBlock}
+        onSubmitSuccess={data => {}}
+        onSubmitError={errors => {}}
+        defaultCols={1}
+        afterValueChange={afterValueChange}
+        onMounted={onMounted}
+        ref={formRef}
+      />
+      <ButtonWrapper>Apply</ButtonWrapper>
+      <ButtonWrapper>Clear</ButtonWrapper>
+    </>
+  );
 }

@@ -1,6 +1,10 @@
 import React from 'react';
 import { IFilterModifiedEvent } from './Event.d';
-import { FilterCriteria, PaginationModel, FilterDef } from './Common.d';
+import {
+  FilterCriteria,
+  PaginationModel,
+  FilterDef,
+} from './Common.d';
 import { ITaskControl, ITaskBlock } from './Task.d';
 import {
   IFilterBlockProps,
@@ -9,7 +13,7 @@ import {
   IModalBlockProps,
   IDataBlockProps,
   IModalTemplateValue,
-  IBlockProps
+  IBlockProps,
 } from './Block.d';
 
 export interface ContextState {
@@ -37,7 +41,11 @@ export interface ContextState {
   containerData: any[];
   processingData?: any;
 
-  modalTemplate?: Record<string, IModalTemplateValue> | ((param: IModalTemplateFuncParam) => Record<string, IModalTemplateValue>);
+  modalTemplate?:
+    | Record<string, IModalTemplateValue>
+    | ((
+        param: IModalTemplateFuncParam
+      ) => Record<string, IModalTemplateValue>);
   currentModalTeamplate?: string;
   modalBlockParams?: unknown;
   modalBlockComponent?: React.ComponentType<unknown>;
@@ -45,20 +53,26 @@ export interface ContextState {
   dataBlockParams?: unknown;
   dataBlockComponent?: React.ComponentType<unknown>;
 
-  onFetchData?: (taskBlock?: ITaskBlock, context?: ContextState, contextApi?: ContextApi) => any[] | Promise<any[]>;
+  onFetchData?: (
+    taskBlock?: ITaskBlock,
+    context?: ContextState,
+    contextApi?: ContextApi
+  ) => any[] | Promise<any[]>;
 }
 
 export interface ContextApi {
   // filter
   applyFilterInstance: (filterInstance: FilterCriteria[]) => void;
   addFilterCriterias: (criterias: FilterCriteria[]) => void;
-  // Task 
+  // Task
   createTaskChain: (taskChain: ITaskBlock[]) => void;
   applyTaskBatch: (tasks: ITaskBlock[]) => void;
   clearTaskResult: () => void;
   completeTask: (task: ITaskBlock) => void;
   // pagination
-  applyPaginationInstance: (paginationModel: PaginationModel) => void;
+  applyPaginationInstance: (
+    paginationModel: PaginationModel
+  ) => void;
   // data
   applyProcessingData: (data: any | null) => void;
   applyContainerData: (data: any[]) => void;

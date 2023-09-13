@@ -1,5 +1,11 @@
 import { ThemeOptions } from '@mui/system';
-import { IFontWeight, ISpacing, IStrokeWidth, ICornerRadius, IThemeTypography } from '@/package/preta/types';
+import {
+  IFontWeight,
+  ISpacing,
+  IStrokeWidth,
+  ICornerRadius,
+  IThemeTypography,
+} from '@/package/preta/types';
 
 const fontWeight: IFontWeight = {
   regular: 400,
@@ -26,7 +32,7 @@ const strokeWidth: IStrokeWidth = {
   thick: '2px',
   thicker: '3px',
   thickest: '4px',
-}
+};
 
 const cornerRadius: ICornerRadius = {
   none: '0px',
@@ -34,8 +40,8 @@ const cornerRadius: ICornerRadius = {
   medium: '4px',
   large: '8px',
   xLarge: '12px',
-  circle: '50%'
-}
+  circle: '50%',
+};
 
 export const typography: IThemeTypography = {
   root: {
@@ -147,13 +153,11 @@ export const typography: IThemeTypography = {
     letterSpacing: spacing.none,
     fontWeight: fontWeight.semibold,
   },
-}
+};
 
 export const components: ThemeOptions['components'] = {
   fontWeight,
   spacing,
   strokeWidth,
-  cornerRadius
-}
-
-
+  cornerRadius,
+};

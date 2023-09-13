@@ -1,8 +1,11 @@
 import { forwardRef, ForwardedRef } from 'react';
 import clsx from 'clsx';
-import { IBackDropProps } from './types.d'
+import { IBackDropProps } from './types.d';
 
-function BackDrop(props: IBackDropProps, ref: ForwardedRef<HTMLDivElement>) {
+function BackDrop(
+  props: IBackDropProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   const { open, className, ...other } = props;
   return (
     <div
@@ -13,4 +16,4 @@ function BackDrop(props: IBackDropProps, ref: ForwardedRef<HTMLDivElement>) {
   );
 }
 
-export default forwardRef<HTMLDivElement, IBackDropProps>(BackDrop)
+export default forwardRef<HTMLDivElement, IBackDropProps>(BackDrop);

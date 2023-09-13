@@ -2,55 +2,101 @@ import * as React from 'react';
 import { IDataFieldBlockProps } from './types.d';
 
 import { useController } from 'react-hook-form';
-import { motion, useAnimation, AnimationControls } from "framer-motion";
-import useAsyncEffect from "@n1ru4l/use-async-effect";
+import {
+  motion,
+  useAnimation,
+  AnimationControls,
+} from 'framer-motion';
+import useAsyncEffect from '@n1ru4l/use-async-effect';
 import { useContainerContext } from '@/package/naraka/manipulation-container/context/useContainerContext';
 import FieldItem from '@/package/naraka/manipulation-container/items/DataFieldItem';
-import { StyledLabel, StyledRequiredIcon, StyledMessage, StyledDataBlockRoot } from './StyledElements'
+import {
+  StyledLabel,
+  StyledRequiredIcon,
+  StyledMessage,
+  StyledDataBlockRoot,
+} from './StyledElements';
 
 export default function DataFieldBlock(props: IDataFieldBlockProps) {
   const { fieldDef, name } = props;
 
-  const { context: { fieldMessage, defaultFieldLabelAlign, defaultFieldRaito, fieldHidden } } = useContainerContext();
-  const { formState: { errors } } = useController({ name: name });
+  const {
+    context: {
+      fieldMessage,
+      defaultFieldLabelAlign,
+      defaultFieldRaito,
+      fieldHidden,
+    },
+  } = useContainerContext();
+  const {
+    formState: { errors },
+  } = useController({ name: name });
 
   const errorMsgControls = useAnimation();
   const customMsgControls = useAnimation();
 
-  const [errorMessage, setErrorMessage] = React.useState<string | undefined>();
+  const [errorMessage, setErrorMessage] = React.useState<
+    string | undefined
+  >();
   const [message, setMessage] = React.useState<string | undefined>();
 
   const renderControlContainer = () => {
-    return <FieldItem fieldDef={fieldDef} name={name}></FieldItem>
+    return <FieldItem fieldDef={fieldDef} name={name}></FieldItem>;
   };
 
   /**
- * Trigger the change event for errors, which will activate animation and update error message.
- * @param {Function} onCancel - The cancel function for the effect.
- * @param {Function} cast - The generator function for the effect.
- * @param {Object} errors - The object containing error messages.
- * @param {string} fieldName - The name of the field.
- * @param {Object} controls - The controls for animation.
- */
-  useAsyncEffect(function* (onCancel, cast) {
-    useMessageHandling(setErrorMessage, errors, name, errorMsgControls);
-  }, [errors]);
+   * Trigger the change event for errors, which will activate animation and update error message.
+   * @param {Function} onCancel - The cancel function for the effect.
+   * @param {Function} cast - The generator function for the effect.
+   * @param {Object} errors - The object containing error messages.
+   * @param {string} fieldName - The name of the field.
+   * @param {Object} controls - The controls for animation.
+   */
+  useAsyncEffect(
+    function* (onCancel, cast) {
+      useMessageHandling(
+        setErrorMessage,
+        errors,
+        name,
+        errorMsgControls
+      );
+    },
+    [errors]
+  );
 
-  useAsyncEffect(function* (onCancel, cast) {
-    useMessageHandling(setMessage, fieldMessage, name, customMsgControls);
-  }, [fieldMessage]);
+  useAsyncEffect(
+    function* (onCancel, cast) {
+      useMessageHandling(
+        setMessage,
+        fieldMessage,
+        name,
+        customMsgControls
+      );
+    },
+    [fieldMessage]
+  );
 
   const renderDataFieldBlock = () => {
     let { label, required, fieldRaito, labelAlign } = fieldDef;
 
-    // TODO: Check lại xem vì sao không có label thì nó không render cả control luôn 
+    // TODO: Check lại xem vì sao không có label thì nó không render cả control luôn
     if (label) {
       return (
-        <StyledDataBlockRoot className='styled-data-block-root' fieldRaito={fieldRaito ? fieldRaito : defaultFieldRaito}>
+        <StyledDataBlockRoot
+          className="styled-data-block-root"
+          fieldRaito={fieldRaito ? fieldRaito : defaultFieldRaito}
+        >
           <div>
-            <StyledLabel status={errorMessage ? 'error' : undefined} textAlign={labelAlign ? labelAlign : defaultFieldLabelAlign}>
+            <StyledLabel
+              status={errorMessage ? 'error' : undefined}
+              textAlign={
+                labelAlign ? labelAlign : defaultFieldLabelAlign
+              }
+            >
               {label}
-              {required ? <StyledRequiredIcon>*</StyledRequiredIcon> : null}
+              {required ? (
+                <StyledRequiredIcon>*</StyledRequiredIcon>
+              ) : null}
             </StyledLabel>
           </div>
           <div>
@@ -60,20 +106,18 @@ export default function DataFieldBlock(props: IDataFieldBlockProps) {
               initial="initial"
               variants={fieldMessageVariants}
             >
-              <StyledMessage status='error'>{errorMessage}</StyledMessage>
+              <StyledMessage status="error">
+                {errorMessage}
+              </StyledMessage>
             </motion.div>
-            <StyledMessage status='warning'>{message}</StyledMessage>
+            <StyledMessage status="warning">{message}</StyledMessage>
           </div>
         </StyledDataBlockRoot>
       );
     } else {
-      return (
-        <div>
-          {renderControlContainer()}
-        </div>
-      );
+      return <div>{renderControlContainer()}</div>;
     }
-  }
+  };
 
   return renderDataFieldBlock();
 }
@@ -84,7 +128,7 @@ const fieldMessageVariants = {
     y: 0,
     transition: {
       duration: 0.2,
-      type: "spring",
+      type: 'spring',
       bounce: 0.2,
     },
   },
@@ -93,14 +137,14 @@ const fieldMessageVariants = {
     y: -50,
     transition: {
       duration: 0.2,
-      type: "spring",
+      type: 'spring',
       bounce: 0.2,
     },
   },
   initial: {
     opacity: 0,
-    y: -50
-  }
+    y: -50,
+  },
 };
 
 /**
@@ -111,7 +155,9 @@ const fieldMessageVariants = {
  * @param {AnimationControls} controls - The controls for animation.
  */
 const useMessageHandling = async (
-  setMessage: React.Dispatch<React.SetStateAction<string | undefined>>,
+  setMessage: React.Dispatch<
+    React.SetStateAction<string | undefined>
+  >,
   messageObj: Record<string, any>,
   fieldName: string,
   controls: AnimationControls

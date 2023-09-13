@@ -5,9 +5,7 @@ import {
 } from '@/package/naraka/manipulation-container/types';
 import { IDefaultTheme } from '@/package/preta/types';
 
-export interface IDataFieldBlockProps extends IDataFieldBlockProps {
-
-};
+export interface IDataFieldBlockProps extends IDataFieldBlockProps {}
 
 export interface IStyledLabelProps {
   theme?: IDefaultTheme;

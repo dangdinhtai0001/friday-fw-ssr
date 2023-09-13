@@ -1,6 +1,6 @@
 import { ContextHelper, ContextState } from './Context';
 import { FilterCriteria, PaginationModel } from './Common.d';
-import { ITaskRequest } from './Task.d'
+import { ITaskRequest } from './Task.d';
 
 export interface IBaseEvent {
   // Event identifier
@@ -18,5 +18,3 @@ export interface IPaginationModifiedEvent extends IBaseEvent {
 export interface ICreateTaskChainEvent extends IBaseEvent {
   requests: ITaskRequest[];
 }
-
-

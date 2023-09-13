@@ -1,43 +1,83 @@
 import * as React from 'react';
 import { Box, useTheme } from '@mui/system';
-export interface ITypographyProps {
-}
+export interface ITypographyProps {}
 
 export default function Typography(props: ITypographyProps) {
   const theme = useTheme<any>();
 
   return (
     <div>
-      <div className='display'>Display</div>
-      <div className='large-title'>Large title</div>
-      <div className='title-1'>Title 1</div>
-      <div className='title-2'>Title 2</div>
-      <div className='title-3'>Title 3</div>
-      <div className='subtitle-1'>Subtitle 1: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='subtitle-2-stronger'>Subtitle 2: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='subtitle-2'>Subtitle 2: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='body-2'>Body 2: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='body-1-stronger'>Body 1: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='body-1-strong'>Body 1: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='body-1'>Body 1: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='caption-1-stronger'>Caption 1: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='caption-1-strong'>Caption 1: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='caption-1'>Caption 1: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='caption-1'>Caption 1: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='caption-2-strong'>Caption 2: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
-      <div className='caption-2'>Caption 2: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur</div>
+      <div className="display">Display</div>
+      <div className="large-title">Large title</div>
+      <div className="title-1">Title 1</div>
+      <div className="title-2">Title 2</div>
+      <div className="title-3">Title 3</div>
+      <div className="subtitle-1">
+        Subtitle 1: Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quos blanditiis tenetur
+      </div>
+      <div className="subtitle-2-stronger">
+        Subtitle 2: Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quos blanditiis tenetur
+      </div>
+      <div className="subtitle-2">
+        Subtitle 2: Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quos blanditiis tenetur
+      </div>
+      <div className="body-2">
+        Body 2: Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Quos blanditiis tenetur
+      </div>
+      <div className="body-1-stronger">
+        Body 1: Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Quos blanditiis tenetur
+      </div>
+      <div className="body-1-strong">
+        Body 1: Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Quos blanditiis tenetur
+      </div>
+      <div className="body-1">
+        Body 1: Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Quos blanditiis tenetur
+      </div>
+      <div className="caption-1-stronger">
+        Caption 1: Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quos blanditiis tenetur
+      </div>
+      <div className="caption-1-strong">
+        Caption 1: Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quos blanditiis tenetur
+      </div>
+      <div className="caption-1">
+        Caption 1: Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quos blanditiis tenetur
+      </div>
+      <div className="caption-1">
+        Caption 1: Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quos blanditiis tenetur
+      </div>
+      <div className="caption-2-strong">
+        Caption 2: Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quos blanditiis tenetur
+      </div>
+      <div className="caption-2">
+        Caption 2: Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Quos blanditiis tenetur
+      </div>
 
       <br></br>
-      <div className='title-1'>Corner radius</div>
-      <Box sx={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(6, 1fr)',
-        justifyContent: 'center',
-        alignItems: 'center',
-        bgcolor: 'background.paper',
-        padding: '10px',
-        columnGap: '10px',
-      }}>
+      <div className="title-1">Corner radius</div>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          justifyContent: 'center',
+          alignItems: 'center',
+          bgcolor: 'background.paper',
+          padding: '10px',
+          columnGap: '10px',
+        }}
+      >
         <Box
           sx={{
             width: '100%',
@@ -119,17 +159,19 @@ export default function Typography(props: ITypographyProps) {
       </Box>
 
       <br></br>
-      <div className='title-1'>Stroke</div>
-      <Box sx={{
-        display: 'grid',
-        columnGap: '10px',
-        height: 60,
-        gridTemplateColumns: 'repeat(5, 1fr)',
-        justifyContent: 'center',
-        alignItems: 'center',
-        bgcolor: 'background.paper',
-        padding: '10px'
-      }}>
+      <div className="title-1">Stroke</div>
+      <Box
+        sx={{
+          display: 'grid',
+          columnGap: '10px',
+          height: 60,
+          gridTemplateColumns: 'repeat(5, 1fr)',
+          justifyContent: 'center',
+          alignItems: 'center',
+          bgcolor: 'background.paper',
+          padding: '10px',
+        }}
+      >
         <Box
           sx={{
             width: '100%',

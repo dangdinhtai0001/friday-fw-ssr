@@ -38,10 +38,10 @@ export interface ICornerRadius {
 
 export interface IThemeComponents {
   fontWeight: IFontWeight;
-  spacing: ISpacing,
-  strokeWidth: IStrokeWidth,
-  cornerRadius: ICornerRadius
-};
+  spacing: ISpacing;
+  strokeWidth: IStrokeWidth;
+  cornerRadius: ICornerRadius;
+}
 
 export interface IThemeTypographyOption {
   fontSize: string;
@@ -52,13 +52,30 @@ export interface IThemeTypographyOption {
   fontFamily?: string;
 }
 
-export type IThemeTypographyKey = "root" | "caption2" | "caption2Strong" | "caption1" | "caption1Strong" | "caption1Stronger" | "body1" | "body1Strong" | "body1Stronger" | "body2" | "subtitle2" | "subtitle2Stronger" | "subtitle1" | "title3" | "title2" | "title1" | "largeTitle" | "display"
+export type IThemeTypographyKey =
+  | 'root'
+  | 'caption2'
+  | 'caption2Strong'
+  | 'caption1'
+  | 'caption1Strong'
+  | 'caption1Stronger'
+  | 'body1'
+  | 'body1Strong'
+  | 'body1Stronger'
+  | 'body2'
+  | 'subtitle2'
+  | 'subtitle2Stronger'
+  | 'subtitle1'
+  | 'title3'
+  | 'title2'
+  | 'title1'
+  | 'largeTitle'
+  | 'display';
 
-export interface IThemeTypography extends Record<IThemeTypographyKey, IThemeTypographyOption> {
-
-}
+export interface IThemeTypography
+  extends Record<IThemeTypographyKey, IThemeTypographyOption> {}
 
 export interface IDefaultTheme extends Theme {
-  components: IThemeComponents,
-  typography: IThemeTypography
+  components: IThemeComponents;
+  typography: IThemeTypography;
 }

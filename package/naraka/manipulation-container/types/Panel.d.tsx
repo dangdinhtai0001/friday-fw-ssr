@@ -1,5 +1,3 @@
-export interface IWatcherPanelProps {
-}
+export interface IWatcherPanelProps {}
 
-export interface IDataPanelProps {
-}
+export interface IDataPanelProps {}

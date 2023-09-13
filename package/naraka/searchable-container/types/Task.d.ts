@@ -12,12 +12,15 @@ export interface ITaskBlock extends ITaskRequest {
   status: TASK_STATUS;
   isLast?: boolean;
   previousBlock?: any;
-};
+}
 
 export type ITaskControl = {
   id: DefaultTaskName | string;
-  onProcessTask: (payload: ITaskBlock, context?: ContextState, contextApi?: ContextApi)
-    => ITaskBlock | Promise<ITaskBlock>;
+  onProcessTask: (
+    payload: ITaskBlock,
+    context?: ContextState,
+    contextApi?: ContextApi
+  ) => ITaskBlock | Promise<ITaskBlock>;
 };
 
 export interface ITaskHook {

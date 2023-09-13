@@ -1,5 +1,9 @@
 import { IDividerProps } from './types';
-import { StyledDividerContainer, StyledDividerLine, StyledDividerText } from './StyledElements';
+import {
+  StyledDividerContainer,
+  StyledDividerLine,
+  StyledDividerText,
+} from './StyledElements';
 
 export default function Divider(props: IDividerProps) {
   const { height = 1, type = 'solid', text, color } = props;

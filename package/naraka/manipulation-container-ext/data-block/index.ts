@@ -1,2 +1,2 @@
 export { default } from './DataBlock';
-export * from './types.d'  
+export * from './types.d';

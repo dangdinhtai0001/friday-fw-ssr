@@ -1,10 +1,14 @@
 import { useMemo } from 'react';
 import useSWR from 'swr';
 import axios from 'axios';
-import { IDatasourceProps, IDatasourceReturn } from '../types/Datasource.d'
+import {
+  IDatasourceProps,
+  IDatasourceReturn,
+} from '../types/Datasource.d';
 
-
-export default function useDatasource(props?: IDatasourceProps): IDatasourceReturn | null {
+export default function useDatasource(
+  props?: IDatasourceProps
+): IDatasourceReturn | null {
   if (!props) {
     return null;
   }
@@ -20,7 +24,12 @@ export default function useDatasource(props?: IDatasourceProps): IDatasourceRetu
   const fetcher = async (url: string) => {
     const headers = fetcherOptions?.headers || {};
     const method = fetcherOptions?.method || 'GET';
-    const response = await axios.request({ url, headers, method, ...fetcherOptions });
+    const response = await axios.request({
+      url,
+      headers,
+      method,
+      ...fetcherOptions,
+    });
     let data = response.data;
 
     // Extract and transform data using the combined function if provided
@@ -28,9 +37,8 @@ export default function useDatasource(props?: IDatasourceProps): IDatasourceRetu
   };
 
   // Sử dụng useMemo để tối ưu hiệu năng bằng cách tránh gọi lại hook useSWR khi swrOptions
-  // không thay đổi. Điều này có thể cải thiện hiệu suất của ứng dụng trong trường hợp swrOptions 
+  // không thay đổi. Điều này có thể cải thiện hiệu suất của ứng dụng trong trường hợp swrOptions
   // có thể thay đổi một cách thường xuyên.
   const memoizedSwrOptions = useMemo(() => swrOptions, [swrOptions]);
   return useSWR(url, fetcher, memoizedSwrOptions);
-};
-
+}

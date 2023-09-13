@@ -49,7 +49,8 @@ const GlobalStyled = () => {
           fontSize: theme.typography.caption2Strong.fontSize,
           fontWeight: theme.typography.caption2Strong.fontWeight,
           lineHeight: theme.typography.caption2Strong.lineHeight,
-          letterSpacing: theme.typography.caption2Strong.letterSpacing,
+          letterSpacing:
+            theme.typography.caption2Strong.letterSpacing,
         },
         '.caption-1': {
           fontSize: theme.typography.caption1.fontSize,
@@ -61,13 +62,15 @@ const GlobalStyled = () => {
           fontSize: theme.typography.caption1Strong.fontSize,
           fontWeight: theme.typography.caption1Strong.fontWeight,
           lineHeight: theme.typography.caption1Strong.lineHeight,
-          letterSpacing: theme.typography.caption1Strong.letterSpacing,
+          letterSpacing:
+            theme.typography.caption1Strong.letterSpacing,
         },
         '.caption-1-stronger': {
           fontSize: theme.typography.caption1Stronger.fontSize,
           fontWeight: theme.typography.caption1Stronger.fontWeight,
           lineHeight: theme.typography.caption1Stronger.lineHeight,
-          letterSpacing: theme.typography.caption1Stronger.letterSpacing,
+          letterSpacing:
+            theme.typography.caption1Stronger.letterSpacing,
         },
         '.body-1': {
           fontSize: theme.typography.body1.fontSize,
@@ -85,7 +88,8 @@ const GlobalStyled = () => {
           fontSize: theme.typography.body1Stronger.fontSize,
           fontWeight: theme.typography.body1Stronger.fontWeight,
           lineHeight: theme.typography.body1Stronger.lineHeight,
-          letterSpacing: theme.typography.body1Stronger.letterSpacing,
+          letterSpacing:
+            theme.typography.body1Stronger.letterSpacing,
         },
         '.body-2': {
           fontSize: theme.typography.body2.fontSize,
@@ -103,7 +107,8 @@ const GlobalStyled = () => {
           fontSize: theme.typography.subtitle2Stronger.fontSize,
           fontWeight: theme.typography.subtitle2Stronger.fontWeight,
           lineHeight: theme.typography.subtitle2Stronger.lineHeight,
-          letterSpacing: theme.typography.subtitle2Stronger.letterSpacing,
+          letterSpacing:
+            theme.typography.subtitle2Stronger.letterSpacing,
         },
         '.subtitle-1': {
           fontSize: theme.typography.subtitle1.fontSize,

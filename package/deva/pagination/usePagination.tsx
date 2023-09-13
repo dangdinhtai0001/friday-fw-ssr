@@ -1,20 +1,27 @@
 import { useMemo, useState } from 'react';
-import { IUsePaginationProps, IUsePaginationReturns } from './type.d'
+import {
+  IUsePaginationProps,
+  IUsePaginationReturns,
+} from './type.d';
 
 /**
  * Hook sử dụng cho phân trang.
  * @param {IUsePaginationProps} props - Các thuộc tính của phân trang.
  * @returns {number[]} - Mảng chứa các số trang cần hiển thị.
  */
-export default function usePagination(props: IUsePaginationProps): IUsePaginationReturns {
+export default function usePagination(
+  props: IUsePaginationProps
+): IUsePaginationReturns {
   const { totalCount, pageSize, siblingCount, currentPage } = props;
 
   const totalPageCount = Math.ceil(totalCount / pageSize);
 
   const shouldDisplayPrevious = currentPage > 1;
   const shouldDisplayNext = currentPage < totalPageCount;
-  const shouldDisplayJumpNext = currentPage + 1 * siblingCount <= totalPageCount;
-  const shouldDisplayJumpPrevious = currentPage - 1 * siblingCount >= 1;
+  const shouldDisplayJumpNext =
+    currentPage + 1 * siblingCount <= totalPageCount;
+  const shouldDisplayJumpPrevious =
+    currentPage - 1 * siblingCount >= 1;
 
   const paginationRange = useMemo(() => {
     // Số lượng trang được tính bằng tổng số trang lề + trang đầu + trang cuối + trang hiện tại + 2*DOTS
@@ -42,7 +49,8 @@ export default function usePagination(props: IUsePaginationProps): IUsePaginatio
      * Chúng ta không hiển thị dấu chấm khi chỉ có một số trang được chèn giữa các cực trị của sibling và các giới hạn trang, tức là 1 và totalPageCount. Do đó, chúng ta sử dụng leftSiblingIndex > 2 và rightSiblingIndex < totalPageCount - 2
      */
     const shouldShowLeftDots = leftSiblingIndex > 2;
-    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
+    const shouldShowRightDots =
+      rightSiblingIndex < totalPageCount - 2;
 
     const firstPageIndex = 1;
     const lastPageIndex = totalPageCount;
@@ -61,7 +69,6 @@ export default function usePagination(props: IUsePaginationProps): IUsePaginatio
      * Trường hợp 3: Không hiển thị dấu chấm phải, nhưng hiển thị dấu chấm trái
      */
     if (shouldShowLeftDots && !shouldShowRightDots) {
-
       let rightItemCount = 3 + 2 * siblingCount;
       let rightRange = range(
         totalPageCount - rightItemCount + 1,
@@ -75,12 +82,24 @@ export default function usePagination(props: IUsePaginationProps): IUsePaginatio
      */
     if (shouldShowLeftDots && shouldShowRightDots) {
       let middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
+      return [
+        firstPageIndex,
+        DOTS,
+        ...middleRange,
+        DOTS,
+        lastPageIndex,
+      ];
     }
-
   }, [totalCount, pageSize, siblingCount, currentPage]);
 
-  return { paginationRange, shouldDisplayPrevious, shouldDisplayNext, shouldDisplayJumpNext, shouldDisplayJumpPrevious, totalPageCount };
+  return {
+    paginationRange,
+    shouldDisplayPrevious,
+    shouldDisplayNext,
+    shouldDisplayJumpNext,
+    shouldDisplayJumpPrevious,
+    totalPageCount,
+  };
 }
 
 /**
