@@ -19,7 +19,10 @@ export const StyledBackdrop = styled(
   // "-webkit-tap-highlight-color": "transparent",
 }));
 
-export const StyledModal = styled(Modal, {})(({ theme }: { theme?: IDefaultTheme }) => ({
+export const StyledModal = styled(
+  Modal,
+  {}
+)(({ theme }: { theme?: IDefaultTheme }) => ({
   position: 'fixed',
   zIndex: 1300,
   inset: 0,

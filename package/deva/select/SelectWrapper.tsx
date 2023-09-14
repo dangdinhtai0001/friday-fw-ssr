@@ -1,8 +1,4 @@
-import {
-  forwardRef,
-  useState,
-  useRef,
-} from 'react';
+import { forwardRef, useState, useRef } from 'react';
 import { SelectProps, Select } from '@mui/base/Select';
 import { SelectValue } from '@mui/base/useSelect';
 import { SelectOption } from '@mui/base/useOption';
@@ -10,10 +6,7 @@ import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useTheme } from '@mui/system';
-import {
-  ISelectWrapperProps,
-  IListboxWrapperProps,
-} from './types';
+import { ISelectWrapperProps, IListboxWrapperProps } from './types';
 import { useDatasource } from '@/package/preta/intergration';
 import {
   StyledOption,
@@ -125,8 +118,8 @@ function SelectWrapper<TValue extends {}, Multiple extends boolean>(
     return props.itemDefs
       ? renderAllOptions(props.itemDefs)
       : datasource?.data
-        ? renderAllOptions(datasource.data)
-        : null;
+      ? renderAllOptions(datasource.data)
+      : null;
   };
 
   function renderValue(

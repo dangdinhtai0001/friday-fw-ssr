@@ -39,8 +39,10 @@ function InputWrapper(
     onChange?.(e.target.value);
   };
 
-  const { getRootProps, getInputProps } = useInput({ ...props, onChange: handleOnChange });
-
+  const { getRootProps, getInputProps } = useInput({
+    ...props,
+    onChange: handleOnChange,
+  });
 
   return (
     <StyledInputContainer
