@@ -46,11 +46,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const onFetchData = async () => {
-  let url = 'http://127.0.0.1:3658/m1/370198-0-default/accounts';
-  let headers = {
+  const url = 'http://127.0.0.1:3658/m1/370198-0-default/accounts';
+  const headers = {
     Accept: '*/*',
   };
-  let method = 'GET';
+  const method = 'GET';
   const response = await axios.request({ url, headers, method });
   // console.log(response.data);
   return response.data;
@@ -63,6 +63,8 @@ const modalTemplate = (
   return {
     create: {
       title: 'Tạo mới tài khoản',
+      width: '30vw',
+      height: '25vh',
       component: FormProvider,
       componentParams: {
         fieldDefs: [
@@ -76,7 +78,7 @@ const modalTemplate = (
             componentParams: {
               type: 'text',
               placeholder: 'account',
-            } as IInputWrapperProps,
+            } as IInputWrapperProps<string>,
           },
           {
             name: 'accountName',
@@ -87,7 +89,7 @@ const modalTemplate = (
             componentParams: {
               type: 'text',
               placeholder: 'accountName',
-            } as IInputWrapperProps,
+            } as IInputWrapperProps<string>,
           },
           {
             name: 'amount',
@@ -98,7 +100,7 @@ const modalTemplate = (
             componentParams: {
               type: 'text',
               placeholder: 'Amount',
-            } as IInputWrapperProps,
+            } as IInputWrapperProps<number>,
           },
           {
             name: 'currencyCode',
@@ -140,7 +142,7 @@ const modalTemplate = (
         resolver: async (values, context, options) => {
           console.log('validate ', values, options, context);
 
-          let errors: any = {};
+          const errors: any = {};
 
           if (values.accountName === '') {
             errors.accountName = {
@@ -195,14 +197,15 @@ const taskControls: ITaskControl[] = [
         payload.data
       );
 
-      let url = 'http://127.0.0.1:3658/m1/370198-0-default/accounts';
-      let headers = {
+      const url =
+        'http://127.0.0.1:3658/m1/370198-0-default/accounts';
+      const headers = {
         Accept: '*/*',
       };
-      let method = 'POST';
+      const method = 'POST';
       const response = await axios.request({ url, headers, method });
 
-      let rData = response.data;
+      const rData = response.data;
 
       if (rData.code === 200) {
         return {
