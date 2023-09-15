@@ -19,7 +19,10 @@ export const StyledBackdrop = styled(
   // "-webkit-tap-highlight-color": "transparent",
 }));
 
-export const StyledModal = styled(Modal, {})(({ theme }: { theme?: IDefaultTheme }) => ({
+export const StyledModal = styled(
+  Modal,
+  {}
+)(({ theme }: { theme?: IDefaultTheme }) => ({
   position: 'fixed',
   zIndex: 1300,
   inset: 0,
@@ -30,7 +33,10 @@ export const StyledModal = styled(Modal, {})(({ theme }: { theme?: IDefaultTheme
 
 // --------------------------------------------------------------------------
 
-export const StyledModalContainer = styled('div', {})<IStyledModalContainerProps>(
+export const StyledModalContainer = styled(
+  'div',
+  {}
+)<IStyledModalContainerProps>(
   ({ theme, width, height }: IStyledModalContainerProps) => ({
     ...defaultComponentContainer({ theme, width, noneBorder: true }),
     height: height,
@@ -43,7 +49,10 @@ export const StyledModalContainer = styled('div', {})<IStyledModalContainerProps
   })
 );
 
-export const StyledModalHeader = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+export const StyledModalHeader = styled(
+  'div',
+  {}
+)(({ theme }: { theme?: IDefaultTheme }) => ({
   ...defaultComponentContainer({ theme, noneBorder: true }),
   width: '',
   borderRadius: `${theme?.components.cornerRadius.medium} ${theme?.components.cornerRadius.medium} 0px 0px`,
@@ -60,7 +69,10 @@ export const StyledModalHeader = styled('div', {})(({ theme }: { theme?: IDefaul
   backgroundColor: theme?.palette?.primary.main,
 }));
 
-export const StyledModalContent = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+export const StyledModalContent = styled(
+  'div',
+  {}
+)(({ theme }: { theme?: IDefaultTheme }) => ({
   ...defaultComponentContainer({ theme, noneBorder: true }),
   width: '',
   borderRadius: `0px 0px 0px 0px`,
@@ -71,7 +83,10 @@ export const StyledModalContent = styled('div', {})(({ theme }: { theme?: IDefau
   overflow: 'auto',
 }));
 
-export const StyledModalFooter = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+export const StyledModalFooter = styled(
+  'div',
+  {}
+)(({ theme }: { theme?: IDefaultTheme }) => ({
   ...defaultComponentContainer({ theme, noneBorder: true }),
   width: '',
   borderRadius: `0px 0px ${theme?.components.cornerRadius.medium} ${theme?.components.cornerRadius.medium}`,

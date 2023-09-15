@@ -7,33 +7,29 @@ import {
 } from '@/package/preta/styled-shared';
 import { IStyledInputContainerProps } from './types.d';
 
-export const StyledInputElement = styled(
-  'input',
-  {}
-)(
-  ({
-    theme,
-    disabled,
-  }: {
-    theme?: IDefaultTheme;
-    disabled: boolean;
-  }) => ({
-    ...typographyCaption1({ theme }),
-    width: '100%',
-    flexGrow: 1,
-    background: 'inherit',
-    border: 'none',
-    borderRadius: 'inherit',
-    outline: 0,
-    boxSizing: 'border-box',
-    padding: '0rem 0.2rem',
+export const StyledInputElement = styled('input', {})(({
+  theme,
+  disabled,
+}: {
+  theme?: IDefaultTheme;
+  disabled: boolean;
+}) => ({
+  ...typographyCaption1({ theme }),
+  width: '100%',
+  flexGrow: 1,
+  background: 'inherit',
+  border: 'none',
+  borderRadius: 'inherit',
+  outline: 0,
+  boxSizing: 'border-box',
+  padding: '0rem 0.2rem',
 
-    '&[type="number"]::-webkit-inner-spin-button': {
-      WebkitAppearance: 'none',
-    },
+  '&[type="number"]::-webkit-inner-spin-button': {
+    WebkitAppearance: 'none',
+  },
 
-    cursor: disabled ? 'not-allowed' : 'inherit',
-  })
+  cursor: disabled ? 'not-allowed' : 'inherit',
+})
 );
 
 export const StyledInputContainer = styled(

@@ -71,7 +71,9 @@ function ButtonWrapper(
   };
 
   return animationDisabled ? (
-    renderButton()
+    <div>
+      {renderButton()}
+    </div>
   ) : (
     <motion.div
       whileTap={{ scale: disabled ? 1 : hoverScale, y: 0 }}

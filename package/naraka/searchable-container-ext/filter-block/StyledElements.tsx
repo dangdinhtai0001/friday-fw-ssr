@@ -24,7 +24,10 @@ export const StyledFilterBlockButton = styled(
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
-export const StyledFilterBlockContainer = styled('div', {})(({ theme }: IStyledFilterBlockContainerProps) => ({
+export const StyledFilterBlockContainer = styled(
+  'div',
+  {}
+)(({ theme }: IStyledFilterBlockContainerProps) => ({
   ...defaultComponentContainer({ theme, noneBorder: false }),
   // padding: `${theme?.components.spacing.s}`,
   width: '',
@@ -32,8 +35,23 @@ export const StyledFilterBlockContainer = styled('div', {})(({ theme }: IStyledF
 
 export const StyledFilterBlockHeader = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
   ...defaultComponentContainer({ theme, noneBorder: true }),
+
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: `${theme?.components.spacing.s}`,
+  width: '',
+}));
+
+export const StyledFilterBlockHeaderAction = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  gap: `${theme?.components.spacing.sx}`,
 }));
 
 export const StyledFilterBlockContent = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
   ...defaultComponentContainer({ theme, noneBorder: true }),
+  padding: `${theme?.components.spacing.sx}`,
+  width: '',
 }));
