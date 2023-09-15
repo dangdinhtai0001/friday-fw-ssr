@@ -1,6 +1,7 @@
 import styled from '@mui/system/styled';
 import { IDefaultTheme } from '@/package/preta/types';
 import { defaultComponentContainer } from '@/package/preta/styled-shared';
+import { IStyledFilterBlockContainerProps } from './types.d';
 
 export const StyledFilterBlock = styled(
   'div',
@@ -19,4 +20,20 @@ export const StyledFilterBlockButton = styled(
   display: 'flex',
   justifyContent: 'flex-end',
   // border: '1px solid red'
+}));
+
+// --------------------------------------------------------------------------------------------------------------------------------------
+
+export const StyledFilterBlockContainer = styled('div', {})(({ theme }: IStyledFilterBlockContainerProps) => ({
+  ...defaultComponentContainer({ theme, noneBorder: false }),
+  // padding: `${theme?.components.spacing.s}`,
+  width: '',
+}));
+
+export const StyledFilterBlockHeader = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+  ...defaultComponentContainer({ theme, noneBorder: true }),
+}));
+
+export const StyledFilterBlockContent = styled('div', {})(({ theme }: { theme?: IDefaultTheme }) => ({
+  ...defaultComponentContainer({ theme, noneBorder: true }),
 }));
