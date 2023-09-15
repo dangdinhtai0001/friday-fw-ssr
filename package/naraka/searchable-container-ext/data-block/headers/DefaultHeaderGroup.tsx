@@ -22,8 +22,6 @@ function DefaultHeaderGroup(
 
   const [_, setExpandState] = useState('collapsed');
 
-  console.log('rerendering', displayName ? displayName : 'null');
-
   const childrenLength = columnGroup.getChildren()?.length || 0;
   if (childrenLength <= 1) {
     return null;
@@ -41,6 +39,7 @@ function DefaultHeaderGroup(
     <StyledDefaultHeaderGroupContainer className="styled-default-header-group-container">
       {displayName}
       <ButtonWrapper
+        animationDisabled
         icon={
           <motion.div
             initial={{ rotate: 0 }}

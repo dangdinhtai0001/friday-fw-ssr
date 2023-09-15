@@ -1,2 +1,2 @@
-export { default } from './FilterBlock2';
+export { default } from './FilterBlock';
 export * from './types.d';

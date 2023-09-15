@@ -1,27 +1,47 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { useTheme } from '@mui/system';
 
 import { ContainerProvider as FormContainerProvider } from '@/package/naraka/form-container';
 import DefaultDataBlock from '@/package/naraka/form-container-ext';
-import { ContainerRef } from '@/package/naraka/form-container/types';
 import { useContainerContext } from '@/package/naraka/searchable-container';
+import { FilterCriteria } from '@/package/naraka/searchable-container/types';
+import { ContainerRef } from '@/package/naraka/form-container/types';
+import { IFilterBlockExtProps } from './types';
 import {
-  StyledFilterBlock,
-  StyledFilterBlockButton,
+  StyledFilterBlockContainer,
+  StyledFilterBlockHeader,
+  StyledFilterBlockHeaderAction,
+  StyledFilterBlockContent,
 } from './StyledElements';
-import { IFilterBlockExtProps } from './types.d';
-import ButtonWrapper from '@/package/deva/button';
-import { FilterCriteria } from '../../searchable-container/types';
 
-export default function FilterBlock(props: IFilterBlockExtProps) {
+import Collapsible from '@/package/deva/Collapsible';
+import ButtonWrapper, { IButtonWrapperProps, } from '@/package/deva/button';
+import { IDefaultTheme } from '@/package/preta/types';
+
+function FilterBlock(props: IFilterBlockExtProps) {
+  const {
+    label = '',
+    contentHeight='fit-content',
+    defaultCollapsed = true,
+    formProps,
+    onFilterModified
+  } = props;
+
   const { context, contextApi } = useContainerContext();
-
   const formRef = useRef<ContainerRef>(null);
 
-  const { onFilterModified } = props;
+  const [isOpen, setIsOpen] = useState(defaultCollapsed);
 
-  const handleOnclick = () => {
+  const theme = useTheme<IDefaultTheme>();
+
+  const handleOnToggle = () => {
+    setIsOpen(!isOpen);
+  }
+
+  const handleOnSubmit = () => {
     formRef.current?.submitForm();
   };
 
@@ -50,25 +70,61 @@ export default function FilterBlock(props: IFilterBlockExtProps) {
   };
 
   return (
-    <StyledFilterBlock className="styled-filter-block">
-      <FormContainerProvider
-        {...props}
-        fieldDefs={context.filterDefs ? context.filterDefs : []}
-        dataBlockComponent={DefaultDataBlock}
-        onSubmitSuccess={handleOnSubmitSucces}
-        onSubmitError={handleOnSubmitErrors}
-        ref={formRef}
-      />
-      <StyledFilterBlockButton>
-        {/* TODO: chuyển sang dùng i18n */}
-        <ButtonWrapper
-          icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
-          onClick={handleOnclick}
-          width="fit-content"
-        >
-          Áp dụng
-        </ButtonWrapper>
-      </StyledFilterBlockButton>
-    </StyledFilterBlock>
+    <StyledFilterBlockContainer className="styled-filter-block">
+      <Collapsible
+        open={isOpen}
+        defaultOpen={defaultCollapsed}
+        contentHeight={contentHeight}
+        header={
+          <StyledFilterBlockHeader className="styled-filter-block--header">
+            <div className='styled-filter-block--header-label'>
+              {label}
+            </div>
+            <StyledFilterBlockHeaderAction className='styled-filter-block--header-action'>
+              <ButtonWrapper onClick={handleOnSubmit}>
+                {/* TODO: DÙng i18n ở đây */}
+                Áp dụng
+              </ButtonWrapper>
+              <ButtonWrapper
+                icon={
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      rotate: isOpen ? 0 : 180,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      color={theme.palette.text.primary}
+                    />
+                  </motion.div>
+                }
+                onClick={handleOnToggle}
+                color='transparent'
+                border={false}
+                animationDisabled
+              />
+            </StyledFilterBlockHeaderAction>
+          </StyledFilterBlockHeader>
+        }
+      >
+        <StyledFilterBlockContent className="styled-filter-block--content">
+          <FormContainerProvider
+            {...formProps}
+            dataBlockComponent={DefaultDataBlock}
+            onSubmitSuccess={handleOnSubmitSucces}
+            onSubmitError={handleOnSubmitErrors}
+            className='styled-filter-block--content-form'
+            ref={formRef}
+          />
+        </StyledFilterBlockContent>
+        {/* <div style={{ height: '300px' }}></div> */}
+      </Collapsible>
+    </StyledFilterBlockContainer>
   );
 }
+
+export default FilterBlock;

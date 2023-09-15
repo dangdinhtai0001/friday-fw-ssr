@@ -61,6 +61,7 @@ function FloatingFilter(
       </StyledDisplayContainer>
       <ButtonWrapper
         width="fit-content"
+        animationDisabled
         icon={<FontAwesomeIcon icon={faFilter} />}
         onClick={() => {
           showParentFilter();

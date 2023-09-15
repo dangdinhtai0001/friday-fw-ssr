@@ -26,7 +26,7 @@ function DefaultHeader(
     <StyledDefaultHeaderContainer className="styled-default-header-container">
       <span>{displayName}</span>
       {enableMenu && (
-        <ButtonWrapper icon={<FontAwesomeIcon icon={faBars} />} />
+        <ButtonWrapper icon={<FontAwesomeIcon icon={faBars} />} animationDisabled/>
       )}
     </StyledDefaultHeaderContainer>
   );
