@@ -24,6 +24,7 @@ import { IDefaultTheme } from '@/package/preta/types';
 function FilterBlock(props: IFilterBlockExtProps) {
   const {
     label = '',
+    contentHeight='fit-content',
     defaultCollapsed = true,
     formProps,
     onFilterModified
@@ -73,7 +74,7 @@ function FilterBlock(props: IFilterBlockExtProps) {
       <Collapsible
         open={isOpen}
         defaultOpen={defaultCollapsed}
-        contentHeight='100px'
+        contentHeight={contentHeight}
         header={
           <StyledFilterBlockHeader className="styled-filter-block--header">
             <div className='styled-filter-block--header-label'>
@@ -113,14 +114,14 @@ function FilterBlock(props: IFilterBlockExtProps) {
         <StyledFilterBlockContent className="styled-filter-block--content">
           <FormContainerProvider
             {...formProps}
-            fieldDefs={context.filterDefs ? context.filterDefs : []}
             dataBlockComponent={DefaultDataBlock}
             onSubmitSuccess={handleOnSubmitSucces}
             onSubmitError={handleOnSubmitErrors}
+            className='styled-filter-block--content-form'
             ref={formRef}
           />
         </StyledFilterBlockContent>
-        <div style={{ height: '300px' }}></div>
+        {/* <div style={{ height: '300px' }}></div> */}
       </Collapsible>
     </StyledFilterBlockContainer>
   );

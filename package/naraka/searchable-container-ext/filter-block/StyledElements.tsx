@@ -24,12 +24,9 @@ export const StyledFilterBlockButton = styled(
 
 // --------------------------------------------------------------------------------------------------------------------------------------
 
-export const StyledFilterBlockContainer = styled(
-  'div',
-  {}
-)(({ theme }: IStyledFilterBlockContainerProps) => ({
+export const StyledFilterBlockContainer = styled('div', {})(({ theme }: IStyledFilterBlockContainerProps) => ({
   ...defaultComponentContainer({ theme, noneBorder: false }),
-  // padding: `${theme?.components.spacing.s}`,
+  // padding: `${theme?.components.spacing.xxs}`,
   width: '',
 }));
 

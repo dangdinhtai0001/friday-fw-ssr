@@ -27,7 +27,6 @@ const createDefaultContextStateValue = (
       totalPages: 10,
     },
     // ---------------------------
-    filterDefs: props.filterDefs,
     filterBlockComponent: props.filterBlockComponent,
     filterBlockParams: props.filterBlockParams,
     // ---------------------------
@@ -57,22 +56,14 @@ const createDefaultContextStateValue = (
   };
 };
 
-function ContainerProvider<
-  EFilterBlockProps extends IFilterBlockProps,
-  EToolbarBlockProps extends IToolbarBlockProps,
-  EPaginationBlockProps extends IPaginationBlockProps,
-  EModalBlockProps extends IModalBlockProps,
-  EDataBlockProps extends IDataBlockProps
->(props: ContainerProviderProps) {
+function ContainerProvider(props: ContainerProviderProps) {
   let initialState: ContextState =
     createDefaultContextStateValue(props);
 
   return (
-    <>
-      <ContainerContextProvider initialState={initialState}>
-        <Container {...initialState}></Container>
-      </ContainerContextProvider>
-    </>
+    <ContainerContextProvider initialState={initialState}>
+      <Container {...initialState} />
+    </ContainerContextProvider>
   );
 }
 

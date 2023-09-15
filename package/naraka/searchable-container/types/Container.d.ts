@@ -4,7 +4,6 @@ import { IModalWrapperProps } from '@/package/deva/modal';
 
 export interface ContainerProviderProps {
   // ==================================================
-  filterDefs?: FilterDef[];
   filterBlockParams?: unknown;
   filterBlockComponent?: React.ComponentType<unknown>;
   // ==================================================

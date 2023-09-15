@@ -22,7 +22,6 @@ export interface ContextState {
 
   filterInstance: FilterCriteria[];
 
-  filterDefs?: FieldDef[];
   filterBlockParams?: unknown;
   filterBlockComponent?: React.ComponentType<unknown>;
 

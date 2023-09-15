@@ -6,9 +6,9 @@ import {
 import { IDefaultTheme } from '@/package/preta/types';
 
 export interface IFilterBlockExtProps
-  extends IFilterBlockProps,
-  ContainerProviderProps {
+  extends IFilterBlockProps {
   label?: string | React.ReactNode;
+  contentHeight?: string | number;
   defaultCollapsed?: boolean;
   formProps?: FormProps;
 }

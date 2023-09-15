@@ -228,29 +228,31 @@ export default function ComponentPage() {
   const searchableContainerProps: ContainerProviderProps = {
     modalTemplate: modalTemplate,
     // ------------
-    filterDefs: [
-      {
-        name: 'fromDate',
-        label: 'Từ ngày',
-        initialValue: '',
-        component: InputWrappper,
-      },
-      {
-        name: 'toDate',
-        label: 'Đến ngày',
-        initialValue: '',
-        component: InputWrappper,
-      },
-    ],
     filterBlockParams: {
-      onMounted(context: FormContextState) {
-        console.log('on mounted event: ', context.formId);
-      },
-      defaultCols: 2,
-      defaultFieldRaito: '20% 80%',
+      contentHeight: '50px',
+      formProps: {
+        onMounted(context: FormContextState) {
+          console.log('on mounted event: ', context.formId);
+        },
+        defaultCols: 2,
+        defaultFieldRaito: '20% 80%',
+        fieldDefs: [
+          {
+            name: 'fromDate',
+            label: 'Từ ngày',
+            initialValue: '',
+            component: InputWrappper,
+          },
+          {
+            name: 'toDate',
+            label: 'Đến ngày',
+            initialValue: '',
+            component: InputWrappper,
+          },
+        ],
+      }
     } as unknown as IFilterBlockExtProps,
-    filterBlockComponent:
-      DefaultFilterBlock as React.ComponentType<unknown>,
+    filterBlockComponent: DefaultFilterBlock as React.ComponentType<unknown>,
     // ------------
     toolbarBlockComponent:
       DefaultToolbarBlock as React.ComponentType<unknown>,
