@@ -2,7 +2,7 @@ import { IFilterBlockProps } from '@/package/naraka/searchable-container/types';
 import {
   ContainerProviderProps,
   ContainerRef,
-} from '@/package/naraka/manipulation-container/types';
+} from '@/package/naraka/form-container/types';
 
 export interface IFilterBlockExtProps
   extends IFilterBlockProps,

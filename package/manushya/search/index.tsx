@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-import FormProvider from '@/package/naraka/manipulation-container';
-import DefaultDataBlock from '@/package/naraka/manipulation-container-ext';
+import FormProvider from '@/package/naraka/form-container';
+import DefaultDataBlock from '@/package/naraka/form-container-ext';
 import {
   ContainerProviderProps as FormProps,
-  ContextState as ManipulationContextState,
-} from '@/package/naraka/manipulation-container/types';
+  ContextState as FormContextState,
+} from '@/package/naraka/form-container/types';
 
 import InputWrappper, {
   IInputWrapperProps,
@@ -243,7 +243,7 @@ export default function ComponentPage() {
       },
     ],
     filterBlockParams: {
-      onMounted(context: ManipulationContextState) {
+      onMounted(context: FormContextState) {
         console.log('on mounted event: ', context.formId);
       },
       defaultCols: 2,

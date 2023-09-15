@@ -1,14 +1,13 @@
 import { useRef } from 'react';
-import FormContainer from '@/package/naraka/manipulation-container';
+import FormContainer from '@/package/naraka/form-container';
 import {
   ContainerRef as FormmRef,
   FieldDef,
-  ContainerProviderProps,
   ContextState,
   ContextApi,
-} from '@/package/naraka/manipulation-container/types';
+} from '@/package/naraka/form-container/types';
 
-import DefaultDataBlock from '@/package/naraka/manipulation-container-ext';
+import DefaultDataBlock from '@/package/naraka/form-container-ext';
 
 import SelectWrapper, {
   ISelectWrapperProps,
@@ -53,7 +52,7 @@ const fieldDefs: FieldDef<any>[] = [
     name: 'first_value',
     initialValue: '',
     component: InputWrapper,
-    componentParams: {} as IInputWrapperProps,
+    componentParams: {} as IInputWrapperProps<string>,
   },
   // combination_operator
   {
@@ -81,7 +80,7 @@ const fieldDefs: FieldDef<any>[] = [
         { label: 'Or 2', value: '||' },
         { label: 'Or 3', value: '||' },
       ],
-    } as IRadioGroupProps,
+    } as IRadioGroupProps<string>,
   },
   {
     name: 'second_operator',
@@ -104,7 +103,7 @@ const fieldDefs: FieldDef<any>[] = [
     name: 'second_value',
     initialValue: '',
     component: InputWrapper,
-    componentParams: {} as IInputWrapperProps,
+    componentParams: {} as IInputWrapperProps<string>,
   },
 ];
 

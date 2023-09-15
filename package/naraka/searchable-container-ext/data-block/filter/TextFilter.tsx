@@ -15,16 +15,16 @@ import {
   CombinationOperator,
 } from '@/package/naraka/searchable-container-ext/data-block/types.d';
 
-import FormContainer from '@/package/naraka/manipulation-container';
+import FormContainer from '@/package/naraka/form-container';
 import {
   ContainerRef as FormmRef,
   FieldDef,
   ContainerProviderProps,
   ContextState as FormContextState,
   ContextApi as FormContextApi,
-} from '@/package/naraka/manipulation-container/types';
+} from '@/package/naraka/form-container/types';
 
-import DefaultDataBlock from '@/package/naraka/manipulation-container-ext';
+import DefaultDataBlock from '@/package/naraka/form-container-ext';
 
 import SelectWrapper, {
   ISelectWrapperProps,

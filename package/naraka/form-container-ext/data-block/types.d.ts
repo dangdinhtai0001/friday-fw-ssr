@@ -2,7 +2,7 @@ import {
   IDataFieldBlockProps,
   DataFieldStatus,
   LabelTextAlign,
-} from '@/package/naraka/manipulation-container/types';
+} from '@/package/naraka/form-container/types';
 import { IDefaultTheme } from '@/package/preta/types';
 
 export interface IDataFieldBlockProps extends IDataFieldBlockProps {}

@@ -1,4 +1,4 @@
-export { FieldDef } from '@/package/naraka/manipulation-container/types';
+export { FieldDef } from '@/package/naraka/form-container/types';
 export {
   IFooterConfig,
   IModalWrapperProps,

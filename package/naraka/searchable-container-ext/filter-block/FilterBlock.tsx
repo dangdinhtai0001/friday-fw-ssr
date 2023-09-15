@@ -2,9 +2,9 @@ import { useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-import { ContainerProvider as FormContainerProvider } from '@/package/naraka/manipulation-container';
-import DefaultDataBlock from '@/package/naraka/manipulation-container-ext';
-import { ContainerRef } from '@/package/naraka/manipulation-container/types';
+import { ContainerProvider as FormContainerProvider } from '@/package/naraka/form-container';
+import DefaultDataBlock from '@/package/naraka/form-container-ext';
+import { ContainerRef } from '@/package/naraka/form-container/types';
 import { useContainerContext } from '@/package/naraka/searchable-container';
 import {
   StyledFilterBlock,

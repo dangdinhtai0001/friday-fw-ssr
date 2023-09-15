@@ -8,8 +8,8 @@ import {
   AnimationControls,
 } from 'framer-motion';
 import useAsyncEffect from '@n1ru4l/use-async-effect';
-import { useContainerContext } from '@/package/naraka/manipulation-container/context/useContainerContext';
-import FieldItem from '@/package/naraka/manipulation-container/items/DataFieldItem';
+import { useContainerContext } from '@/package/naraka/form-container/context/useContainerContext';
+import FieldItem from '@/package/naraka/form-container/items/DataFieldItem';
 import {
   StyledLabel,
   StyledRequiredIcon,

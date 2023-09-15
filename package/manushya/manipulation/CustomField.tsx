@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IFieldItemComponentProps } from '@/package/naraka/manipulation-container/types';
+import { IFieldItemComponentProps } from '@/package/naraka/form-container/types';
 
 export interface ICustomFieldProps
   extends IFieldItemComponentProps {}
