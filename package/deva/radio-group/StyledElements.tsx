@@ -4,6 +4,7 @@ import {
   defaultComponentContainer,
   typographyCaption1Strong,
   typographyCaption2,
+  typographyCaption1,
 } from '@/package/preta/styled-shared';
 
 export const StyledRadioGroupOption = styled(
@@ -20,7 +21,7 @@ export const StyledRadioGroupOptionLabel = styled(
   'label',
   {}
 )(({ theme }: { theme?: IDefaultTheme }) => ({
-  ...typographyCaption2({ theme }),
+  ...typographyCaption1({ theme }),
 
   cursor: 'pointer',
   marginTop: '2px',
