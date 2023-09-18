@@ -43,20 +43,19 @@ function FloatingFilter(
       onParentModelChanged(
         parentModel: number | null,
         event: FilterChangedEvent
-      ) {},
+      ) { },
 
       // Gets called every time the popup is shown, after the GUI returned in
       // getGui is attached to the DOM. If the filter popup is closed and re-opened, this method is
       // called each time the filter is shown. This is useful for any logic that requires attachment
       // before executing, such as putting focus on a particular DOM element.
-      afterGuiAttached(params?: IAfterGuiAttachedParams) {},
+      afterGuiAttached(params?: IAfterGuiAttachedParams) { },
     };
   });
 
   return (
     <StyledFloatingFilterContainer className="styled-floating-filter-container">
       <StyledDisplayContainer className="styled-display-container">
-        {' '}
         {getDisplayedCriteriaAsString()}
       </StyledDisplayContainer>
       <ButtonWrapper

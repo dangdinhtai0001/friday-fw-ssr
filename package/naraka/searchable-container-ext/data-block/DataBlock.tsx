@@ -14,6 +14,8 @@ import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpAZ } from '@fortawesome/free-solid-svg-icons';
 
 function DataBlock(props: IDataBlockExtProps) {
   const { onCreateTaskChain } = props;
