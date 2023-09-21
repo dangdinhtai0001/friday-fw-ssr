@@ -1,4 +1,15 @@
 - TailwindCSS: style cho cac truwofng hop don gian va khong can dynamic
-- Zustand: quản lý state trong ứng dụng. Thay thế cho React Context
-- @reduxjs/toolkit: Thư viện Redux
--  i18next: internationalization
+- Context management
+  - Zustand 
+- Redux
+  - @reduxjs/toolkit
+- Internationalization: 
+  - App router
+  - i18next
+  - i18next-resources-to-backend
+  - react-i18next
+  - i18next-browser-languagedetector
+- Grid 
+  - @tanstack/react-table 
+- Icons:
+  - fontawesome
