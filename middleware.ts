@@ -87,7 +87,9 @@ export function middleware(req: NextRequest) {
          * Set language cookie if found
          */
         const response = NextResponse.next()
-        if (langInReferer) response.cookies.set(cookieName, langInReferer)
+        if (langInReferer) {
+            response.cookies.set(cookieName, langInReferer)
+        }
 
         return response
     }

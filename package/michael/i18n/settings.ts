@@ -1,16 +1,16 @@
 export const fallbackLang = 'vi';
 export const languages = [fallbackLang, 'en'];
-export const defaultNS = 'translation';
+export const defaultNS = 'default';
 export const cookieName = 'i18next';
 
-export function getOptions(lang: string = fallbackLang, ns: string = defaultNS) {
+export function getOptions(language: string = fallbackLang, namespace: string = defaultNS) {
     return {
         // debug: true,
         supportedLngs: languages,
         fallbackLang,
-        lang,
+        lng: language,
         fallbackNS: defaultNS,
         defaultNS,
-        ns
+        ns: namespace
     }
 }

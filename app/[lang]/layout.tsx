@@ -15,7 +15,7 @@ function RootLayout(props: ILayoutProps<IPageParam>) {
 }
 
 export async function generateStaticParams() {
-  return languages.map((lng) => ({ lng }))
+  return languages.map((lang) => ({ lang }))
 };
 
 export default RootLayout;
