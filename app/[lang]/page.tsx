@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 import { IPageProps, IPageParam } from '@/package/raphael';
-import { useTranslation } from '@/package/michael/i18n';
+import { useAsyncTranslation } from '@/package/michael/i18n';
 
 async function Page(props: IPageProps<IPageParam, any>) {
     const { params: { lang } } = props;
 
-    const { t } = await useTranslation(lang);
+    const { t } = await useAsyncTranslation(lang);
 
     return (
         <>
