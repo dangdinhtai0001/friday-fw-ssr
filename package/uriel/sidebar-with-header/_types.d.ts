@@ -12,6 +12,8 @@ export interface ISidebarContentProps {
 }
 
 export interface IHeaderProps {
-    onShowSidebar: () => void;
+    onShowSidebar?: () => void;
+    onCloseSidebar?: () => void;
+    isShowSidebar?: boolean
     showSidebarButton?: boolean
 }

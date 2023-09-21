@@ -1,26 +1,23 @@
-import { Box, Center, Flex, IconButton, Text } from '@chakra-ui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Box, Center, Flex, IconButton, Icon } from '@chakra-ui/react';
 import { IHeaderProps } from './_types.d';
+import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
 
 export default function Header(props: IHeaderProps) {
-    const { showSidebarButton, onShowSidebar } = props;
+    const { showSidebarButton, isShowSidebar, onShowSidebar, onCloseSidebar } = props;
+
     return (
-        <Flex bg="tomato" color="white" justifyContent="center">
-            <Box flex="1">
-                {showSidebarButton && (
-                    <IconButton
-                        icon={<FontAwesomeIcon icon={faChevronRight} />}
-                        colorScheme="blackAlpha"
-                        variant="outline"
-                        onClick={onShowSidebar}
-                        aria-label={''} />
-                )}
-            </Box>
-            <Center flex="1" h="40px">
-                <Text fontSize="xl">Page Title</Text>
-            </Center>
-            <Box flex="1" />
-        </Flex>
+        <Box bg='tomato' p={4} color='white'>
+            {showSidebarButton &&
+                <IconButton
+                    aria-label='Search database'
+                    icon={<Icon as={isShowSidebar ? AiOutlineMenuFold : AiOutlineMenuUnfold} />}
+                    backgroundColor='transparent'
+                    border='none'
+                    color='white'
+                    paddingLeft={10}
+                    onClick={isShowSidebar ? onCloseSidebar : onShowSidebar}
+                />
+            }
+        </Box>
     );
 }

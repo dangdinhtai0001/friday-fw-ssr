@@ -12,4 +12,4 @@
 - Grid 
   - @tanstack/react-table 
 - Icons:
-  - fontawesome
+  - react-icons

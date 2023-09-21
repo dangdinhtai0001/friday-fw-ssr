@@ -26,13 +26,12 @@ export default function SidebarWithHeader(props: ISidebarWithHeaderProps) {
             />
             <motion.div animate={controls} initial={{ marginLeft: '50px' }}>
                 <Header
-                    showSidebarButton={false}
-                    onShowSidebar={onClose}
+                    showSidebarButton={true}
+                    onShowSidebar={onOpen}
+                    onCloseSidebar={onClose}
+                    isShowSidebar={isOpen}
                 />
                 <Box paddingLeft='20px' paddingTop='10px'>
-                    <Button colorScheme='blue' onClick={isOpen ? onClose : onOpen}>
-                        Open
-                    </Button>
                     {children}
                 </Box>
             </motion.div>
