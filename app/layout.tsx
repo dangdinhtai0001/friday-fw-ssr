@@ -1,5 +1,5 @@
 import { ChakraUIProvider } from '@/package/michael';
-import { MainLayout } from '@/package/gabriel/main-layout';
+import { MainLayout } from '@/package/uriel/templates/main-layout';
 
 function RootLayout({ children, }: { children: React.ReactNode; }) {
   return (

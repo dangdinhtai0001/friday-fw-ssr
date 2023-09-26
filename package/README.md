@@ -18,6 +18,20 @@ Ngoài 4 tổng lãnh thiên sứ, còn có rất nhiều thiên sứ khác đư
 
 ---
 - Michael: Chứa các file cấu hình và config 
-- Gabriel: Chứa các file phục vụ cho pages
-- Uriel: Chứa các components
+- Gabriel: Chứa các ATOMIC Pages
+- Uriel: Chứa các ATOMIC Atoms, Molecules, Organisms, Templates
 - Raphael: Các hook dùng chung, utils, types ...
+
+Trong Atomic Design: giao diện được chia thành 5 phần:
+
+- Atoms: 
+  - Là thành phần nhỏ nhất, những block cơ bản nhất và không thể nhỏ hơn nữa (ví dụ: buttons, input fields, checkboxes, links). Chúng cũng có thể trừ tượng như colours, fonts chữ.
+- Molecules:
+  -  Gồm các atom kết hợp vs nhau là các phần tử bên ngoài như đơn vị (ví dụ: một input field và một button có thể kết hợp thành một khung tìm kiếm)
+  -  Molecules có thể đơn giản hoặc phức tạp, được xây dựng để tái sử dụng hoặc chỉ dụng một lần. ví dụ hình ảnh sau: Thì molecules gồm ảnh và text, progess-bar, box-ảnh
+- Organisms:
+  - Nhóm các Molecules giống nhau hoặc khác nhau để tạo thành một thành phần hoàn chỉnh của một giao diện. (Ví dụ: Header trang có thể kết hợp từ một logo, menu và khung tìm kiếm)
+- Templates:
+  - là kết hợp các organisms với nhau tạo thành các trang.
+- Pages:
+  - là các mẫu cụ thể. Họ sẽ kiểm tra templates làm việc với nội dung thực tế như thế nào, cho phép các designers quay trở lại để chỉnh sửa các molecules, organisms, và các templates khi cần thiết.

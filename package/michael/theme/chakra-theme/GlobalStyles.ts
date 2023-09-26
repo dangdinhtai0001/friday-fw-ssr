@@ -86,7 +86,19 @@ export const globalStyles = {
             "700": "#a8a8a8",
             "800": "#bababa",
             "900": "#cfcfcf"
-        }
+        },
+        "surface": {
+            "50": "#fafafa",
+            "100": "#f5f5f5",
+            "200": "#eeeeee",
+            "300": "#e0e0e0",
+            "400": "#d7d7d7",
+            "500": "#cccccc",
+            "600": "#c2c2c2",
+            "700": "#b9b9b9",
+            "800": "#b0b0b0",
+            "900": "#a6a6a6"
+          }
     }
     ,
     styles: {
