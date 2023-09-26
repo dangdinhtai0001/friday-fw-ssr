@@ -1,12 +1,12 @@
-import { ChakraProvider } from '@/package/michael';
+import { ChakraUIProvider } from '@/package/michael';
 
 function RootLayout({ children, }: { children: React.ReactNode; }) {
   return (
     <html lang="en">
       <body>
-        <ChakraProvider>
+        <ChakraUIProvider>
           {children}
-        </ChakraProvider>
+        </ChakraUIProvider>
       </body>
     </html>
   );
