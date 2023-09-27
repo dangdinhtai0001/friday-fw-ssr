@@ -9,10 +9,12 @@ const sidebarVariant = definePartsStyle({
 });
 
 const baseStyle = definePartsStyle({
-    // define the part you're going to style
-    container: {
-        bg: 'red.200', // change the backgroundColor of the container
+    panel: {
+        padding: '0px',
     },
+    button: {
+        border: 'none',
+    }
 })
 
 export const accordionStyles = defineMultiStyleConfig({ baseStyle })
