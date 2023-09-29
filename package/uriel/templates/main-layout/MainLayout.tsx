@@ -9,8 +9,8 @@ export default function MainLayout(props: IMainLayoutProps) {
 
   return (
     <>
-      <Flex>
-        <Sidebar expandedWidth='150px'></Sidebar>
+      <Flex h='100vh'>
+        <Sidebar expandedWidth='250px'></Sidebar>
         {children}
       </Flex>
     </>

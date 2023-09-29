@@ -1,42 +1,39 @@
-import { Box, Flex, Menu, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel, Icon, useColorMode } from '@chakra-ui/react';
-import { INavItemProps } from './_type';
+import { Box, Flex, Text, Icon } from '@chakra-ui/react';
 import { mode } from "@chakra-ui/theme-tools";
+import { INavItemProps } from './_type';
 
 function NavItem(props: INavItemProps) {
-    const { title, icon, disabledHover = false } = props;
+    const { title, icon, disabledHover = false, px = 4, ...flexProps } = props;
 
     return (
         <>
-            <Box
-                as="a"
-                href="#"
-                style={{ textDecoration: 'none' }}
-                _focus={{ boxShadow: 'none' }}>
-                <Flex
-                    align="center"
-                    borderRadius="sm"
-                    role="group"
-                    cursor="pointer"
-                    _hover={disabledHover ?
-                        {} :
-                        {
-                            bg: mode('primary.100', 'primary.900'),
+            <Flex
+                align="center"
+                px={4}
+                py={2}
+                borderRadius={1}
+                cursor="pointer"
+                textDecoration='none'
+                _hover={disabledHover ?
+                    {} :
+                    {
+                        bg: mode('primary.100', 'primary.900'),
+                        color: 'white',
+                    }}
+                {...flexProps}
+            >
+                {icon && (
+                    <Icon
+                        mr="4"
+                        fontSize="16"
+                        _groupHover={{
                             color: 'white',
                         }}
-                >
-                    {icon && (
-                        <Icon
-                            mr="4"
-                            fontSize="16"
-                            _groupHover={{
-                                color: 'white',
-                            }}
-                            as={icon!}
-                        />
-                    )}
-                    <Text> {title}</Text>
-                </Flex>
-            </Box>
+                        as={icon!}
+                    />
+                )}
+                <Text> {title}</Text>
+            </Flex>
         </ >
     );
 };

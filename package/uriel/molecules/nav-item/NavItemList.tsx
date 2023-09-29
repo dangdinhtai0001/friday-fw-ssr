@@ -1,4 +1,5 @@
-import { Box, Flex, Menu, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@chakra-ui/react';
+import { Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@chakra-ui/react';
+import { mode } from "@chakra-ui/theme-tools";
 import NavItem from './NavItem';
 import { INavItemProps } from './_type';
 
@@ -7,24 +8,24 @@ function NavItemList(props: INavItemProps) {
 
     return (
         <>
-            {items.length <= 0 ? (
-                <NavItem {...props}></NavItem>
-            ) : (
-                <Accordion allowMultiple>
-                    <AccordionItem>
-                        <AccordionButton>
-                            <NavItem {...props}></NavItem>
-                        </AccordionButton>
+            <Accordion variant={"sidebar"} allowMultiple>
+                <AccordionItem>
+                    <AccordionButton
+                        _hover={{
+                            bgColor: mode('primary.100', 'primary.900'),
+                            color: 'white',
+                        }}>
+                        <NavItem {...props}></NavItem>
+                    </AccordionButton>
+                    {items.length > 0 ? (
                         <AccordionPanel>
-                            <Box marginLeft={3}>
-                                {items.map((item, index) => (
-                                    <NavItem {...item} key={index}></NavItem>
-                                ))}
-                            </Box>
+                            {items.map((item, index) => (
+                                <NavItem {...item} pl={16} key={index}></NavItem>
+                            ))}
                         </AccordionPanel>
-                    </AccordionItem>
-                </Accordion>
-            )}
+                    ) : null}
+                </AccordionItem>
+            </Accordion>
         </ >
     );
 };

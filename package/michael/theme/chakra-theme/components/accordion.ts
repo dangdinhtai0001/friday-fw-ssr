@@ -1,20 +1,26 @@
 import { accordionAnatomy } from '@chakra-ui/anatomy';
 import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
+import { mode } from "@chakra-ui/theme-tools";
 
 const { definePartsStyle, defineMultiStyleConfig } =
     createMultiStyleConfigHelpers(accordionAnatomy.keys);
 
-const sidebarVariant = definePartsStyle({
-
-});
-
-const baseStyle = definePartsStyle({
+const sidebar = definePartsStyle({
     panel: {
-        padding: '0px',
+        p: 0,
     },
     button: {
+        py: 2,
+        px: 8,
+        borderRadius: 1,
+    },
+    container: {
         border: 'none',
+        mx: 1,
+    },
+    root: {
+        width: 'full',
     }
-})
+});
 
-export const accordionStyles = defineMultiStyleConfig({ baseStyle })
+export const accordionStyles = defineMultiStyleConfig({ variants: { sidebar }, });

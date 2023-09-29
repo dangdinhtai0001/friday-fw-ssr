@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { Box, useColorModeValue, Text, Flex } from '@chakra-ui/react';
-import { ISidebarProps } from './_types';
-import { MdSettings } from 'react-icons/md';
 import { IconType } from 'react-icons';
 
+import { MdDashboard, MdMeetingRoom, MdSchool } from 'react-icons/md';
+import { PiStudent, PiBuildings } from 'react-icons/pi';
+import { FcSettings } from 'react-icons/fc';
+
+import { ISidebarProps } from './_types';
 import { INavItemProps } from '@/package/uriel/molecules/nav-item/_type';
 import NavItemList from '../../molecules/nav-item/NavItemList';
 
@@ -12,31 +15,49 @@ function Sidebar(props: ISidebarProps) {
 
     return (
         <Box
-            height={'full'}
+            height='full'
             width={isExpanded ? expandedWidth : collapsedWidth}
-            bg={useColorModeValue('surface.100', 'surface.900')}
+            bgColor={useColorModeValue('surface.100', 'surface.900')}
         >
             {/* ------------------------------- LOGO ------------------------------- */}
-            <Flex align='center' justify='center'>
+            <Flex alignItems='flex-start' justifyContent='center' py={5}>
                 <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
                     Logo
                 </Text>
             </Flex>
             {/* ------------------------------- ITEMS ------------------------------- */}
-            {items.map((item, index) => (
-                <NavItemList key={index} {...item}></NavItemList>
-            ))}
+            <Flex direction='column' alignItems='flex-start' alignSelf='stretch'>
+
+                {items.map((item, index) => (
+                    <NavItemList key={index} {...item}></NavItemList>
+                ))}
+            </Flex>
         </Box>
     );
 };
 
 const iconMap: Record<string, IconType> = {
-    item1: MdSettings
+    // ----------------------------------------------------------------
+    dashboard: MdDashboard,
+    // ----------------------------------------------------------------
+    edu: MdSchool,
+    edu_classroom: MdMeetingRoom,
+    edu_student: PiStudent,
+    edu_address: PiBuildings,
+    // ----------------------------------------------------------------
+    settings: FcSettings
 }
 
 const items: INavItemProps[] = [
-    { title: 'Item 1', disabledHover: true, items: [{ title: 'Item 1.1' }], icon: iconMap['item1'] },
-    { title: 'Item 2', disabledHover: true, items: [{ title: 'Item 2.1' }, { title: 'Item 2.2' }, { title: 'Item 2.3' }] },
-    { title: 'Item 3', disabledHover: true, items: [{ title: 'Item 3.1' }] },
+
+    { title: 'Dashboard', icon: iconMap['dashboard'] },
+    {
+        title: 'Education', icon: iconMap['edu'], items: [
+            { title: 'Classroom', icon: iconMap['edu_classroom'] },
+            { title: 'Student', icon: iconMap['edu_student'] },
+            { title: 'Address', icon: iconMap['edu_address'] },
+        ]
+    },
+    { title: 'Settings', icon: iconMap['settings'] },
 ]
 export default Sidebar;
