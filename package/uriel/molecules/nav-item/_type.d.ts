@@ -9,4 +9,6 @@ export interface INavItemProps extends FlexProps {
     navSize?: 'none' | 'small' | 'large';
     disabledHover?: boolean;
     items?: INavItemProps[];
+    pathname?: string;
+    query?: Record<string, string>;
 }

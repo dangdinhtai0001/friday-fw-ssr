@@ -1,12 +1,13 @@
 import { Box, Flex, Text, Icon } from '@chakra-ui/react';
 import { mode } from "@chakra-ui/theme-tools";
 import { INavItemProps } from './_type';
+import { Link } from '@chakra-ui/next-js'
 
 function NavItem(props: INavItemProps) {
-    const { title, icon, disabledHover = false, px = 4, ...flexProps } = props;
+    const { title, icon, disabledHover = false, px = 4, items, pathname, query, ...flexProps } = props;
 
-    return (
-        <>
+    const renderNavContent = () => {
+        return (
             <Flex
                 align="center"
                 px={4}
@@ -14,12 +15,10 @@ function NavItem(props: INavItemProps) {
                 borderRadius={1}
                 cursor="pointer"
                 textDecoration='none'
-                _hover={disabledHover ?
+                _hover={disabledHover || items ?
                     {} :
-                    {
-                        bg: mode('primary.100', 'primary.900'),
-                        color: 'white',
-                    }}
+                    { bg: mode('primary.100', 'primary.900'), }
+                }
                 {...flexProps}
             >
                 {icon && (
@@ -32,9 +31,19 @@ function NavItem(props: INavItemProps) {
                         as={icon!}
                     />
                 )}
-                <Text> {title}</Text>
+                <Text textDecoration='none'> {title}</Text>
             </Flex>
-        </ >
+        )
+    }
+
+    if (items) {
+        return renderNavContent();
+    }
+
+    return (
+        <Link href={{ pathname, query, }} textDecoration='none' >
+            {renderNavContent()}
+        </Link>
     );
 };
 

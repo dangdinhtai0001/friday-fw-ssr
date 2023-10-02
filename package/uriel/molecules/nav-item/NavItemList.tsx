@@ -2,7 +2,6 @@ import { Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@chak
 import { mode } from "@chakra-ui/theme-tools";
 import NavItem from './NavItem';
 import { INavItemProps } from './_type';
-
 function NavItemList(props: INavItemProps) {
     const { title, items = [] } = props;
 
@@ -11,9 +10,9 @@ function NavItemList(props: INavItemProps) {
             <Accordion variant={"sidebar"} allowMultiple>
                 <AccordionItem>
                     <AccordionButton
+                     textDecoration='none'
                         _hover={{
                             bgColor: mode('primary.100', 'primary.900'),
-                            color: 'white',
                         }}>
                         <NavItem {...props}></NavItem>
                     </AccordionButton>
