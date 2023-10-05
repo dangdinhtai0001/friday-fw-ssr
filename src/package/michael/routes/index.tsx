@@ -19,12 +19,34 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         path: "lecturer",
-                        element: (
-                            <Suspense>
-                                <LecturerPage />
-                            </Suspense>
-                        )
-                    }
+                        children: [
+                            {
+                                path: "info",
+                                element: (
+                                    <Suspense>
+                                        <LecturerPage />
+                                    </Suspense>
+                                )
+                            },
+                            {
+                                path: "salary",
+                                element: (
+                                    <Suspense>
+                                        <LecturerPage />
+                                    </Suspense>
+                                )
+                            },
+                            {
+                                path: "feedback",
+                                element: (
+                                    <Suspense>
+                                        <LecturerPage />
+                                    </Suspense>
+                                )
+                            }
+                        ]
+                    },
+
                 ]
             },
         ],

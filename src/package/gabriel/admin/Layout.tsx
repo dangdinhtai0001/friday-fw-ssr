@@ -1,9 +1,12 @@
 import { Outlet } from "react-router-dom";
+
+import { AdminLayout } from '@package/uriel/templates/admin-layout';
 export default function Layout() {
     return (
         <div>
-            admin layout nè
-            <Outlet />
+            <AdminLayout  >
+                <Outlet />
+            </AdminLayout>
         </div>
     );
 }
