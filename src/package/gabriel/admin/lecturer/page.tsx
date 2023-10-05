@@ -1,7 +1,4 @@
-export interface IPageProps {
-}
-
-export default function Page(props: IPageProps) {
+export default function Page() {
     return (
         <div>
             page nè

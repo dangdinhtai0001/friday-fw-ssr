@@ -1,10 +1,11 @@
-import { lazy, Suspense } from 'react';
+import { Suspense } from "react";
 import { createBrowserRouter, } from "react-router-dom";
 
 import RootLayout from '@package/gabriel/Layout';
+import AdminLayout from '@package/gabriel/admin/Layout';
 import ErrorPage from "@package/gabriel/Error";
 
-const Page = lazy(() => import("@package/gabriel/admin/lecturer/page"));
+import LecturerPage from '@package/gabriel/admin/lecturer/Page';
 
 export const router = createBrowserRouter([
     {
@@ -13,12 +14,18 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "lecturer",
-                element: (
-                    <Suspense fallback={<>...</>}>
-                        <Page />
-                    </Suspense>
-                )
+                path: 'admin',
+                element: <AdminLayout />,
+                children: [
+                    {
+                        path: "lecturer",
+                        element: (
+                            <Suspense>
+                                <LecturerPage />
+                            </Suspense>
+                        )
+                    }
+                ]
             },
         ],
     },
