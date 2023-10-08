@@ -1,9 +1,7 @@
+import { Suspense } from "react";
+
 import { IndexRouteObject, NonIndexRouteObject } from 'react-router-dom';
 import { IconType } from 'react-icons';
-import { GiMoneyStack, GiTeacher } from 'react-icons/gi';
-import { Suspense } from "react";
-import { createBrowserRouter, } from "react-router-dom";
-
 import RootLayout from '@package/gabriel/Layout';
 import AdminLayout from '@package/gabriel/admin/Layout';
 import ErrorPage from "@package/gabriel/Error";
@@ -19,90 +17,76 @@ export interface RouteConfig extends
     children?: RouteConfig[];
 };
 
-const routeConfig: RouteConfig[] = [
-    {
-        path: "/",
-        element: <RootLayout />,
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                path: 'admin',
-                element: <AdminLayout />,
-                children: [
-                    {
-                        displayOnSidebar: true,
-                        title: 'Giảng viên',
-                        icon: GiTeacher,
-                        path: "lecturer",
-                        children: [
-                            {
-                                displayOnSidebar: true,
-                                title: 'Giảng viên',
-                                icon: GiTeacher,
-                                path: "info",
-                                element: (
-                                    <Suspense>
-                                        <LecturerPage />
-                                    </Suspense>
-                                )
-                            },
-                            {
-                                path: "salary",
-                                element: (
-                                    <Suspense>
-                                        <LecturerPage />
-                                    </Suspense>
-                                )
-                            },
-                            {
-                                path: "feedback",
-                                element: (
-                                    <Suspense>
-                                        <LecturerPage />
-                                    </Suspense>
-                                )
-                            }
-                        ]
-                    },
-
-                ]
-            },
-        ],
-    },
-];
-function getSidebarRoutes(routeConfig: any, _path: any): any{
-    const sidebarRoutes = [];
-
-    let path;
-    for (const route of routeConfig) {
-        if (_path === "/") {
-            path = route.path;
-        } else {
-            path = _path + "" + route.path;
-        }
-
-        if (route.children) {
-            const sidebarChildRoutes = getSidebarRoutes(route.children, path);
-
-            if (sidebarChildRoutes.length > 0) {
-                sidebarRoutes.push({
-                    title: route.title,
-                    icon: route.icon,
-                    path: path,
-                    children: sidebarChildRoutes,
-                });
-            }
-        } else if (route.displayOnSidebar) {
-            sidebarRoutes.push({
-                title: route.title,
-                icon: route.icon,
-                path: path,
-                children: route.children,
-            });
-        }
-    }
-
-    return sidebarRoutes;
+export interface SidebarConfig {
+    id: string | number;
+    title?: string;
+    icon?: IconType;
+    children?: SidebarConfig[];
 }
 
-export const router = createBrowserRouter(routeConfig);
+
+
+export const getSidebarConfig = (config?: RouteConfig[]): SidebarConfig[] | undefined => {
+    if (!config) {
+        return undefined;
+    }
+
+    return routeConfig.map((config, index): SidebarConfig => {
+        return {
+            title: config.title,
+            icon: config.icon,
+            id: index,
+            children: getSidebarConfig(config.children)
+        }
+    })
+};
+
+export const getRouteConfig = (config: RouteConfig[]): RouteConfig[] => {
+    return [
+        {
+            path: "/",
+            element: <RootLayout />,
+            errorElement: <ErrorPage />,
+            children: config,
+        }
+    ]
+}
+
+export const routeConfig: RouteConfig[] = [
+    {
+        path: 'admin',
+        element: <AdminLayout />,
+        children: [
+            {
+                path: "lecturer",
+                children: [
+                    {
+                        path: "info",
+                        element: (
+                            <Suspense>
+                                <LecturerPage />
+                            </Suspense>
+                        )
+                    },
+                    {
+                        path: "salary",
+                        element: (
+                            <Suspense>
+                                <LecturerPage />
+                            </Suspense>
+                        )
+                    },
+                    {
+                        path: "feedback",
+                        element: (
+                            <Suspense>
+                                <LecturerPage />
+                            </Suspense>
+                        )
+                    }
+                ]
+            },
+
+        ]
+    },
+];
