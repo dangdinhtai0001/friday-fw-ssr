@@ -8,7 +8,7 @@ export default function AdminLayout(props: IAdminLayoutProps) {
 
   return (
     <>
-      <Flex h='full'>
+      <Flex h='100vh'>
         <Sidebar expandedWidth='250px'></Sidebar>
         {children}
       </Flex>

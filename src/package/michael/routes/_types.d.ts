@@ -7,12 +7,14 @@ export interface RouteConfig extends
     title?: string;
     icon?: IconType;
     displayOnSidebar?: boolean;
+    isDefaultSidebarItem?: boolean;
     children?: RouteConfig[];
     query?: Record<string, string>;
 };
 
 export interface SidebarConfig {
     id?: string;
+    isDefault?: boolean;
     title?: string;
     icon?: IconType;
     path?: string;
