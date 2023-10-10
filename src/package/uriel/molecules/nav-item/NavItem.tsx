@@ -1,9 +1,11 @@
-import { Box, Flex, Text, Icon } from '@chakra-ui/react';
+import { Flex, Text, Icon } from '@chakra-ui/react';
 import { mode } from "@chakra-ui/theme-tools";
+import { Link } from "react-router-dom";
+import _ from 'lodash';
 import { INavItemProps } from './_type';
 
 function NavItem(props: INavItemProps) {
-    const { title, icon, disabledHover = false, px = 4, items, pathname, query, ...flexProps } = props;
+    const { title, icon, disabledHover = false, px = 4, _children, path = "/", query, ...flexProps } = props;
 
     const renderNavContent = () => {
         return (
@@ -14,7 +16,7 @@ function NavItem(props: INavItemProps) {
                 borderRadius={1}
                 cursor="pointer"
                 textDecoration='none'
-                _hover={disabledHover || items ?
+                _hover={disabledHover || _children ?
                     {} :
                     { bg: mode('primary.100', 'primary.900'), }
                 }
@@ -35,17 +37,37 @@ function NavItem(props: INavItemProps) {
         )
     }
 
-    if (items) {
+    if (_children) {
         return renderNavContent();
     }
 
     return (
         <>
-            {/* <Link href={{ pathname, query, }} textDecoration='none' > */}
-            {renderNavContent()}
-            {/* </Link> */}
+            <Link to={getPath(path, query)} >
+                {renderNavContent()}
+            </Link>
         </>
     );
 };
+
+function encodeURIComponent(str: string) {
+    return encodeURI(str).replace(/[!'()*]/g, escape);
+}
+
+function getPath(initialPath: string, query?: Record<string, string>): string {
+
+    if (!query) {
+        return initialPath;
+    }
+
+    const template = `${initialPath}?<%= query %>`;
+
+    const encodedQuery = _.map(query, (value, key) => {
+        return `${key}=${encodeURIComponent(value)}`;
+    }).join('&');
+
+    return _.template(template)({ query: encodedQuery });
+
+}
 
 export default NavItem;

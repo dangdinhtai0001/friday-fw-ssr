@@ -1,45 +1,53 @@
-import { Suspense } from "react";
-
-import { IndexRouteObject, NonIndexRouteObject } from 'react-router-dom';
-import { IconType } from 'react-icons';
 import RootLayout from '@package/gabriel/Layout';
 import AdminLayout from '@package/gabriel/admin/Layout';
 import ErrorPage from "@package/gabriel/Error";
 
-import LecturerPage from '@package/gabriel/admin/lecturer/Page';
+import { GiArchiveRegister } from 'react-icons/gi';
+import { ImProfile } from 'react-icons/im';
 
-export interface RouteConfig extends
-    Omit<IndexRouteObject, 'children' | 'index'>,
-    Omit<IndexRouteObject, 'children' | 'index'> {
-    title?: string;
-    icon?: IconType;
-    displayOnSidebar?: boolean;
-    children?: RouteConfig[];
-};
+import RecruitmentPage from '@package/gabriel/admin/recruitment/Page';
+import EnrollmentPage from '@package/gabriel/admin/enrollment/Page';
 
-export interface SidebarConfig {
-    id: string | number;
-    title?: string;
-    icon?: IconType;
-    children?: SidebarConfig[];
-}
+import { RouteConfig, SidebarConfig } from './_types.d';
 
 
+// export const getSidebarConfig = (config?: RouteConfig[]): SidebarConfig[] | null => {
+//     if (!config) {
+//         return null;
+//     }
 
-export const getSidebarConfig = (config?: RouteConfig[]): SidebarConfig[] | undefined => {
+//     return config.map((configItem, index): SidebarConfig => {
+//         return {
+//             id: String(index),
+//             title: configItem.title,
+//             icon: configItem.icon,
+//             path: configItem.path,
+//             query: configItem.query,
+//             _children: configItem.children ? getSidebarConfig(configItem.children) : null
+//         }
+//     });
+// };
+
+export const getSidebarConfig = (config?: RouteConfig[], parentPath = ''): SidebarConfig[] | null => {
     if (!config) {
-        return undefined;
+      return null; 
     }
-
-    return routeConfig.map((config, index): SidebarConfig => {
-        return {
-            title: config.title,
-            icon: config.icon,
-            id: index,
-            children: getSidebarConfig(config.children)
-        }
-    })
-};
+  
+    return config.map((configItem) => {
+      const path = `${parentPath}/${configItem.path}`;
+  
+      return {
+        id: String(Math.random()),
+        title: configItem.title, 
+        icon: configItem.icon,
+        path: path,
+        query: configItem.query,
+        _children: configItem.children 
+          ? getSidebarConfig(configItem.children, path)
+          : null
+      };
+    });
+  };
 
 export const getRouteConfig = (config: RouteConfig[]): RouteConfig[] => {
     return [
@@ -47,46 +55,42 @@ export const getRouteConfig = (config: RouteConfig[]): RouteConfig[] => {
             path: "/",
             element: <RootLayout />,
             errorElement: <ErrorPage />,
-            children: config,
+            children: [
+                {
+                    path: 'admin',
+                    element: <AdminLayout />,
+                    children: config
+                }
+            ],
         }
     ]
 }
 
 export const routeConfig: RouteConfig[] = [
     {
-        path: 'admin',
-        element: <AdminLayout />,
+        title: 'recruitment',
+        icon: GiArchiveRegister,
+        path: 'recruitment',
+        element: <RecruitmentPage />
+    },
+    {
+        title: 'enrollment',
+        icon: ImProfile,
+        path: 'enrollment',
+        element: <EnrollmentPage />
+    },
+    {
+        title: 'foo',
+        icon: GiArchiveRegister,
+        path: 'foo',
         children: [
             {
-                path: "lecturer",
-                children: [
-                    {
-                        path: "info",
-                        element: (
-                            <Suspense>
-                                <LecturerPage />
-                            </Suspense>
-                        )
-                    },
-                    {
-                        path: "salary",
-                        element: (
-                            <Suspense>
-                                <LecturerPage />
-                            </Suspense>
-                        )
-                    },
-                    {
-                        path: "feedback",
-                        element: (
-                            <Suspense>
-                                <LecturerPage />
-                            </Suspense>
-                        )
-                    }
-                ]
-            },
-
+                title: 'bar',
+                icon: GiArchiveRegister,
+                path: 'bar',
+                query: {foo: 'bar'},
+                element: <EnrollmentPage />
+            }
         ]
     },
 ];
