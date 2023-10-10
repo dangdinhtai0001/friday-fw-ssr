@@ -7,5 +7,7 @@ export interface IRouteConfig extends
 };
 
 export interface ISidebarConfig {
-
+    title?: string;
+    items?: ISidebarConfig[];
+    isGroup?: boolean;
 }
