@@ -1,0 +1,15 @@
+import { extendTheme } from "@chakra-ui/react";
+import { globalStyles } from "./GlobalStyles";
+import { themeConfig } from './config';
+import { colors } from './colors';
+
+export default extendTheme({
+
+    globalStyles,
+    config: themeConfig, //  color mode config
+    colors: colors,
+    // components 
+    components: {
+    }
+}
+);
