@@ -9,16 +9,14 @@ const sidebar = definePartsStyle({
         p: 0,
     },
     button: {
-        py: 2,
-        px: 8,
+        py: 2.5,
         borderRadius: 1,
     },
     container: {
         border: 'none',
-        mx: 1,
     },
     root: {
-        width: 'full',
+        width: '100%',
     }
 });
 

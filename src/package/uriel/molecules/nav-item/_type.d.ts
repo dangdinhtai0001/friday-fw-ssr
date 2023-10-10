@@ -7,7 +7,7 @@ export interface INavItemProps extends SidebarConfig, FlexProps {
     title?: string;
     description?: string;
     isActive?: boolean;
-    navSize?: 'none' | 'small' | 'large';
+    navSize?: 'small' | 'large';
     disabledHover?: boolean;
     // children?: INavItemProps[];
 }
