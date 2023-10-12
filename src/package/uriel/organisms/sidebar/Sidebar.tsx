@@ -8,7 +8,7 @@ import {
   MenuGroup,
   MenuOptionGroup,
   MenuDivider,
-  Button, Box, useDisclosure
+  Button, Box, useDisclosure, Flex,Text
 } from '@chakra-ui/react';
 
 import { SidebarItem } from '@package/uriel/molecules/sidebar-item'
@@ -19,79 +19,19 @@ import MenuItemSubMenu from '../../molecules/nested-menu/MenuItemSubMenu';
 import StyledMenuItem from '../../molecules/nested-menu/StyledMenuItem';
 
 function Sidebar(props: ISidebarProps) {
-  // const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const [innerMenusActive, setInnerMenusActive] = useState(true);
-  const closeSubMenus = () => {
-    setInnerMenusActive(false);
-  };
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { expandedWidth = '212px', isExpanded = true, collapsedWidth = '70px' } = props;
   return (
-    <div>
-      <Menu autoSelect={false} closeOnSelect={false} onClose={onClose} isOpen={isOpen} placement="right-end">
-        <CloseSubMenuOverlay
-          isActive={innerMenusActive}
-          closeSubMenu={closeSubMenus}
-        />
-        <MenuButton as={'div'} onMouseEnter={onOpen}>
-          Menu
-        </MenuButton>
-        <MenuList transition="all 0.1s" zIndex={999}>
-          <StyledMenuItem closeSubMenu={closeSubMenus}>Music</StyledMenuItem>
-          <MenuItemSubMenu>
-            <InnerMenu
-              title="Movies"
-              childrenItems={[
-                "New Release Movies  ",
-                "Disney Movies  ",
-                "TV Shows  ",
-                "YouTube Video  ",
-                "New Release Movies",
-                "Disney Movies",
-                "TV Shows",
-                "YouTube Video"
-              ]}
-            />
-          </MenuItemSubMenu>
-          <StyledMenuItem closeSubMenu={closeSubMenus}>About</StyledMenuItem>
-          <MenuItemSubMenu>
-            <InnerMenu
-              title="Books"
-              childrenItems={[
-                "Textbooks",
-                "Audiobooks",
-                "Disney Books",
-                <InnerMenu
-                  title="Children's Books"
-                  childrenItems={[
-                    "Happy Birthday to You!",
-                    "On the  Night You...",
-                    <InnerMenu
-                      title="Something else"
-                      childrenItems={[
-                        "... .... ... ... ",
-                        "... .... ... .. ",
-                        "... .... ... . ",
-                        "... .... ... ",
-                        "... .... .. ",
-                        "... .... ."
-                      ]}
-                    />,
-                    "Now You Are One",
-                    "How Do Dinosaurs Say...",
-                    "5 minute stories"
-                  ]}
-                />
-              ]}
-            />
-          </MenuItemSubMenu>
-          <StyledMenuItem closeSubMenu={closeSubMenus}>Contacts</StyledMenuItem>
-        </MenuList>
-      </Menu>
-      sidebar
-    </div >
+    <Flex
+      direction='column'
+      alignItems='center'
+      gap={4} px={4}
+      py={5}
+      flexShrink={0}
+      h='full'
+      w={isExpanded ? expandedWidth : collapsedWidth}
+      border='1px solid red'
+    >
+    </Flex>
   );
 }
 

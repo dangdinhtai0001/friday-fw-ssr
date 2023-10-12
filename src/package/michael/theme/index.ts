@@ -1,14 +1,20 @@
 import { extendTheme } from "@chakra-ui/react";
 import { globalStyles } from "./GlobalStyles";
 import { themeConfig } from './config';
-import { colors } from './colors';
+import { semanticTokens } from './sematic-tokens';
+import { fonts, textStyles } from './typography';
 
 export default extendTheme({
-
+    // ----------------------------------------------------------------
     globalStyles,
-    config: themeConfig, //  color mode config
-    colors: colors,
-    // components 
+    // ---------------------------------------------------------------- 
+    semanticTokens: semanticTokens,
+    // ----------------------------------------------------------------
+    fonts: fonts,
+    textStyles: textStyles,
+    // ----------------------------------------------------------------
+    config: themeConfig,
+    // ---------------------------------------------------------------- 
     components: {
     }
 }
