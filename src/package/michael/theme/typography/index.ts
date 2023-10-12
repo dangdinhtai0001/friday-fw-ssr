@@ -1,97 +1,98 @@
 export const fonts = {
     heading: `'Open Sans', sans-serif`,
-    body: `'Inter', sans-serif`
+    body: `'Inter', sans-serif`,
+    mono: `'Inter', sans-serif`,
 };
 
 export const textStyles = {
     // ----------------------------------------------------------------
     64: {
         semibold: {
-            fontSize: 64,
+            fontSize: '64px',
             fontStyle: 'normal',
             fontWeight: 600,
-            lineHeight: 78,
+            lineHeight: '78px',
         },
         regular: {
-            fontSize: 64,
+            fontSize: '64px',
             fontStyle: 'normal',
             fontWeight: 400,
-            lineHeight: 78,
+            lineHeight: '78px',
         }
     },
     // ----------------------------------------------------------------
     48: {
         semibold: {
-            fontSize: 48,
+            fontSize: '48px',
             fontStyle: 'normal',
             fontWeight: 600,
-            lineHeight: 58,
+            lineHeight: '58px',
         },
         regular: {
-            fontSize: 48,
+            fontSize: '48px',
             fontStyle: 'normal',
             fontWeight: 400,
-            lineHeight: 58,
+            lineHeight: '58px',
         }
     },
     // ----------------------------------------------------------------
     24: {
         semibold: {
-            fontSize: 24,
+            fontSize: '24px',
             fontStyle: 'normal',
             fontWeight: 600,
-            lineHeight: 36,
+            lineHeight: '36px',
         },
         regular: {
-            fontSize: 24,
+            fontSize: '24px',
             fontStyle: 'normal',
             fontWeight: 400,
-            lineHeight: 36,
+            lineHeight: '36px',
         }
-    },  
+    },
     // ----------------------------------------------------------------
     18: {
         semibold: {
-            fontSize: 18,
+            fontSize: '18px',
             fontStyle: 'normal',
             fontWeight: 600,
-            lineHeight: 24,
+            lineHeight: '24px',
         },
         regular: {
-            fontSize: 18,
+            fontSize: '18px',
             fontStyle: 'normal',
             fontWeight: 400,
-            lineHeight: 24,
+            lineHeight: '24px',
         }
-    },   
+    },
     // ----------------------------------------------------------------
     14: {
         semibold: {
-            fontSize: 14,
+            fontSize: '14px',
             fontStyle: 'normal',
             fontWeight: 600,
-            lineHeight: 24,
+            lineHeight: '20px',
         },
         regular: {
-            fontSize: 20,
+            fontSize: '14px',
             fontStyle: 'normal',
             fontWeight: 400,
-            lineHeight: 24,
+            lineHeight: '20px',
         }
-    }, 
+    },
     // ----------------------------------------------------------------
     12: {
         semibold: {
-            fontSize: 12,
+            fontSize: '12px',
             fontStyle: 'normal',
             fontWeight: 600,
-            lineHeight: 18,
+            lineHeight: '18px',
         },
         regular: {
-            fontSize: 20,
+            fontSize: '12px',
             fontStyle: 'normal',
             fontWeight: 400,
-            lineHeight: 18,
+            lineHeight: '18px',
         }
-    },              
+    },
 };

@@ -5,6 +5,6 @@ export const semanticTokens = {
     colors: colorToken,
 
     space: { measurement: measurement },
-    borderRadius: { measurement: measurement },
-    size: { measurement: measurement }
+    radii: { measurement: measurement },
+    sizes: { measurement: measurement }
 };

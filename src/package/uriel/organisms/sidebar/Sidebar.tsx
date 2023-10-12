@@ -8,8 +8,9 @@ import {
   MenuGroup,
   MenuOptionGroup,
   MenuDivider,
-  Button, Box, useDisclosure, Flex,Text
+  Button, Box, useDisclosure, Flex, Text
 } from '@chakra-ui/react';
+
 
 import { SidebarItem } from '@package/uriel/molecules/sidebar-item'
 import CloseSubMenuOverlay from '../../molecules/nested-menu/CloseSubMenuOverlay';
@@ -18,23 +19,44 @@ import InnerMenu from '../../molecules/nested-menu/InnerMenu';
 import MenuItemSubMenu from '../../molecules/nested-menu/MenuItemSubMenu';
 import StyledMenuItem from '../../molecules/nested-menu/StyledMenuItem';
 
+import { SidebarName } from '@package/uriel/molecules/sidebar-name';
+import { SidebarFavorite } from '@package/uriel/molecules/sidebar-favorite';
+import { SidebarRoute } from '@package/uriel/molecules/sidebar-route';
+
 function Sidebar(props: ISidebarProps) {
   const { expandedWidth = '212px', isExpanded = true, collapsedWidth = '70px' } = props;
   return (
     <Flex
+      w={isExpanded ? expandedWidth : collapsedWidth}
       direction='column'
       alignItems='center'
-      gap={4} px={4}
-      py={5}
+      gap='measurement.16'
+      px='measurement.16'
+      py='measurement.20'
       flexShrink={0}
       h='full'
-      w={isExpanded ? expandedWidth : collapsedWidth}
-      border='1px solid red'
+      borderRight='1px'
+      borderRightColor='black.10'
     >
+      {/* Name badge */}
+      <SidebarName {...sidebarNameProps} />
+      {/* Favorite frame */}
+      <SidebarFavorite {...sidebaFavoriteProps} />
+      {/* route frame */}
+      <SidebarRoute />
     </Flex>
   );
 }
 
+const sidebarNameProps = {
+  avatarUrl: "https://bit.ly/dan-abramov",
+  name: "ByeWind"
+}
+
+const sidebaFavoriteProps = {
+  favorites: [{ display: "Overview", "url": "" }, { display: "Projects", "url": "" }],
+  recently: [{ display: "re-Overview", "url": "" }, { display: "re-Projects", "url": "" }]
+}
 export const menuItems = [
   {
     title: "Home",

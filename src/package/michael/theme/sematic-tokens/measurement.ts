@@ -10,5 +10,7 @@ export const measurement = {
     12: '12px',
     8: '8px',
     4: '4px',
+    2: '2px',
+    1: '1px',
     0: '0px',
 };
