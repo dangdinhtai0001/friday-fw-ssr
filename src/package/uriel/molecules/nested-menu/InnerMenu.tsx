@@ -3,7 +3,9 @@ import {
     Menu,
     MenuButton,
     MenuList,
-    useDisclosure
+    useDisclosure,
+    Flex,
+    Text
 } from "@chakra-ui/react";
 import { RefObject, useRef, useEffect, useCallback } from "react";
 
@@ -55,23 +57,35 @@ const InnerMenu = (props: IInnerMenuProps) => {
     return (
         <Menu autoSelect={false} offset={[0, 0]} isOpen={isOpen} placement="right-end">
             <MenuButton
-                px={2}
-                py={1}
+                // px={2}
+                // py={1}
+                // borderRadius="none"
+                // textAlign="left"
+                // _hover={{
+                //     bg: useColorModeValue("primary.100", "primary.900")
+                // }}
+                border='1px solid red'
                 w="full"
-                textAlign="left"
-                borderRadius="none"
-                _hover={{
-                    bg: useColorModeValue("primary.100", "primary.900")
-                }}
+
                 ref={refSubMenuButton}
             >
-                {title}
+                <Flex
+                    w='full'
+                    pl={0}
+                    pr='measurement.8'
+                    py='measurement.4'
+                    alignItems='center'
+                    alignContent='center'
+                    gap='measurement.4'
+                    alignSelf='strech'
+                    flex='1 0 0'
+                    borderRadius='measurement.8'
+                >
+                    <Text color='black.100' textStyle='14.regular'> {title}</Text>
+                </Flex>
+
             </MenuButton>
-            <MenuList
-
-                ref={refSubMenuList}
-
-            >
+            <MenuList ref={refSubMenuList} w='full' >
                 {childrenItems.map((item, i) => {
                     if (typeof item === "string") {
                         return <MenuItem key={item}>{item}</MenuItem>;

@@ -7,8 +7,9 @@ import {
     MenuGroup,
     MenuOptionGroup,
     MenuDivider,
-    Button, Box, useDisclosure, Flex, Text
+    Button, Box, useDisclosure, Flex, Text, Icon
 } from '@chakra-ui/react';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 
 import { SidebarItem } from '@package/uriel/molecules/sidebar-item'
@@ -28,19 +29,38 @@ export default function SidebarRoute(props: ISidebarRouteProps) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
-        <div>
+        <Flex
+            pb='measurement.12'
+            direction='column'
+            alignItems='flex-start'
+            gap='measurement.4'
+            alignSelf='strech'
+            borderRadius='measurement.0'
+            w='full'
+        >
             <Menu autoSelect={false} closeOnSelect={false} onClose={onClose} isOpen={isOpen} placement="right-end">
                 <CloseSubMenuOverlay
                     isActive={innerMenusActive}
                     closeSubMenu={closeSubMenus}
                 />
-                <MenuButton as={'div'} onMouseEnter={onOpen}>
-                    Menu
+                <MenuButton onMouseEnter={onOpen} w='full'>
+                    <Flex
+                        w='full'
+                        pl={0}
+                        pr='measurement.8'
+                        py='measurement.4'
+                        alignItems='center'
+                        alignContent='center'
+                        gap='measurement.4'
+                        alignSelf='strech'
+                        flex='1 0 0'
+                        borderRadius='measurement.8'
+                    >
+                        <Icon as={AiOutlineShoppingCart} />
+                        <Text color='black.100' textStyle='14.regular'>eCommerce</Text>
+                    </Flex>
                 </MenuButton>
-                <MenuButton as={'div'} onMouseEnter={onOpen}>
-                    Menu 2
-                </MenuButton>
-                <MenuList transition="all 0.1s" zIndex={999}>
+                <MenuList transition="all 0.1s" zIndex={999} w='full'>
                     <StyledMenuItem closeSubMenu={closeSubMenus}>Music</StyledMenuItem>
                     <MenuItemSubMenu>
                         <InnerMenu
@@ -92,6 +112,6 @@ export default function SidebarRoute(props: ISidebarRouteProps) {
                     <StyledMenuItem closeSubMenu={closeSubMenus}>Contacts</StyledMenuItem>
                 </MenuList>
             </Menu>
-        </div>
+        </Flex>
     );
 }
