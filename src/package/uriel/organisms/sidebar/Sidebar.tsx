@@ -13,11 +13,11 @@ import {
 
 
 import { SidebarItem } from '@package/uriel/molecules/sidebar-item'
-import CloseSubMenuOverlay from '../../molecules/nested-menu/CloseSubMenuOverlay';
+import CloseSubMenuOverlay from '../../molecules/nested-menu-2/CloseSubMenuOverlay';
 import { useState } from 'react';
-import InnerMenu from '../../molecules/nested-menu/InnerMenu';
-import MenuItemSubMenu from '../../molecules/nested-menu/MenuItemSubMenu';
-import StyledMenuItem from '../../molecules/nested-menu/StyledMenuItem';
+import InnerMenu from '../../molecules/nested-menu-2/InnerMenu';
+import MenuItemSubMenu from '../../molecules/nested-menu-2/MenuItemSubMenu';
+import StyledMenuItem from '../../molecules/nested-menu-2/StyledMenuItem';
 
 import { SidebarName } from '@package/uriel/molecules/sidebar-name';
 import { SidebarFavorite } from '@package/uriel/molecules/sidebar-favorite';

@@ -1,4 +1,5 @@
 import {
+    useColorModeValue,
     Menu,
     MenuButton,
     MenuList,
@@ -10,8 +11,8 @@ import {
 import { RefObject, useRef, useEffect, useCallback } from "react";
 
 import { IInnerMenuProps } from './_types';
+import MenuItem from './StyledMenuItem';
 import MenuItemSubMenu from './MenuItemSubMenu';
-import NestedMenuItem from './NestedMenuItem';
 
 
 const InnerMenu = (props: IInnerMenuProps) => {
@@ -82,7 +83,7 @@ const InnerMenu = (props: IInnerMenuProps) => {
                 {childrenItems.map((item, index) => {
                     if (typeof item === "string") {
                         return (
-                            <NestedMenuItem key={index}>
+                            <MenuItem key={index}>
                                 <Box
                                     _hover={{
                                         bg: 'black.5'
@@ -93,9 +94,10 @@ const InnerMenu = (props: IInnerMenuProps) => {
                                 >
                                     {item}
                                 </Box>
-                            </NestedMenuItem>
+                            </MenuItem>
                         )
                     }
+                    // return <MenuItemSubMenu key={index}> {item} </MenuItemSubMenu>
                     return (
                         <MenuItemSubMenu key={index}>
                             <Box

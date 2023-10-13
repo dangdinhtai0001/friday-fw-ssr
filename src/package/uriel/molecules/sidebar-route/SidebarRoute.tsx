@@ -2,22 +2,16 @@ import {
     Menu,
     MenuButton,
     MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
-    Button, Box, useDisclosure, Flex, Text, Icon
+    useDisclosure, Flex, Text, Icon
 } from '@chakra-ui/react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 
-import { SidebarItem } from '@package/uriel/molecules/sidebar-item'
-import CloseSubMenuOverlay from '../../molecules/nested-menu/CloseSubMenuOverlay';
+import CloseSubMenuOverlay from '../nested-menu-2/CloseSubMenuOverlay';
 import { useState } from 'react';
-import InnerMenu from '../../molecules/nested-menu/InnerMenu';
-import MenuItemSubMenu from '../../molecules/nested-menu/MenuItemSubMenu';
-import StyledMenuItem from '../../molecules/nested-menu/StyledMenuItem';
+import InnerMenu from '../nested-menu-2/InnerMenu';
+import MenuItemSubMenu from '../nested-menu-2/MenuItemSubMenu';
+import StyledMenuItem from '../nested-menu-2/StyledMenuItem';
 
 import { ISidebarRouteProps } from './_types.d';
 
@@ -43,24 +37,29 @@ export default function SidebarRoute(props: ISidebarRouteProps) {
                     isActive={innerMenusActive}
                     closeSubMenu={closeSubMenus}
                 />
-                <MenuButton onMouseEnter={onOpen} w='full'>
+                <MenuButton
+                    as={Flex}
+                    onMouseEnter={onOpen} w='full'
+                    _hover={{
+                        bg: 'black.5',
+                        cursor: 'pointer'
+                    }}
+                >
                     <Flex
-                        w='full'
                         pl={0}
                         pr='measurement.8'
                         py='measurement.4'
+                        gap='measurement.4'
                         alignItems='center'
                         alignContent='center'
-                        gap='measurement.4'
                         alignSelf='strech'
                         flex='1 0 0'
-                        borderRadius='measurement.8'
                     >
                         <Icon as={AiOutlineShoppingCart} />
                         <Text color='black.100' textStyle='14.regular'>eCommerce</Text>
                     </Flex>
                 </MenuButton>
-                <MenuList transition="all 0.1s" zIndex={999} w='full'>
+                <MenuList transition="all 0.1s" w='full' p={0} borderRadius='measurement.8'>
                     <StyledMenuItem closeSubMenu={closeSubMenus}>Music</StyledMenuItem>
                     <MenuItemSubMenu>
                         <InnerMenu

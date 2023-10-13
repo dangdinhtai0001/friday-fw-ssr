@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { MenuItem } from "@chakra-ui/menu";
-import { useColorModeValue } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
-import { IStyledMenuItemProps } from './_types.d';
-const StyledMenuItem = (props: IStyledMenuItemProps) => {
+import { INestedMenuItemProps } from './_types';
+const NestedMenuItem = (props: INestedMenuItemProps) => {
     const { children, closeSubMenu } = props;
 
     const refMenuItem = useRef<HTMLButtonElement | null>(null);
@@ -22,18 +22,8 @@ const StyledMenuItem = (props: IStyledMenuItemProps) => {
 
     return (
         <MenuItem
-            // px={2}
-            // my={0.5}
-            // w="full"
-            // boxShadow="0px 2px 0px 0px transparent"
-            // borderRadius={0}
-            // justifyContent="flex-start"
-            // bg="transparent"
-            // _hover={{
-            //     bg: useColorModeValue("primary.100", "primary.900")
-            // }}
+            as={Flex}
             w='full'
-            // pl={0}
             px='measurement.8'
             py='measurement.4'
             alignItems='center'
@@ -41,12 +31,17 @@ const StyledMenuItem = (props: IStyledMenuItemProps) => {
             gap='measurement.4'
             alignSelf='strech'
             flex='1 0 0'
-            borderRadius='measurement.8'
+            _hover={{
+                bg: 'black.5',
+                cursor: 'pointer',
+            }}
             ref={refMenuItem}
         >
-            {children}
+            <Text color='black.100' textStyle='14.regular'>
+                {children}
+            </Text>
         </MenuItem>
     );
 };
 
-export default StyledMenuItem;
+export default NestedMenuItem;

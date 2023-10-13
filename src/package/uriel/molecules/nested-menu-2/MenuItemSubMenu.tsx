@@ -1,6 +1,6 @@
 import { MenuItem } from "@chakra-ui/menu";
 import { IMenuItemSubMenuProps } from "./_types";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 const MenuItemSubMenu = (props: IMenuItemSubMenuProps) => {
     const { children } = props;
