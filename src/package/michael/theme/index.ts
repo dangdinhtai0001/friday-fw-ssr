@@ -4,6 +4,8 @@ import { themeConfig } from './config';
 import { semanticTokens } from './sematic-tokens';
 import { fonts, textStyles } from './typography';
 
+import { menuTheme } from './components/Menu';
+
 export default extendTheme({
     // ----------------------------------------------------------------
     globalStyles,
@@ -16,5 +18,6 @@ export default extendTheme({
     config: themeConfig,
     // ---------------------------------------------------------------- 
     components: {
+        Menu: menuTheme
     }
 });

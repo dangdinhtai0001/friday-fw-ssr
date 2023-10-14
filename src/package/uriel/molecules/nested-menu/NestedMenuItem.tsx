@@ -1,47 +1,61 @@
-import { useEffect, useRef } from "react";
-import { MenuItem } from "@chakra-ui/menu";
-import { Flex, Text } from '@chakra-ui/react';
+import { useDisclosure, Button, Flex, Menu, MenuButton, MenuGroup, MenuItem, MenuItemOption, MenuList, MenuOptionGroup } from '@chakra-ui/react';
 
-import { INestedMenuItemProps } from './_types';
-const NestedMenuItem = (props: INestedMenuItemProps) => {
-    const { children, closeSubMenu } = props;
+import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
 
-    const refMenuItem = useRef<HTMLButtonElement | null>(null);
+import { INestedMenuItemProps } from './_types.d';
+import ItemContent from './ItemContent';
 
-    useEffect(() => {
-        if (refMenuItem.current && closeSubMenu) {
-            refMenuItem.current.addEventListener("mouseenter", closeSubMenu);
-        }
+export default function NestedMenuItem(props: INestedMenuItemProps) {
+    const { icon, label, items, type } = props;
 
-        return () => {
-            if (refMenuItem.current && closeSubMenu) {
-                refMenuItem.current.removeEventListener("mouseenter", closeSubMenu);
-            }
-        };
-    }, [closeSubMenu]);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    if (type === 'group') {
+        return (
+            <Menu placement='right-end'>
+                {Array.isArray(items) ? (
+                    <MenuGroup title={label} >
+                        {items.map(item => (
+                            <NestedMenuItem {...item}></NestedMenuItem>
+                        ))}
+                    </MenuGroup>
+                ) : null
+                }
+            </Menu >
+        );
+    }
 
     return (
-        <MenuItem
-            as={Flex}
-            w='full'
-            px='measurement.8'
-            py='measurement.4'
-            alignItems='center'
-            alignContent='center'
-            gap='measurement.4'
-            alignSelf='strech'
-            flex='1 0 0'
-            _hover={{
-                bg: 'black.5',
-                cursor: 'pointer',
-            }}
-            ref={refMenuItem}
-        >
-            <Text color='black.100' textStyle='14.regular'>
-                {children}
-            </Text>
-        </MenuItem>
+        <Menu placement='right-end' isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+            {Array.isArray(items) ? (
+                <MenuButton  bg={isOpen? 'black.5' : ''}>
+                    <ItemContent
+                        icon={icon}
+                        label={label}
+                        expandIcon={AiOutlineRight}
+                        collapseIcon={AiOutlineLeft}
+                        isOpen={isOpen}
+                    />
+                </MenuButton>
+            ) : (
+                <MenuItem  >
+                    <ItemContent icon={icon} label={label} />
+                </MenuItem>
+            )}
+
+            {Array.isArray(items) ? (
+                <MenuList >
+                    {items.map(item => (
+                        <NestedMenuItem {...item}></NestedMenuItem>
+                    ))}
+                </MenuList>
+            ) : null}
+        </Menu >
     );
 };
 
-export default NestedMenuItem;
+const borderLeftStyles = {
+    borderLeftColor: 'black.40',
+    borderLeftWidth: '2px',
+    borderLeftStyle: 'solid'
+};

@@ -6,7 +6,12 @@ import { ISidebarFavoriteProps } from './_types.d';
 function SidebarFavorite(props: ISidebarFavoriteProps) {
     const { favorites, recently } = props;
     return (
-        <Tabs variant="unstyled" pb='measurement.12' position="relative">
+        <Tabs
+            variant="unstyled"
+            pb='measurement.12'
+            position="relative"
+            isLazy={true}
+        >
             <TabList borderRadius='measurement.8'>
                 <Tab textAlign='center'>
                     <Text color='black.40' textStyle='14.regular'> Favorites </Text>
@@ -22,9 +27,8 @@ function SidebarFavorite(props: ISidebarFavoriteProps) {
                 borderRadius="measurement.2"
             />
             <TabPanels>
-                <TabPanel
-                    as={Flex}
-                    direction='column'
+
+                <TabPanel as={Flex} direction='column'
                     alignItems='flex-start'
                     gap='measurement.4'
                     alignSelf='stretch'
@@ -33,9 +37,7 @@ function SidebarFavorite(props: ISidebarFavoriteProps) {
                         renderContent(item.display, index)
                     ))}
                 </TabPanel>
-                <TabPanel
-                    as={Flex}
-                    direction='column'
+                <TabPanel as={Flex} direction='column'
                     alignItems='flex-start'
                     gap='measurement.4'
                     alignSelf='stretch'
