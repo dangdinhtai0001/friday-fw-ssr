@@ -2,7 +2,8 @@ import { ISidebarProps } from './_types';
 import { Flex } from '@chakra-ui/react';
 
 import NameBadge from './NameBadge';
-import Frame from './Frame';
+import Categories from './Categories';
+import Logo from './Logo';
 
 function Sidebar(props: ISidebarProps) {
   const { expandedWidth = '212px', isExpanded = true, collapsedWidth = '70px' } = props;
@@ -21,8 +22,10 @@ function Sidebar(props: ISidebarProps) {
     >
       {/* Name badge */}
       <NameBadge />
-      {/* sidebar frame */}
-      <Frame />
+      {/* Categories */}
+      <Categories />
+      {/* logo */}
+      <Logo />
     </Flex>
   );
 }

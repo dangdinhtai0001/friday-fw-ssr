@@ -1,29 +1,17 @@
-import { Box } from '@chakra-ui/react';
+import { StateCreator } from 'zustand';
 import { Snowflake } from "@theinternetfolks/snowflake";
 
-import NestedMenuItem from './NestedMenuItem';
-import { IItemDefinition, INestedMenuProps } from './_types.d';
+import { State, Action } from './_types';
+import { ICategoryDef } from '@package/raphael/types/application.types'
 
-export default function NestedMenu(props: INestedMenuProps) {
-    const { items = [] } = props;
-
-    return (
-        <Box w='full'>
-            {items.map(item => (
-                <NestedMenuItem {...item}></NestedMenuItem>
-            ))}
-        </Box>
-    );
-};
-const items: IItemDefinition[] = [
+const categories: ICategoryDef[] = [
     {
         label: 'Dashboard', key: Snowflake.generate(), icon: null, type: 'group', items: [
             { label: "eCommerce", key: Snowflake.generate(), icon: null, items: [] },
             { label: "Projects", key: Snowflake.generate(), icon: null, items: [] },
             { label: "Online Courses", key: Snowflake.generate(), icon: null, items: [] },
         ],
-    },
-    {
+    }, {
         label: 'Pages', key: Snowflake.generate(), icon: null, type: 'group', items: [
             {
                 label: "User Profile", key: Snowflake.generate(), icon: null, items: [
@@ -41,3 +29,8 @@ const items: IItemDefinition[] = [
         ]
     }
 ];
+
+export const createStateSlice: StateCreator<State & Action> = () => ({
+    categories: categories,
+    savedCategories: [],
+});
