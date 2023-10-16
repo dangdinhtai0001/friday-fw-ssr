@@ -1,5 +1,5 @@
 export interface ISidebarProps {
-    isExpanded: boolean;
+    isExpanded?: boolean;
     expandedWidth?: string | number;
     collapsedWidth?: string | number;
 }

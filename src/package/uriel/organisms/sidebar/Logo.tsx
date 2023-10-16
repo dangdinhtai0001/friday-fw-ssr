@@ -4,7 +4,7 @@ export default function Logo() {
     return (
         <Flex
             w='180px'
-            p='measurements.8'
+            p='measurement.8'
             direction='column'
             alignItems='center'
             position='absolute'
