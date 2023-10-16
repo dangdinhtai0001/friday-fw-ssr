@@ -1,7 +1,6 @@
 export interface INestedMenuProps {
 };
 
-
 export interface INestedMenuItemProps extends IItemDefinition{
 };
 

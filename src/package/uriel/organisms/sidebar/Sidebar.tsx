@@ -1,27 +1,8 @@
 import { ISidebarProps } from './_types';
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Button, Box, useDisclosure, Flex, Text
-} from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
-
-import { SidebarItem } from '@package/uriel/molecules/sidebar-item'
-import CloseSubMenuOverlay from '../../molecules/nested-menu-2/CloseSubMenuOverlay';
-import { useState } from 'react';
-import InnerMenu from '../../molecules/nested-menu-2/InnerMenu';
-import MenuItemSubMenu from '../../molecules/nested-menu-2/MenuItemSubMenu';
-import StyledMenuItem from '../../molecules/nested-menu-2/StyledMenuItem';
-
-import { SidebarName } from '@package/uriel/molecules/sidebar-name';
-import { SidebarFavorite } from '@package/uriel/molecules/sidebar-favorite';
-import { SidebarRoute } from '@package/uriel/molecules/sidebar-route';
+import NameBadge from './NameBadge';
+import Frame from './Frame';
 
 function Sidebar(props: ISidebarProps) {
   const { expandedWidth = '212px', isExpanded = true, collapsedWidth = '70px' } = props;
@@ -39,11 +20,9 @@ function Sidebar(props: ISidebarProps) {
       borderRightColor='black.10'
     >
       {/* Name badge */}
-      <SidebarName {...sidebarNameProps} />
-      {/* Favorite frame */}
-      <SidebarFavorite {...sidebaFavoriteProps} />
-      {/* route frame */}
-      <SidebarRoute />
+      <NameBadge />
+      {/* sidebar frame */}
+      <Frame />
     </Flex>
   );
 }

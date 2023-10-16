@@ -20,7 +20,7 @@ Ngoài 4 tổng lãnh thiên sứ, còn có rất nhiều thiên sứ khác đư
 - Michael: Chứa các file cấu hình và config 
 - Gabriel: Chứa các ATOMIC Pages
 - Uriel: Chứa các ATOMIC Atoms, Molecules, Organisms, Templates
-- Raphael: Các hook dùng chung, utils, types ...
+- Raphael: Các hook dùng chung, store, utils, types ...
 
 Trong Atomic Design: giao diện được chia thành 5 phần:
 

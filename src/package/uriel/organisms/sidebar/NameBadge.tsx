@@ -1,8 +1,10 @@
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
-import { ISidebarNameProps } from './_types.d';
+import { Avatar, Flex, Text } from '@chakra-ui/react';
 
-export default function SidebarName(props: ISidebarNameProps) {
-    const { avatarUrl, name } = props;
+import { useUserStore } from '@package/raphael/stores/user'
+export default function NameBadge() {
+    const name = useUserStore(state => state.name);
+    const avatarUrl = useUserStore(state => state.avatarUrl);
+
     return (
         <>
             {/* Name badge */}
