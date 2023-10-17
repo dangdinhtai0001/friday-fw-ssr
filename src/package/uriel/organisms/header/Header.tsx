@@ -1,7 +1,8 @@
 import { Flex, Text } from '@chakra-ui/react';
 
 import { IHeaderProps } from './_types';
-import IconBreadcrumb from './IconBreadcrumb'
+import IconBreadcrumb from './IconBreadcrumb';
+import Activities from './Activities';
 
 function Header(props: IHeaderProps) {
     return (
@@ -17,6 +18,7 @@ function Header(props: IHeaderProps) {
                 borderBottomWidth='1px'
             >
                 <IconBreadcrumb />
+                <Activities />
             </Flex>
         </>
     );

@@ -1,6 +1,6 @@
 import { Avatar, Flex, Text } from '@chakra-ui/react';
 
-import { useUserStore } from '@package/raphael/stores/user'
+import { useUserStore } from '@package/michael/stores/user'
 export default function NameBadge() {
     const name = useUserStore(state => state.name);
     const avatarUrl = useUserStore(state => state.avatarUrl);

@@ -7,9 +7,6 @@ export default function Logo() {
             p='measurement.8'
             direction='column'
             alignItems='center'
-            position='absolute'
-            left='16px'
-            bottom='20px'
             backdropFilter='blur(20px)'
         >
             <Text textStyle='14.regular'>Logo</Text>

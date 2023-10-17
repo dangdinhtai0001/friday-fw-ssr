@@ -1,5 +1,5 @@
 import { ISidebarProps } from './_types';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Spacer } from '@chakra-ui/react';
 
 import NameBadge from './NameBadge';
 import Categories from './Categories';
@@ -24,6 +24,7 @@ function Sidebar(props: ISidebarProps) {
       <NameBadge />
       {/* Categories */}
       <Categories />
+      <Spacer />
       {/* logo */}
       <Logo />
     </Flex>

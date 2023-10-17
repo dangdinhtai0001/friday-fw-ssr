@@ -6,6 +6,7 @@ import {
     BreadcrumbSeparator,
     Text
 } from "@chakra-ui/react";
+import { Link, useLocation } from 'react-router-dom';
 
 import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
 import { MdStarRate } from 'react-icons/md';
@@ -16,6 +17,9 @@ import { ToggleIcon } from '@package/uriel/atoms/toggle-icon';
 export default function IconBreadcrumb() {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isRated, setRated] = useState<boolean>(false);
+
+    const location = useLocation();
+    const pathnames = location.pathname.split("/").filter((x) => x);
 
     return (
         <Flex
@@ -55,29 +59,35 @@ export default function IconBreadcrumb() {
                     borderRadius='measurement.8'
                     aria-label=""
                     bgColor='transparent'
-                    icon={<Icon as={MdStarRate} w='measurement.20' h='measurement.20' color={isRated ? 'secondary.orange' : 'black.40'} />}
+                    icon={<ToggleIcon
+                        closeIcon={MdStarRate}
+                        openIcon={MdStarRate}
+                        isOpen={isRated}
+                        iconProps={{ w: 'measurement.20', h: 'measurement.20', color: isRated ? 'secondary.orange' : 'black.10' }}
+                    />}
                     onClick={() => { setRated(!isRated) }}
                 />
             </Flex>
             {/* -------------------------------------------- Breadcrumb -------------------------------------------- */}
-
+            {/* {location.pathname === "/" ? null : <Link to="/">Home</Link>} */}
             <Breadcrumb>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='#'>
-                        <Text color='black.40' textStyle='14.regular'>Home</Text>
-                    </BreadcrumbLink>
-                </BreadcrumbItem>
+                {pathnames.map((value, index) => {
+                    const last = index === pathnames.length - 1;
+                    const to = `/${pathnames.slice(0, index + 1).join("/")}`;
 
-                <BreadcrumbItem>
-                    <Text color='black.40' textStyle='14.regular'>Docs</Text>
-                </BreadcrumbItem>
+                    return (
+                        <BreadcrumbItem key={index}>
+                            {last ? (
+                                <BreadcrumbLink href={to} >
+                                    <Text color='black.100' textStyle='14.regular'>{value}</Text>
+                                </BreadcrumbLink>
+                            ) : (
+                                <Text color='black.40' textStyle='14.regular'>{value}</Text>
+                            )}
 
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>
-                        <Text color='black.100' textStyle='14.regular'>Breadcrumb</Text>
-                    </BreadcrumbLink>
-
-                </BreadcrumbItem>
+                        </BreadcrumbItem>
+                    )
+                })}
             </Breadcrumb>
         </Flex>
     );
