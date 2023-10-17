@@ -1,0 +1,1 @@
+- `figma`: https://www.svgrepo.com/svg/527030/figma

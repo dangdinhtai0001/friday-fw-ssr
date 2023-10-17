@@ -3,6 +3,7 @@ import { Snowflake } from "@theinternetfolks/snowflake";
 
 import { State, Action } from './_types';
 import { ICategoryDef } from '@package/raphael/types/application.types'
+import { Figma } from '@package/uriel/atoms/icons'
 
 const categories: ICategoryDef[] = [
     {

@@ -1,4 +1,4 @@
-import { useDisclosure, Button, Flex, Menu, MenuButton, MenuGroup, MenuItem, MenuItemOption, MenuList, MenuOptionGroup } from '@chakra-ui/react';
+import { useDisclosure, Menu, MenuButton, MenuGroup, MenuItem, MenuList } from '@chakra-ui/react';
 
 import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
 
@@ -54,8 +54,4 @@ export default function NestedMenuItem(props: INestedMenuItemProps) {
     );
 };
 
-const borderLeftStyles = {
-    borderLeftColor: 'black.40',
-    borderLeftWidth: '2px',
-    borderLeftStyle: 'solid'
-};
+
