@@ -40,7 +40,7 @@ const categories: ICategoryDef[] = [
         ]
     },
     {
-        label: "Design", key: Snowflake.generate(), icon: null, type: 'group', items: [
+        label: "Documents", key: Snowflake.generate(), icon: null, type: 'group', items: [
             {
                 label: "Design system", key: Snowflake.generate(), icon: null, items: [
                     { label: "Measurement", key: Snowflake.generate(), icon: null },
