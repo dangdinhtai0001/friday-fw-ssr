@@ -1,1 +1,3 @@
-- `figma`: https://www.svgrepo.com/svg/527030/figma
+- `Figma`: https://www.svgrepo.com/svg/527030/figma
+- `LightMode`: https://www.svgrepo.com/svg/433086/light-mode
+- `DarkMode`: https://www.svgrepo.com/svg/515776/dark-mode

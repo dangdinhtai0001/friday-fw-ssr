@@ -1,9 +1,11 @@
 import { Flex, Icon, IconButton, useColorMode } from "@chakra-ui/react";
 
-import { CiLight, CiDark, } from 'react-icons/ci';
 import { FiBell } from 'react-icons/fi';
 
-import { ToggleIcon } from "@package/uriel/atoms/toggle-icon";
+import { IconSwitcher } from "@package/uriel/atoms/icon-switcher";
+
+import { DarkMode, LightMode } from '@package/uriel/atoms/icons';
+
 export default function Activities() {
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -25,11 +27,10 @@ export default function Activities() {
           borderRadius='measurement.8'
           aria-label=""
           bgColor='transparent'
-          icon={<ToggleIcon
-            closeIcon={CiDark}
-            openIcon={CiLight}
+          icon={<IconSwitcher
+            closeIcon={<DarkMode color='black.100' />}
+            openIcon={<LightMode color='black.100' />}
             isOpen={colorMode === 'light'}
-            iconProps={{ w: 'measurement.20', h: 'measurement.20' }}
           />}
           onClick={toggleColorMode}
         />
