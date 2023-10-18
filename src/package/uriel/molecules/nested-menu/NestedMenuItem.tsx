@@ -5,7 +5,7 @@ import ItemContent from './ItemContent';
 import { LeftChevron, RightChevron } from '@package/uriel/atoms/icons';
 
 export default function NestedMenuItem(props: INestedMenuItemProps) {
-    const { icon, label, items, type } = props;
+    const { icon, label, items, type, url } = props;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -27,7 +27,7 @@ export default function NestedMenuItem(props: INestedMenuItemProps) {
     return (
         <Menu placement='right-end' isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
             {Array.isArray(items) ? (
-                <MenuButton  bg={isOpen? 'black.5' : ''}>
+                <MenuButton bg={isOpen ? 'black.5' : ''}>
                     <ItemContent
                         icon={icon}
                         label={label}
@@ -38,7 +38,7 @@ export default function NestedMenuItem(props: INestedMenuItemProps) {
                 </MenuButton>
             ) : (
                 <MenuItem  >
-                    <ItemContent icon={icon} label={label} />
+                    <ItemContent icon={icon} label={label} url={url} />
                 </MenuItem>
             )}
 

@@ -1,18 +1,19 @@
-import { isValidElement } from 'react';
 import { Flex, Text } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
 
 import { IItemContentProps } from './_types.d';
-
 import { IconSwitcher } from '@package/uriel/atoms/icon-switcher';
 
 export default function ItemContent(props: IItemContentProps) {
     const {
         icon,
         label,
+        url,
         isOpen = false,
         expandIcon,
         collapseIcon
     } = props;
+
 
     return (
         <Flex
@@ -21,7 +22,10 @@ export default function ItemContent(props: IItemContentProps) {
             alignContent='center'
             gap='measurement.4'
             alignSelf='strech'
-            onClick={() => { "click!" }}
+            w='full'
+            // 
+            as={Link}
+            to={url}
         >
             {(expandIcon && collapseIcon) && (
                 <IconSwitcher
@@ -30,7 +34,7 @@ export default function ItemContent(props: IItemContentProps) {
                     isOpen={isOpen}
                 />
             )}
-            {isValidElement(icon) && icon}
+            {icon}
             <Text color='black.100' textStyle='14.regular'>{label}</Text>
         </Flex>
     );
