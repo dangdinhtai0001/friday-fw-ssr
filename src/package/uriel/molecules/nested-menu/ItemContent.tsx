@@ -26,8 +26,6 @@ export default function ItemContent(props: IItemContentProps) {
                     closeIcon={expandIcon}
                     openIcon={collapseIcon}
                     isOpen={isOpen}
-                    flexProps={{w: '50px'}}
-                    
                 />
             )}
             {icon}

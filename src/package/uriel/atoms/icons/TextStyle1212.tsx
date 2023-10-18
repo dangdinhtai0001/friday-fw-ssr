@@ -5,7 +5,7 @@ export const TextStyle1212 = createIcon({
     viewBox: "0 0 20 20",
     path: (
         <>
-            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                 <g id="Dribbble-Light-Preview" transform="translate(-60.000000, -2759.000000)"
                     fill="currentColor">
                     <g id="icons" transform="translate(56.000000, 160.000000)">
