@@ -1,8 +1,8 @@
-import { Flex, Icon, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
 import { IItemContentProps } from './_types.d';
 
-import { ToggleIcon } from '@package/uriel/atoms/toggle-icon'
+import { IconSwitcher } from '@package/uriel/atoms/icon-switcher';
 
 export default function ItemContent(props: IItemContentProps) {
     const {
@@ -22,14 +22,13 @@ export default function ItemContent(props: IItemContentProps) {
             alignSelf='strech'
         >
             {(expandIcon && collapseIcon) && (
-                <ToggleIcon
-                    closeIcon={collapseIcon}
-                    openIcon={expandIcon}
+                <IconSwitcher
+                    closeIcon={expandIcon}
+                    openIcon={collapseIcon}
                     isOpen={isOpen}
-                    iconProps={{ color: 'black.40', w: 'measurement.16', h: 'measurement.16' }}
                 />
             )}
-            {icon && <Icon as={icon} />}
+            {icon}
             <Text color='black.100' textStyle='14.regular'>{label}</Text>
         </Flex>
     );

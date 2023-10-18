@@ -6,16 +6,16 @@ export interface INestedMenuItemProps extends IItemDefinition{
 };
 
 export interface IItemContentProps {
-    icon: IconType | null;
+    icon: React.ReactNode | null;
     label: string;
-    expandIcon?: IconType;
-    collapseIcon?: IconType;
+    expandIcon?: React.ReactNode;
+    collapseIcon?: React.ReactNode;
     isOpen?: boolean; 
 }
 
 export interface IItemDefinition {
     disabled?: boolean;
-    icon: IconType | null;
+    icon: React.ReactNode | null;
     key: string;
     label: string;
     title?: string;

@@ -1,18 +1,14 @@
 import { useState } from "react";
 import {
-    Flex, Icon, IconButton, Breadcrumb,
+    Flex, IconButton, Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
-    BreadcrumbSeparator,
     Text
 } from "@chakra-ui/react";
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
-import { MdStarRate } from 'react-icons/md';
-
-
-import { ToggleIcon } from '@package/uriel/atoms/toggle-icon';
+import { IconSwitcher } from '@package/uriel/atoms/icon-switcher';
+import { SidebarHide, SidebarShow, Star, FavoriteStar } from '@package/uriel/atoms/icons'
 
 export default function IconBreadcrumb() {
     const [isOpen, setOpen] = useState<boolean>(false);
@@ -43,11 +39,10 @@ export default function IconBreadcrumb() {
                     borderRadius='measurement.8'
                     aria-label=""
                     bgColor='transparent'
-                    icon={<ToggleIcon
-                        closeIcon={AiOutlineMenuFold}
-                        openIcon={AiOutlineMenuUnfold}
+                    icon={<IconSwitcher
+                        closeIcon={<SidebarShow color='black.40' w='measurement.20' h='measurement.20' />}
+                        openIcon={<SidebarHide color='black.40' w='measurement.20' h='measurement.20' />}
                         isOpen={isOpen}
-                        iconProps={{ w: 'measurement.20', h: 'measurement.20' }}
                     />}
                     onClick={() => { setOpen(!isOpen) }}
                 />
@@ -59,11 +54,10 @@ export default function IconBreadcrumb() {
                     borderRadius='measurement.8'
                     aria-label=""
                     bgColor='transparent'
-                    icon={<ToggleIcon
-                        closeIcon={MdStarRate}
-                        openIcon={MdStarRate}
+                    icon={<IconSwitcher
+                        openIcon={<Star color='black.10' w='measurement.20' h='measurement.20' />}
+                        closeIcon={<FavoriteStar color={isRated ? 'secondary.orange' : 'black.10'} w='measurement.20' h='measurement.20' />}
                         isOpen={isRated}
-                        iconProps={{ w: 'measurement.20', h: 'measurement.20', color: isRated ? 'secondary.orange' : 'black.10' }}
                     />}
                     onClick={() => { setRated(!isRated) }}
                 />

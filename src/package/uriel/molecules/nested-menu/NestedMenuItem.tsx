@@ -1,9 +1,8 @@
 import { useDisclosure, Menu, MenuButton, MenuGroup, MenuItem, MenuList } from '@chakra-ui/react';
 
-import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
-
 import { INestedMenuItemProps } from './_types.d';
 import ItemContent from './ItemContent';
+import { LeftChevron, RightChevron } from '@package/uriel/atoms/icons';
 
 export default function NestedMenuItem(props: INestedMenuItemProps) {
     const { icon, label, items, type } = props;
@@ -32,8 +31,8 @@ export default function NestedMenuItem(props: INestedMenuItemProps) {
                     <ItemContent
                         icon={icon}
                         label={label}
-                        expandIcon={AiOutlineRight}
-                        collapseIcon={AiOutlineLeft}
+                        expandIcon={<LeftChevron color='black.40' w='measurement.16' h='measurement.16' />}
+                        collapseIcon={<RightChevron color='black.40' w='measurement.16' h='measurement.16' />}
                         isOpen={isOpen}
                     />
                 </MenuButton>

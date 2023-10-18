@@ -1,10 +1,8 @@
-import { Flex, Icon, IconButton, useColorMode } from "@chakra-ui/react";
-
-import { FiBell } from 'react-icons/fi';
+import { Flex, IconButton, useColorMode } from "@chakra-ui/react";
 
 import { IconSwitcher } from "@package/uriel/atoms/icon-switcher";
 
-import { DarkMode, LightMode } from '@package/uriel/atoms/icons';
+import { DarkMode, LightMode, NotificationBell } from '@package/uriel/atoms/icons';
 
 export default function Activities() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -42,7 +40,7 @@ export default function Activities() {
           borderRadius='measurement.8'
           aria-label=""
           bgColor='transparent'
-          icon={<Icon as={FiBell} w='measurement.20' h='measurement.20' />}
+          icon={<NotificationBell fill='black.100'/>}
         />
       </Flex>
     </Flex>

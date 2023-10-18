@@ -1,3 +1,10 @@
 - `Figma`: https://www.svgrepo.com/svg/527030/figma
 - `LightMode`: https://www.svgrepo.com/svg/433086/light-mode
 - `DarkMode`: https://www.svgrepo.com/svg/515776/dark-mode
+- `LeftChevron`: https://www.svgrepo.com/svg/510039/left-chevron
+- `RightChevron`: https://www.svgrepo.com/svg/510166/right-chevron
+- `NotificationBell`: https://www.svgrepo.com/svg/487632/notification-bell
+- `SidebarShow`: https://www.svgrepo.com/svg/448612/sidebar-show
+- `SidebarHide`: https://www.svgrepo.com/svg/448610/sidebar-hide
+- `FavoritesStar`: https://www.svgrepo.com/svg/474335/star-black
+- `Star`: https://www.svgrepo.com/svg/513408/star

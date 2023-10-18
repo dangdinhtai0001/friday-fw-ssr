@@ -1,9 +1,7 @@
-import { IconType } from "react-icons";
-
 export interface ICategoryDef {
     id?: string;
     disabled?: boolean;
-    icon: IconType | null;
+    icon: React.ReactNode | null;
     key: string;
     label: string;
     title?: string;

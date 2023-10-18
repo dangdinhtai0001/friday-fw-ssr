@@ -46,7 +46,7 @@ const variantClosed = {
 }
 
 const variantOpen = {
-    rotate: 360,
+    rotate: 0,
     scale: 1,
     opacity: 1,
     transition: {
