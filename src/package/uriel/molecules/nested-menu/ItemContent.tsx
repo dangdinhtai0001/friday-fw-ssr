@@ -1,3 +1,4 @@
+import { isValidElement } from 'react';
 import { Flex, Text } from '@chakra-ui/react';
 
 import { IItemContentProps } from './_types.d';
@@ -20,6 +21,7 @@ export default function ItemContent(props: IItemContentProps) {
             alignContent='center'
             gap='measurement.4'
             alignSelf='strech'
+            onClick={() => { "click!" }}
         >
             {(expandIcon && collapseIcon) && (
                 <IconSwitcher
@@ -28,7 +30,7 @@ export default function ItemContent(props: IItemContentProps) {
                     isOpen={isOpen}
                 />
             )}
-            {icon}
+            {isValidElement(icon) && icon}
             <Text color='black.100' textStyle='14.regular'>{label}</Text>
         </Flex>
     );
