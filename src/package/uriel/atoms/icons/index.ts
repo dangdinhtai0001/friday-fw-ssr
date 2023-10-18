@@ -8,3 +8,7 @@ export * from './SidebarShow';
 export * from './SidebarHide';
 export * from './FavoritesStar';
 export * from './Star';
+export * from './ColorPalette';
+export * from './TextStyleOne';
+export * from './TextStyle1212';
+export * from './Measurement';

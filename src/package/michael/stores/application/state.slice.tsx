@@ -3,7 +3,7 @@ import { Snowflake } from "@theinternetfolks/snowflake";
 
 import { State, Action } from './_types';
 import { ICategoryDef } from '@package/raphael/types/application.types'
-import { Figma } from '@package/uriel/atoms/icons'
+import { Figma, ColorPalette, TextStyle1212, Measurement } from '@package/uriel/atoms/icons';
 
 const categories: ICategoryDef[] = [
     {
@@ -43,10 +43,10 @@ const categories: ICategoryDef[] = [
     {
         label: "Documents", key: Snowflake.generate(), icon: null, type: 'group', items: [
             {
-                label: "Design system", key: Snowflake.generate(), icon: null, items: [
-                    { label: "Measurement", key: Snowflake.generate(), icon: null },
-                    { label: "Color", key: Snowflake.generate(), icon: null },
-                    { label: "Text Styles", key: Snowflake.generate(), icon: null },
+                label: "Design system", key: Snowflake.generate(), icon: <Figma />, items: [
+                    { label: "Measurement", key: Snowflake.generate(), icon: <Measurement /> },
+                    { label: "Color", key: Snowflake.generate(), icon: <ColorPalette /> },
+                    { label: "Text Styles", key: Snowflake.generate(), icon: <TextStyle1212 /> },
                     { label: "Effect Styles", key: Snowflake.generate(), icon: null },
                 ]
             },

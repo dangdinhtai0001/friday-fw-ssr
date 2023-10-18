@@ -8,3 +8,7 @@
 - `SidebarHide`: https://www.svgrepo.com/svg/448610/sidebar-hide
 - `FavoritesStar`: https://www.svgrepo.com/svg/474335/star-black
 - `Star`: https://www.svgrepo.com/svg/513408/star
+- `ColorPalette`: https://www.svgrepo.com/svg/521576/color-palette
+- `TextStyleOne`: https://www.svgrepo.com/svg/388744/text-style-one
+- `TextStyle1212`: https://www.svgrepo.com/svg/512971/text-style-1212
+- `Measurement`: https://www.svgrepo.com/svg/475836/measurement
