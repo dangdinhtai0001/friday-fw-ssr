@@ -5,6 +5,8 @@ import './Spinner.scss';
 // source: https://codepen.io/jeremywynn/pen/ZEywNW
 
 export default function Spinner(props: ISpinnerProps) {
+    const { color='black.40', height='6px', width='18px' } = props;
+
     return (
         <Flex position='relative'>
             {Array.from({ length: 12 }, (_, index) => (
@@ -16,55 +18,14 @@ export default function Spinner(props: ISpinnerProps) {
                 >
                     <Box
                         className="segment"
-                        bgColor='black.40'
-                        height='6px'
-                        width='18px'
+                        bgColor={color}
+                        height={height}
+                        width={width}
+                        borderRadius='measurement.28'
+                        transformOrigin='0% 0%'
                     ></Box>
                 </Box>
             ))}
         </Flex>
     );
-}
-
-// export default function Spinner(props: ISpinnerProps) {
-//     return (
-//         <Flex position='relative'>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//             <div className="sheath">
-//                 <div className="segment"></div>
-//             </div>
-//         </Flex>
-//     );
-// }
+};
