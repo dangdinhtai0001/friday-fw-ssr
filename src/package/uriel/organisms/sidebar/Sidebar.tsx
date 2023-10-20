@@ -1,9 +1,9 @@
 import { ISidebarProps } from './_types';
 import { Flex, Spacer } from '@chakra-ui/react';
 
+import { Logo } from '@/package/uriel/atoms/brand';
 import NameBadge from './NameBadge';
 import Categories from './Categories';
-import Logo from './Logo';
 
 function Sidebar(props: ISidebarProps) {
   const { expandedWidth = '212px', isExpanded = true, collapsedWidth = '70px' } = props;

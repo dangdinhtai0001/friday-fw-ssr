@@ -1,4 +1,6 @@
 import { useRouteError, isRouteErrorResponse } from "react-router-dom";
+
+import { PageNotFound } from '@package/uriel/templates/errors-page'
 export default function ErrorPage() {
     const error = useRouteError();
 
@@ -11,15 +13,16 @@ export default function ErrorPage() {
         }
 
         return (
-            <div id="error-page">
-                <h1>Oops! {error.status}</h1>
-                <p>{error.statusText}</p>
-                {error.data?.message && (
-                    <p>
-                        <i>{error.data.message}</i>
-                    </p>
-                )}
-            </div>
+            // <div id="error-page">
+            //     <h1>Oops! {error.status}</h1>
+            //     <p>{error.statusText}</p>
+            //     {error.data?.message && (
+            //         <p>
+            //             <i>{error.data.message}</i>
+            //         </p>
+            //     )}
+            // </div>
+            <PageNotFound />
         );
     } else if (error instanceof Error) {
         return (
