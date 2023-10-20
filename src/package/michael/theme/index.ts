@@ -8,7 +8,7 @@ import { menuTheme } from './components/Menu';
 
 export default extendTheme({
     // ----------------------------------------------------------------
-    globalStyles,
+    styles: globalStyles,
     // ---------------------------------------------------------------- 
     semanticTokens: semanticTokens,
     // ----------------------------------------------------------------
