@@ -1,9 +1,13 @@
 import { Box, Flex, Text, Image, Center, Spacer } from '@chakra-ui/react';
+import { useLottie } from 'lottie-react';
 
 import { Logo, Copyright } from '@/package/uriel/atoms/brand';
 import { IPageNotFoundProps } from './_types.d';
+import animationData from '@package/uriel/atoms/lottie/404-animation.json';
 
 export default function PageNotFound(props: IPageNotFoundProps) {
+    const Lottie = useLottie(defaultOptions, style);
+
     return (
         <Flex w='full' h='100vh' flexDirection='column'>
             {/* ************** || Header || ************** */}
@@ -36,7 +40,7 @@ export default function PageNotFound(props: IPageNotFoundProps) {
                         <Text color='black.100' textStyle='48.semibold'>Page Not Found</Text>
                     </Flex>
                     <Center w='full'>
-                        <Image src='/assets/error-page.svg' w='200px' h='200px' />
+                        {Lottie.View}
                     </Center>
                 </Box>
             </Center>
@@ -47,4 +51,15 @@ export default function PageNotFound(props: IPageNotFoundProps) {
             </Center>
         </Flex>
     );
-}
+};
+
+const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+};
+
+const style = {
+    height: 250,
+};
+
