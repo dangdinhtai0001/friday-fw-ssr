@@ -3,6 +3,7 @@ import { RouteObject } from 'react-router-dom';
 import _ from 'lodash';
 
 import { RouterConfig } from "./_types";
+import { ICategoryDef } from '@package/raphael/types/application.types'
 
 export const _routerConfig: RouterConfig[] = [
     {
@@ -39,6 +40,17 @@ export const _routerConfig: RouterConfig[] = [
     },
 ];
 
+function getPath(key: string, path?: string): string {
+    if (path) {
+        return path;
+    } else {
+        const segments = key.split('/');
+
+        return segments[segments.length - 1];
+    }
+
+}
+
 export function getRouterObject(_key: string): RouteObject {
 
     let config = _.find(_routerConfig, (obj) => { return obj.key === _key; });
@@ -49,19 +61,28 @@ export function getRouterObject(_key: string): RouteObject {
 
     const { id, key, path, lazy } = config;
 
-    let _path;
-
-    if (path) {
-        _path = path;
-    } else {
-        const segments = key.split('/');
-
-        _path = segments[segments.length - 1];
-    }
-
     return {
         id: id,
-        path: _path,
+        path: getPath(key, path),
         lazy: lazy
     }
 };
+
+export function getCategoriesState(_key: string) {
+    let config = _.find(_routerConfig, (obj) => { return obj.key === _key; });
+
+    if (!config) {
+        return {};
+    }
+
+    const { id, key, path, iconAlias, name, type } = config;
+
+    return {
+        id: id,
+        key: key,
+        label: name,
+        type: type,
+        url: getPath(key, path),
+        icon: iconAlias
+    }
+}

@@ -6,4 +6,6 @@ export interface RouterConfig {
     name?: string;
     path?: string;
     lazy?: RouteObject['lazy'];
+    type?: 'group';
+    iconAlias?: string;
 }
