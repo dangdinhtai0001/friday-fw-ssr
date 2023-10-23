@@ -6,8 +6,9 @@ import { INestedMenuItemProps, INestedMenuProps } from '@package/uriel/molecules
 import { ICategoryDef } from '@/package/raphael/types/application.types';
 import { Box } from '@chakra-ui/react';
 import { Figma, ColorPalette, TextStyle1212, Measurement } from '@package/uriel/atoms/icons'
+import { categoryDefs, getCategory } from '@package/michael/config';
 function Categories() {
-    const categories = useApplicationStore(state => state.categories);
+    // const categories = useApplicationStore(state => state.categories);
     const savedCategories = useApplicationStore(state => state.savedCategories);
 
     return (
@@ -15,16 +16,17 @@ function Categories() {
             {/*saved categories */}
             {savedCategories && <NestedMenu items={createSavedCategories(savedCategories) as INestedMenuProps['items']} />}
             {/* categories */}
-            {categories && <NestedMenu items={updateCategoriesWithIcons(categories) as INestedMenuProps['items']} />}
+            {/* {categories && <NestedMenu items={updateCategoriesWithIcons(categories) as INestedMenuProps['items']} />} */}
+            <NestedMenu items={categoryDefs as INestedMenuProps['items']} />
         </Box>
     );
 };
 
-function createSavedCategories(categories: ICategoryDef[]) {
+function createSavedCategories(categories: string[]) {
     return updateCategoriesWithIcons([
         {
             label: 'Favorites', key: Snowflake.generate(), url: null, type: 'group', items: [
-                ...categories
+                ...categories.map(category => (getCategory(category)))
             ]
         }
     ])

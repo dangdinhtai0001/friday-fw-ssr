@@ -54,6 +54,5 @@ const categories: ICategoryDef[] = [
 ];
 
 export const createStateSlice: StateCreator<State & Action> = () => ({
-    categories: categories,
     savedCategories: [],
 });

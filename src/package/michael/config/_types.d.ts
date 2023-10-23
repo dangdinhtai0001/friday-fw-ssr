@@ -1,3 +1,4 @@
+import React from 'react';
 import { RouteObject } from 'react-router-dom';
 
 export interface RouterConfig {
@@ -7,5 +8,5 @@ export interface RouterConfig {
     path?: string;
     lazy?: RouteObject['lazy'];
     type?: 'group';
-    iconAlias?: string;
+    icon?: React.ReactNode;
 }

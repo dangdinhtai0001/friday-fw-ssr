@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     Flex, IconButton, Breadcrumb,
     BreadcrumbItem,
@@ -6,16 +6,29 @@ import {
     Text
 } from "@chakra-ui/react";
 import { useLocation } from 'react-router-dom';
+import _ from 'lodash';
 
 import { IconSwitcher } from '@package/uriel/atoms/icon-switcher';
 import { SidebarHide, SidebarShow, Star, FavoriteStar } from '@package/uriel/atoms/icons'
+import { useApplicationStore } from "@/package/michael/stores/application";
 
 export default function IconBreadcrumb() {
-    const [isOpen, setOpen] = useState<boolean>(false);
-    const [isRated, setRated] = useState<boolean>(false);
-
+    const { savedCategories, removeSavedCategory, addSavedCategory } = useApplicationStore(state => state);
     const location = useLocation();
     const pathnames = location.pathname.split("/").filter((x) => x);
+
+    const [isOpen, setOpen] = useState<boolean>(false);
+    const [isRated, setRated] = useState<boolean>(_.includes(savedCategories, location.pathname));
+
+    const handleOnClickRate = () => {
+        isRated ? removeSavedCategory?.(location.pathname) : addSavedCategory?.(location.pathname);
+
+        setRated(!isRated)
+    }
+
+    useEffect(() => {
+        setRated(_.includes(savedCategories, location.pathname));
+    }, [location]);
 
     return (
         <Flex
@@ -59,7 +72,7 @@ export default function IconBreadcrumb() {
                         closeIcon={<FavoriteStar color={isRated ? 'secondary.orange' : 'black.10'} w='measurement.20' h='measurement.20' />}
                         isOpen={isRated}
                     />}
-                    onClick={() => { setRated(!isRated) }}
+                    onClick={handleOnClickRate}
                 />
             </Flex>
             {/* -------------------------------------------- Breadcrumb -------------------------------------------- */}
