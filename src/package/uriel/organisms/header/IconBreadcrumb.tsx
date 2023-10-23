@@ -79,12 +79,9 @@ export default function IconBreadcrumb() {
             {/* -------------------------------------------- Breadcrumb -------------------------------------------- */}
             {/* {location.pathname === "/" ? null : <Link to="/">Home</Link>} */}
             <Breadcrumb>
-                {pathnames.map((value, index) => {
+                {pathnames.map((_, index) => {
                     const last = index === pathnames.length - 1;
                     const to = `/${pathnames.slice(0, index + 1).join("/")}`;
-
-                    console.log(value, getCategory(to), last);
-
 
                     return (
                         <BreadcrumbItem key={index}>
@@ -95,7 +92,6 @@ export default function IconBreadcrumb() {
                             ) : (
                                 <Text color='black.40' textStyle='14.regular'>{getCategory(to).label}</Text>
                             )}
-
                         </BreadcrumbItem>
                     )
                 })}

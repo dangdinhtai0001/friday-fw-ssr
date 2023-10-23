@@ -2,7 +2,7 @@ import { Snowflake } from '@theinternetfolks/snowflake';
 
 import { useApplicationStore } from '@package/michael/stores/application';
 import { NestedMenu } from '@package/uriel/molecules/nested-menu';
-import { INestedMenuItemProps, INestedMenuProps } from '@package/uriel/molecules/nested-menu/_types';
+import { INestedMenuProps } from '@package/uriel/molecules/nested-menu/_types';
 import { ICategoryDef } from '@/package/raphael/types/application.types';
 import { Box } from '@chakra-ui/react';
 import { Figma, ColorPalette, TextStyle1212, Measurement } from '@package/uriel/atoms/icons'
