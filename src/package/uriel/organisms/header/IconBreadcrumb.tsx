@@ -11,6 +11,7 @@ import _ from 'lodash';
 import { IconSwitcher } from '@package/uriel/atoms/icon-switcher';
 import { SidebarHide, SidebarShow, Star, FavoriteStar } from '@package/uriel/atoms/icons'
 import { useApplicationStore } from "@/package/michael/stores/application";
+import { getCategory } from '@package/michael/config'
 
 export default function IconBreadcrumb() {
     const { savedCategories, removeSavedCategory, addSavedCategory } = useApplicationStore(state => state);
@@ -82,14 +83,17 @@ export default function IconBreadcrumb() {
                     const last = index === pathnames.length - 1;
                     const to = `/${pathnames.slice(0, index + 1).join("/")}`;
 
+                    console.log(value, getCategory(to), last);
+
+
                     return (
                         <BreadcrumbItem key={index}>
                             {last ? (
                                 <BreadcrumbLink href={to} >
-                                    <Text color='black.100' textStyle='14.regular'>{value}</Text>
+                                    <Text color='black.100' textStyle='14.regular'>{getCategory(to).label}</Text>
                                 </BreadcrumbLink>
                             ) : (
-                                <Text color='black.40' textStyle='14.regular'>{value}</Text>
+                                <Text color='black.40' textStyle='14.regular'>{getCategory(to).label}</Text>
                             )}
 
                         </BreadcrumbItem>
