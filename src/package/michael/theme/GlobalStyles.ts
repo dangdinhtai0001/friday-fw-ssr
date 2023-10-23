@@ -11,6 +11,7 @@ export const globalStyles: Styles = {
         '::-webkit-scrollbar': {
             borderRadius: '10px',
             w: '5px',
+            h: '5px',
             bgColor: 'primary.background',
         },
         '::-webkit-scrollbar-thumb': {

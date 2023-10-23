@@ -9,7 +9,7 @@ export default function Layout() {
     return (
         <AdminLayout  >
             {navigation.state !== "idle" && <Loading />}
-            <Box overflowX='hidden' overflowY='auto' h='full'>
+            <Box overflowX='auto' overflowY='auto' h='full' w='full'>
                 <Outlet />
             </Box>
         </AdminLayout>
