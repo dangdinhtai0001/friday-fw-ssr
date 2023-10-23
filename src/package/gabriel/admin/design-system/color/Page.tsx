@@ -51,7 +51,6 @@ export default function Page() {
                                         <Text color={color.text} textStyle='14.regular'>{color.bg}</Text>
                                     </Flex>
                                 ))}
-
                             </Flex>
                         </Flex>
                     </Flex>
