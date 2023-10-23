@@ -4,15 +4,17 @@ import _ from 'lodash';
 
 import { RouterConfig } from "./_types";
 import { ICategoryDef } from '@package/raphael/types/application.types'
-import { ColorPalette, Figma, Measurement, TextStyle1212 } from "@/package/uriel/atoms/icons";
+import { ColorPalette, Figma, Measurement, TextStyle1212, Component, Component1 } from "@/package/uriel/atoms/icons";
 
 export const _routerConfig: RouterConfig[] = [
+    // Documents || ===================================================================================================================================================
     {
         id: Snowflake.generate(),
         name: 'Documents',
         key: '__documents',
         type: 'group'
     },
+    // Design system || ===============================================================
     {
         id: Snowflake.generate(),
         name: 'Design system',
@@ -48,6 +50,23 @@ export const _routerConfig: RouterConfig[] = [
             return { Component: Page.default };
         },
         icon: <Measurement />
+    },
+    // Components || ===============================================================
+    {
+        id: Snowflake.generate(),
+        name: 'Components',
+        key: '/admin/components',
+        icon: <Component />
+    },
+    {
+        id: Snowflake.generate(),
+        name: 'Base components',
+        key: '/admin/components/base',
+        lazy: async () => {
+            let Page = await import('@package/gabriel/admin/components/base/Page');
+            return { Component: Page.default };
+        },
+        icon: <Component1 />
     },
 ];
 
@@ -107,6 +126,11 @@ export function getCategories(): ICategoryDef[] {
                         { ...getCategory("/admin/design-system/measurement") },
                         { ...getCategory("/admin/design-system/color") },
                         { ...getCategory("/admin/design-system/text-styles") },
+                    ]
+                },
+                {
+                    ...getCategory("/admin/components"), items: [
+                        { ...getCategory("/admin/components/base") },
                     ]
                 }
             ]

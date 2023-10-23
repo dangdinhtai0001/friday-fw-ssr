@@ -13,3 +13,4 @@ export * from './TextStyleOne';
 export * from './TextStyle1212';
 export * from './Measurement';
 export * from './Component';
+export * from './Component1';

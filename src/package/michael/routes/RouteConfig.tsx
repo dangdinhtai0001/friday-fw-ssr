@@ -6,13 +6,20 @@ import ErrorPage from "@package/gabriel/Error";
 
 import { getRouterObject, _routerConfig } from '@package/michael/config'
 
-export const routeConfig: any[] = [{
-    ...getRouterObject("/admin/design-system"), children: [
-        { ...getRouterObject("/admin/design-system/color") },
-        { ...getRouterObject("/admin/design-system/text-styles") },
-        { ...getRouterObject("/admin/design-system/measurement") },
-    ]
-}]
+export const routeConfig: any[] = [
+    {
+        ...getRouterObject("/admin/design-system"), children: [
+            { ...getRouterObject("/admin/design-system/color") },
+            { ...getRouterObject("/admin/design-system/text-styles") },
+            { ...getRouterObject("/admin/design-system/measurement") },
+        ],
+    },
+    {
+        ...getRouterObject("/admin/components"), children: [
+            { ...getRouterObject("/admin/components/base") },
+        ]
+    }
+]
 
 export const getRouteConfig = (config: RouteObject[]): RouteObject[] => {
     return [

@@ -13,3 +13,4 @@
 - `TextStyle1212`: https://www.svgrepo.com/svg/512971/text-style-1212
 - `Measurement`: https://www.svgrepo.com/svg/475836/measurement
 - `Component`: https://www.svgrepo.com/svg/334577/component
+- `Component1`: https://www.svgrepo.com/svg/361435/component-1
