@@ -2,8 +2,7 @@ import { Snowflake } from "@theinternetfolks/snowflake";
 import _ from 'lodash';
 
 import { RouterConfig } from "./_types";
-import { ICategoryDef } from '@package/raphael/types/application.types'
-import { ColorPalette, Figma, Measurement, TextStyle1212, Component, Component1 } from "@/package/uriel/atoms/icons";
+import { ColorPalette, Figma, Measurement, TextStyle1212, Component1 } from "@/package/uriel/atoms/icons";
 
 export const _routerConfig: RouterConfig[] = [
     // ========= || Group:: Documents || ===================================================================================================================================================
@@ -73,6 +72,14 @@ export const _routerConfig: RouterConfig[] = [
             let Page = await import('@package/gabriel/admin/components/base/card/Page');
             return { Component: Page.default };
         },
-        icon: <ColorPalette />
+    },
+    {
+        id: Snowflake.generate(),
+        name: 'Button',
+        key: '/admin/components/base/button',
+        lazy: async () => {
+            let Page = await import('@package/gabriel/admin/components/base/button/Page');
+            return { Component: Page.default };
+        },
     },
 ];

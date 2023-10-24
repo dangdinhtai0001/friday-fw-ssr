@@ -27,6 +27,7 @@ export function getCategories(): ICategoryDef[] {
                 {
                     ...getCategory("/admin/components/base"), items: [
                         { ...getCategory("/admin/components/base/card") },
+                        { ...getCategory("/admin/components/base/button") },
                     ]
                 },
             ]
@@ -47,6 +48,7 @@ export const routeConfig: any[] = [
     {
         ...getRouterObject("/admin/components/base"), children: [
             { ...getRouterObject("/admin/components/base/card") },
+            { ...getRouterObject("/admin/components/base/button") },
 
         ],
     },

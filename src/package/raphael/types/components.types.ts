@@ -1,0 +1,1 @@
+export type IComponentSize = "small" | "medium" | "large";
