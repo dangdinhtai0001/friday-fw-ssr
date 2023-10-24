@@ -70,7 +70,7 @@ Quy trình thêm 1 page mới
     export function getCategories(): ICategoryDef[] {
         return [
             {
-                ...getCategory("__documents"), items: [
+                ...getCategory("__design"), items: [
                     {
                         ...getCategory("/admin/design-system"), items: [
                             { ...getCategory("/admin/design-system/measurement") },
@@ -88,7 +88,7 @@ Quy trình thêm 1 page mới
     export function getCategories(): ICategoryDef[] {
         return [
             {
-                ...getCategory("__documents"), items: [
+                ...getCategory("__design"), items: [
                     {
                         ...getCategory("/admin/design-system"), items: [
                             { ...getCategory("/admin/design-system/measurement") },
