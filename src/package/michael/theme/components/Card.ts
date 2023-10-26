@@ -10,9 +10,14 @@ const baseStyle = definePartsStyle({
         p: 'measurement.24',
         gap: 'measurement.16',
         borderRadius: 'measurement.16',
+        bg: "primary.background"
     },
     header: {
         p: 'measurement.0',
+        pb: 'measurement.8',
+        borderBottomStyle: 'solid',
+        borderBottomColor: 'black.10',
+        borderBottomWidth: '1px'
     },
     body: {
     },

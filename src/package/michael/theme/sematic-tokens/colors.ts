@@ -2,7 +2,7 @@ const pastel = {
     black: {
         100: {
             default: "#1C1C1C",
-            _dark: "#FFF",
+            _dark: "#FFFFFF",
         },
         80: {
             default: "rgba(28, 28, 28, 0.80)",
@@ -27,7 +27,7 @@ const pastel = {
     },
     white: {
         100: {
-            default: "#FFF",
+            default: "#FFFFFF",
             _dark: "#1C1C1C",
         },
         80: {
@@ -73,7 +73,7 @@ const pastel = {
             _dark: "rgba(255, 255, 255, 0.05)",
         },
         background: {
-            default: "#FFF",
+            default: "#FFFFFF",
             _dark: "#1C1C1C",
         },
     },
