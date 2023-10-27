@@ -12,7 +12,7 @@ export default function Page() {
             <Box p='measurement.8'>
                 <Card>
                     <CardHeader>
-                        <Text color='black.100' textStyle='14.semibold'>Solid Buttons</Text>
+                        <Text color='black.100' textStyle='24.semibold'>Solid Buttons</Text>
                     </CardHeader>
                     <CardBody>
                         {solidButtons.map((button, index) => (
@@ -34,7 +34,7 @@ export default function Page() {
                                     alignItems='flex-start'
                                     flex='1 0 0'
                                 >
-                                    <Text color='black.100' textStyle='24.regular'>{button.group}</Text>
+                                    <Text color='black.100' textStyle='14.regular'>{button.group}</Text>
                                 </Flex>
                                 {/* ***************************************** ||  -- CONTENT || ***************************************** */}
                                 <Flex gap='measurement.8' justifyContent='flex-start' alignItems='flex-start' flex='1 0 0' >
@@ -53,7 +53,7 @@ export default function Page() {
             <Box p='measurement.8'>
                 <Card>
                     <CardHeader>
-                        <Text color='black.100' textStyle='14.semibold'>Outline Buttons</Text>
+                        <Text color='black.100' textStyle='24.semibold'>Outline Buttons</Text>
                     </CardHeader>
                     <CardBody>
                         {outlineButtons.map((button, index) => (
@@ -75,7 +75,7 @@ export default function Page() {
                                     alignItems='flex-start'
                                     flex='1 0 0'
                                 >
-                                    <Text color='black.100' textStyle='24.regular'>{button.group}</Text>
+                                    <Text color='black.100' textStyle='14.regular'>{button.group}</Text>
                                 </Flex>
                                 {/* ***************************************** ||  -- CONTENT || ***************************************** */}
                                 <Flex gap='measurement.8' justifyContent='flex-start' alignItems='flex-start' flex='1 0 0' >
@@ -94,7 +94,7 @@ export default function Page() {
             <Box p='measurement.8'>
                 <Card>
                     <CardHeader>
-                        <Text color='black.100' textStyle='14.semibold'>Outline Buttons</Text>
+                        <Text color='black.100' textStyle='24.semibold'>Ghost Buttons</Text>
                     </CardHeader>
                     <CardBody>
                         {ghostButtons.map((button, index) => (
@@ -116,7 +116,7 @@ export default function Page() {
                                     alignItems='flex-start'
                                     flex='1 0 0'
                                 >
-                                    <Text color='black.100' textStyle='24.regular'>{button.group}</Text>
+                                    <Text color='black.100' textStyle='14.regular'>{button.group}</Text>
                                 </Flex>
                                 {/* ***************************************** ||  -- CONTENT || ***************************************** */}
                                 <Flex gap='measurement.8' justifyContent='flex-start' alignItems='flex-start' flex='1 0 0' >
@@ -129,6 +129,27 @@ export default function Page() {
                             </Flex>
                         ))}
 
+                    </CardBody>
+                </Card>
+            </Box>
+            <Box p='measurement.0'>
+                <Card>
+                    <CardHeader>
+                        <Text color='black.100' textStyle='24.semibold'>Disabled Buttons</Text>
+                    </CardHeader>
+                    <CardBody>
+
+                        <Flex
+                            p='measurement.28'
+                            alignItems='center'
+                            alignContent='center'
+                            gap='measurement.4'
+                            alignSelf='stretch'
+                        >
+                            <Button isDisabled>
+                                disabled
+                            </Button>
+                        </Flex>
                     </CardBody>
                 </Card>
             </Box>

@@ -6,11 +6,8 @@ import { reduceOpacity, getColorBrightness, getColorCodeFromChakraTheme, adjustB
 // ================================================================= || Base || =================================================================
 const baseStyle = defineStyle({
     _active: {
-        transform: 'scale(0.8)'
+        // transform: 'scale(0.8)'
     },
-
-    _hover: {
-    }
 })
 // ================================================================= || Sizes || =================================================================
 const small = defineStyle({
@@ -116,10 +113,24 @@ const _ghost = defineStyle((props: StyleFunctionProps) => {
     }
 });
 
+const _disabled = defineStyle((props: StyleFunctionProps) => {
+
+    return {
+        _hover: {
+        },
+    }
+});
+
+
 export const buttonTheme = defineStyleConfig({
+    defaultProps: {
+        size: 'small',
+        variant: '_solid',
+        colorScheme: 'primary.blue',
+    },
     baseStyle,
     sizes: { small, medium, large },
-    variants: { _solid, _outline, _ghost }
+    variants: { _solid, _outline, _ghost, _disabled }
 });
 
 

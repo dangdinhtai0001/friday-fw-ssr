@@ -20,16 +20,10 @@ const baseStyle = definePartsStyle({
         borderBottomWidth: '1px'
     },
     body: {
+        p: 'measurement.0',
     },
     footer: {
     },
 })
 
-const sizes = {
-    md: definePartsStyle({
-        container: {
-        },
-    }),
-}
-
-export const cardTheme = defineMultiStyleConfig({ baseStyle, sizes })
+export const cardTheme = defineMultiStyleConfig({ baseStyle })
