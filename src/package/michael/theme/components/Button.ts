@@ -3,6 +3,16 @@ import { textStyles } from '@package/michael/theme/typography';
 import _ from 'lodash';
 import { reduceOpacity, getColorBrightness, getColorCodeFromChakraTheme, adjustBrightness } from '@package/raphael/utils/colors'
 
+// ================================================================= || Base || =================================================================
+const baseStyle = defineStyle({
+    _active: {
+        transform: 'scale(0.8)'
+    },
+
+    _hover: {
+    }
+})
+// ================================================================= || Sizes || =================================================================
 const small = defineStyle({
     py: 'measurement.4',
     px: 'measurement.8',
@@ -30,6 +40,7 @@ const large = defineStyle({
     ...textStyles[18]?.regular
 });
 
+// ================================================================= || Variants || =================================================================
 const _solid = defineStyle((props: StyleFunctionProps) => {
     const { colorScheme, colorMode } = props;
 
@@ -37,38 +48,78 @@ const _solid = defineStyle((props: StyleFunctionProps) => {
 
     return {
         bg: colorScheme,
-        color: getColorBrightness(colorCode) > 0.5 ? 
-            (colorMode === 'light' ? "black.100" : "white.100"): 
+        color: getColorBrightness(colorCode) > 0.5 ?
+            (colorMode === 'light' ? "black.100" : "white.100") :
             (colorMode === 'light' ? "white.100" : "black.100"),
 
         _hover: {
-            bg: getColorBrightness(colorCode) > 0.5 ? adjustBrightness(colorCode, -0.2) : adjustBrightness(colorCode, 0.2)
+            bg: getColorBrightness(colorCode) > 0.5 ? adjustBrightness(colorCode, -0.2) : adjustBrightness(colorCode, 0.2),
+        },
+
+        _focus: {
+            bg: getColorBrightness(colorCode) > 0.5 ? adjustBrightness(colorCode, -0.2) : adjustBrightness(colorCode, 0.2),
         }
     }
 });
 
 const _outline = defineStyle((props: StyleFunctionProps) => {
-    const { colorScheme,colorMode } = props;
+    const { colorScheme, colorMode } = props;
 
     let colorCode = getColorCodeFromChakraTheme(props);
 
     return {
         bg: 'transparent',
+        color: colorScheme,
+
         borderStyle: 'solid',
         borderColor: colorScheme,
-        color: getColorBrightness(colorCode) > 0.5 ? 
-            (colorMode === 'light' ? "black.100" : "white.100"): 
-            (colorMode === 'light' ? "white.100" : "black.100"),
+        borderWidth: '1px',
 
         _hover: {
-            bg: getColorBrightness(colorCode) > 0.5 ? adjustBrightness(colorCode, -0.2) : adjustBrightness(colorCode, 0.2)
+            bg: colorScheme,
+            color: getColorBrightness(colorCode) > 0.5 ?
+                (colorMode === 'light' ? "black.100" : "white.100") :
+                (colorMode === 'light' ? "white.100" : "black.100"),
+        },
+
+        _focus: {
+            bg: colorScheme,
+            color: getColorBrightness(colorCode) > 0.5 ?
+                (colorMode === 'light' ? "black.100" : "white.100") :
+                (colorMode === 'light' ? "white.100" : "black.100"),
+        }
+    }
+});
+
+const _ghost = defineStyle((props: StyleFunctionProps) => {
+    const { colorScheme, colorMode } = props;
+
+    let colorCode = getColorCodeFromChakraTheme(props);
+
+    return {
+        bg: 'transparent',
+        color: colorScheme,
+
+        _hover: {
+            bg: colorScheme,
+            color: getColorBrightness(colorCode) > 0.5 ?
+                (colorMode === 'light' ? "black.100" : "white.100") :
+                (colorMode === 'light' ? "white.100" : "black.100"),
+        },
+
+        _focus: {
+            bg: colorScheme,
+            color: getColorBrightness(colorCode) > 0.5 ?
+                (colorMode === 'light' ? "black.100" : "white.100") :
+                (colorMode === 'light' ? "white.100" : "black.100"),
         }
     }
 });
 
 export const buttonTheme = defineStyleConfig({
+    baseStyle,
     sizes: { small, medium, large },
-    variants: { _solid, _outline }
+    variants: { _solid, _outline, _ghost }
 });
 
 
