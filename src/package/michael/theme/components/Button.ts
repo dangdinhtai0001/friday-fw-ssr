@@ -6,8 +6,22 @@ import { reduceOpacity, getColorBrightness, getColorCodeFromChakraTheme, adjustB
 // ================================================================= || Base || =================================================================
 const baseStyle = defineStyle({
     _active: {
-        // transform: 'scale(0.8)'
+        _disabled: {
+            transform: 'none',
+        },
+        transform: 'scale(0.8)'
     },
+
+    _hover: {
+        _disabled: {
+            bg: 'black.20'
+        }
+    },
+
+    _disabled: {
+        transform: 'none',
+        bg: 'black.20'
+    }
 })
 // ================================================================= || Sizes || =================================================================
 const small = defineStyle({
