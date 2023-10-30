@@ -24,14 +24,16 @@ const baseStyle = definePartsStyle({
         w: 'full',
 
         color: 'black.100',
-        fontStyle: '14.regular'
+        fontStyle: '14.regular',
     },
     list: {
         // this will style the MenuList component
         transition: "all 0.1s",
         w: 'full',
         p: 0,
-        borderRadius: 'measurement.8'
+        borderRadius: 'measurement.8',
+
+        bg: 'primary.background',
     },
     item: {
         // this will style the MenuItem and MenuItemOption components
@@ -43,6 +45,8 @@ const baseStyle = definePartsStyle({
         alignSelf: 'strech',
         flex: '1 0 0',
         w: 'full',
+
+        bg: 'primary.background',
 
         _hover: {
             bg: 'black.5',

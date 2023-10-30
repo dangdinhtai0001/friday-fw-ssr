@@ -4,23 +4,32 @@ import _ from 'lodash';
 import { reduceOpacity, getColorBrightness, getColorCodeFromChakraTheme, adjustBrightness } from '@package/raphael/utils/colors'
 
 // ================================================================= || Base || =================================================================
-const baseStyle = defineStyle({
-    _active: {
+const baseStyle = defineStyle((props: StyleFunctionProps) => {
+    let colorCode = getColorCodeFromChakraTheme(props);
+
+    return {
+        _active: {
+            _disabled: {
+                transform: 'none',
+            },
+
+            transform: 'scale(0.8)',
+            bg: getColorBrightness(colorCode) > 0.5 ?
+                adjustBrightness(colorCode, -0.2) :
+                adjustBrightness(colorCode, 0.2),
+        },
+
+        _hover: {
+            _disabled: {
+                bg: 'black.20',
+            }
+        },
+
         _disabled: {
             transform: 'none',
-        },
-        transform: 'scale(0.8)'
-    },
-
-    _hover: {
-        _disabled: {
-            bg: 'black.20'
+            bg: 'black.20',
+            color: 'black.40',
         }
-    },
-
-    _disabled: {
-        transform: 'none',
-        bg: 'black.20'
     }
 })
 // ================================================================= || Sizes || =================================================================
@@ -66,10 +75,6 @@ const _solid = defineStyle((props: StyleFunctionProps) => {
         _hover: {
             bg: getColorBrightness(colorCode) > 0.5 ? adjustBrightness(colorCode, -0.2) : adjustBrightness(colorCode, 0.2),
         },
-
-        _focus: {
-            bg: getColorBrightness(colorCode) > 0.5 ? adjustBrightness(colorCode, -0.2) : adjustBrightness(colorCode, 0.2),
-        }
     }
 });
 
@@ -91,13 +96,14 @@ const _outline = defineStyle((props: StyleFunctionProps) => {
             color: getColorBrightness(colorCode) > 0.5 ?
                 (colorMode === 'light' ? "black.100" : "white.100") :
                 (colorMode === 'light' ? "white.100" : "black.100"),
+
+            _disabled: {
+                color: 'black.40',
+            }
         },
 
-        _focus: {
-            bg: colorScheme,
-            color: getColorBrightness(colorCode) > 0.5 ?
-                (colorMode === 'light' ? "black.100" : "white.100") :
-                (colorMode === 'light' ? "white.100" : "black.100"),
+        _disabled: {
+            borderColor: 'transparent',
         }
     }
 });
@@ -116,6 +122,10 @@ const _ghost = defineStyle((props: StyleFunctionProps) => {
             color: getColorBrightness(colorCode) > 0.5 ?
                 (colorMode === 'light' ? "black.100" : "white.100") :
                 (colorMode === 'light' ? "white.100" : "black.100"),
+
+            _disabled: {
+                color: 'black.40',
+            }
         },
 
         _focus: {
@@ -124,14 +134,6 @@ const _ghost = defineStyle((props: StyleFunctionProps) => {
                 (colorMode === 'light' ? "black.100" : "white.100") :
                 (colorMode === 'light' ? "white.100" : "black.100"),
         }
-    }
-});
-
-const _disabled = defineStyle((props: StyleFunctionProps) => {
-
-    return {
-        _hover: {
-        },
     }
 });
 
@@ -144,7 +146,7 @@ export const buttonTheme = defineStyleConfig({
     },
     baseStyle,
     sizes: { small, medium, large },
-    variants: { _solid, _outline, _ghost, _disabled }
+    variants: { _solid, _outline, _ghost }
 });
 
 
